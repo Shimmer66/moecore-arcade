@@ -1,10 +1,5 @@
-import { renderApp } from './app/bootstrap';
+import { createApp } from 'vue';
+import App from './App.vue';
 import './styles.css';
 
-const root = document.querySelector<HTMLElement>('#app');
-
-if (!root) {
-  throw new Error('Application root #app was not found.');
-}
-
-renderApp(root);
+createApp(App).mount('#app');

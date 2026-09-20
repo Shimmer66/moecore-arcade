@@ -4,6 +4,7 @@
 
 - Node.js 24.15.0，记录于根目录 `.node-version`；项目当前限定 Node 24。
 - pnpm 10.33.0，记录于根目录 `package.json` 的 `packageManager`。
+- `apps/web` 使用 Vue 3；游戏包和 `game-sdk` 保持框架无关。
 - 所有命令在仓库根目录执行。Windows PowerShell、macOS 和 Linux 使用相同的 pnpm 命令。
 - 当前不需要 `.env`、API 密钥、数据库或后端。
 
@@ -79,6 +80,14 @@ CI 不设置此变量，继续使用锁定 Playwright 版本对应的 Chromium�
 
 当前注册表为空，Web 也没有游戏运行时。仅增加注册项不会自动获得可玩的路由或游戏卡片。
 不要提前创建其余六款游戏包，也不需要先建设 `game-runtime`、`ui` 或 `playground`。
+
+## Vue 宿主边界
+
+Vue 组件只管理首页、游戏选择、设置、暂停层、结算层和加载错误等宿主界面。
+游戏规则、Phaser 场景、物理循环和高频棋盘状态留在 `games/<id>` 内，不通过 Vue 的响应式状态逐帧转发。
+
+游戏接入时由 Vue 宿主调用 `GameModule.mount()`，把低频的回合、结果和错误事件映射为界面状态；
+切换或退出时先终止会话，再调用游戏实例的 `destroy()`。Vue 组件不直接导入其他游戏的私有源码。
 
 ## CI 与部署
 

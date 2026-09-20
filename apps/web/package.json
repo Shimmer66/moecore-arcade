@@ -7,16 +7,19 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "typecheck": "tsc --project tsconfig.json",
+    "typecheck": "vue-tsc --project tsconfig.json",
     "lint": "eslint .",
     "test:e2e": "playwright test"
   },
   "dependencies": {
     "@moecore/assets": "workspace:*",
-    "@moecore/game-sdk": "workspace:*"
+    "@moecore/game-sdk": "workspace:*",
+    "vue": "3.5.43"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
+    "@vitejs/plugin-vue": "6.0.9",
+    "vue-tsc": "3.3.11",
     "vite": "8.3.0"
   }
 }

@@ -36,7 +36,7 @@ Linux CI 安装浏览器时使用 `playwright install --with-deps chromium`。�
 
 | 模块     | 已有内容                                                  | 尚未实现                                  |
 | -------- | --------------------------------------------------------- | ----------------------------------------- |
-| Web 入口 | Vite、DOM/CSS 外壳、空游戏注册表、响应式空状态            | 游戏路由、加载生命周期、设置和图鉴页面    |
+| Web 入口 | Vue 3、Vite、空游戏注册表、响应式空状态                   | 游戏路由、加载生命周期、设置和图鉴页面    |
 | 消消乐   | 包结构、棋盘类型、8×8 / 20 步原型配置、配置测试           | 交换、匹配、连锁、关卡、Phaser 场景和结算 |
 | 游戏 SDK | 挂载、暂停、恢复、销毁、会话及结果的类型契约              | 宿主运行时与会话保护                      |
 | 角色     | 六位候选角色的稳定 ID、名称和待审核状态                   | 已获许可的角色头像和立绘                  |
@@ -44,7 +44,7 @@ Linux CI 安装浏览器时使用 `playwright install --with-deps chromium`。�
 | 存储     | 设置键、分游戏存储键生成与隔离测试                        | 持久化适配、异常降级、数据校验和迁移      |
 | 工程     | 严格 TypeScript、ESLint、Prettier、Vitest、Playwright、CI | 游戏流程、真实移动设备和发布性能验收      |
 
-这些基础测试不代表玩法验收通过。Phaser 是后续场景实现的选型，当前骨架尚未安装或加载它。
+这些基础测试不代表玩法验收通过。Vue 3 只负责 Web 宿主界面；Phaser 是后续游戏场景的选型，当前骨架尚未安装或加载它。
 
 ## 项目结构
 
@@ -52,8 +52,8 @@ Linux CI 安装浏览器时使用 `playwright install --with-deps chromium`。�
 moecore-arcade/
 ├── apps/web/                  # 唯一可启动、可部署的应用
 │   ├── src/
-│   │   ├── app/               # 应用启动与组装
-│   │   ├── features/          # 页面功能
+│   │   ├── App.vue            # Vue 宿主布局与全局生命周期
+│   │   ├── features/          # Vue 页面组件
 │   │   ├── games/registry.ts  # 只注册已可玩的游戏，目前为空
 │   │   └── main.ts
 │   ├── public/                # 站点固定文件
@@ -81,7 +81,7 @@ moecore-arcade/
 
 ## 工程约定
 
-- 使用 **pnpm Workspace + TypeScript + Vite**，应用外壳采用原生 DOM/CSS；游戏表现层后续接入 Phaser。
+- 使用 **pnpm Workspace + TypeScript + Vite + Vue 3**，Vue 只负责应用外壳；游戏表现层后续接入 Phaser。
 - `apps/web` 组装游戏和服务；`games/*` 管理本游戏规则；`packages/*` 提供必要的共享能力。
 - 内部依赖通过 `workspace:*` 和公开 `exports` 导入，禁止跨包访问私有源码。公共包不得反向依赖应用或游戏，游戏之间不得互相依赖。
 - 内部包直接导出 TypeScript 源码，由应用统一构建；均为私有工作区包，不发布到 npm。
