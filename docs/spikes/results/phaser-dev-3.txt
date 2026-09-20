@@ -1,0 +1,13 @@
+
+> moecore-arcade@0.0.0 dev C:\home\yuki\projects\moecore-arcade-spike
+> pnpm --filter @moecore/web run dev "--port" "55526" "--strictPort" "--force"
+
+
+> @moecore/web@0.0.0 dev C:\home\yuki\projects\moecore-arcade-spike\apps\web
+> vite --host 127.0.0.1 "--port" "55526" "--strictPort" "--force"
+
+9:46:29 pm [vite] (client) Forced re-optimization of dependencies
+
+  VITE v8.3.0  ready in 174 ms
+
+  ➜  Local:   http://127.0.0.1:55526/

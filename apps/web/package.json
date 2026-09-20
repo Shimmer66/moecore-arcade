@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@moecore/assets": "workspace:*",
+    "@moecore/game-match3": "workspace:*",
     "@moecore/game-sdk": "workspace:*"
   },
   "devDependencies": {

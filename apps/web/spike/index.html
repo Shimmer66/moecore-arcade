@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <title>Engine selection spike</title>
+    <style>
+      body {
+        margin: 0;
+        background: #181818;
+      }
+      #board {
+        width: 384px;
+        max-width: 100vw;
+        aspect-ratio: 1;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="board" aria-label="8 by 8 board"></main>
+    <script type="module" src="./main.mjs"></script>
+  </body>
+</html>

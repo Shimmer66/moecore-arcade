@@ -35,6 +35,9 @@ importers:
       '@moecore/assets':
         specifier: workspace:*
         version: link:../../packages/assets
+      '@moecore/game-match3':
+        specifier: workspace:*
+        version: link:../../games/match3
       '@moecore/game-sdk':
         specifier: workspace:*
         version: link:../../packages/game-sdk

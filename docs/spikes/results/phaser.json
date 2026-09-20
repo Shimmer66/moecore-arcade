@@ -1,0 +1,315 @@
+{
+  "engine": "phaser",
+  "startedAt": "2026-09-20T13:46:09.003Z",
+  "environment": {
+    "cwd": "C:\\home\\yuki\\projects\\moecore-arcade-spike\\",
+    "node": "v24.15.0",
+    "os": "win32 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+    "ramBytes": 33778278400,
+    "baseCommit": "281027b29a347a7f542146b54d60ea15a64c7b89",
+    "pnpm": "10.33.0"
+  },
+  "before": {
+    "duSh": "114M\tnode_modules",
+    "duAllocated": "118876160\tnode_modules",
+    "allocatedBytes": 118876160,
+    "duApparent": "109660401\tnode_modules",
+    "apparentBytes": 109660401,
+    "wcLock": "1570 pnpm-lock.yaml",
+    "lockLines": 1570
+  },
+  "commands": [
+    "pnpm --filter @moecore/web add --save-exact phaser@4.2.1",
+    "pnpm run build",
+    "pnpm --filter @moecore/web remove phaser"
+  ],
+  "installedVersion": "4.2.1",
+  "after": {
+    "duSh": "230M\tnode_modules",
+    "duAllocated": "240889856\tnode_modules",
+    "allocatedBytes": 240889856,
+    "duApparent": "222265407\tnode_modules",
+    "apparentBytes": 222265407,
+    "wcLock": "1585 pnpm-lock.yaml",
+    "lockLines": 1585
+  },
+  "installDelta": {
+    "allocatedBytes": 122013696,
+    "apparentBytes": 112605006,
+    "lockLines": 15
+  },
+  "assets": {
+    "files": [
+      {
+        "file": "index-OQgvHKxS.js",
+        "bytes": 1382029,
+        "gzip9Bytes": 354967,
+        "gzip9NoNameBytes": 354949,
+        "viteGzipBytes": 358805,
+        "sha256": "501adcc44782355848df1963f547ac3ac8fc029dbb5c6d956ab46e2ee63686b7"
+      }
+    ],
+    "totalBytes": 1382029,
+    "totalGzip9Bytes": 354967,
+    "totalGzip9NoNameBytes": 354949,
+    "totalViteGzipBytes": 358805
+  },
+  "startup": [
+    {
+      "run": 1,
+      "command": "pnpm run dev --port 57992 --strictPort --force",
+      "seconds": 0.7769704999999995
+    },
+    {
+      "run": 2,
+      "command": "pnpm run dev --port 55524 --strictPort --force",
+      "seconds": 0.7541418000000012
+    },
+    {
+      "run": 3,
+      "command": "pnpm run dev --port 55526 --strictPort --force",
+      "seconds": 0.742254399999998
+    }
+  ],
+  "browser": {
+    "channel": "chrome",
+    "browserVersion": "153.0.8010.48",
+    "samples": [
+      {
+        "run": 1,
+        "firstPaintMs": 224.79999999701977,
+        "engine": {
+          "name": "phaser",
+          "version": "4.2.1"
+        },
+        "renderer": {
+          "version": "WebGL 1.0 (OpenGL ES 2.0 Chromium)",
+          "vendor": "Google Inc. (NVIDIA)",
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5090 Laptop GPU (0x00002C18) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "navigation": {
+          "name": "http://127.0.0.1:55535/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 209.60000000149012,
+          "navigationId": 3886,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "http/1.1",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.29999999701976776,
+          "domainLookupStart": 0.29999999701976776,
+          "domainLookupEnd": 0.29999999701976776,
+          "connectStart": 0.29999999701976776,
+          "secureConnectionStart": 0,
+          "connectEnd": 0.29999999701976776,
+          "requestStart": 1.3999999985098839,
+          "responseStart": 5.899999998509884,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 5.899999998509884,
+          "responseEnd": 6.299999997019768,
+          "transferSize": 866,
+          "encodedBodySize": 566,
+          "decodedBodySize": 566,
+          "responseStatus": 200,
+          "serverTiming": [],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 12.5,
+          "domContentLoadedEventStart": 159.79999999701977,
+          "domContentLoadedEventEnd": 159.89999999850988,
+          "domComplete": 209.60000000149012,
+          "loadEventStart": 209.60000000149012,
+          "loadEventEnd": 209.60000000149012,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        },
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "boardSha256": "20d546b13133bd385b596bfae286d1c2fe490a37ac623b55962d0ddcb8469941",
+        "clickLatencyMs": 13.5,
+        "selected": [28]
+      },
+      {
+        "run": 2,
+        "firstPaintMs": 92.10000000149012,
+        "engine": {
+          "name": "phaser",
+          "version": "4.2.1"
+        },
+        "renderer": {
+          "version": "WebGL 1.0 (OpenGL ES 2.0 Chromium)",
+          "vendor": "Google Inc. (NVIDIA)",
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5090 Laptop GPU (0x00002C18) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "navigation": {
+          "name": "http://127.0.0.1:55535/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 85.60000000149012,
+          "navigationId": 1266,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "http/1.1",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.19999999552965164,
+          "domainLookupStart": 0.19999999552965164,
+          "domainLookupEnd": 0.19999999552965164,
+          "connectStart": 0.19999999552965164,
+          "secureConnectionStart": 0,
+          "connectEnd": 0.19999999552965164,
+          "requestStart": 0.7999999970197678,
+          "responseStart": 2.5,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 2.5,
+          "responseEnd": 2.7999999970197678,
+          "transferSize": 866,
+          "encodedBodySize": 566,
+          "decodedBodySize": 566,
+          "responseStatus": 200,
+          "serverTiming": [],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 8,
+          "domContentLoadedEventStart": 72.60000000149012,
+          "domContentLoadedEventEnd": 72.79999999701977,
+          "domComplete": 85.60000000149012,
+          "loadEventStart": 85.60000000149012,
+          "loadEventEnd": 85.60000000149012,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        },
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "boardSha256": "20d546b13133bd385b596bfae286d1c2fe490a37ac623b55962d0ddcb8469941",
+        "clickLatencyMs": 8.699999995529652,
+        "selected": [28]
+      },
+      {
+        "run": 3,
+        "firstPaintMs": 92.39999999850988,
+        "engine": {
+          "name": "phaser",
+          "version": "4.2.1"
+        },
+        "renderer": {
+          "version": "WebGL 1.0 (OpenGL ES 2.0 Chromium)",
+          "vendor": "Google Inc. (NVIDIA)",
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5090 Laptop GPU (0x00002C18) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+        },
+        "navigation": {
+          "name": "http://127.0.0.1:55535/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 86,
+          "navigationId": 3187,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "http/1.1",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.30000000447034836,
+          "domainLookupStart": 0.30000000447034836,
+          "domainLookupEnd": 0.30000000447034836,
+          "connectStart": 0.30000000447034836,
+          "secureConnectionStart": 0,
+          "connectEnd": 0.30000000447034836,
+          "requestStart": 0.8000000044703484,
+          "responseStart": 2.3000000044703484,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 2.3000000044703484,
+          "responseEnd": 2.5,
+          "transferSize": 866,
+          "encodedBodySize": 566,
+          "decodedBodySize": 566,
+          "responseStatus": 200,
+          "serverTiming": [],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 7.5,
+          "domContentLoadedEventStart": 69.5,
+          "domContentLoadedEventEnd": 69.60000000149012,
+          "domComplete": 85.89999999850988,
+          "loadEventStart": 85.89999999850988,
+          "loadEventEnd": 86,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        },
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "boardSha256": "20d546b13133bd385b596bfae286d1c2fe490a37ac623b55962d0ddcb8469941",
+        "clickLatencyMs": 3.3000000044703484,
+        "selected": [28]
+      }
+    ],
+    "qa": [
+      {
+        "viewport": "desktop-mouse",
+        "cellsChecked": 64,
+        "toggleOffChecked": true,
+        "pixelsChecked": true,
+        "noHorizontalOverflow": true
+      },
+      {
+        "viewport": "mobile-touch",
+        "cellsChecked": 64,
+        "toggleOffChecked": true,
+        "pixelsChecked": true,
+        "noHorizontalOverflow": true
+      }
+    ]
+  },
+  "status": "complete",
+  "restored": {
+    "manifestIdentical": true,
+    "lockIdentical": true,
+    "manifestSha256": "614a05020b9f75b02f8e01368e3cba84aec0c34bdb9b5e46ba1b5cdb2edf6ec0",
+    "lockSha256": "048cacec2345a532a483c63ae0ea04a94fcff6eab9726d33e46b3c49f1b19db4"
+  },
+  "finishedAt": "2026-09-20T13:46:37.285Z"
+}

@@ -1,0 +1,9 @@
+
+> moecore-arcade@0.0.0 preview C:\home\yuki\projects\moecore-arcade-spike
+> pnpm --filter @moecore/web run preview "--port" "55535" "--strictPort"
+
+
+> @moecore/web@0.0.0 preview C:\home\yuki\projects\moecore-arcade-spike\apps\web
+> vite preview --host 127.0.0.1 "--port" "55535" "--strictPort"
+
+  ➜  Local:   http://127.0.0.1:55535/
