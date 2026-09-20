@@ -1,0 +1,61 @@
+﻿序号,分类,素材ID,名称,相对路径,宽,高,来源图集
+1,角色立绘,deepseek_pose_01,DeepSeek · 姿态 1,assets/characters/deepseek_pose_01.png,384,384,sources/latest/01_characters.png
+2,角色立绘,deepseek_pose_02,DeepSeek · 姿态 2,assets/characters/deepseek_pose_02.png,384,384,sources/latest/01_characters.png
+3,角色立绘,glm_pose_01,GLM · 姿态 1,assets/characters/glm_pose_01.png,384,384,sources/latest/01_characters.png
+4,角色立绘,glm_pose_02,GLM · 姿态 2,assets/characters/glm_pose_02.png,384,384,sources/latest/01_characters.png
+5,角色立绘,gpt_pose_01,ChatGPT / GPT · 姿态 1,assets/characters/gpt_pose_01.png,384,384,sources/latest/01_characters.png
+6,角色立绘,gpt_pose_02,ChatGPT / GPT · 姿态 2,assets/characters/gpt_pose_02.png,384,384,sources/latest/01_characters.png
+7,角色立绘,claude_pose_01,Claude · 姿态 1,assets/characters/claude_pose_01.png,384,384,sources/latest/01_characters.png
+8,角色立绘,claude_pose_02,Claude · 姿态 2,assets/characters/claude_pose_02.png,384,384,sources/latest/01_characters.png
+9,角色立绘,gemini_pose_01,Gemini · 姿态 1,assets/characters/gemini_pose_01.png,384,384,sources/latest/01_characters.png
+10,角色立绘,gemini_pose_02,Gemini · 姿态 2,assets/characters/gemini_pose_02.png,384,384,sources/latest/01_characters.png
+11,角色立绘,kimi_pose_01,Kimi · 姿态 1,assets/characters/kimi_pose_01.png,384,384,sources/latest/01_characters.png
+12,角色立绘,kimi_pose_02,Kimi · 姿态 2,assets/characters/kimi_pose_02.png,384,384,sources/latest/01_characters.png
+13,角色头像,deepseek_avatar,DeepSeek · 头像,assets/avatars/deepseek_avatar.png,384,384,sources/latest/02_avatars.png
+14,角色头像,glm_avatar,GLM · 头像,assets/avatars/glm_avatar.png,384,384,sources/latest/02_avatars.png
+15,角色头像,gpt_avatar,ChatGPT / GPT · 头像,assets/avatars/gpt_avatar.png,384,384,sources/latest/02_avatars.png
+16,角色头像,claude_avatar,Claude · 头像,assets/avatars/claude_avatar.png,384,384,sources/latest/02_avatars.png
+17,角色头像,gemini_avatar,Gemini · 头像,assets/avatars/gemini_avatar.png,384,384,sources/latest/02_avatars.png
+18,角色头像,kimi_avatar,Kimi · 头像,assets/avatars/kimi_avatar.png,384,384,sources/latest/02_avatars.png
+19,普通棋子,deepseek_tile_portrait,DeepSeek · 头像棋子,assets/tiles/deepseek_tile_portrait.png,384,384,sources/latest/03_tiles.png
+20,普通棋子,glm_tile_portrait,GLM · 头像棋子,assets/tiles/glm_tile_portrait.png,384,384,sources/latest/03_tiles.png
+21,普通棋子,gpt_tile_portrait,ChatGPT / GPT · 头像棋子,assets/tiles/gpt_tile_portrait.png,384,384,sources/latest/03_tiles.png
+22,普通棋子,claude_tile_portrait,Claude · 头像棋子,assets/tiles/claude_tile_portrait.png,384,384,sources/latest/03_tiles.png
+23,普通棋子,gemini_tile_portrait,Gemini · 头像棋子,assets/tiles/gemini_tile_portrait.png,384,384,sources/latest/03_tiles.png
+24,普通棋子,kimi_tile_portrait,Kimi · 头像棋子,assets/tiles/kimi_tile_portrait.png,384,384,sources/latest/03_tiles.png
+25,普通棋子,deepseek_tile_symbol,DeepSeek · 主题符号棋子,assets/tiles/deepseek_tile_symbol.png,384,384,sources/latest/03_tiles.png
+26,普通棋子,glm_tile_symbol,GLM · 主题符号棋子,assets/tiles/glm_tile_symbol.png,384,384,sources/latest/03_tiles.png
+27,普通棋子,gpt_tile_symbol,ChatGPT / GPT · 主题符号棋子,assets/tiles/gpt_tile_symbol.png,384,384,sources/latest/03_tiles.png
+28,普通棋子,claude_tile_symbol,Claude · 主题符号棋子,assets/tiles/claude_tile_symbol.png,384,384,sources/latest/03_tiles.png
+29,普通棋子,gemini_tile_symbol,Gemini · 主题符号棋子,assets/tiles/gemini_tile_symbol.png,384,384,sources/latest/03_tiles.png
+30,普通棋子,kimi_tile_symbol,Kimi · 主题符号棋子,assets/tiles/kimi_tile_symbol.png,384,384,sources/latest/03_tiles.png
+31,特殊棋子与道具,clear_row,横向清除,assets/powerups/clear_row.png,384,384,sources/latest/04_powerups.png
+32,特殊棋子与道具,clear_column,纵向清除,assets/powerups/clear_column.png,384,384,sources/latest/04_powerups.png
+33,特殊棋子与道具,clear_cross,十字清除,assets/powerups/clear_cross.png,384,384,sources/latest/04_powerups.png
+34,特殊棋子与道具,star_bomb,星星炸弹,assets/powerups/star_bomb.png,384,384,sources/latest/04_powerups.png
+35,特殊棋子与道具,rainbow_ball,彩虹球,assets/powerups/rainbow_ball.png,384,384,sources/latest/04_powerups.png
+36,特殊棋子与道具,gift_box,礼盒,assets/powerups/gift_box.png,384,384,sources/latest/04_powerups.png
+37,障碍物,crate_wood,木箱,assets/obstacles/crate_wood.png,384,384,sources/latest/05_obstacles.png
+38,障碍物,crate_reinforced,加固木箱,assets/obstacles/crate_reinforced.png,384,384,sources/latest/05_obstacles.png
+39,障碍物,stone,石块,assets/obstacles/stone.png,384,384,sources/latest/05_obstacles.png
+40,障碍物,ice,冰块,assets/obstacles/ice.png,384,384,sources/latest/05_obstacles.png
+41,障碍物,locked_stone,锁链石块,assets/obstacles/locked_stone.png,384,384,sources/latest/05_obstacles.png
+42,障碍物,vines,藤蔓,assets/obstacles/vines.png,384,384,sources/latest/05_obstacles.png
+43,静态特效,sparkle_blue,蓝色闪光,assets/effects/sparkle_blue.png,384,384,sources/latest/06_effects.png
+44,静态特效,burst_gold,金色星爆,assets/effects/burst_gold.png,384,384,sources/latest/06_effects.png
+45,静态特效,burst_hearts,爱心闪光,assets/effects/burst_hearts.png,384,384,sources/latest/06_effects.png
+46,静态特效,burst_bubbles,泡泡闪光,assets/effects/burst_bubbles.png,384,384,sources/latest/06_effects.png
+47,静态特效,burst_clover,四叶草闪光,assets/effects/burst_clover.png,384,384,sources/latest/06_effects.png
+48,静态特效,burst_paw,爪印闪光,assets/effects/burst_paw.png,384,384,sources/latest/06_effects.png
+49,界面按钮,button_play,开始按钮,assets/ui/button_play.png,384,384,sources/latest/07_ui_buttons.png
+50,界面按钮,button_pause,暂停按钮,assets/ui/button_pause.png,384,384,sources/latest/07_ui_buttons.png
+51,界面按钮,button_home,首页按钮,assets/ui/button_home.png,384,384,sources/latest/07_ui_buttons.png
+52,界面按钮,button_settings,设置按钮,assets/ui/button_settings.png,384,384,sources/latest/07_ui_buttons.png
+53,界面按钮,button_restart,重开按钮,assets/ui/button_restart.png,384,384,sources/latest/07_ui_buttons.png
+54,界面按钮,button_back,返回按钮,assets/ui/button_back.png,384,384,sources/latest/07_ui_buttons.png
+55,界面按钮,button_next,继续按钮,assets/ui/button_next.png,384,384,sources/latest/07_ui_buttons.png
+56,界面按钮,button_help,帮助按钮,assets/ui/button_help.png,384,384,sources/latest/07_ui_buttons.png
+57,界面按钮,button_close,关闭按钮,assets/ui/button_close.png,384,384,sources/latest/07_ui_buttons.png
+58,界面按钮,button_confirm,确认按钮,assets/ui/button_confirm.png,384,384,sources/latest/07_ui_buttons.png
+59,界面按钮,button_menu,菜单按钮,assets/ui/button_menu.png,384,384,sources/latest/07_ui_buttons.png
+60,界面按钮,button_gift,礼物按钮,assets/ui/button_gift.png,384,384,sources/latest/07_ui_buttons.png
