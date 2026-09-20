@@ -2,6 +2,9 @@ import { ASSETS } from '@moecore/assets';
 import { renderHome } from '../features/home';
 
 export function renderApp(root: HTMLElement): void {
+  const favicon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+  if (favicon) favicon.href = ASSETS.arcadeMark.url;
+
   root.innerHTML = `
     <header class="site-header">
       <div class="wordmark">

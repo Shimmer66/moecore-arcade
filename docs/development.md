@@ -55,6 +55,20 @@ Playwright 在 `127.0.0.1:4175` 启动独立预览服务，结束后自动清理
 截图和失败追踪存入 `apps/web/test-results`，不提交到 Git。
 移动视口模拟不等于 Android、iOS 真机兼容性验收。
 
+若 Playwright 浏览器下载不可用，可显式指定本机已安装的 Chrome 进行本地冒烟验证：
+
+```powershell
+# PowerShell，仅影响当前终端；测试后清除
+$env:PLAYWRIGHT_CHANNEL = 'chrome'
+pnpm test:e2e
+Remove-Item Env:PLAYWRIGHT_CHANNEL
+```
+
+macOS / Linux 使用 `PLAYWRIGHT_CHANNEL=chrome pnpm test:e2e`。
+这不会使用日常浏览器的用户数据；测试仍启动独立浏览器实例。
+记录实际使用的通道，不将本机 Chrome 验证等同于默认 Chromium 下载问题已经解决。
+CI 不设置此变量，继续使用锁定 Playwright 版本对应的 Chromium。
+
 ## 新增游戏
 
 1. 创建 `games/<id>`，包名采用 `@moecore/game-<id>`，声明实际依赖和公开导出。
