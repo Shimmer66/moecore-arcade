@@ -1,6 +1,6 @@
 import { CHARACTERS } from '@moecore/characters';
 
-// Prototype inputs, not a playable level or a generated board.
+// Starting values for the single prototype level, not balanced difficulty targets.
 export const prototypeConfig = {
   id: 'match3',
   rows: 8,

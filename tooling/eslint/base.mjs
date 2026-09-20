@@ -13,6 +13,7 @@ export default defineConfig(
       '**/playwright-report/**',
       '**/test-results/**',
       '**/.codegraph/**',
+      '**/.cache/**',
     ],
   },
   js.configs.recommended,
@@ -35,6 +36,8 @@ export default defineConfig(
       'vue/html-self-closing': 'off',
       'vue/max-attributes-per-line': 'off',
       'vue/singleline-html-element-content-newline': 'off',
+      'vue/html-closing-bracket-newline': 'off',
+      'vue/html-indent': 'off',
     },
   },
   {
@@ -42,7 +45,7 @@ export default defineConfig(
     languageOptions: { globals: globals.node },
   },
   {
-    files: ['packages/**/*.ts'],
+    files: ['packages/**/*.ts', 'packages/**/*.vue'],
     rules: {
       'no-restricted-imports': [
         'error',
@@ -58,7 +61,7 @@ export default defineConfig(
     },
   },
   {
-    files: ['games/**/*.ts'],
+    files: ['games/**/*.ts', 'games/**/*.vue'],
     rules: {
       'no-restricted-imports': [
         'error',

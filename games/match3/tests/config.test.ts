@@ -1,6 +1,6 @@
 import { CHARACTERS } from '@moecore/characters';
 import { describe, expect, it } from 'vitest';
-import { prototypeConfig } from '../src/index';
+import { prototypeConfig } from '../src/config/prototype';
 
 describe('match3 prototype configuration', () => {
   it('defines a finite board and move budget', () => {

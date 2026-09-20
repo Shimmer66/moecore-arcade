@@ -1,32 +1,8 @@
-export { prototypeConfig } from './config/prototype';
+import type { GameDefinition } from '@moecore/game-sdk';
+import Match3Game from './components/Match3Game.vue';
 
-export type {
-  Board,
-  BoardConfig,
-  BoardCreation,
-  BoardOptions,
-  BoardStats,
-  Cell,
-  MatchRun,
-  Orientation,
-  Position,
-  RandomSource,
-  SwapCandidate,
-} from './rules/index';
-
-export {
-  DEFAULT_MAX_RANDOM_ATTEMPTS,
-  MINIMUM_RUN_LENGTH,
-  createBoard,
-  createRandomSource,
-  enumerateValidSwaps,
-  findMatchedCells,
-  findRuns,
-  hasImmediateMatch,
-  hasValidSwap,
-  isAdjacent,
-  isEffectiveSwap,
-  isInsideBoard,
-  isMatchedCell,
-  trySwap,
-} from './rules/index';
+export const game = {
+  id: 'match3',
+  title: 'AI 娘消消乐',
+  component: Match3Game,
+} satisfies GameDefinition;

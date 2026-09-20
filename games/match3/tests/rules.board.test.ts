@@ -5,9 +5,9 @@ import {
   createRandomSource,
   hasImmediateMatch,
   hasValidSwap,
-} from '../src/index';
-import { prototypeConfig } from '../src/index';
-import type { Board, BoardConfig, RandomSource } from '../src/index';
+} from '../src/rules';
+import { prototypeConfig } from '../src/config/prototype';
+import type { Board, BoardConfig, RandomSource } from '../src/rules';
 
 const config: BoardConfig = {
   rows: prototypeConfig.rows,

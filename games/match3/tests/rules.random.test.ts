@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createRandomSource } from '../src/index';
+import { createRandomSource } from '../src/rules';
 
 describe('match3 random source', () => {
   it('repeats the same sequence for the same seed', () => {

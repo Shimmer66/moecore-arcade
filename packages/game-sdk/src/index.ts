@@ -11,6 +11,7 @@ export interface GameResult {
   readonly sessionId: string;
   readonly outcome: 'win' | 'lose' | 'draw' | 'completed' | 'aborted';
   readonly durationMs: number;
+  readonly summary: string;
   readonly stats: Readonly<Record<string, number>>;
 }
 
@@ -19,25 +20,20 @@ export interface GameStorage {
   write(key: string, value: JsonValue): void;
 }
 
-export interface GameContext {
+export interface GameProps {
   readonly sessionId: string;
-  readonly signal: AbortSignal;
+  readonly paused: boolean;
   readonly settings: Readonly<GameSettings>;
-  readonly storage: GameStorage;
-  onFinish(result: GameResult): void;
-  onExit(): void;
 }
 
-export interface GameInstance {
-  pause(): void;
-  resume(): void;
-  resize(width: number, height: number): void;
-  updateSettings(settings: Readonly<GameSettings>): void;
-  destroy(): void;
-}
+export type GameEvents = {
+  finish: [result: GameResult];
+  exit: [];
+};
 
-export interface GameModule {
+export interface GameDefinition {
   readonly id: string;
   readonly title: string;
-  mount(container: HTMLElement, context: GameContext): Promise<GameInstance>;
+  readonly component: Component;
 }
+import type { Component } from 'vue';

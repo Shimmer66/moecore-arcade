@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { findMatchedCells, findRuns, hasImmediateMatch, isMatchedCell } from '../src/index';
-import type { Board } from '../src/index';
+import { findMatchedCells, findRuns, hasImmediateMatch, isMatchedCell } from '../src/rules';
+import type { Board } from '../src/rules';
 
 const D = 'deepseek';
 const G = 'glm';

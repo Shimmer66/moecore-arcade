@@ -1,12 +1,28 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { ASSETS } from '@moecore/assets';
 import HomeView from './features/HomeView.vue';
+import GameHost from './games/GameHost.vue';
+
+const selectedGame = ref('');
+function readRoute() {
+  const match = /^#\/games\/([a-z0-9-]+)$/.exec(window.location.hash);
+  selectedGame.value = match?.[1] ?? '';
+}
+function selectGame(id: string) {
+  window.location.hash = `/games/${id}`;
+}
+function leaveGame() {
+  window.location.hash = '/';
+}
+readRoute();
 
 onMounted(() => {
   const favicon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
   if (favicon) favicon.href = ASSETS.arcadeMark.url;
+  window.addEventListener('hashchange', readRoute);
 });
+onUnmounted(() => window.removeEventListener('hashchange', readRoute));
 </script>
 
 <template>
@@ -18,11 +34,12 @@ onMounted(() => {
         <span class="brand-subtitle" lang="en">MoeCore Arcade</span>
       </div>
     </div>
-    <span class="development-label">筹备中</span>
+    <span class="development-label">原型试玩</span>
   </header>
 
   <main id="main-content">
-    <HomeView />
+    <GameHost v-if="selectedGame" :key="selectedGame" :game-id="selectedGame" @exit="leaveGame" />
+    <HomeView v-else @select="selectGame" />
   </main>
 
   <footer class="site-footer">MoeCore Arcade · 非官方同人项目</footer>

@@ -3,6 +3,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, extname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
+import { parse } from '@vue/compiler-sfc';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const packages = new Map();
@@ -43,7 +44,7 @@ function* sourceFiles(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
     const location = join(directory, entry.name);
     if (entry.isDirectory()) yield* sourceFiles(location);
-    else if (extname(entry.name) === '.ts') yield location;
+    else if (['.ts', '.vue'].includes(extname(entry.name))) yield location;
   }
 }
 
@@ -65,12 +66,16 @@ for (const [name, pkg] of packages) {
   }
 
   for (const file of sourceFiles(join(pkg.directory, 'src'))) {
-    const source = ts.createSourceFile(
-      file,
-      readFileSync(file, 'utf8'),
-      ts.ScriptTarget.Latest,
-      true,
-    );
+    let code = readFileSync(file, 'utf8');
+    if (extname(file) === '.vue') {
+      const { descriptor, errors } = parse(code, { filename: file });
+      assert.equal(errors.length, 0, `${file}: invalid Vue component`);
+      assert(!descriptor.script?.src, `${file}: keep component scripts inside the SFC`);
+      code = [descriptor.script?.content, descriptor.scriptSetup?.content]
+        .filter(Boolean)
+        .join('\n');
+    }
+    const source = ts.createSourceFile(file, code, ts.ScriptTarget.Latest, true);
     function visit(node) {
       let specifier;
       if (ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) {

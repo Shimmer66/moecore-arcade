@@ -23,6 +23,7 @@
     "check": "pnpm run check:workspace && pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run test"
   },
   "devDependencies": {
+    "@vue/compiler-sfc": "3.5.43",
     "@stylistic/eslint-plugin": "5.10.0",
     "@eslint/js": "10.0.1",
     "@types/node": "24.13.6",

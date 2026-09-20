@@ -6,8 +6,8 @@ import {
   isEffectiveSwap,
   isInsideBoard,
   trySwap,
-} from '../src/index';
-import type { Board } from '../src/index';
+} from '../src/rules';
+import type { Board } from '../src/rules';
 
 const D = 'deepseek';
 const G = 'glm';

@@ -1,4 +1,6 @@
 export type { Board, Cell, Position } from './types';
+export { collapseAndFill, MAX_CASCADES, playMove, startSession } from './session';
+export type { CascadeFrame, Level, Match3State, MoveResult } from './session';
 
 export type { BoardConfig, BoardCreation, BoardOptions, BoardStats } from './board';
 export { DEFAULT_MAX_RANDOM_ATTEMPTS, createBoard } from './board';

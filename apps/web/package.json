@@ -14,6 +14,8 @@
   "dependencies": {
     "@moecore/assets": "workspace:*",
     "@moecore/game-sdk": "workspace:*",
+    "@moecore/game-match3": "workspace:*",
+    "@lucide/vue": "1.47.0",
     "vue": "3.5.43"
   },
   "devDependencies": {
