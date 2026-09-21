@@ -5,15 +5,15 @@
 `apps/*` 是可启动或部署的应用；`games/*` 是可被应用装载的游戏；`packages/*` 是共享源码包。
 首版只部署 `apps/web`，没有独立游戏站点、业务后端或 npm 包发布流程。
 
-| 包                      | 当前职责                                   | 后续边界                     |
-| ----------------------- | ------------------------------------------ | ---------------------------- |
-| `@moecore/web`          | Vue 游戏列表、动态加载、暂停、重开与结算   | 不实现游戏规则               |
-| `@moecore/game-match3`  | Vue 棋盘、纯 TypeScript 规则、原型关卡     | 不导入其他游戏或应用代码     |
-| `@moecore/game-parkour` | Vue 跑道、固定步长规则、收集机制和章节故事 | 不导入其他游戏或应用代码     |
-| `@moecore/game-sdk`     | 组件定义、props、事件与结果类型            | 仅类型契约，不创建引擎实例   |
-| `@moecore/characters`   | 角色候选 ID、展示名、素材状态              | 不定义跨游戏统一战力         |
-| `@moecore/assets`       | 占位图、消消乐素材及显式 URL 映射          | 只接入已审核或明确标记的资源 |
-| `@moecore/storage`      | 按游戏生成版本化存储键                     | 后续增加持久化适配和异常降级 |
+| 包                      | 当前职责                                      | 后续边界                     |
+| ----------------------- | --------------------------------------------- | ---------------------------- |
+| `@moecore/web`          | Vue 游戏列表、动态加载、暂停、重开与结算      | 不实现游戏规则               |
+| `@moecore/game-match3`  | Vue 棋盘、纯 TypeScript 规则、原型关卡        | 不导入其他游戏或应用代码     |
+| `@moecore/game-parkour` | Vue 跑道、固定步长规则、AI 主题交互与事件台词 | 不导入其他游戏或应用代码     |
+| `@moecore/game-sdk`     | 组件定义、props、事件与结果类型               | 仅类型契约，不创建引擎实例   |
+| `@moecore/characters`   | 角色候选 ID、展示名、素材状态                 | 不定义跨游戏统一战力         |
+| `@moecore/assets`       | 占位图、消消乐素材及显式 URL 映射             | 只接入已审核或明确标记的资源 |
+| `@moecore/storage`      | 按游戏生成版本化存储键                        | 后续增加持久化适配和异常降级 |
 
 内部包的 `exports` 直接指向 TypeScript / Vue 源码，由 Vite 统一编译。
 不为这些包单独创建构建产物；Node 工具复用或独立发布需求出现后再调整。
@@ -41,15 +41,15 @@ ESLint 同时限制反向导入。检查覆盖 `.ts` 和 Vue SFC 的脚本，解
 正式类型定义位于 `packages/game-sdk/src/index.ts`：
 
 - `GameDefinition`：游戏 ID、标题和 Vue 根组件。
-- `GameProps`：宿主创建的 `sessionId`、`paused` 和设置。
+- `GameProps`：宿主创建的 `sessionId`、本次访问的 `attempt`、`paused` 和设置。
 - `GameEvents`：`finish` 携带结果，`exit` 请求退出。
-- `GameResult`：游戏与会话 ID、结果、有效时长、摘要和本游戏统计；可选 `story` 提供结尾标题和正文。
+- `GameResult`：游戏与会话 ID、结果、有效时长、摘要和统计；可选 `story` 提供结尾标题、正文和图片 URL。
 
 `GameHost.vue` 使用 `<component :is="definition.component" :key="sessionId">` 装载游戏。
 不为游戏再调用 `createApp`，不保留旧的手动挂载与销毁接口，也不使用 KeepAlive 缓存未结束的对局。
 
 1. 注册表提供显式动态导入，首页只显示实际注册的游戏；同一时刻最多一个游戏组件。
-2. 重开更换 `sessionId`，退出或切换卸载组件；游戏在 `onUnmounted` 中释放计时器、动画帧和监听。
+2. 重开更换 `sessionId` 并增加 `attempt`；新访问从 1 开始。退出或切换卸载组件，游戏在 `onUnmounted` 中释放计时器、动画帧和监听。
 3. 宿主通过加载版本号拒绝过期导入；组件通过清理自身回调避免修改下一局。
 4. 宿主核对结果的游戏 ID 与会话 ID，拒绝过期或重复结算。
 5. `paused` 为真时游戏停止输入、动画推进及计时。窗口重新获得焦点不自动恢复。
@@ -58,7 +58,8 @@ ESLint 同时限制反向导入。检查覆盖 `.ts` 和 Vue SFC 的脚本，解
 
 分数与技能由各游戏定义。宿主显示游戏传入的摘要，不解释消消乐专属的统计字段，也不合成统一排名。
 消消乐与跑酷共用同一宿主；新增游戏实现相同 props / 事件、声明依赖并添加注册项，不复制宿主。
-跑酷在章节阅读时自行暂停固定步长循环，宿主暂停仍优先；章节不增加有效对局时长。
+跑酷只在首次访问显示一句开场，`attempt > 1` 直接进入短倒计时；局内不插入阅读暂停。
+开场、倒计时及宿主暂停不增加有效对局时长。游戏可以忽略 `attempt`，消消乐仍正常初始化新棋盘。
 宿主只显示游戏提供的结尾，不参与游戏的剧情条件判定。
 
 ## 角色和资源
@@ -66,7 +67,8 @@ ESLint 同时限制反向导入。检查覆盖 `.ts` 和 Vue SFC 的脚本，解
 角色候选与可用图片分开管理。登记角色名称不代表已经取得相应图像。
 `packages/assets/resources` 存放站点占位资源，`packages/assets/match3` 存放消消乐开发素材；
 `CREDITS.md` 是公开署名和审核状态入口。
-`packages/assets/parkour` 保存 400 张跑酷候选素材，`loadParkourAssets(ids)` 按需解析 URL。
+`packages/assets/parkour` 的旧 400 张素材保留归档。当前办公室跑酷通过
+`@moecore/assets/whale-runner` 加载新素材的 WebP 运行图，不再引用海洋包。
 运行资源通过显式映射导入，由宿主构建；不依赖其他包的 `public` 目录自动发布，也不热链第三方图片。
 
 `apps/web/public` 同样属于发布资源目录；即便没有被页面引用，文件仍可能进入产物。

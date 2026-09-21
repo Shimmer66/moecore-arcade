@@ -277,6 +277,10 @@ button:disabled {
   text-align: center;
   line-height: 1.8;
 }
+.story-ending-image {
+  object-fit: contain;
+  flex-shrink: 0;
+}
 .confirm-dialog {
   width: min(400px, calc(100% - 32px));
   padding: 24px;
@@ -309,6 +313,16 @@ button:disabled {
   gap: 8px;
 }
 @media (max-width: 740px) {
+  #app:has(.whale-game) .site-header {
+    padding-block: 10px;
+  }
+  main:has(.whale-game) {
+    padding-block: 12px;
+  }
+  .game-host:has(.whale-game) .game-toolbar {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
   .game-toolbar {
     align-items: flex-start;
     flex-wrap: wrap;

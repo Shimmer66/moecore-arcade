@@ -19,5 +19,27 @@ export type {
   RunResult,
   RunState,
 } from './types';
-export { beginAdventure, advanceAdventure, multiplierFor, seedForSession } from './adventure';
-export type { Adventure, AdventureInput, Pickup, PickupKind } from './adventure';
+export {
+  beginAdventure,
+  advanceAdventure,
+  multiplierFor,
+  seedForSession,
+  TAIL_TICKS,
+  TAIL_COOLDOWN,
+  TAIL_REACH,
+  BURST_TICKS,
+  SLOW_TICKS,
+  PAPER_SPEED,
+  RETURN_SPEED,
+  CONTEXT_CAPACITY,
+} from './adventure';
+export { ANSWER_DISTANCE, SHIFT_DISTANCE, departmentAt } from '../config/shift';
+export type {
+  Adventure,
+  AdventureInput,
+  Pickup,
+  Printer,
+  Paper,
+  RequestQueue,
+  Feedback,
+} from './adventure';

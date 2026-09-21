@@ -12,7 +12,7 @@ export interface GameResult {
   readonly outcome: 'win' | 'lose' | 'draw' | 'completed' | 'aborted';
   readonly durationMs: number;
   readonly summary: string;
-  readonly story?: { readonly title: string; readonly body: string };
+  readonly story?: { readonly title: string; readonly body: string; readonly imageUrl?: string };
   readonly stats: Readonly<Record<string, number>>;
 }
 
@@ -23,6 +23,7 @@ export interface GameStorage {
 
 export interface GameProps {
   readonly sessionId: string;
+  readonly attempt: number;
   readonly paused: boolean;
   readonly settings: Readonly<GameSettings>;
 }

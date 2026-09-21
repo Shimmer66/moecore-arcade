@@ -10,6 +10,7 @@ const definition = shallowRef<GameDefinition>();
 const error = ref('');
 const loading = ref(false);
 const sessionId = ref('');
+const attempt = ref(0);
 const manuallyPaused = ref(false);
 const autoPaused = ref(false);
 const result = shallowRef<GameResult>();
@@ -27,6 +28,7 @@ const settings = computed(() => ({ masterVolume: 1, reduceMotion: reduceMotion.v
 let loadRevision = 0;
 
 function restart() {
+  attempt.value += 1;
   result.value = undefined;
   manuallyPaused.value = false;
   autoPaused.value = document.hidden;
@@ -45,6 +47,7 @@ async function load() {
     const game = await entry.load();
     if (revision !== loadRevision) return;
     if (game.id !== entry.id) throw new Error('Game ID does not match the registry');
+    attempt.value = 0;
     restart();
     definition.value = game;
   } catch {
@@ -171,6 +174,7 @@ onUnmounted(() => {
           :is="definition.component"
           :key="sessionId"
           :session-id="sessionId"
+          :attempt="attempt"
           :paused="paused"
           :settings="settings"
           @finish="finish"
@@ -184,6 +188,14 @@ onUnmounted(() => {
         aria-label="对局结算"
         aria-live="polite"
       >
+        <img
+          v-if="result.story?.imageUrl"
+          class="story-ending-image"
+          :src="result.story.imageUrl"
+          alt=""
+          width="136"
+          height="136"
+        />
         <h2>{{ result.story?.title ?? (result.outcome === 'win' ? '挑战完成！' : '本局结束') }}</h2>
         <p v-if="result.story" class="story-ending">{{ result.story.body }}</p>
         <p>{{ result.summary }}</p>

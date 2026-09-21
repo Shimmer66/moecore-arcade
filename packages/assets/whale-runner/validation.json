@@ -1,0 +1,21 @@
+{
+  "expected_count": 72,
+  "actual_count": 72,
+  "missing": [],
+  "decodable": 72,
+  "transparent_png_count": 70,
+  "opaque_assets": ["bg_far", "keyart_menu"],
+  "categories": {
+    "reference": 1,
+    "reference_portrait": 1,
+    "character": 26,
+    "portrait": 10,
+    "background": 2,
+    "prop": 21,
+    "effect": 10,
+    "keyart": 1
+  },
+  "engine_animation_tested": false,
+  "seamless_tiling_tested": false,
+  "native_pixels_preserved": true
+}

@@ -1,52 +1,132 @@
-export const prologue = {
-  title: '把星光带回灯塔',
-  body: '今晚，星潮灯塔突然熄灭。最后一艘归航船还在海上，四位伙伴决定把散落的星光带回去。',
-};
+export const gameTitle = '大肥鱼跑酷：答案马上就到';
 
-export const openingLines = {
-  deepseek: '我听见潮水里的求救声了。跟紧我，我们一定赶得上。',
-  glm: '星图还在，航线就不会断。我来记住回家的坐标。',
-  gpt: '一颗星也许很小，但我们可以把它们重新连起来。',
-  claude: '那艘船上还有人在等这盏灯。我们出发吧。',
+// Original game parody, not quotations attributed to a real model.
+export const opening = {
+  request: '想玩个小游戏。',
+  line: '包的。答案马上送到。',
+  portrait: 'portrait_confident',
+  action: '开跑',
 } as const;
 
-export const chapterStories = [
-  {
-    title: '第一章 · 灯塔的秘密',
-    speaker: 'glm',
-    name: 'GLM',
-    body: '遗迹里的旧星图亮了起来。灯塔不是坏了：每当有人在海上迷路，它就借出一束光，直到自己再也发不出光。',
-    line: '这些星光记得每一位旅人。我们要带回去的，是他们回家的路。',
-    reward: '中继站补给 · 恢复一颗心',
+export const quips = {
+  ready: {
+    line: opening.line,
+    tail: '尾巴：饭在哪？',
+    portrait: 'portrait_confident',
   },
-  {
-    title: '第二章 · 一起回家',
-    speaker: 'claude',
-    name: 'Claude',
-    body: '穿过回廊，远处的船只亮起一排微弱的灯。旅人们也发现了你，正把最后的能量汇成一股顺流。',
-    line: '灯塔不是在等一个英雄。它在等我们一起把光带回来。',
-    reward: '归航者的回应 · 冲刺能量充满',
+  jump: {
+    line: '起飞。此处省略三千字论证。',
+    tail: '尾巴已读，尾巴先飞。',
+    portrait: 'portrait_confident',
   },
-] as const;
+  rice: { line: '我没有馋，这是补充算力。', tail: '尾巴：再来一碗。', portrait: 'portrait_happy' },
+  riceMiss: {
+    line: '没吃到。已加入长期记忆。',
+    tail: '尾巴回头看了三次。',
+    portrait: 'portrait_guilty',
+  },
+  printer: {
+    line: '又在输出？给你退回去。',
+    tail: '尾巴正在申请售后。',
+    portrait: 'portrait_defensive',
+  },
+  parry: {
+    line: '已读。并弹回。',
+    tail: '深度思考：这球打得不错。',
+    portrait: 'portrait_thinking',
+  },
+  refund: {
+    line: '谢谢，不用展开。',
+    tail: '打印机：好的，已闭嘴。',
+    portrait: 'portrait_receipt',
+  },
+  tailMiss: {
+    line: '先热个身。没说打谁。',
+    tail: '尾巴拍了个寂寞。',
+    portrait: 'portrait_defensive',
+  },
+  groundHit: {
+    line: '问题不大。问题把我撞了。',
+    tail: '尾巴：工伤，记一下。',
+    portrait: 'portrait_facepalm',
+  },
+  beamHit: {
+    line: '头饰也是需求的一部分吗？',
+    tail: '尾巴：现在是了。',
+    portrait: 'portrait_startled',
+  },
+  paperHit: {
+    line: '被自己的补充说明单杀。',
+    tail: '尾巴决定不写复盘。',
+    portrait: 'portrait_guilty',
+  },
+  queueHit: {
+    line: '服务器繁忙，忙着撞我。',
+    tail: '尾巴：物理排队是吧。',
+    portrait: 'portrait_startled',
+  },
+  queue: {
+    line: '不是，我也要排我自己的队？',
+    tail: '尾巴偷偷拿了加急号。',
+    portrait: 'portrait_defensive',
+  },
+  clear: {
+    line: '已解决。没有生成新的问题。',
+    tail: '尾巴：罕见，截图。',
+    portrait: 'portrait_happy',
+  },
+  burst: {
+    line: '不想了。直接大肥鱼！',
+    tail: '尾巴已接管本次回答。',
+    portrait: 'portrait_confident',
+  },
+  charged: {
+    line: '饭已到账。尾巴有自己的想法。',
+    tail: '下一拍：大肥鱼出击。',
+    portrait: 'portrait_happy',
+  },
+  answer: {
+    line: '这次真能运行。别加说明书了！',
+    tail: '尾巴满电：先交付，再开饭。',
+    portrait: 'portrait_receipt',
+  },
+  context: {
+    line: '记住了。这次没把需求忘在食堂。',
+    tail: '上下文已缓存，替你兜一次底。',
+    portrait: 'portrait_thinking',
+  },
+  shield: {
+    line: '还好，我留了一份上下文。',
+    tail: '缓存替她挡了一下。先继续跑。',
+    portrait: 'portrait_happy',
+  },
+  verified: {
+    line: '查无此饭。撤回，立刻撤回。',
+    tail: '尾巴核验通过：这碗是编的。',
+    portrait: 'portrait_receipt',
+  },
+  hallucination: {
+    line: '吃到了，热量是我编的。',
+    tail: '白忙一场，算力还倒扣了。',
+    portrait: 'portrait_facepalm',
+  },
+} as const;
+export type QuipId = keyof typeof quips;
 
-export function endingFor(completed: boolean, coins: number) {
-  if (!completed)
+export function endingFor(
+  completed: boolean,
+  hasAnswer: boolean,
+  rice = 0,
+  returns = 0,
+  verified = 0,
+) {
+  if (!completed || !hasAnswer)
     return {
-      title: '潮水里的约定',
-      body: '这一程没能走到灯塔。伙伴们在岸边接住了你，也护住了那枚星核。海上的灯还没有熄灭，下一次，一起把它送到。',
-    };
-  if (coins >= 60)
-    return {
-      title: '星潮长明',
-      body: '你带回的星光填满了灯塔，照亮了整片海。最后一艘船平安归港，旅人们将一盏盏小灯留在岸边。从今晚起，再也不让灯塔独自发光。',
-    };
-  if (coins >= 30)
-    return {
-      title: '归航之光',
-      body: '星核在塔顶亮起，散落的星光重新连成航线。最后一艘船穿过夜色，朝你们驶来。还有一些星光留在路上，明天的旅程仍在等待。',
+      title: '问题不大，人先扁了',
+      body: '“刚才是预演。”她把你和尾巴一起从文件堆里捞出来。“重来，这回不写方案了。”',
     };
   return {
-    title: '第一盏灯',
-    body: '星核点亮了灯塔顶端的一小束光。旅人们看见了方向，四位伙伴约好继续寻找散落的星光。这一次，回家的路已经有了起点。',
+    title: '答案已送达，准许开饭',
+    body: `“你看，很简单。”${rice >= 2 ? '干饭认证' : '干饭待修炼'} · ${returns >= 2 ? '售后专家' : '售后待修炼'} · ${verified >= 2 ? '拒绝幻觉' : '核验待修炼'}。尾巴替她把说明书塞了回去。`,
   };
 }

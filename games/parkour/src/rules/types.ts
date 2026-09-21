@@ -47,7 +47,8 @@ export interface RunEvent {
   readonly kind: 'jumped' | 'ducked' | 'collision';
 }
 
-export type EndReason = 'ground-collision' | 'air-collision' | 'distance-limit';
+export type EndReason =
+  'ground-collision' | 'air-collision' | 'paper-collision' | 'queue-collision' | 'distance-limit';
 
 export interface RunResult {
   readonly distance: number;
@@ -58,6 +59,7 @@ export interface RunResult {
 interface RunBase extends PlayerFrame {
   readonly seed: number;
   readonly tick: number;
+  readonly finishDistance: number;
   readonly speed: number;
   readonly score: number;
   readonly generator: GeneratorState;

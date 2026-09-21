@@ -41,16 +41,8 @@ export function classifyObstacle(
   const start = { ...playerBox(from), height: end.height };
   const box = obstacleBox(obstacle);
   const dx = end.x - start.x;
-  const dy = end.y - start.y;
-  const horizontal = axisInterval(start.x, start.width, dx, box.x, box.width);
-  const vertical = axisInterval(start.y, start.height, dy, box.y, box.height);
-
-  // Swept AABB on this tick's linear motion; the target posture applies at tick start.
-  if (horizontal && vertical) {
-    const enter = Math.max(0, horizontal[0], vertical[0]);
-    const leave = Math.min(1, horizontal[1], vertical[1]);
-    if (enter < leave) return { kind: 'collision', fraction: enter };
-  }
+  const contact = sweptContact(start, end, box);
+  if (contact !== null) return { kind: 'collision', fraction: contact };
 
   const trailingEdge = box.x + box.width;
   if (dx > 0 && from.distance < trailingEdge && to.distance >= trailingEdge) {
@@ -60,4 +52,15 @@ export function classifyObstacle(
     };
   }
   return { kind: 'none' };
+}
+
+export function sweptContact(from: Box, to: Box, box: Box, movedBox: Box = box): number | null {
+  const dx = to.x - from.x - (movedBox.x - box.x);
+  const dy = to.y - from.y - (movedBox.y - box.y);
+  const horizontal = axisInterval(from.x, from.width, dx, box.x, box.width);
+  const vertical = axisInterval(from.y, from.height, dy, box.y, box.height);
+  if (!horizontal || !vertical) return null;
+  const enter = Math.max(0, horizontal[0], vertical[0]);
+  const leave = Math.min(1, horizontal[1], vertical[1]);
+  return enter < leave ? enter : null;
 }

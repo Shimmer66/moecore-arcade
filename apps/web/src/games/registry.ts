@@ -18,7 +18,7 @@ export const games: ReadonlyArray<GameEntry> = [
   },
   {
     id: 'parkour',
-    title: 'AI 娘星潮跑酷',
+    title: '大肥鱼跑酷：答案马上就到',
     category: '动作 · 单人',
     icon: 'runner',
     load: async () => (await import('@moecore/game-parkour')).game,

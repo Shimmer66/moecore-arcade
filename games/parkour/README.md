@@ -2,10 +2,16 @@
 
 This package exports a Vue game through `GameDefinition`. The fixed-step rules were imported
 from `feat/parkour` at commit `5d6268f`, without merging other branch changes.
-`rules/adventure.ts` adds double jump, fast fall, three hearts, combo rewards, charged dash,
-pickups and three per-run missions. The original rules remain separately testable.
+`rules/adventure.ts` implements a short Answer Generation Center shift: double jump, fast fall,
+rice detours, timed tail returns, automatic parry slow motion, charged whale bursts, moving request
+queues, a context shield and verifiable hallucinations. The three actions are jump, slide and tail.
+The authored 480m course lives in `config/shift.ts`; deterministic pilots target 45–60 seconds.
+There are no mid-run reading stops. Retries skip the initial one-line exchange.
+The original base rules remain separately testable. The previous ocean story and character roster
+are replaced, not offered as a parallel game mode.
 
-The Web entry is `/#/games/parkour`. Keyboard, touch buttons and pointer gestures are supported.
+The Web entry is `/#/games/parkour`, titled 大肥鱼跑酷：答案马上就到.
+Keyboard, touch buttons and pointer gestures are supported.
 Game art is previewed only during development; production uses original geometric placeholders.
 No Phaser dependency or manual game-mount compatibility layer is introduced.
 See `docs/games/parkour.md` at the repository root for gameplay and current limits.
@@ -28,8 +34,11 @@ run = restart(run); // Same seed by default; restart(run, 0) selects a new seed.
 including zero and non-finite values, throw. The host must convert elapsed time to fixed ticks.
 Pausing means not calling `step`; wall-clock time never enters the rules.
 
-This API describes the unchanged base simulation. The Vue game uses `beginAdventure` and
-`advanceAdventure` for the additional mechanics; health recovery does not apply to base `step`.
+This API describes the base simulation, whose default finish remains 1200m. The Vue game uses
+`beginAdventure` and `advanceAdventure`, sets `finishDistance` to 480m and supplies an authored
+course. Energy, slow motion, printers and answer pickup do not apply to base `step`.
+Real ticks and world ticks separate ability time from slowed motion. No second physics engine
+or old UI compatibility mode is introduced.
 
 States, inputs, obstacle lists, and RNG state are immutable values. Functions do not mutate
 arguments or shared state. Callers must treat returned state as read-only. The supported run-state

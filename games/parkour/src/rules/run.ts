@@ -11,6 +11,7 @@ export function start(seed: number = 1): RunState {
   return {
     seed,
     tick: 0,
+    finishDistance: FINISH_DISTANCE,
     status: 'running',
     result: null,
     distance: 0,
@@ -47,8 +48,8 @@ export function step(state: RunState, input: PlayerInput, dt: number = FIXED_DT)
   const toPlayer = advancePlayer(fromPlayer, dt);
   const travel = state.speed * dt;
   const fullDistance = state.distance + travel;
-  let fraction = Math.min(1, (FINISH_DISTANCE - state.distance) / travel);
-  let reason: EndReason | null = fullDistance >= FINISH_DISTANCE ? 'distance-limit' : null;
+  let fraction = Math.min(1, (state.finishDistance - state.distance) / travel);
+  let reason: EndReason | null = fullDistance >= state.finishDistance ? 'distance-limit' : null;
   let hit: Obstacle | null = null;
   const passed: { event: RunEvent; fraction: number }[] = [];
 
@@ -73,7 +74,7 @@ export function step(state: RunState, input: PlayerInput, dt: number = FIXED_DT)
   }
 
   const distance =
-    reason === 'distance-limit' ? FINISH_DISTANCE : state.distance + travel * fraction;
+    reason === 'distance-limit' ? state.finishDistance : state.distance + travel * fraction;
   const score = scoreAtDistance(distance);
   const events: RunEvent[] = passed
     .filter((pass) => pass.fraction <= fraction)
@@ -82,10 +83,14 @@ export function step(state: RunState, input: PlayerInput, dt: number = FIXED_DT)
 
   const generated = reason
     ? { generator: state.generator, obstacles: [] }
-    : generateObstacles(state.generator, Math.min(FINISH_DISTANCE, distance + LOOKAHEAD_DISTANCE));
+    : generateObstacles(
+        state.generator,
+        Math.min(state.finishDistance, distance + LOOKAHEAD_DISTANCE),
+      );
   const next = {
     seed: state.seed,
     tick: state.tick + 1,
+    finishDistance: state.finishDistance,
     distance,
     score,
     speed: speedAtDistance(distance),
