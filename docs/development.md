@@ -78,7 +78,7 @@ CI 不设置此变量，继续使用锁定 Playwright 版本对应的 Chromium�
 4. 在 `apps/web/package.json` 声明工作区依赖，并在 `src/games/registry.ts` 加入显式动态导入。
 5. 注册表同时生成首页入口；补齐该游戏的规则与浏览器测试后再合并。
 
-当前只有消消乐已注册；其他游戏可以独立开发。注册项只负责加载，不代替游戏本身实现。
+当前消消乐与跑酷已注册；其他游戏可以独立开发。注册项只负责加载，不代替游戏本身实现。
 不要提前创建其余六款游戏包，也不需要先建设 `game-runtime`、`ui` 或 `playground`。
 
 ```ts
@@ -105,11 +105,15 @@ Vue 既渲染宿主页面，也渲染游戏棋盘；规则计算仍是普通 Typ
 
 ## 素材预览
 
-`pnpm dev` 会在消消乐中加载本地提供的头像棋子和立绘。
-`pnpm build` 使用自制缩写棋子，不包含待审核 PNG；没有增加“已获授权”的声明。
+`pnpm dev` 会在消消乐和跑酷中加载本地提供的角色与场景素材。
+`pnpm build` 使用自制缩写棋子或几何角色，不包含待审核 PNG；没有增加“已获授权”的声明。
 公开发布前仍需单独审核素材。首次启动后的 URL 模块加载与图片解码不能以文件哈希检查代替。
 
 ## CI 与部署
+
+跑酷专项验证：`pnpm --filter @moecore/game-parkour test` 执行纯规则与剧情条件测试，
+`pnpm --filter @moecore/web exec playwright test parkour.spec.ts` 验证动作输入、暂停、结算和两个剧情节点。
+剧情阅读不推进模拟，补给只触发一次；游戏通过 `GameResult.story` 返回可选结尾，宿主不判定剧情条件。
 
 GitHub Actions 在 push / pull request 上运行：
 冻结依赖安装、`pnpm check`、构建、安装 Chromium、桌面与移动视口 E2E。

@@ -184,7 +184,8 @@ onUnmounted(() => {
         aria-label="对局结算"
         aria-live="polite"
       >
-        <h2>{{ result.outcome === 'win' ? '挑战完成！' : '本局结束' }}</h2>
+        <h2>{{ result.story?.title ?? (result.outcome === 'win' ? '挑战完成！' : '本局结束') }}</h2>
+        <p v-if="result.story" class="story-ending">{{ result.story.body }}</p>
         <p>{{ result.summary }}</p>
         <button class="primary-button" type="button" @click="restart">
           <RotateCcw :size="18" />再来一局

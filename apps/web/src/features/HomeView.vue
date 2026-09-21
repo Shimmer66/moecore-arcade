@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowUpRight, Grid2X2 } from '@lucide/vue';
+import { ArrowUpRight, Footprints, Grid2X2 } from '@lucide/vue';
 import { games } from '../games/registry';
 
 defineEmits<{ select: [gameId: string] }>();
@@ -19,7 +19,14 @@ defineEmits<{ select: [gameId: string] }>();
         class="game-card"
         @click="$emit('select', game.id)"
       >
-        <div class="game-cover" aria-hidden="true"><Grid2X2 :size="80" :stroke-width="1.25" /></div>
+        <div
+          class="game-cover"
+          :class="{ 'runner-cover': game.icon === 'runner' }"
+          aria-hidden="true"
+        >
+          <Footprints v-if="game.icon === 'runner'" :size="80" :stroke-width="1.25" />
+          <Grid2X2 v-else :size="80" :stroke-width="1.25" />
+        </div>
         <div class="game-card-info">
           <span>{{ game.category }}</span>
           <h2>{{ game.title }}</h2>

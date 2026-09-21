@@ -1,0 +1,36 @@
+{
+  "asset_count": 400,
+  "readable_png_count": 400,
+  "rgba_count": 400,
+  "empty_images": 0,
+  "exact_pixel_duplicates": 0,
+  "padding_violations": 0,
+  "category_counts": {
+    "portraits": 26,
+    "characters": 168,
+    "terrain": 40,
+    "obstacles_enemies": 40,
+    "items": 40,
+    "effects": 48,
+    "ui": 38
+  },
+  "dimensions": {
+    "min_width": 109,
+    "max_width": 257,
+    "min_height": 100,
+    "max_height": 234
+  },
+  "visual_review": "已检查分组总览；分离相邻素材，排除连接成多个人物的区域及不符合设定的菜单人物图标。",
+  "caveats": [
+    "角色及表情属于此前 AI 生成的参考改编图，不是网友原图的像素级复制。",
+    "保留原生像素，不提高源图分辨率；角色与特效是静态姿态/状态，非已对齐的连续动画。",
+    "图中自带的道具、附着粒子与服饰属于该素材，未将一个特效的粒子拆开凑数。"
+  ],
+  "tests": {
+    "open_all_png": "pass",
+    "count": "pass",
+    "alpha": "pass",
+    "exact_duplicates": "pass",
+    "checksums": "pass"
+  }
+}

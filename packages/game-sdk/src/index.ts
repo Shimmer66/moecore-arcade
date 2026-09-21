@@ -12,6 +12,7 @@ export interface GameResult {
   readonly outcome: 'win' | 'lose' | 'draw' | 'completed' | 'aborted';
   readonly durationMs: number;
   readonly summary: string;
+  readonly story?: { readonly title: string; readonly body: string };
   readonly stats: Readonly<Record<string, number>>;
 }
 

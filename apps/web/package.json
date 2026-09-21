@@ -15,6 +15,7 @@
     "@moecore/assets": "workspace:*",
     "@moecore/game-sdk": "workspace:*",
     "@moecore/game-match3": "workspace:*",
+    "@moecore/game-parkour": "workspace:*",
     "@lucide/vue": "1.47.0",
     "vue": "3.5.43"
   },
