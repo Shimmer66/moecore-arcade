@@ -1,0 +1,746 @@
+{
+  "name": "大肥鱼推箱子运行时素材",
+  "version": "1.0.0",
+  "assetCount": 82,
+  "reviewStatus": "generated-pending-review",
+  "assets": [
+    {
+      "id": "box_ribbon_01",
+      "file": "runtime/box_ribbon_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "27b494fe7418869441888f7524209e640876661d9b4597b71059ff5d766eae10"
+    },
+    {
+      "id": "box_wood_01",
+      "file": "runtime/box_wood_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "00e1dab9746d4c11c547fbef0dabe90faf73b783cb762322c26adb7999fbd3c2"
+    },
+    {
+      "id": "char_E_blocked_01",
+      "file": "runtime/char_E_blocked_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "3e6603cec1796b534619616537f0b2d2d6196f27e881becefee022ff2eaf41f5"
+    },
+    {
+      "id": "char_E_blocked_02",
+      "file": "runtime/char_E_blocked_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "35f37deea7a74589d92e77b2579e1bc4da742af85c39418a849ddb248e3aeb44"
+    },
+    {
+      "id": "char_E_blocked_03",
+      "file": "runtime/char_E_blocked_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "d58de2243b3df8f7567ba36eb53e35787b8a8c2d76345262a6a4c7cba855ffa4"
+    },
+    {
+      "id": "char_E_idle_01",
+      "file": "runtime/char_E_idle_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "edb91ce0d981c44b17dc277d74eb273a681d0ce4ab9a1e53136e61702586193b"
+    },
+    {
+      "id": "char_E_idle_02",
+      "file": "runtime/char_E_idle_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "cebbdcca06f8fae720490775abf16014c8baa98eaac7682201b4856427c7a088"
+    },
+    {
+      "id": "char_E_push_end_01",
+      "file": "runtime/char_E_push_end_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "a7364ddedfeaace62aeda0e6adaf1c5dff02facae3859d7ed0459aa48de0fe06"
+    },
+    {
+      "id": "char_E_push_end_02",
+      "file": "runtime/char_E_push_end_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "f620c28739ef6f2f4bec09bacd8fccbd9824cc3441fcc156aad4f3eb7acab6ee"
+    },
+    {
+      "id": "char_E_push_loop_01",
+      "file": "runtime/char_E_push_loop_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "b3036ea83a4ee7be1141a91fda8d88a9677b21aef8c786092e2685bea90376e6"
+    },
+    {
+      "id": "char_E_push_loop_02",
+      "file": "runtime/char_E_push_loop_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "51e55e3d9abb799a6dffca504e48405335b5891dfe5cf8f456bdc20e68747e57"
+    },
+    {
+      "id": "char_E_push_loop_03",
+      "file": "runtime/char_E_push_loop_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "8e6bd0d272ffbd1495c3d3d25c6cb07e93b1de86d44aed5e50b0066efc22f524"
+    },
+    {
+      "id": "char_E_push_loop_04",
+      "file": "runtime/char_E_push_loop_04.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "aeaede8e6b9d67d06e93322cd0a1a330b22f96e5753cc398cc4db327cbba28c2"
+    },
+    {
+      "id": "char_E_push_start_01",
+      "file": "runtime/char_E_push_start_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "c90e384578fe841b65a164afa5a38a0b834d84361abe25ed3d72b15816a7acf3"
+    },
+    {
+      "id": "char_E_push_start_02",
+      "file": "runtime/char_E_push_start_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "68f6c834a5c48f3f081d66a137c32d00d1b7014f3e31209543745450a8964ec2"
+    },
+    {
+      "id": "char_E_walk_01",
+      "file": "runtime/char_E_walk_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "b18fefdff9e51575b97f065203017a7c1cdc7cac378beae8f831cac051a9c52d"
+    },
+    {
+      "id": "char_E_walk_02",
+      "file": "runtime/char_E_walk_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "edbebde78088571d47195b224b86fcac40beb346c6366c1f9a018b8386d4abc7"
+    },
+    {
+      "id": "char_E_walk_03",
+      "file": "runtime/char_E_walk_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "86b723d3b963e85afc7f1590c3688bee9b904fbadee7cedca2728a7805669574"
+    },
+    {
+      "id": "char_E_walk_04",
+      "file": "runtime/char_E_walk_04.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "2be38bca00847f0d1eae6dc895d25c6b584f466da05807e706a6955e6bb07bc5"
+    },
+    {
+      "id": "char_N_blocked_01",
+      "file": "runtime/char_N_blocked_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "9c552e76443052b3f442e600048283fe9770a5210ab7209c696633e496341ee0"
+    },
+    {
+      "id": "char_N_blocked_02",
+      "file": "runtime/char_N_blocked_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "598ac86e52dcf85bd4e773e03ee83ee0df6ee1f70f2957036b0cf970fed4d897"
+    },
+    {
+      "id": "char_N_blocked_03",
+      "file": "runtime/char_N_blocked_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "ee20691428ec41590bf6f03509adb9ee7fdadc7a8081e635ba34f13c0f692e90"
+    },
+    {
+      "id": "char_N_idle_01",
+      "file": "runtime/char_N_idle_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "4613d27690afc2e30eca70936066fb11912f5df31fdf543290df37fc2c911054"
+    },
+    {
+      "id": "char_N_idle_02",
+      "file": "runtime/char_N_idle_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "6d9fe811be8cc387d64e3e8fbd07da1f5e51cffb2bb6f45f632032bbe60068aa"
+    },
+    {
+      "id": "char_N_push_end_01",
+      "file": "runtime/char_N_push_end_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "4f0b0b5eed411ec1d806ddaa4fefe344af5caf9e095db22ca111f7c6487aa567"
+    },
+    {
+      "id": "char_N_push_end_02",
+      "file": "runtime/char_N_push_end_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "adb67ef28a7b98318530ba8fdca04f2dcc5297baa4c8c8aec4e9be114004d3dd"
+    },
+    {
+      "id": "char_N_push_loop_01",
+      "file": "runtime/char_N_push_loop_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "b0185d7d06294c55d84490c4fb61792d5316aed5fbfb01c70c903a3f3bbf35a9"
+    },
+    {
+      "id": "char_N_push_loop_02",
+      "file": "runtime/char_N_push_loop_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "451067f9b43af6c487273a047b6aadca0d4204ef7f8e9958aa093b09511d6d41"
+    },
+    {
+      "id": "char_N_push_loop_03",
+      "file": "runtime/char_N_push_loop_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "103960b34e4f4e68af8ba53dcb402762f2990e2d6b478a71f65643c4ae170adf"
+    },
+    {
+      "id": "char_N_push_loop_04",
+      "file": "runtime/char_N_push_loop_04.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "2e05b06dd9d0b247841f548a088cd8f33331bde3fff8fc47ebc3b74d352a94f8"
+    },
+    {
+      "id": "char_N_push_start_01",
+      "file": "runtime/char_N_push_start_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "bffd0a45d0f775a5fafd6b0c675eee54f28e9a7f7833d2bd4bdc90ec560db708"
+    },
+    {
+      "id": "char_N_push_start_02",
+      "file": "runtime/char_N_push_start_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "46d122d9ce19d988f8a99c3e922097baaf2860d4f61dc373a606de765e33f520"
+    },
+    {
+      "id": "char_N_walk_01",
+      "file": "runtime/char_N_walk_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "e8797566ee2eaec6b8caf91b96b9ac62af233d5ca1a9c5bbdede0d7359de6018"
+    },
+    {
+      "id": "char_N_walk_02",
+      "file": "runtime/char_N_walk_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "74e9510151246b7facdccde78f927aad6b665ac3beda96380eb0719e923cd4dd"
+    },
+    {
+      "id": "char_N_walk_03",
+      "file": "runtime/char_N_walk_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "6411bd8e77bbd74049a037c6da7fa42dc2c003064184aae57de7367e1d961153"
+    },
+    {
+      "id": "char_N_walk_04",
+      "file": "runtime/char_N_walk_04.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "18e5febecf8bf6bbe61165ae92b39448560b2901b191c527f07625591b7a3dfe"
+    },
+    {
+      "id": "char_S_blocked_01",
+      "file": "runtime/char_S_blocked_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "ae6dcfc818a65e2917541d322db743470960d2600b1c3dbab8d13468bbcef90e"
+    },
+    {
+      "id": "char_S_blocked_02",
+      "file": "runtime/char_S_blocked_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "8541821fb9dd88305c6a77ae9197908d5ee3a43c64c994a19fd4104746474c22"
+    },
+    {
+      "id": "char_S_blocked_03",
+      "file": "runtime/char_S_blocked_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "2b792532f2c080dc0167d8a564dcef9961cac2cfeba812a84e35cbe521eabc72"
+    },
+    {
+      "id": "char_S_idle_01",
+      "file": "runtime/char_S_idle_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "b89c720985e4cfedeca75eb127172978f213df3dd3f4aff583ef1c083a33952a"
+    },
+    {
+      "id": "char_S_idle_02",
+      "file": "runtime/char_S_idle_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "3538cdef88ced7ae8ee3645d9944be6481134d64fc6d77fd1001a0a7721758e8"
+    },
+    {
+      "id": "char_S_push_end_01",
+      "file": "runtime/char_S_push_end_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "cbe46f50b89cfbd904a34dc4c62a78355c4fda850370c5bf84ca90fc4ccf2cc1"
+    },
+    {
+      "id": "char_S_push_end_02",
+      "file": "runtime/char_S_push_end_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "544d0404b11df53e519a055cef1cd390231ef6cd0abb693eda76b722af40f827"
+    },
+    {
+      "id": "char_S_push_loop_01",
+      "file": "runtime/char_S_push_loop_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "8d752e5e41a81624709b92de76374f07def39c4b7389e58c2a4fb4661cdcad2e"
+    },
+    {
+      "id": "char_S_push_loop_02",
+      "file": "runtime/char_S_push_loop_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "90b3b22c4316d9caeb7bc571d8570b8210ea0163863ee1cd720d2ac9d8b08c8b"
+    },
+    {
+      "id": "char_S_push_loop_03",
+      "file": "runtime/char_S_push_loop_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "f27b10ff2298c26a4236b1f3951a930c6dc31b81d55b7f09692488b8cb85cf53"
+    },
+    {
+      "id": "char_S_push_loop_04",
+      "file": "runtime/char_S_push_loop_04.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "a652cc6feeb483d098a3602f3b2f43ebe5b3381bc4c7ecba98b75d2676a9945f"
+    },
+    {
+      "id": "char_S_push_start_01",
+      "file": "runtime/char_S_push_start_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "a105573d874915db1ef6f48621d8d8ccae0f1ee12c08ef4acdf8b7460250dd25"
+    },
+    {
+      "id": "char_S_push_start_02",
+      "file": "runtime/char_S_push_start_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "4b1af9396bc9e9892a0691f63c78417519098dc2caaf1b5d104660cd55865528"
+    },
+    {
+      "id": "char_S_walk_01",
+      "file": "runtime/char_S_walk_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "7233bbeaf542d881c548c24b4cd6f9ee2ea1fdc011b17845f0f1b6118c99c493"
+    },
+    {
+      "id": "char_S_walk_02",
+      "file": "runtime/char_S_walk_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "e3cb67ec078aa9c13d1566053d303f4c0305dddedff3f4165075a70bb5726a56"
+    },
+    {
+      "id": "char_S_walk_03",
+      "file": "runtime/char_S_walk_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "f75ff30df3dd5c4195447d9b861040c5a6e06fb75e3941d354ae1301d69b0d7e"
+    },
+    {
+      "id": "char_S_walk_04",
+      "file": "runtime/char_S_walk_04.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "96f2b8948ed6bdb4075728d0360640a61ea8380fa34182f0f48f68e1204a5b9f"
+    },
+    {
+      "id": "char_W_blocked_01",
+      "file": "runtime/char_W_blocked_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "e087f1fd414379d0cca7ba0e0e8efd5c3eb08dc113ac155fe1345542cac4c8ff"
+    },
+    {
+      "id": "char_W_blocked_02",
+      "file": "runtime/char_W_blocked_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "add82db714f08031d71175e02338a5319f081cab40f1d04db769d5588bcf4486"
+    },
+    {
+      "id": "char_W_blocked_03",
+      "file": "runtime/char_W_blocked_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "24703b7b142996c50146bfc6e08fbf60b1a2b42988490506636de9e1a15a27bb"
+    },
+    {
+      "id": "char_W_idle_01",
+      "file": "runtime/char_W_idle_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "10546582400c7529bc519341fcc1968ad5c58fae4e222643a9f92c410dc4bac9"
+    },
+    {
+      "id": "char_W_idle_02",
+      "file": "runtime/char_W_idle_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "f333ce1498a01b2d8445bf4cc44858a416bf7f4e431691c43f15e109aa606253"
+    },
+    {
+      "id": "char_W_push_end_01",
+      "file": "runtime/char_W_push_end_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "f0a2a19646c861a1dc44aa22329616ab1b9ae8a967a7ba8e933831008bb074e5"
+    },
+    {
+      "id": "char_W_push_end_02",
+      "file": "runtime/char_W_push_end_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "97edfe024fbc25ffead1070f1c4146f7ce8c1da743652416dc61018653b4d094"
+    },
+    {
+      "id": "char_W_push_loop_01",
+      "file": "runtime/char_W_push_loop_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "c47079cab2f52598498dcc4d92721117914b04aca429b068c880f542ffe4575b"
+    },
+    {
+      "id": "char_W_push_loop_02",
+      "file": "runtime/char_W_push_loop_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "2e1a4605f96bdb5aec1648098f8f9b6c3bd3fa1a506ebaef74951313fed33491"
+    },
+    {
+      "id": "char_W_push_loop_03",
+      "file": "runtime/char_W_push_loop_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "625be742baf434df69876240fc3a176bed0ef1d051fb979a0787a4a96ddb62d6"
+    },
+    {
+      "id": "char_W_push_loop_04",
+      "file": "runtime/char_W_push_loop_04.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "f698c4b23b08b695d12d30e0b3355fb7fe02a12613f784fb9008798fe0b79a83"
+    },
+    {
+      "id": "char_W_push_start_01",
+      "file": "runtime/char_W_push_start_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "eb010d0132f79e31cd108bb21b196b267a1ca762ba13f131d8d9b810b4b52d79"
+    },
+    {
+      "id": "char_W_push_start_02",
+      "file": "runtime/char_W_push_start_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "02761c0953ac67c8af57f3f1b2e95d040a74e779d6a6c7b43a53637ff6e80737"
+    },
+    {
+      "id": "char_W_walk_01",
+      "file": "runtime/char_W_walk_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "0566db0b3b8d5b76e784712009dbd4498d15b0516857807b47c2cd1fa3fe0901"
+    },
+    {
+      "id": "char_W_walk_02",
+      "file": "runtime/char_W_walk_02.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "b8e8b577596112f0f88a2b272fa8a91dc324e0dcc8d063fdf9688f61b841ff32"
+    },
+    {
+      "id": "char_W_walk_03",
+      "file": "runtime/char_W_walk_03.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "e256b152e787f031203dc283c9fb3f9e6ba6b13ad44186a6f3b51e51020b6511"
+    },
+    {
+      "id": "char_W_walk_04",
+      "file": "runtime/char_W_walk_04.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "f346db8af398748c51a30468deb8ef19e1c9b70a2b3be5422ce2e1f1b40e7524"
+    },
+    {
+      "id": "fx_clear_confetti",
+      "file": "runtime/fx_clear_confetti.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "a3a87f9a280781bbd88aa05e4924b0ddea0fc0afa056e3b43686cd375209c3f0"
+    },
+    {
+      "id": "fx_confusion_bubble",
+      "file": "runtime/fx_confusion_bubble.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "3988dd8ff5972e45b41caca80bb026785ef2f71622d902c4c9bed7eeb361dca4"
+    },
+    {
+      "id": "fx_goal_sparkle",
+      "file": "runtime/fx_goal_sparkle.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "c7243d74e0111bee25bc322785cca894c5abb0dcfb634f81154859b1799e58a0"
+    },
+    {
+      "id": "fx_push_dust",
+      "file": "runtime/fx_push_dust.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "a3242fdbfc862a12ef37274a4902b4e801f647eb52cec5cce82f7e60a94684c8"
+    },
+    {
+      "id": "portrait_confused",
+      "file": "runtime/portrait_confused.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "22a9404b4ad071eecd209386ac7d7ce13002031fc68e2fea90a67869ebb55f6b"
+    },
+    {
+      "id": "portrait_effort",
+      "file": "runtime/portrait_effort.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "83a6e3c0498edf2c87d423c2809f7fedd2dc64f79baaf527f1a0153a0c52feb9"
+    },
+    {
+      "id": "portrait_happy",
+      "file": "runtime/portrait_happy.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "328ffbafd06aff44c1e20bcf48b2cc445594c45f8e5867dad1f66bc1689a215a"
+    },
+    {
+      "id": "portrait_neutral",
+      "file": "runtime/portrait_neutral.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "48ce1270635465671496fb00341c018340173f36a77e42b8385e2ec1f324e842"
+    },
+    {
+      "id": "portrait_proud",
+      "file": "runtime/portrait_proud.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "eb9c01d79f295b575f9d7d388e801ed72fad6932b678836b8a04a7a1d1b97dc5"
+    },
+    {
+      "id": "portrait_reassuring",
+      "file": "runtime/portrait_reassuring.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "21f31a86237a586ecafca1f3cf0904b874db736e80dddd4793a526ae5bcc93cc"
+    },
+    {
+      "id": "target_empty_01",
+      "file": "runtime/target_empty_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "1ce7a8193f852601ef7a5e58ef832e87a9141f93854b3cd80bd98fbb10f29752"
+    },
+    {
+      "id": "target_filled_01",
+      "file": "runtime/target_filled_01.png",
+      "width": 512,
+      "height": 512,
+      "format": "PNG RGBA",
+      "reviewStatus": "generated-pending-review",
+      "sha256": "1e79cdcb4d6df08cedd5f6d4382d58b525c24bb202e9f0ac636044f0dc6aa63f"
+    }
+  ]
+}
