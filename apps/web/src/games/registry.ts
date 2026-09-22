@@ -4,7 +4,7 @@ export interface GameEntry {
   readonly id: string;
   readonly title: string;
   readonly category: string;
-  readonly icon: 'grid' | 'runner' | 'box';
+  readonly icon: 'grid' | 'runner' | 'box' | 'whale';
   readonly description: string;
   readonly tags: readonly string[];
   readonly tone: 'mint' | 'sky' | 'peach' | 'lav' | 'lemon';
@@ -45,6 +45,17 @@ export const games: ReadonlyArray<GameEntry> = [
     tone: 'peach',
     badge: '✨ Vue 3 新作',
     load: async () => (await import('@moecore/game-sokoban')).game,
+  },
+  {
+    id: 'whale-queue',
+    title: '鲸鲸的灵感长队',
+    category: '动作 · 单人',
+    icon: 'whale',
+    description: '带着小鲸队伍穿过数据海，收集 30 颗灵感星，整理出一份温柔答案。',
+    tags: ['动作', '单人'],
+    tone: 'sky',
+    badge: '🌊 新作',
+    load: async () => (await import('@moecore/game-whale-queue')).game,
   },
 ];
 

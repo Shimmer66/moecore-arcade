@@ -66,7 +66,13 @@ const visibleGames = computed(() =>
           <div class="catalog-cover" :class="`tone-${game.tone}`" aria-hidden="true">
             <span v-if="game.badge" class="catalog-badge">{{ game.badge }}</span>
             <span class="catalog-emoji">{{
-              game.icon === 'box' ? '📦' : game.icon === 'runner' ? '🏃‍♀️' : '🧩'
+              game.icon === 'box'
+                ? '📦'
+                : game.icon === 'runner'
+                  ? '🏃‍♀️'
+                  : game.icon === 'whale'
+                    ? '🐋'
+                    : '🧩'
             }}</span>
           </div>
           <div class="catalog-body">

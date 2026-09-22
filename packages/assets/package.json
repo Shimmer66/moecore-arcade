@@ -8,7 +8,8 @@
     "./match3": "./src/match3.ts",
     "./parkour": "./src/parkour.ts",
     "./whale-runner": "./src/whale-runner.ts",
-    "./sokoban": "./src/sokoban.ts"
+    "./sokoban": "./src/sokoban.ts",
+    "./whale-queue": "./src/whale-queue.ts"
   },
   "scripts": {
     "typecheck": "tsc --project tsconfig.json",

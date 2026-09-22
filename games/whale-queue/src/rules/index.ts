@@ -1,0 +1,27 @@
+export {
+  BOARD_SIZE,
+  DEFAULT_ROCKS,
+  MAP_VARIANTS,
+  INITIAL_QUEUE_LENGTH,
+  MIN_QUEUE_LENGTH,
+  NORMAL_STEP_MS,
+  STAR_SCORE,
+  TARGET_STARS,
+  THINKING_DURATION_MS,
+  THINKING_STEP_MS,
+  createGameState,
+  queueDirection,
+  step,
+  tick,
+  useThinking,
+} from './game';
+export type {
+  CreateGameStateOptions,
+  Direction,
+  GameState,
+  GameStatus,
+  Position,
+  Rock,
+  StepEvent,
+  TickResult,
+} from './types';
