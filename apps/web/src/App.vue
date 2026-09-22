@@ -34,6 +34,17 @@ onUnmounted(() => window.removeEventListener('hashchange', readRoute));
         <span class="brand-subtitle" lang="en">MoeCore Arcade</span>
       </div>
     </div>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="#games">小游戏</a>
+      <a href="#about">关于企划</a>
+      <a
+        class="site-nav-cta"
+        href="https://github.com/Shimmer66/moecore-arcade"
+        target="_blank"
+        rel="noreferrer"
+        >加入共创</a
+      >
+    </nav>
     <span class="development-label">原型试玩</span>
   </header>
 

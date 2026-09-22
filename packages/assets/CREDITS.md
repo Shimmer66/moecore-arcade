@@ -25,6 +25,10 @@
 `parkour/` 收录用户于 2026-09-21 提供的 400 张独立 RGBA PNG，来自
 `萌芯游乐园_AI娘跑酷_400张_一图一素材.zip`。分类、原图记录、原生尺寸和哈希保留在
 [`parkour/manifest.json`](parkour/manifest.json)，包内质量声明保留为 `QA_REPORT.json`。
+
+## 推箱子
+
+[`sokoban/manifest.json`](sokoban/manifest.json) 记录大肥鱼推箱子运行时素材及其 `generated-pending-review` 状态。素材说明见 [`sokoban/CREDITS.md`](sokoban/CREDITS.md)。
 项目测试另行校验数量、尺寸和哈希；原包声明不能代替实际使用范围的审核。
 
 来源按原包说明登记为 AI 生成参考图的切分整理，状态为 `generated-pending-review`。
