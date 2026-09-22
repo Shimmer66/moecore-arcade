@@ -151,7 +151,10 @@ function applyMove(direction: Direction): void {
   if (result.becameWon) completeLevel();
 }
 function execute(directions: readonly Direction[]): void {
-  if (!directions.length) { routeTarget.value = null; return; }
+  if (!directions.length) {
+    routeTarget.value = null;
+    return;
+  }
   clearPath();
   busy.value = true;
   const token = runToken.value;

@@ -15,7 +15,9 @@ test('loads the Fatfish Sokoban game from the arcade registry', async ({ page })
   expect(
     await page
       .locator('img')
-      .evaluateAll((images) => images.every((image) => image.naturalWidth > 0)),
+      .evaluateAll((images) =>
+        images.every((image) => (image as HTMLImageElement).naturalWidth > 0),
+      ),
   ).toBe(true);
   expect(
     await page.evaluate(
