@@ -13,8 +13,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@moecore/assets": "workspace:*",
-    "@moecore/game-sdk": "workspace:*",
+    "@moecore/assets": "file:../../packages/assets",
+    "@moecore/game-sdk": "file:../../packages/game-sdk",
     "@lucide/vue": "1.47.0",
     "vue": "3.5.43"
   },

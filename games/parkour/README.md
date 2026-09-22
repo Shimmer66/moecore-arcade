@@ -99,9 +99,9 @@ correct input. Generation also rejects horizons beyond the course plus lookahead
 From the worktree root:
 
 ```text
-pnpm --filter @moecore/game-parkour test
-pnpm run check
-pnpm build
+npm --workspace @moecore/game-parkour run test
+npm run check
+npm run build
 ```
 
 Tests cover golden input/output traces, complete recorded replays, local RNG vectors, batched

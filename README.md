@@ -7,30 +7,28 @@
 
 ## 快速开始
 
-环境基线：Node.js **24.15.0**、pnpm **10.33.0**。Node 版本记录在 `.node-version`，pnpm 版本由 `packageManager` 固定，依赖由根锁文件统一管理。
+环境基线：Node.js **24.15.0** 和 npm。Node 版本记录在 `.node-version`，依赖由根目录的 npm workspace 和锁文件统一管理。
 
 ```bash
-# 安装指定包管理器；已安装对应版本时跳过
-npm install --global pnpm@10.33.0
-
 # 在仓库根目录安装并启动
-pnpm install --frozen-lockfile
-pnpm dev
+npm install
+npm start
 ```
 
 默认开发地址为 `http://127.0.0.1:5173`，端口占用时以终端输出为准。
+`npm start` 会启动 Web 开发服务。
 选择游戏，或直接进入 `/#/games/match3`、`/#/games/parkour`。
 本地开发显示提供的待审核角色素材；正式构建使用自制缩写棋子或几何角色，不打包这些待审核图片。
 
 ```bash
-pnpm check                     # 工作区、类型、代码风格、格式、单元测试
-pnpm build                     # 构建到 apps/web/dist
-pnpm preview                   # 本地预览构建产物
+npm run check                  # 工作区、类型、代码风格、格式、单元测试
+npm run build                  # 构建到 apps/web/dist
+npm run preview                # 本地预览构建产物
 
 # 浏览器测试首次运行前安装 Chromium
-pnpm --filter @moecore/web exec playwright install chromium
-pnpm build
-pnpm test:e2e                   # 对生产构建执行桌面/移动视口冒烟测试
+npm exec --workspace @moecore/web -- playwright install chromium
+npm run build
+npm run test:e2e                # 对生产构建执行桌面/移动视口冒烟测试
 ```
 
 Linux CI 安装浏览器时使用 `playwright install --with-deps chromium`。完整命令与验证范围见[开发指南](docs/development.md)。
@@ -79,19 +77,18 @@ moecore-arcade/
 ├── docs/                      # 架构、开发、玩法和路线
 ├── .github/workflows/ci.yml
 ├── package.json
-├── pnpm-workspace.yaml
-└── pnpm-lock.yaml
+└── package-lock.json
 ```
 
 每个已创建的包都有独立清单与检查命令。暂不创建其他游戏空包、独立调试应用或通用引擎封装。
 
 ## 工程约定
 
-- 使用 **pnpm Workspace + TypeScript + Vite + Vue 3**；宿主与游戏界面均使用 Vue，规则层不导入 Vue。
+- 使用 **npm Workspace + TypeScript + Vite + Vue 3**；宿主与游戏界面均使用 Vue，规则层不导入 Vue。
 - `apps/web` 组装游戏和服务；`games/*` 管理本游戏规则；`packages/*` 提供必要的共享能力。
-- 内部依赖通过 `workspace:*` 和公开 `exports` 导入，禁止跨包访问私有源码。公共包不得反向依赖应用或游戏，游戏之间不得互相依赖。
+- 内部依赖通过 npm 兼容的本地 workspace 引用和公开 `exports` 导入，禁止跨包访问私有源码。公共包不得反向依赖应用或游戏，游戏之间不得互相依赖。
 - 内部包直接导出 TypeScript / Vue 源码，由应用统一构建；均为私有工作区包，不发布到 npm。
-- 只保留根目录一份 `pnpm-lock.yaml`，CI 使用冻结锁文件安装。推送触发检查，不自动部署网站。
+- 依赖锁定在根目录的 `package-lock.json`。推送触发检查，不自动部署网站。
 
 详细接入协议和资源流程见[架构说明](docs/architecture/README.md)。
 
@@ -123,7 +120,7 @@ moecore-arcade/
 
 候选角色为 DeepSeek、GLM、GPT / ChatGPT、Claude、Gemini、Kimi。项目不声明与对应公司、产品或社区存在官方、合作或赞助关系，也不以角色数值比较真实模型能力。
 
-消消乐与跑酷素材已纳入本地工作区，状态仍是 `generated-pending-review`，只在 `pnpm dev` 中预览。
+消消乐与跑酷素材已纳入本地工作区，状态仍是 `generated-pending-review`，只在 `npm start` 中预览。
 图片、音效与字体使用前需要逐项确认来源、作者、修改范围和分发许可；正式构建不包含待审核图片，许可私信不得放入公开仓库或发布目录。
 
 代码许可证尚未确定，当前不提供 `LICENSE` 授权声明。第三方素材许可与未来代码许可分别管理。

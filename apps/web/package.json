@@ -12,10 +12,10 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@moecore/assets": "workspace:*",
-    "@moecore/game-sdk": "workspace:*",
-    "@moecore/game-match3": "workspace:*",
-    "@moecore/game-parkour": "workspace:*",
+    "@moecore/assets": "file:../../packages/assets",
+    "@moecore/game-sdk": "file:../../packages/game-sdk",
+    "@moecore/game-match3": "file:../../games/match3",
+    "@moecore/game-parkour": "file:../../games/parkour",
     "@lucide/vue": "1.47.0",
     "vue": "3.5.43"
   },

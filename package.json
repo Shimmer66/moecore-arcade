@@ -4,23 +4,29 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.33.0",
+  "workspaces": [
+    "apps/*",
+    "games/*",
+    "packages/*"
+  ],
   "engines": {
     "node": ">=24.15.0 <25",
     "pnpm": "10.33.0"
   },
   "scripts": {
-    "dev": "pnpm --filter @moecore/web run dev",
-    "build": "pnpm --filter @moecore/web run build",
-    "preview": "pnpm --filter @moecore/web run preview",
-    "typecheck": "pnpm -r run typecheck",
+    "start": "npm --workspace @moecore/web run dev --",
+    "dev": "npm --workspace @moecore/web run dev --",
+    "build": "npm --workspace @moecore/web run build",
+    "preview": "npm --workspace @moecore/web run preview",
+    "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "pnpm -r run test",
-    "test:match3": "pnpm --filter @moecore/game-match3 run test",
-    "test:e2e": "pnpm --filter @moecore/web run test:e2e",
+    "test": "npm run test --workspaces --if-present",
+    "test:match3": "npm --workspace @moecore/game-match3 run test",
+    "test:e2e": "npm --workspace @moecore/web run test:e2e",
     "check:workspace": "node scripts/check-workspace.mjs",
-    "check": "pnpm run check:workspace && pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run test"
+    "check": "npm run check:workspace && npm run typecheck && npm run lint && npm run format:check && npm run test"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "3.5.43",

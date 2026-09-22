@@ -3,32 +3,33 @@
 ## 环境
 
 - Node.js 24.15.0，记录于根目录 `.node-version`；项目当前限定 Node 24。
-- pnpm 10.33.0，记录于根目录 `package.json` 的 `packageManager`。
+- npm workspace，工作区配置记录于根目录 `package.json`。
 - `apps/web` 和游戏界面使用 Vue 3；游戏的 `rules` 入口保持纯 TypeScript。
-- 所有命令在仓库根目录执行。Windows PowerShell、macOS 和 Linux 使用相同的 pnpm 命令。
+- 所有命令在仓库根目录执行。Windows PowerShell、macOS 和 Linux 使用相同的 npm 命令。
 - 当前不需要 `.env`、API 密钥、数据库或后端。
 
-首次安装执行 `pnpm install --frozen-lockfile`。修改依赖后执行 `pnpm install` 更新锁文件，再提交对应清单和根锁文件；不在子包生成独立锁文件。
+首次安装执行 `npm install`。修改依赖后执行 `npm install` 更新锁文件，再提交对应清单和根锁文件；不在子包生成独立锁文件。
 
 ## 常用命令
 
-| 命令                                            | 作用                                             |
-| ----------------------------------------------- | ------------------------------------------------ |
-| `pnpm dev`                                      | 启动 Web 开发服务，默认只监听 `127.0.0.1`        |
-| `pnpm build`                                    | 构建唯一站点到 `apps/web/dist`                   |
-| `pnpm preview`                                  | 预览已经生成的构建产物，不执行构建               |
-| `pnpm check:workspace`                          | 校验包清单、导出、内部依赖、依赖环和源码跨包导入 |
-| `pnpm typecheck`                                | 对全部工作区包执行 TypeScript 检查               |
-| `pnpm lint`                                     | 检查全仓库 TypeScript 与工程脚本                 |
-| `pnpm format:check`                             | 检查格式                                         |
-| `pnpm format`                                   | 自动格式化                                       |
-| `pnpm test`                                     | 执行具有单元测试脚本的包                         |
-| `pnpm test:match3`                              | 只测试消消乐包的配置与已实现规则                 |
-| `pnpm --filter @moecore/game-match3 test:watch` | 监听消消乐包的测试变化                           |
-| `pnpm check`                                    | 顺序执行工作区、类型、lint、格式和单元测试       |
-| `pnpm test:e2e`                                 | 对已构建站点运行 Playwright                      |
+| 命令                                                  | 作用                                             |
+| ----------------------------------------------------- | ------------------------------------------------ |
+| `npm start`                                           | 启动 Web 开发服务，默认只监听 `127.0.0.1`        |
+| `npm run dev`                                         | 启动 Web 开发服务，默认只监听 `127.0.0.1`        |
+| `npm run build`                                       | 构建唯一站点到 `apps/web/dist`                   |
+| `npm run preview`                                     | 预览已经生成的构建产物，不执行构建               |
+| `npm run check:workspace`                             | 校验包清单、导出、内部依赖、依赖环和源码跨包导入 |
+| `npm run typecheck`                                   | 对全部工作区包执行 TypeScript 检查               |
+| `npm run lint`                                        | 检查全仓库 TypeScript 与工程脚本                 |
+| `npm run format:check`                                | 检查格式                                         |
+| `npm run format`                                      | 自动格式化                                       |
+| `npm test`                                            | 执行具有单元测试脚本的包                         |
+| `npm run test:match3`                                 | 只测试消消乐包的配置与已实现规则                 |
+| `npm --workspace @moecore/game-match3 run test:watch` | 监听消消乐包的测试变化                           |
+| `npm run check`                                       | 顺序执行工作区、类型、lint、格式和单元测试       |
+| `npm run test:e2e`                                    | 对已构建站点运行 Playwright                      |
 
-指定开发端口：`pnpm dev --port 5180`。需要局域网设备访问时显式传入 `--host 0.0.0.0`，不要将开发服务器当作生产服务。
+指定开发端口：`npm run dev -- --port 5180`。需要局域网设备访问时显式传入 `--host 0.0.0.0`，不要将开发服务器当作生产服务。
 
 ## 当前测试覆盖
 
@@ -42,14 +43,14 @@
 | 游戏 SDK | 纯类型包，通过 TypeScript 检查，不配置空的运行时测试              |
 | Web 应用 | 桌面/移动视口下的对局、暂停、重开、退出、刷新、加载竞态与失败恢复 |
 
-未使用 `passWithNoTests` 掩盖缺失测试。`pnpm test` 不包括 Web E2E，也不表示尚未实现的玩法、存档或生命周期已通过验证。
+未使用 `passWithNoTests` 掩盖缺失测试。`npm test` 不包括 Web E2E，也不表示尚未实现的玩法、存档或生命周期已通过验证。
 
 浏览器测试步骤：
 
 ```bash
-pnpm --filter @moecore/web exec playwright install chromium
-pnpm build
-pnpm test:e2e
+npm exec --workspace @moecore/web -- playwright install chromium
+npm run build
+npm run test:e2e
 ```
 
 Playwright 在 `127.0.0.1:4175` 启动独立预览服务，结束后自动清理。
@@ -62,11 +63,11 @@ Playwright 在 `127.0.0.1:4175` 启动独立预览服务，结束后自动清理
 ```powershell
 # PowerShell，仅影响当前终端；测试后清除
 $env:PLAYWRIGHT_CHANNEL = 'chrome'
-pnpm test:e2e
+npm run test:e2e
 Remove-Item Env:PLAYWRIGHT_CHANNEL
 ```
 
-macOS / Linux 使用 `PLAYWRIGHT_CHANNEL=chrome pnpm test:e2e`。
+macOS / Linux 使用 `PLAYWRIGHT_CHANNEL=chrome npm run test:e2e`。
 这不会使用日常浏览器的用户数据；测试仍启动独立浏览器实例。
 记录实际使用的通道，不将本机 Chrome 验证等同于默认 Chromium 下载问题已经解决。
 CI 不设置此变量，继续使用锁定 Playwright 版本对应的 Chromium。
@@ -106,14 +107,14 @@ Vue 既渲染宿主页面，也渲染游戏棋盘；规则计算仍是普通 Typ
 
 ## 素材预览
 
-`pnpm dev` 会在消消乐和跑酷中加载本地提供的角色与场景素材。
-`pnpm build` 使用自制缩写棋子或几何角色，不包含待审核 PNG；没有增加“已获授权”的声明。
+`npm start` 会在消消乐和跑酷中加载本地提供的角色与场景素材。
+`npm run build` 使用自制缩写棋子或几何角色，不包含待审核 PNG；没有增加“已获授权”的声明。
 公开发布前仍需单独审核素材。首次启动后的 URL 模块加载与图片解码不能以文件哈希检查代替。
 
 ## CI 与部署
 
-跑酷专项验证：`pnpm --filter @moecore/game-parkour test` 执行纯规则与剧情条件测试，
-`pnpm --filter @moecore/web exec playwright test parkour.spec.ts` 验证三个动作、暂停、即时重试、窄屏及完整短局。
+跑酷专项验证：`npm --workspace @moecore/game-parkour run test` 执行纯规则与剧情条件测试，
+`npm --workspace @moecore/web exec -- playwright test parkour.spec.ts` 验证三个动作、暂停、即时重试、窄屏及完整短局。
 开场不推进模拟；局内没有阅读暂停。取得答案并抵达 480 米出口即自动结算。
 浏览器试跑通过正常按键完成干饭、退件、核查和爆发，不通过修改组件内部状态跳过关卡。
 游戏通过 `GameResult.story` 返回可选结尾与角色图，宿主不判定剧情条件。
@@ -122,7 +123,7 @@ Vue 既渲染宿主页面，也渲染游戏棋盘；规则计算仍是普通 Typ
 素材测试同时核对源文件与运行图哈希。发布构建不会包含开发模式下加载的 PNG 或 WebP。
 
 GitHub Actions 在 push / pull request 上运行：
-冻结依赖安装、`pnpm check`、构建、安装 Chromium、桌面与移动视口 E2E。
+冻结依赖安装、`npm run check`、构建、安装 Chromium、桌面与移动视口 E2E。
 工作流只读仓库内容，不自动发布或配置 GitHub Pages。
 
 后续静态部署只上传 `apps/web/dist`，不上传整个仓库。
@@ -131,6 +132,6 @@ Vite 使用相对 `base`，适合相对资源寻址；接入游戏路由和动�
 
 ## 提交前
 
-执行 `pnpm check`、`pnpm build` 与 `pnpm test:e2e`，确认本次变更对应的测试已通过。
+执行 `npm run check`、`npm run build` 与 `npm run test:e2e`，确认本次变更对应的测试已通过。
 检查暂存区，排除依赖目录、构建输出、测试截图、密钥和私密授权证据。
 记录未运行的检查和实际限制，不把规划功能写成已完成。

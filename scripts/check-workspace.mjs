@@ -39,6 +39,14 @@ function isInside(directory, target) {
   return path !== '..' && !path.startsWith(`..${sep}`) && !isAbsolute(path);
 }
 
+function isWorkspaceDependency(pkg, dependency, version) {
+  if (version === 'workspace:*') return true;
+  const target = packages.get(dependency);
+  if (!target || typeof version !== 'string' || !version.startsWith('file:')) return false;
+  const expected = `file:${relative(pkg.directory, target.directory).split(sep).join('/')}`;
+  return version === expected;
+}
+
 function* sourceFiles(directory) {
   if (!existsSync(directory)) return;
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -58,7 +66,10 @@ for (const [name, pkg] of packages) {
     if (!dependency.startsWith('@moecore/')) continue;
     const target = packages.get(dependency);
     assert(target, `${name}: unknown workspace dependency ${dependency}`);
-    assert.equal(version, 'workspace:*', `${name}: ${dependency} must use workspace:*`);
+    assert(
+      isWorkspaceDependency(pkg, dependency, version),
+      `${name}: ${dependency} must use workspace:* or an npm-compatible file: workspace reference`,
+    );
     assert.notEqual(name, dependency, `${name}: self dependency`);
     if (pkg.group !== 'apps') {
       assert.equal(target.group, 'packages', `${name}: invalid dependency on ${dependency}`);
@@ -96,7 +107,7 @@ for (const [name, pkg] of packages) {
         } else if (value.startsWith('@moecore/')) {
           const dependency = value.split('/').slice(0, 2).join('/');
           assert(
-            pkg.manifest.dependencies?.[dependency] === 'workspace:*',
+            isWorkspaceDependency(pkg, dependency, pkg.manifest.dependencies?.[dependency]),
             `${file}: declare ${dependency} in dependencies`,
           );
           const target = packages.get(dependency);
