@@ -101,6 +101,19 @@ test('pauses an active cascade and resumes without spending a second move', asyn
   await expect(page.getByTestId('moves')).toHaveText('19');
 });
 
+test('toggles the game host into and out of fullscreen', async ({ page }) => {
+  await enterGame(page);
+  await page.getByRole('button', { name: '全屏', exact: true }).click();
+  await expect(page.getByRole('button', { name: '退出全屏', exact: true })).toBeVisible();
+  await expect
+    .poll(() => page.evaluate(() => document.fullscreenElement?.classList.contains('game-host')))
+    .toBe(true);
+
+  await page.getByRole('button', { name: '退出全屏', exact: true }).click();
+  await expect(page.getByRole('button', { name: '全屏', exact: true })).toBeVisible();
+  await expect.poll(() => page.evaluate(() => document.fullscreenElement)).toBeNull();
+});
+
 test('restarting during a cascade cancels the old animation', async ({ page }) => {
   await page.clock.install();
   await enterGame(page);

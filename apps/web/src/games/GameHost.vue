@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onErrorCaptured, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue';
-import { ArrowLeft, Pause, Play, RotateCcw, X } from '@lucide/vue';
+import { ArrowLeft, Maximize2, Minimize2, Pause, Play, RotateCcw, X } from '@lucide/vue';
 import type { GameDefinition, GameResult } from '@moecore/game-sdk';
 import { findGame } from './registry';
 
@@ -17,6 +17,9 @@ const result = shallowRef<GameResult>();
 const confirmation = ref<HTMLDialogElement>();
 const pendingAction = ref<'restart' | 'exit'>();
 const reduceMotion = ref(false);
+const gameHost = ref<HTMLElement>();
+const fullscreen = ref(false);
+const fullscreenSupported = ref(false);
 const paused = computed(
   () =>
     manuallyPaused.value ||
@@ -100,6 +103,25 @@ function reload() {
   window.location.reload();
 }
 
+function syncFullscreen() {
+  fullscreen.value = document.fullscreenElement === gameHost.value;
+}
+
+async function toggleFullscreen() {
+  const host = gameHost.value;
+  if (!host) return;
+
+  try {
+    if (document.fullscreenElement === host) {
+      await document.exitFullscreen();
+    } else if (!document.fullscreenElement) {
+      await host.requestFullscreen();
+    }
+  } catch {
+    syncFullscreen();
+  }
+}
+
 function pauseForBackground() {
   if (definition.value && !result.value) autoPaused.value = true;
 }
@@ -110,19 +132,25 @@ function visibilityChanged() {
 
 onMounted(() => {
   reduceMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  fullscreenSupported.value = Boolean(
+    document.fullscreenEnabled && gameHost.value?.requestFullscreen,
+  );
+  syncFullscreen();
   window.addEventListener('blur', pauseForBackground);
   document.addEventListener('visibilitychange', visibilityChanged);
+  document.addEventListener('fullscreenchange', syncFullscreen);
 });
 onUnmounted(() => {
   loadRevision += 1;
   confirmation.value?.close();
   window.removeEventListener('blur', pauseForBackground);
   document.removeEventListener('visibilitychange', visibilityChanged);
+  document.removeEventListener('fullscreenchange', syncFullscreen);
 });
 </script>
 
 <template>
-  <section class="game-host">
+  <section ref="gameHost" class="game-host">
     <div class="game-toolbar">
       <div class="game-heading">
         <button
@@ -159,6 +187,18 @@ onUnmounted(() => {
           @click="requestAction('restart')"
         >
           <RotateCcw :size="20" />
+        </button>
+        <button
+          type="button"
+          class="icon-button"
+          :disabled="!definition || !fullscreenSupported"
+          :title="fullscreen ? '退出全屏' : '全屏'"
+          :aria-label="fullscreen ? '退出全屏' : '全屏'"
+          :aria-pressed="fullscreen"
+          @click="toggleFullscreen"
+        >
+          <Minimize2 v-if="fullscreen" :size="20" />
+          <Maximize2 v-else :size="20" />
         </button>
       </div>
     </div>

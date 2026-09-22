@@ -240,6 +240,30 @@ button:disabled {
 .game-stage {
   position: relative;
 }
+.game-host:fullscreen {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+  max-width: none;
+  flex-direction: column;
+  padding: clamp(12px, 3vw, 32px);
+  overflow: auto;
+  background: var(--home-bg);
+}
+.game-host:fullscreen .game-toolbar {
+  flex-shrink: 0;
+}
+.game-host:fullscreen .game-stage {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+}
+.game-host:fullscreen .game-stage > :first-child {
+  min-height: 0;
+  flex: 1;
+}
 .host-state {
   min-height: 360px;
   display: flex;
