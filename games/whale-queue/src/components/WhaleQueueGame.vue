@@ -555,7 +555,7 @@ onUnmounted(() => {
 }
 .wq-board-frame {
   position: relative;
-  width: min(100%, 650px);
+  width: min(100%, 850px);
   margin: 0 auto;
   aspect-ratio: 1;
 }
