@@ -338,7 +338,11 @@ button:disabled {
 }
 @media (max-width: 740px) {
   #app:has(.whale-game) .site-header {
-    padding-block: 10px;
+    padding-block: 6px;
+  }
+  #app:has(.whale-game) .site-nav,
+  #app:has(.whale-game) .development-label {
+    display: none;
   }
   main:has(.whale-game) {
     padding-block: 12px;

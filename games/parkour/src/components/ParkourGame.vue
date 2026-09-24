@@ -33,7 +33,7 @@ const phase = ref<'ready' | 'countdown' | 'running' | 'ended'>('ready');
 const state = shallowRef(beginAdventure(seedForSession(props.sessionId)));
 const art = shallowRef<Readonly<Record<string, string>>>({});
 const artError = ref(false);
-const artLoading = ref(import.meta.env.DEV);
+const artLoading = ref(true);
 const stage = ref<InstanceType<typeof OfficeStage>>();
 const score = computed(() => state.value.run.score + state.value.bonus);
 const dialogue = computed(() => quips[state.value.quip]);
@@ -73,7 +73,6 @@ let loadVersion = 0;
 let finished = false;
 
 async function loadArt() {
-  if (!import.meta.env.DEV) return;
   const version = ++loadVersion;
   artLoading.value = true;
   artError.value = false;

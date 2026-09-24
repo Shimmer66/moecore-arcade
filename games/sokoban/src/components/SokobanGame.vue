@@ -288,10 +288,8 @@ onMounted(async () => {
     'char_S_blocked_02',
     'char_W_blocked_02',
   ];
-  if (import.meta.env.DEV) {
-    const { getSokobanAsset } = await import('@moecore/assets/sokoban');
-    assetUrls.value = Object.fromEntries(ids.map((id) => [id, getSokobanAsset(id).url]));
-  }
+  const { getSokobanAsset } = await import('@moecore/assets/sokoban');
+  assetUrls.value = Object.fromEntries(ids.map((id) => [id, getSokobanAsset(id).url]));
 });
 onUnmounted(() => {
   clearPath();

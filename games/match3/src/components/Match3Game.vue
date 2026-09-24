@@ -68,14 +68,12 @@ let pointer: { id: number; position: Position; x: number; y: number } | undefine
 let suppressClick = false;
 
 onMounted(async () => {
-  if (import.meta.env.DEV) {
-    const { getMatch3Asset } = await import('@moecore/assets/match3');
-    if (disposed) return;
-    urls.value = Object.fromEntries(
-      CHARACTERS.map(({ id }) => [id, getMatch3Asset(`${id}_tile_portrait`).url]),
-    );
-    portrait.value = getMatch3Asset('deepseek_pose_01').url;
-  }
+  const { getMatch3Asset } = await import('@moecore/assets/match3');
+  if (disposed) return;
+  urls.value = Object.fromEntries(
+    CHARACTERS.map(({ id }) => [id, getMatch3Asset(`${id}_tile_portrait`).url]),
+  );
+  portrait.value = getMatch3Asset('deepseek_pose_01').url;
 });
 
 function setFrame() {
