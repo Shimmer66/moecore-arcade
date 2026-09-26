@@ -127,11 +127,12 @@ onBeforeUnmount(() => {
     inset 2px 0 1px rgb(255 255 255 / 48%),
     inset 0 -2px 1px rgb(43 90 134 / 28%),
     inset -1px 0 2px rgb(92 151 193 / 22%);
-  backdrop-filter: blur(2px) saturate(1.12);
+  /* Keep the standard declaration last so production CSS retains both variants. */
   -webkit-backdrop-filter: blur(2px) saturate(1.12);
-  backdrop-filter: var(--surface-refraction) blur(var(--surface-blur, 0.35px)) saturate(1.12);
+  backdrop-filter: blur(2px) saturate(1.12);
   -webkit-backdrop-filter: var(--surface-refraction) blur(var(--surface-blur, 0.35px))
     saturate(1.12);
+  backdrop-filter: var(--surface-refraction) blur(var(--surface-blur, 0.35px)) saturate(1.12);
 }
 .liquid-surface > svg {
   position: absolute;
@@ -181,8 +182,8 @@ button:active > .liquid-surface-interactive {
   .liquid-surface {
     border: 1px solid ButtonText;
     background: Canvas;
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     box-shadow: none;
   }
   .liquid-surface::before,

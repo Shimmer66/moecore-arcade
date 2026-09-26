@@ -6,6 +6,46 @@ async function centerOf(locator: Locator) {
   return { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 };
 }
 
+async function expectRefraction(lens: Locator, optics = lens.locator('filter')) {
+  await expect(lens).toBeVisible();
+  await expect(lens).toHaveCSS('backdrop-filter', /url\(/);
+  await expect(optics.locator('feImage')).toHaveAttribute('href', /^data:image\/png/);
+  await lens.scrollIntoViewIfNeeded();
+  const bounds = (await lens.boundingBox())!;
+  const viewport = lens.page().viewportSize()!;
+  const clip = {
+    x: Math.max(0, bounds.x),
+    y: Math.max(0, bounds.y),
+    width: Math.min(bounds.width, viewport.width - Math.max(0, bounds.x)),
+    height: Math.min(bounds.height, viewport.height - Math.max(0, bounds.y)),
+  };
+  const screenshot = () => lens.page().screenshot({ clip, animations: 'disabled', scale: 'css' });
+  let refracted = await screenshot();
+  await expect
+    .poll(async () => {
+      const settled = await screenshot();
+      const stable = refracted.equals(settled);
+      refracted = settled;
+      return stable;
+    })
+    .toBe(true);
+
+  const displacement = optics.locator('feDisplacementMap');
+  const scale = (await displacement.getAttribute('scale'))!;
+  expect(Number(scale)).toBeGreaterThan(0);
+  try {
+    // Keep the same CSS filter, tint and blur; only disable its displacement.
+    await displacement.evaluate((element) => element.setAttribute('scale', '0'));
+    const unshifted = await screenshot();
+    expect(refracted.equals(unshifted), `${lens} should visibly bend its backdrop`).toBe(false);
+  } finally {
+    await displacement.evaluate((element, value) => element.setAttribute('scale', value), scale);
+  }
+  expect(refracted.equals(await screenshot()), 'Restoring displacement restores the image').toBe(
+    true,
+  );
+}
+
 test('renders the glass platform and lets a surface stretch and settle', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
@@ -105,48 +145,44 @@ test('reduced motion keeps the glass readable without elastic displacement', asy
   await expect(page.locator('.catalog-card')).toHaveCount(2);
 });
 
+test('dock shell and selected tab refract the page before and after navigation', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await page.evaluate(() => document.fonts.ready);
+  const navigation = page.getByRole('navigation', { name: '主导航' });
+  for (const section of ['home', 'about']) {
+    if (section === 'about') {
+      await navigation.getByRole('link', { name: '加入共创', exact: true }).click();
+      await expect(page).toHaveURL(/#about$/);
+    }
+    await expectRefraction(
+      navigation.locator('.dock-shell'),
+      navigation.locator('filter[id$="-shell"]'),
+    );
+    await expectRefraction(
+      navigation.locator('.dock-lens'),
+      navigation.locator('filter[id$="-tab"]'),
+    );
+  }
+});
+
 test('game panels and modal buttons refract their backdrop beyond a blur', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/#/games/sokoban');
   await expect(page.locator('.sokoban')).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
 
-  async function expectRefraction(selector: string) {
-    const lens = page.locator(selector);
-    await expect(lens).toBeVisible();
-    await expect(lens.locator('feImage')).toHaveAttribute('href', /^data:image\/png/);
-    await lens.scrollIntoViewIfNeeded();
-    const bounds = (await lens.boundingBox())!;
-    const viewport = page.viewportSize()!;
-    const clip = {
-      x: Math.max(0, bounds.x),
-      y: Math.max(0, bounds.y),
-      width: Math.min(bounds.width, viewport.width - Math.max(0, bounds.x)),
-      height: Math.min(60, bounds.height, viewport.height - Math.max(0, bounds.y)),
-    };
-    const refracted = await page.screenshot({ clip, animations: 'disabled' });
-    // Keep tint, highlights and blur identical; remove only the displacement filter.
-    await lens.evaluate((element) => {
-      const style = getComputedStyle(element);
-      const blur = style.getPropertyValue('--surface-blur') || '0.35px';
-      (element as HTMLElement).style.backdropFilter = `blur(${blur}) saturate(1.12)`;
-    });
-    const blurred = await page.screenshot({ clip, animations: 'disabled' });
-    expect(refracted.equals(blurred), `${selector} should visibly bend its backdrop`).toBe(false);
-    await lens.evaluate((element) =>
-      (element as HTMLElement).style.removeProperty('backdrop-filter'),
-    );
-  }
-
-  await expectRefraction('.game-stage > .liquid-surface');
+  await expectRefraction(page.locator('.game-stage > .liquid-surface'));
   await page.getByRole('button', { name: '暂停', exact: true }).click();
-  await expectRefraction('.stage-overlay > .liquid-surface');
-  await expectRefraction('.stage-overlay .primary-button > .liquid-surface');
+  await expectRefraction(page.locator('.stage-overlay > .liquid-surface'));
+  await expectRefraction(page.locator('.stage-overlay .primary-button > .liquid-surface'));
   await page.getByRole('button', { name: '继续游戏', exact: true }).click();
   await expect(page.getByRole('region', { name: '暂停菜单' })).toHaveCount(0);
   await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
-  await expectRefraction('.confirm-dialog > .liquid-surface');
-  await expectRefraction('.confirm-dialog .primary-button > .liquid-surface');
+  await expectRefraction(page.locator('.confirm-dialog > .liquid-surface'));
+  await expectRefraction(page.locator('.confirm-dialog .primary-button > .liquid-surface'));
   await page.getByRole('button', { name: '继续本局', exact: true }).click();
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
@@ -161,6 +197,7 @@ test('pausing keeps the game aligned through the flat center of the glass', asyn
   expect(await game.boundingBox()).toEqual(before);
 
   const lens = page.locator('.stage-overlay > .liquid-surface');
+  await expect(lens).toHaveCSS('backdrop-filter', /url\(/);
   await expect(lens.locator('feImage')).toHaveAttribute('href', /^data:image\/png/);
   // The first floor/wall intersection is inside the lens, away from its bent rim.
   const marker = page.locator('.sokoban-cell').nth(8);
@@ -194,6 +231,7 @@ test('a browser without WebGL retains a readable and functional platform', async
     'data-renderer',
     'fallback',
   );
+  await expect(page.locator('.game-search')).toHaveCSS('backdrop-filter', /blur\(8px\)/);
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
   await expect(page.locator('.catalog-card')).toHaveCount(4);
   await page.getByRole('button', { name: '动作', exact: true }).click();
@@ -239,6 +277,7 @@ test('wallpaper loading failure leaves the CSS glass platform usable', async ({ 
     'data-renderer',
     'fallback',
   );
+  await expect(page.locator('.game-search')).toHaveCSS('backdrop-filter', /blur\(8px\)/);
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
   await expect(page.locator('.catalog-card')).toHaveCount(4);
   await page.getByRole('button', { name: '益智', exact: true }).click();
