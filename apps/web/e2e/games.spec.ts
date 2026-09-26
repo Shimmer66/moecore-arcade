@@ -40,7 +40,9 @@ test('opens the Vue game, renders assets, and fits the viewport', async ({ page 
   await enterGame(page);
   await expect(page).toHaveURL(/#\/games\/match3$/);
   await expect(page.getByRole('heading', { name: 'AI 娘消消乐', exact: true })).toBeVisible();
-  await expect(page.locator('canvas')).toHaveCount(0);
+  await expect(page.locator('.game-toolbar canvas.liquid-glass-canvas')).toHaveCount(1);
+  await expect(page.locator('.game-stage canvas')).toHaveCount(0);
+  await expect(page.locator('.site-header, .site-nav')).toHaveCount(0);
   await expect
     .poll(() =>
       page
@@ -108,11 +110,58 @@ test('toggles the game host into and out of fullscreen', async ({ page }) => {
   await expect
     .poll(() => page.evaluate(() => document.fullscreenElement?.classList.contains('game-host')))
     .toBe(true);
+  await expect(
+    page.locator('.game-host:fullscreen .game-toolbar canvas.liquid-glass-canvas'),
+  ).toHaveAttribute('data-renderer', 'webgl');
+  await expect(page.locator('.game-stage canvas')).toHaveCount(0);
+  await expect(page.locator('.site-header, .site-nav')).toHaveCount(0);
 
   await page.getByRole('button', { name: '退出全屏', exact: true }).click();
   await expect(page.getByRole('button', { name: '全屏', exact: true })).toBeVisible();
   await expect.poll(() => page.evaluate(() => document.fullscreenElement)).toBeNull();
+  await expect(page.locator('.site-header, .site-nav')).toHaveCount(0);
 });
+
+for (const [id, selector] of [
+  ['sokoban', '.sokoban'],
+  ['match3', '.match3'],
+  ['parkour', '.whale-game'],
+  ['whale-queue', '.whale-queue-game'],
+] as const) {
+  test(`fullscreen keeps ${id} inside the glass stage with its bottom reachable`, async ({
+    page,
+  }) => {
+    await page.goto(`/#/games/${id}`);
+    const game = page.locator(selector);
+    await expect(game).toBeVisible();
+    await page.getByRole('button', { name: '全屏', exact: true }).click();
+    await expect(page.getByRole('button', { name: '退出全屏', exact: true })).toBeVisible();
+
+    await expect
+      .poll(async () => {
+        const stageBounds = await page.locator('.game-stage').boundingBox();
+        const gameBounds = await game.boundingBox();
+        if (!stageBounds || !gameBounds) return false;
+        return (
+          gameBounds.x >= stageBounds.x &&
+          gameBounds.y >= stageBounds.y &&
+          gameBounds.x + gameBounds.width <= stageBounds.x + stageBounds.width + 1 &&
+          gameBounds.y + gameBounds.height <= stageBounds.y + stageBounds.height + 1
+        );
+      })
+      .toBe(true);
+
+    await page.locator('.game-host').evaluate((host) => {
+      host.scrollTop = host.scrollHeight;
+    });
+    await expect
+      .poll(() => game.evaluate((element) => element.getBoundingClientRect().bottom <= innerHeight))
+      .toBe(true);
+    expect(
+      await page.locator('.game-host').evaluate((host) => host.scrollWidth <= host.clientWidth),
+    ).toBe(true);
+  });
+}
 
 test('restarting during a cascade cancels the old animation', async ({ page }) => {
   await page.clock.install();
@@ -178,6 +227,8 @@ test('background pause requires explicit resume, and restart and exit replace th
   await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
   await page.getByRole('button', { name: '确认', exact: true }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(0);
+  await expect(page.locator('.site-header')).toBeVisible();
+  await expect(page.getByRole('navigation', { name: '主导航' })).toBeVisible();
   await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(64);
   await expect(page.getByTestId('moves')).toHaveText('20');

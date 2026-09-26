@@ -1,5 +1,4 @@
-/* The homepage owns its wallpaper, optical surfaces, and content layer.
-   Game styles deliberately remain outside this scope. */
+/* Shared platform glass; game artwork and gameplay keep their own styles. */
 .platform-shell {
   display: flex;
   min-height: 100svh;
@@ -19,7 +18,7 @@
 .skip-link:focus {
   top: 16px;
 }
-.platform-home {
+.platform-shell {
   --glass-ink: #203552;
   --glass-muted: #344f6b;
   --glass-accent: #275fa6;
@@ -27,12 +26,15 @@
   isolation: isolate;
   color: var(--glass-ink);
   background: #e2edf5;
-  padding-bottom: 124px;
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
+.platform-home {
+  padding-bottom: 124px;
+}
 /* The renderer samples this same fixed, center/cover wallpaper. */
-.platform-home::before {
+.platform-shell::before,
+.platform-game .game-host:fullscreen::before {
   position: fixed;
   inset: 0;
   z-index: -1;
@@ -53,7 +55,7 @@
 .liquid-glass-canvas[data-renderer='fallback'] {
   visibility: hidden;
 }
-.platform-home [data-glass] {
+.platform-shell [data-glass] {
   position: relative;
   background: transparent;
   border: 0;
@@ -62,7 +64,8 @@
   transition: color 180ms ease;
   -webkit-tap-highlight-color: transparent;
 }
-.platform-home:not([data-glass-renderer='webgl']) [data-glass] {
+.platform-home:not([data-glass-renderer='webgl']) [data-glass],
+.platform-game .game-toolbar:not([data-glass-renderer='webgl']) [data-glass] {
   background: linear-gradient(140deg, rgb(247 252 255 / 24%), rgb(223 243 255 / 12%));
   box-shadow:
     0 10px 28px rgb(30 61 99 / 9%),
@@ -71,7 +74,7 @@
   backdrop-filter: blur(8px) saturate(1.08);
   -webkit-backdrop-filter: blur(8px) saturate(1.08);
 }
-.platform-home :is(a, button, input):focus-visible {
+.platform-shell :is(a, button, input):focus-visible {
   outline: 3px solid #2567ad;
   outline-offset: 5px;
 }
@@ -430,13 +433,131 @@
 .platform-home .contribute-banner .home-button:hover {
   background: rgb(243 251 255 / 40%);
 }
-.platform-home .site-footer {
+.platform-shell .site-footer {
   padding: 16px 0;
   border: 0;
   color: var(--glass-muted);
   font-size: 10px;
   letter-spacing: 0.08em;
   text-align: center;
+}
+.platform-game main {
+  width: min(1104px, calc(100% - 64px));
+  padding-block: 32px 24px;
+}
+.platform-game .game-host {
+  position: relative;
+  isolation: isolate;
+}
+.platform-game .game-host:fullscreen {
+  background: #e2edf5;
+}
+.platform-game .game-toolbar {
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.platform-game :is(.game-heading, .game-actions, .game-stage, .host-state) {
+  position: relative;
+  z-index: 1;
+}
+.platform-game .game-heading {
+  gap: 16px;
+}
+.platform-game .game-heading h1 {
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.45;
+  letter-spacing: -0.03em;
+}
+.platform-game .game-actions {
+  flex-shrink: 0;
+}
+.platform-game .game-toolbar .icon-button {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: var(--glass-ink);
+}
+.platform-game .game-toolbar .icon-button:hover:not(:disabled) {
+  background: rgb(240 250 255 / 16%);
+  color: var(--glass-accent);
+}
+.platform-game .motion-toggle {
+  min-height: 46px;
+  gap: 8px;
+  margin: 0 4px 0 0;
+  padding: 10px 16px;
+  border-radius: 24px;
+  color: var(--glass-muted);
+  cursor: pointer;
+}
+.platform-game .motion-toggle input {
+  margin: 0;
+  accent-color: var(--glass-accent);
+}
+.platform-game :is(.game-stage, .host-state, .stage-overlay, .confirm-dialog) {
+  border: 0;
+  border-radius: 30px;
+  background: transparent;
+  box-shadow: none;
+}
+.platform-game .game-stage {
+  padding: clamp(12px, 2.5vw, 28px);
+}
+.platform-game .game-content,
+.platform-game :is(.host-state, .stage-overlay, .confirm-dialog) > :not(.liquid-surface) {
+  position: relative;
+  z-index: 1;
+}
+.platform-game :is(.stage-overlay, .confirm-dialog) {
+  --surface-tint: 42%;
+  --surface-blur: 1.5px;
+  color: var(--glass-ink);
+  text-align: center;
+}
+.platform-game .stage-overlay {
+  padding: 24px;
+  overflow: auto;
+}
+.platform-game .stage-overlay > :not(.liquid-surface) {
+  flex-shrink: 0;
+}
+.platform-game :is(.stage-overlay, .confirm-dialog) p {
+  color: var(--glass-muted);
+}
+.platform-game .confirm-dialog {
+  --surface-tint: 52%;
+  padding: 28px;
+  text-align: left;
+  overflow: visible;
+}
+.platform-game .confirm-dialog::backdrop {
+  background: rgb(24 48 77 / 20%);
+}
+.platform-game
+  :is(.host-state, .stage-overlay, .confirm-dialog)
+  :is(.primary-button, .icon-button, .text-button) {
+  position: relative;
+  border: 0;
+  border-radius: 24px;
+  background: transparent;
+  color: var(--glass-accent);
+  box-shadow: none;
+}
+.platform-game
+  :is(.host-state, .stage-overlay, .confirm-dialog)
+  :is(.primary-button, .icon-button, .text-button)
+  > :not(.liquid-surface) {
+  position: relative;
+  z-index: 1;
+}
+.platform-game :is(.stage-overlay, .confirm-dialog) .text-button {
+  color: var(--glass-muted);
+}
+.platform-game .game-host[data-reduce-motion='true'] .liquid-surface-interactive {
+  --lens-light-x: 24% !important;
+  --lens-light-y: 0% !important;
+  transform: none;
+  transition: none;
 }
 .platform-home .home-dock {
   --dock-gap: 8px;
@@ -642,8 +763,35 @@
   }
 }
 @media (max-width: 760px) {
-  .platform-home::before {
+  .platform-shell::before,
+  .platform-game .game-host:fullscreen::before {
     background-image: url('../../assets/images/bg_menu_portrait.png');
+  }
+  .platform-game main {
+    width: calc(100% - 32px);
+    padding-block: 20px 12px;
+  }
+  .platform-game .game-toolbar {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .platform-game .game-heading {
+    gap: 12px;
+  }
+  .platform-game .game-actions {
+    width: 100%;
+    gap: 8px;
+  }
+  .platform-game .motion-toggle {
+    margin-right: auto;
+    padding-inline: 12px;
+    font-size: 11px;
+  }
+  .platform-game .game-stage {
+    padding: 12px;
+    border-radius: 24px;
   }
   .platform-home :is(.site-header, .site-footer, main) {
     width: calc(100% - 40px);
@@ -748,7 +896,7 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .platform-home [data-glass] {
+  .platform-shell [data-glass] {
     transform: none !important;
     transition: none;
   }
@@ -771,7 +919,7 @@
   .liquid-glass-canvas {
     display: none;
   }
-  .platform-home [data-glass] {
+  .platform-shell [data-glass] {
     border: 1px solid ButtonText;
     background: Canvas;
   }

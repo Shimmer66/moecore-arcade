@@ -19,7 +19,10 @@ function readRoute() {
         : 'home';
 }
 function scrollToSection(behavior: 'auto' | 'smooth' = 'auto') {
-  if (selectedGame.value) return;
+  if (selectedGame.value) {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    return;
+  }
   if (activeSection.value === 'home') window.scrollTo({ top: 0, behavior });
   else document.getElementById(activeSection.value)?.scrollIntoView({ behavior, block: 'start' });
 }
@@ -57,10 +60,10 @@ onUnmounted(() => window.removeEventListener('hashchange', onRouteChange));
 </script>
 
 <template>
-  <div id="home" class="platform-shell" :class="{ 'platform-home': !selectedGame }">
+  <div id="home" class="platform-shell" :class="selectedGame ? 'platform-game' : 'platform-home'">
     <LiquidGlass v-if="!selectedGame" />
     <a class="skip-link" href="#main-content">跳到主要内容</a>
-    <header class="site-header">
+    <header v-if="!selectedGame" class="site-header">
       <div class="wordmark">
         <img :src="ASSETS.arcadeMark.url" alt="" width="40" height="40" />
         <div>
@@ -68,12 +71,7 @@ onUnmounted(() => window.removeEventListener('hashchange', onRouteChange));
           <span class="brand-subtitle" lang="en">MoeCore Arcade</span>
         </div>
       </div>
-      <LiquidDock v-if="!selectedGame" :active-section="activeSection" @select="navigateSection" />
-      <nav v-else class="site-nav" aria-label="主导航">
-        <a href="#home">首页</a>
-        <a href="#games">小游戏</a>
-        <a class="site-nav-cta" href="#about">加入共创</a>
-      </nav>
+      <LiquidDock :active-section="activeSection" @select="navigateSection" />
       <span class="development-label"
         ><span aria-hidden="true" class="status-dot"></span>原型试玩</span
       >

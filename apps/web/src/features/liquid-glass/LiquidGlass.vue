@@ -354,7 +354,8 @@ function onContextLost(event: Event) {
 }
 
 onMounted(() => {
-  platform = document.querySelector<HTMLElement>('.platform-home');
+  // Game optics observe only the toolbar, never the game's animated DOM.
+  platform = canvas.value?.closest<HTMLElement>('.game-toolbar, .platform-shell') ?? null;
   motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
   reducedMotion = motionPreference.matches;
   resizeObserver = new ResizeObserver(requestFrame);

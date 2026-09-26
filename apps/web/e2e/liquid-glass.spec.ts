@@ -49,7 +49,7 @@ test('renders the glass platform and lets a surface stretch and settle', async (
   expect(errors).toEqual([]);
 });
 
-test('filters remain usable and the glass renderer is isolated from games', async ({ page }) => {
+test('filters remain usable and game glass stays within the toolbar', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: '文字', exact: true }).click();
   await expect(page.getByRole('button', { name: '文字', exact: true })).toHaveAttribute(
@@ -68,11 +68,18 @@ test('filters remain usable and the glass renderer is isolated from games', asyn
   await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
   await expect(page).toHaveURL(/#\/games\/match3$/);
   await expect(page.locator('.match3-tile')).toHaveCount(64);
-  await expect(page.locator('canvas')).toHaveCount(0);
+  await expect(page.locator('.game-toolbar canvas.liquid-glass-canvas')).toHaveAttribute(
+    'data-renderer',
+    'webgl',
+  );
+  await expect(page.locator('.game-stage canvas')).toHaveCount(0);
+  await expect(page.locator('.site-header, .site-nav')).toHaveCount(0);
   await expect(page.getByTestId('moves')).toHaveText('20');
   await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
   await page.getByRole('button', { name: '确认', exact: true }).click();
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
+  await expect(page.locator('.site-header')).toBeVisible();
+  await expect(page.getByRole('navigation', { name: '主导航' })).toBeVisible();
   await expect(page.locator('canvas.liquid-glass-canvas')).toHaveAttribute(
     'data-renderer',
     'webgl',
@@ -96,6 +103,79 @@ test('reduced motion keeps the glass readable without elastic displacement', asy
   await page.mouse.up();
   await page.getByRole('button', { name: '益智', exact: true }).click();
   await expect(page.locator('.catalog-card')).toHaveCount(2);
+});
+
+test('game panels and modal buttons refract their backdrop beyond a blur', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/#/games/sokoban');
+  await expect(page.locator('.sokoban')).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+
+  async function expectRefraction(selector: string) {
+    const lens = page.locator(selector);
+    await expect(lens).toBeVisible();
+    await expect(lens.locator('feImage')).toHaveAttribute('href', /^data:image\/png/);
+    await lens.scrollIntoViewIfNeeded();
+    const bounds = (await lens.boundingBox())!;
+    const viewport = page.viewportSize()!;
+    const clip = {
+      x: Math.max(0, bounds.x),
+      y: Math.max(0, bounds.y),
+      width: Math.min(bounds.width, viewport.width - Math.max(0, bounds.x)),
+      height: Math.min(60, bounds.height, viewport.height - Math.max(0, bounds.y)),
+    };
+    const refracted = await page.screenshot({ clip, animations: 'disabled' });
+    // Keep tint, highlights and blur identical; remove only the displacement filter.
+    await lens.evaluate((element) => {
+      const style = getComputedStyle(element);
+      const blur = style.getPropertyValue('--surface-blur') || '0.35px';
+      (element as HTMLElement).style.backdropFilter = `blur(${blur}) saturate(1.12)`;
+    });
+    const blurred = await page.screenshot({ clip, animations: 'disabled' });
+    expect(refracted.equals(blurred), `${selector} should visibly bend its backdrop`).toBe(false);
+    await lens.evaluate((element) =>
+      (element as HTMLElement).style.removeProperty('backdrop-filter'),
+    );
+  }
+
+  await expectRefraction('.game-stage > .liquid-surface');
+  await page.getByRole('button', { name: '暂停', exact: true }).click();
+  await expectRefraction('.stage-overlay > .liquid-surface');
+  await expectRefraction('.stage-overlay .primary-button > .liquid-surface');
+  await page.getByRole('button', { name: '继续游戏', exact: true }).click();
+  await expect(page.getByRole('region', { name: '暂停菜单' })).toHaveCount(0);
+  await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
+  await expectRefraction('.confirm-dialog > .liquid-surface');
+  await expectRefraction('.confirm-dialog .primary-button > .liquid-surface');
+  await page.getByRole('button', { name: '继续本局', exact: true }).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+});
+
+test('pausing keeps the game aligned through the flat center of the glass', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/#/games/sokoban');
+  const game = page.locator('.sokoban');
+  await expect(game).toBeVisible();
+  const before = await game.boundingBox();
+  await page.getByRole('button', { name: '暂停', exact: true }).click();
+  expect(await game.boundingBox()).toEqual(before);
+
+  const lens = page.locator('.stage-overlay > .liquid-surface');
+  await expect(lens.locator('feImage')).toHaveAttribute('href', /^data:image\/png/);
+  // The first floor/wall intersection is inside the lens, away from its bent rim.
+  const marker = page.locator('.sokoban-cell').nth(8);
+  await marker.scrollIntoViewIfNeeded();
+  const bounds = (await marker.boundingBox())!;
+  const clip = { x: bounds.x - 24, y: bounds.y - 24, width: 48, height: 48 };
+  const refracted = await page.screenshot({ clip, animations: 'disabled', scale: 'css' });
+  const filter = lens.locator('feDisplacementMap');
+  const scale = (await filter.getAttribute('scale'))!;
+  await filter.evaluate((element) => element.setAttribute('scale', '0'));
+  const unshifted = await page.screenshot({ clip, animations: 'disabled', scale: 'css' });
+  expect(refracted.equals(unshifted), 'The flat lens center must not translate the game').toBe(
+    true,
+  );
+  await filter.evaluate((element, value) => element.setAttribute('scale', value), scale);
 });
 
 test('a browser without WebGL retains a readable and functional platform', async ({ page }) => {

@@ -257,10 +257,10 @@ button:disabled {
 .game-host:fullscreen .game-stage {
   display: flex;
   min-height: 0;
-  flex: 1;
+  flex: 1 0 auto;
   flex-direction: column;
 }
-.game-host:fullscreen .game-stage > :first-child {
+.game-host:fullscreen .game-content {
   min-height: 0;
   flex: 1;
 }
