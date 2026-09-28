@@ -93,6 +93,8 @@ function resetFilters() {
               alt=""
               width="164"
               height="164"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div class="catalog-body">

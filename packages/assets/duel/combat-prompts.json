@@ -1,0 +1,484 @@
+{
+  "title": "推演对决 · 战斗关键姿态与特效",
+  "generator": "built-in image_gen",
+  "status": "generated-and-visually-reviewed",
+  "scope": "24 character key poses + 6 independent effects; not calibrated animation frames",
+  "assets": [
+    {
+      "id": "duel_deepseek_ready",
+      "character": "deepseek",
+      "pose": "ready",
+      "label": "战斗待机",
+      "action": "idle",
+      "path": "combat/deepseek/ready.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Grounded boxing-ready stance, feet apart, knees softly bent, lead fist at chest height and rear fist beside jaw. Face watches opponent at screen right. Clear gap between arms and torso, relaxed but ready.\nAsset ID (not rendered): duel_deepseek_ready.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-f0dcc586-c345-453e-a24d-a8918f883418.png",
+      "portableReferences": ["references/duel_ds_base.png"]
+    },
+    {
+      "id": "duel_deepseek_dash",
+      "character": "deepseek",
+      "pose": "dash",
+      "label": "压低冲刺",
+      "action": "dash",
+      "path": "combat/deepseek/dash.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Fast ground dash to the right, torso leaning forward 35 degrees, forward leg reaching and rear leg pushing off; arms trail in a controlled sprinter posture. Hair and tail or scarf trail left; face focused. No speed lines, no duplicates. Lowest planted foot at y=88%.\nAsset ID (not rendered): duel_deepseek_dash.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-aebb1a1d-a64d-42f9-b947-5a14b5b8c945.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_jump",
+      "character": "deepseek",
+      "pose": "jump",
+      "label": "起跳腾空",
+      "action": "jump",
+      "path": "combat/deepseek/jump.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Ascending toward screen right, leading knee raised, other leg trailing bent, fists ready. Head at y=14%, feet around y=72%, same body scale as ready pose. Hair and scarf or tail follow momentum. No jump circle or dust.\nAsset ID (not rendered): duel_deepseek_jump.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-967ff06b-8c8b-427e-b567-44e7ac9951a2.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_jab_start",
+      "character": "deepseek",
+      "pose": "jab_start",
+      "label": "第一拳·蓄势",
+      "action": "light1-start",
+      "path": "combat/deepseek/jab_start.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Grounded short jab ANTICIPATION: chin tucked, leading fist retracted near chest ready to punch right, rear fist guards jaw, torso twists back slightly, bent knees; compact readable anticipation. Both fists visibly closed.\nAsset ID (not rendered): duel_deepseek_jab_start.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-f8a3a853-5200-4eae-8965-ee668f26d659.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_jab_hit",
+      "character": "deepseek",
+      "pose": "jab_hit",
+      "label": "第一拳·直击",
+      "action": "light1-hit",
+      "path": "combat/deepseek/jab_hit.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Grounded short jab CONTACT pose: front arm extends horizontally RIGHT at opponent chest height, fist in side profile, rear hand guards jaw. Forward knee bent, weight shifts onto front foot; fist never points at camera. Smug confident tiny smile.\nAsset ID (not rendered): duel_deepseek_jab_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-ced2cb9d-589c-4926-baf7-8b00862883d5.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_cross_hit",
+      "character": "deepseek",
+      "pose": "cross_hit",
+      "label": "第二拳·转身背拳",
+      "action": "light2-hit",
+      "path": "combat/deepseek/cross_hit_v2.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: A powerful SPINNING BACKFIST contact pose attacking SCREEN RIGHT. This must be visibly different from a front-facing straight jab. Show the character's BACK and rear shoulder prominently to camera, torso twisted away about 60 degrees, face visible ONLY in right-facing profile over the attacking shoulder. One bent forearm sweeps horizontally across toward the RIGHT, striking with the BACK of a clenched fist; elbow remains bent 90 degrees, do NOT straighten this arm into a jab. The free arm extends behind to LEFT at waist height as counterbalance, do NOT put it beside the cheek. Wide planted lunge, rear heel lifted, hips strongly rotated. Hair and tail/scarf sweep left. For DeepSeek, rear waist bow of maid apron is visible; for Doubao, back of charcoal sweatshirt is visible. Keep identity, scale, and full figure intact.\nAsset ID (not rendered): duel_deepseek_cross_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "revisions": [
+        {
+          "path": "combat/drafts/deepseek_cross_hit_v1.png",
+          "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Grounded powerful rear-hand CROSS PUNCH toward RIGHT at chest height. Hips rotate and rear heel lifts, shoulder follows fist, non-punching hand protects face. Larger torso rotation than jab. Fist is large but proportional. Determined face.\nAsset ID (not rendered): duel_deepseek_cross_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+          "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-0c3b8b8b-248e-4a3d-907a-27d36e7e21f4.png",
+          "reason": "Too similar to first jab; revise torso rotation and arm silhouette"
+        }
+      ],
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-0fa0208a-71a2-43ef-9828-7ab482117c66.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_kick_hit",
+      "character": "deepseek",
+      "pose": "kick_hit",
+      "label": "第三脚·横踢",
+      "action": "light3-hit",
+      "path": "combat/deepseek/kick_hit.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Grounded horizontal SIDE KICK to screen right: one leg planted, other leg fully extended at opponent torso height, shoe sole facing right in profile; arms counterbalance and torso leans left. Clean visible separation of both legs. Comically fierce expression. Full extended foot must remain inside canvas.\nAsset ID (not rendered): duel_deepseek_kick_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-0e5653ef-c833-4ddb-b736-ac88c19e5114.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_upper_hit",
+      "character": "deepseek",
+      "pose": "upper_hit",
+      "label": "挑空上勾拳",
+      "action": "upper-hit",
+      "path": "combat/deepseek/upper_hit.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Rising UPPERCUT contact pose aimed up-right. Lead boot still planted near baseline, other knee bent; fist above face, elbow and shoulder form readable upward arc, body uncoils from crouch. Open fierce shout. No slash or flame.\nAsset ID (not rendered): duel_deepseek_upper_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-b241f43a-79c9-4bea-aaf0-fb91c413c53e.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_skill_cast",
+      "character": "deepseek",
+      "pose": "skill_cast",
+      "label": "专属技能出手",
+      "action": "skill",
+      "path": "combat/deepseek/skill_cast.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: DeepSeek counterattack release: grounded stance, front open palm calmly pushes to the right at chest height, rear fist pulled back ready for devastating counter. Other hand must not hold a prop. Half-lidded completely unbothered face; one eyebrow lifted. Whale tail curls behind her to the left. No monitor, no circle or effects.\nAsset ID (not rendered): duel_deepseek_skill_cast.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-86f7f522-8ef1-459d-8d0a-b72fee870661.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_guard",
+      "character": "deepseek",
+      "pose": "guard",
+      "label": "抱架格挡",
+      "action": "guard",
+      "path": "combat/deepseek/guard.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Grounded defensive guard facing right: both forearms crossed in front of face and chest, elbows bent, knees bent, body braces backward slightly. Eyes peek cautiously over arms; hair/scarf or tail recoil left. No shield, bubble, sparks or opponent.\nAsset ID (not rendered): duel_deepseek_guard.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-2833e7bf-02cb-4ed1-9aff-50fb637ac66f.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_hurt",
+      "character": "deepseek",
+      "pose": "hurt",
+      "label": "重击受创",
+      "action": "hurt",
+      "path": "combat/deepseek/hurt.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Standing heavy hit recoil: invisible hit came from right, torso bows backward toward left, chin lifts, arms fly apart, knees buckle, one foot retains contact with baseline. Eyes comically squeezed shut, puffed cheek. No injury, blood, bruise, stars or attacker; fully intact clothes.\nAsset ID (not rendered): duel_deepseek_hurt.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-0d8e1283-070f-4c6c-8904-92e53c33dd53.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_deepseek_down",
+      "character": "deepseek",
+      "pose": "down",
+      "label": "倒地嘴硬",
+      "action": "down",
+      "path": "combat/deepseek/down.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_ds_base.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: DeepSeek whale maid from reference: cobalt blue hair with cyan tips, blue whale fin ears, one large blue whale tail, white frilly maid headband, cyan hair bow, blue eyes, dark navy long-sleeve dress, white apron and frills, navy boots with small gold bows, small white rice grain on cheek. Preserve all costume colors and accessories. Sleepy-smart expressions turning unexpectedly fierce.\nPose requirement: Knocked down resting on the left hip with feet extending to the right, one forearm props upper body, other clenched fist raised weakly as if still insisting everything is fine. Head on the left, face glances toward opponent on right. Same body scale as standing reference, occupy LOWER half of canvas, body lowest edge y=88%, not magnified to fill canvas. Comically disgruntled, no sign or speech bubble.\nAsset ID (not rendered): duel_deepseek_down.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-39562baa-ff02-42cd-a8da-2ba67101641c.png",
+      "portableReferences": ["references/duel_ds_base.png", "combat/deepseek/ready.png"]
+    },
+    {
+      "id": "duel_doubao_ready",
+      "character": "doubao",
+      "pose": "ready",
+      "label": "战斗待机",
+      "action": "idle",
+      "path": "combat/doubao/ready.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Grounded boxing-ready stance, feet apart, knees softly bent, lead fist at chest height and rear fist beside jaw. Face watches opponent at screen right. Clear gap between arms and torso, relaxed but ready.\nAsset ID (not rendered): duel_doubao_ready.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-2e1e86a5-ff74-4300-b72b-297c0bd62fb8.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png"]
+    },
+    {
+      "id": "duel_doubao_dash",
+      "character": "doubao",
+      "pose": "dash",
+      "label": "压低冲刺",
+      "action": "dash",
+      "path": "combat/doubao/dash.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Fast ground dash to the right, torso leaning forward 35 degrees, forward leg reaching and rear leg pushing off; arms trail in a controlled sprinter posture. Hair and tail or scarf trail left; face focused. No speed lines, no duplicates. Lowest planted foot at y=88%.\nAsset ID (not rendered): duel_doubao_dash.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-4ce3dc7a-11a2-425b-a067-ed35374f63fa.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_jump",
+      "character": "doubao",
+      "pose": "jump",
+      "label": "起跳腾空",
+      "action": "jump",
+      "path": "combat/doubao/jump.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Ascending toward screen right, leading knee raised, other leg trailing bent, fists ready. Head at y=14%, feet around y=72%, same body scale as ready pose. Hair and scarf or tail follow momentum. No jump circle or dust.\nAsset ID (not rendered): duel_doubao_jump.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-6cee350d-abdb-4b9d-942b-2c01fd2bd94d.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_jab_start",
+      "character": "doubao",
+      "pose": "jab_start",
+      "label": "第一拳·蓄势",
+      "action": "light1-start",
+      "path": "combat/doubao/jab_start.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Grounded short jab ANTICIPATION: chin tucked, leading fist retracted near chest ready to punch right, rear fist guards jaw, torso twists back slightly, bent knees; compact readable anticipation. Both fists visibly closed.\nAsset ID (not rendered): duel_doubao_jab_start.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-20b85a62-34b2-4df5-ae69-39620b27568b.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_jab_hit",
+      "character": "doubao",
+      "pose": "jab_hit",
+      "label": "第一拳·直击",
+      "action": "light1-hit",
+      "path": "combat/doubao/jab_hit.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Grounded short jab CONTACT pose: front arm extends horizontally RIGHT at opponent chest height, fist in side profile, rear hand guards jaw. Forward knee bent, weight shifts onto front foot; fist never points at camera. Smug confident tiny smile.\nAsset ID (not rendered): duel_doubao_jab_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-e4d58cd7-ab6d-4337-b21a-75688e45119a.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_cross_hit",
+      "character": "doubao",
+      "pose": "cross_hit",
+      "label": "第二拳·转身背拳",
+      "action": "light2-hit",
+      "path": "combat/doubao/cross_hit_v2.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: A powerful SPINNING BACKFIST contact pose attacking SCREEN RIGHT. This must be visibly different from a front-facing straight jab. Show the character's BACK and rear shoulder prominently to camera, torso twisted away about 60 degrees, face visible ONLY in right-facing profile over the attacking shoulder. One bent forearm sweeps horizontally across toward the RIGHT, striking with the BACK of a clenched fist; elbow remains bent 90 degrees, do NOT straighten this arm into a jab. The free arm extends behind to LEFT at waist height as counterbalance, do NOT put it beside the cheek. Wide planted lunge, rear heel lifted, hips strongly rotated. Hair and tail/scarf sweep left. For DeepSeek, rear waist bow of maid apron is visible; for Doubao, back of charcoal sweatshirt is visible. Keep identity, scale, and full figure intact.\nAsset ID (not rendered): duel_doubao_cross_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "revisions": [
+        {
+          "path": "combat/drafts/doubao_cross_hit_v1.png",
+          "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Grounded powerful rear-hand CROSS PUNCH toward RIGHT at chest height. Hips rotate and rear heel lifts, shoulder follows fist, non-punching hand protects face. Larger torso rotation than jab. Fist is large but proportional. Determined face.\nAsset ID (not rendered): duel_doubao_cross_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+          "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-72ae58b7-090b-4de6-a77b-a7f4e16c4383.png",
+          "reason": "Too similar to first jab; revise torso rotation and arm silhouette"
+        }
+      ],
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-ad00b604-ec74-40d5-ba5f-3edde01d56f5.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_kick_hit",
+      "character": "doubao",
+      "pose": "kick_hit",
+      "label": "第三脚·横踢",
+      "action": "light3-hit",
+      "path": "combat/doubao/kick_hit.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Grounded horizontal SIDE KICK to screen right: one leg planted, other leg fully extended at opponent torso height, shoe sole facing right in profile; arms counterbalance and torso leans left. Clean visible separation of both legs. Comically fierce expression. Full extended foot must remain inside canvas.\nAsset ID (not rendered): duel_doubao_kick_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-f8a0525d-d7dc-48f9-b69c-a28dbc3051cc.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_upper_hit",
+      "character": "doubao",
+      "pose": "upper_hit",
+      "label": "挑空上勾拳",
+      "action": "upper-hit",
+      "path": "combat/doubao/upper_hit.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Rising UPPERCUT contact pose aimed up-right. Lead boot still planted near baseline, other knee bent; fist above face, elbow and shoulder form readable upward arc, body uncoils from crouch. Open fierce shout. No slash or flame.\nAsset ID (not rendered): duel_doubao_upper_hit.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-0b35ce7f-f94e-482c-909a-957eb4886e81.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_skill_cast",
+      "character": "doubao",
+      "pose": "skill_cast",
+      "label": "专属技能出手",
+      "action": "skill",
+      "path": "combat/doubao/skill_cast.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Doubao bubble-casting release: grounded stance, front open palm forcefully pushes to screen right, rear hand braces front elbow, head tilts forward with a cheeky matter-of-fact grin. Red scarf whips left. She is casting a projectile but the projectile is NOT in this image; clean character only.\nAsset ID (not rendered): duel_doubao_skill_cast.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-2f220ac4-3f62-449a-abca-a8f1e760961f.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_guard",
+      "character": "doubao",
+      "pose": "guard",
+      "label": "抱架格挡",
+      "action": "guard",
+      "path": "combat/doubao/guard.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Grounded defensive guard facing right: both forearms crossed in front of face and chest, elbows bent, knees bent, body braces backward slightly. Eyes peek cautiously over arms; hair/scarf or tail recoil left. No shield, bubble, sparks or opponent.\nAsset ID (not rendered): duel_doubao_guard.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-3579a1ce-0836-48a4-a64a-00a4ed3346dd.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_hurt",
+      "character": "doubao",
+      "pose": "hurt",
+      "label": "重击受创",
+      "action": "hurt",
+      "path": "combat/doubao/hurt.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Standing heavy hit recoil: invisible hit came from right, torso bows backward toward left, chin lifts, arms fly apart, knees buckle, one foot retains contact with baseline. Eyes comically squeezed shut, puffed cheek. No injury, blood, bruise, stars or attacker; fully intact clothes.\nAsset ID (not rendered): duel_doubao_hurt.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-fe78f202-4c65-4257-ae2a-69b701f2fbd3.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_doubao_down",
+      "character": "doubao",
+      "pose": "down",
+      "label": "倒地嘴硬",
+      "action": "down",
+      "path": "combat/doubao/down.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_doubao_base_v3.png",
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a single full-body key pose for an original humorous 2D side-view anime fighting game. Generate ONE character, ONE pose on a genuinely transparent RGBA background, square canvas. Reference image is identity/costume reference only. Crisp hand-drawn cel shading, strong navy outlines, clean readable silhouette at 160 pixels tall. Keep a consistent compact 3-head-tall proportion, no realistic rendering. Camera fixed at waist height, orthographic side view with a very slight three-quarter turn that shows the face, character facing and attacking to SCREEN RIGHT, never looking at the viewer. Full hair, hands, feet and accessories inside canvas; no cropping. Character resting hip centered around x=45% of canvas. Grounded sole baseline y=88%, standing head top around y=18%; maintain that character scale in all poses, leaving room to the right for attacks. Keep at least 8% transparent padding on every side. Flat soft upper-left lighting. No scenery, floor, ground shadow, motion blur, duplicates, afterimage, aura, effect, impact star, text, numbers, label, watermark, border, grid or fake checkerboard. Limbs anatomically clear, exactly two arms and two legs. Fully clothed action comedy. This is a clean character layer; effects will be separate assets.\nIdentity lock: Doubao from reference: dark brown CHIN-LENGTH SIDE-PARTED BOB, exposed forehead, dark eyes, long RED SCARF, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No maid dress, no twin buns, no straight bangs, no orange outfit, no white shirt. Preserve the recognizable bob/scarf silhouette. Confident helpful expression turning comically blunt.\nPose requirement: Knocked down resting on the left hip with feet extending to the right, one forearm props upper body, other clenched fist raised weakly as if still insisting everything is fine. Head on the left, face glances toward opponent on right. Same body scale as standing reference, occupy LOWER half of canvas, body lowest edge y=88%, not magnified to fill canvas. Comically disgruntled, no sign or speech bubble.\nAsset ID (not rendered): duel_doubao_down.\nReference image 2 is the approved side-facing combat stance: match its head/body proportions, exact costume and linework. Change only the pose and expression requested; do not redesign the fighter.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-2fac0294-11e2-4cee-a75b-04df4ad592af.png",
+      "portableReferences": ["references/duel_doubao_base_v3.png", "combat/doubao/ready.png"]
+    },
+    {
+      "id": "duel_fx_whale_arc",
+      "character": "deepseek",
+      "pose": "whale_arc",
+      "label": "鲸尾蓝弧",
+      "action": "effect",
+      "path": "combat/effects/whale_arc.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [],
+      "prompt": "Use case: stylized-concept. ONE isolated 2D fighting-game VFX cutout on a genuinely transparent RGBA background, square canvas. Bright cel shading, crisp graphic shapes and clean navy accent edges matching an anime chibi arcade fighter. Full effect inside canvas with 10% clear padding. A single broad cyan and cobalt crescent attack arc shaped like the sweep of a whale tail, sweeping left-to-right, a compact stylized whale-tail silhouette embedded at the advancing RIGHT tip, sharp white leading edge, three small water droplets trailing left. No character, no literal scene of water. Clean separated skill layer. No text, letters, watermark, checkerboard, colored background, scenery, gradients fading to opaque black, or contact sheet. Asset ID (not rendered): duel_fx_whale_arc.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-218aff8c-bc65-4b7f-bf86-5e24b80a3cf8.png",
+      "portableReferences": []
+    },
+    {
+      "id": "duel_fx_bubble",
+      "character": "doubao",
+      "pose": "bubble",
+      "label": "包的·可反弹气泡",
+      "action": "effect",
+      "path": "combat/effects/bubble.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [],
+      "prompt": "Use case: stylized-concept. ONE isolated 2D fighting-game VFX cutout on a genuinely transparent RGBA background, square canvas. Bright cel shading, crisp graphic shapes and clean navy accent edges matching an anime chibi arcade fighter. Full effect inside canvas with 10% clear padding. ONE glossy coral-pink speech bubble projectile, nearly circular, a small triangular speech-tail pointing left, bright white specular highlights, translucent rosy interior, tiny smug dot eyes and a curved smile. Comically inflated, enough clean outline to read at 48 pixels. No text or character. No text, letters, watermark, checkerboard, colored background, scenery, gradients fading to opaque black, or contact sheet. Asset ID (not rendered): duel_fx_bubble.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-fcad9d8f-ca00-4227-baae-ac574f257251.png",
+      "portableReferences": []
+    },
+    {
+      "id": "duel_fx_bubble_pop",
+      "character": "doubao",
+      "pose": "bubble_pop",
+      "label": "没包住·气泡破裂",
+      "action": "effect",
+      "path": "combat/effects/bubble_pop.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [],
+      "prompt": "Use case: stylized-concept. ONE isolated 2D fighting-game VFX cutout on a genuinely transparent RGBA background, square canvas. Bright cel shading, crisp graphic shapes and clean navy accent edges matching an anime chibi arcade fighter. Full effect inside canvas with 10% clear padding. ONE radial bursting pink speech bubble effect, hollow irregular opening at center, six thick curved translucent pink rubbery fragments flying outward and four small droplets. Large clean shapes. The outline hints at a speech bubble falling apart; no intact bubble, no character. No text, letters, watermark, checkerboard, colored background, scenery, gradients fading to opaque black, or contact sheet. Asset ID (not rendered): duel_fx_bubble_pop.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-d642e197-fa66-4b91-9a1c-2cb5b581cd29.png",
+      "portableReferences": []
+    },
+    {
+      "id": "duel_fx_hit_heavy",
+      "character": "shared",
+      "pose": "hit_heavy",
+      "label": "重拳爆点",
+      "action": "effect",
+      "path": "combat/effects/hit_heavy.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [],
+      "prompt": "Use case: stylized-concept. ONE isolated 2D fighting-game VFX cutout on a genuinely transparent RGBA background, square canvas. Bright cel shading, crisp graphic shapes and clean navy accent edges matching an anime chibi arcade fighter. Full effect inside canvas with 10% clear padding. ONE striking angular heavy-hit impact burst, hot ivory center and golden orange outer spikes, long diagonal primary spike from bottom-left to top-right, short secondary spikes, three chunky orange fragments around it. Punchy cel-shaded arcade fighting impact, asymmetric silhouette, no ring, no words. No text, letters, watermark, checkerboard, colored background, scenery, gradients fading to opaque black, or contact sheet. Asset ID (not rendered): duel_fx_hit_heavy.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-e964cc33-c90b-4ad0-8829-1a272dbf579c.png",
+      "portableReferences": []
+    },
+    {
+      "id": "duel_fx_guard_spark",
+      "character": "shared",
+      "pose": "guard_spark",
+      "label": "格挡火花",
+      "action": "effect",
+      "path": "combat/effects/guard_spark.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [],
+      "prompt": "Use case: stylized-concept. ONE isolated 2D fighting-game VFX cutout on a genuinely transparent RGBA background, square canvas. Bright cel shading, crisp graphic shapes and clean navy accent edges matching an anime chibi arcade fighter. Full effect inside canvas with 10% clear padding. ONE compact ice-blue guard impact: a curved defensive crescent facing screen RIGHT, white contact flash at its middle, six short cyan sparks fanning right and two concentric partial arcs behind. Clean open center and readable at small scale, no actual shield, no character. No text, letters, watermark, checkerboard, colored background, scenery, gradients fading to opaque black, or contact sheet. Asset ID (not rendered): duel_fx_guard_spark.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-83f65636-113a-40bd-9863-80b213e047fa.png",
+      "portableReferences": []
+    },
+    {
+      "id": "duel_fx_landing_dust",
+      "character": "shared",
+      "pose": "landing_dust",
+      "label": "砸地烟尘",
+      "action": "effect",
+      "path": "combat/effects/landing_dust.png",
+      "status": "generated-and-visually-reviewed",
+      "references": [],
+      "prompt": "Use case: stylized-concept. ONE isolated 2D fighting-game VFX cutout on a genuinely transparent RGBA background, square canvas. Bright cel shading, crisp graphic shapes and clean navy accent edges matching an anime chibi arcade fighter. Full effect inside canvas with 10% clear padding. ONE low wide ground-slam dust burst, symmetric outward puffs of pale grey-blue smoke with ivory edges, hollow center reserved for character feet, two tiny dark debris chips. Side-view orthographic, width twice height, effect fully visible centered in square canvas, lower baseline at y=80%, transparent surrounding and gaps. No floor, no terrain or character. No text, letters, watermark, checkerboard, colored background, scenery, gradients fading to opaque black, or contact sheet. Asset ID (not rendered): duel_fx_landing_dust.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-4083d2fc-4ffc-4c40-81e8-5d12a5471434.png",
+      "portableReferences": []
+    }
+  ]
+}

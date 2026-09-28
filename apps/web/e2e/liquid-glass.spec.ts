@@ -1,4 +1,5 @@
 import { expect, test, type Locator } from '@playwright/test';
+import { games } from '../src/games/registry';
 
 async function centerOf(locator: Locator) {
   const bounds = await locator.boundingBox();
@@ -58,7 +59,7 @@ test('renders the glass platform and lets a surface stretch and settle', async (
   await expect(canvas).toHaveAttribute('data-renderer', 'webgl');
   await expect(canvas).toHaveCSS('pointer-events', 'none');
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
@@ -91,15 +92,25 @@ test('renders the glass platform and lets a surface stretch and settle', async (
 
 test('filters remain usable and game glass stays within the toolbar', async ({ page }) => {
   await page.goto('/');
+  await expect(page.getByRole('group', { name: '游戏分类' }).getByRole('button')).toHaveText([
+    '全部',
+    '益智',
+    '动作',
+    '文字',
+    '卡牌',
+    '多人',
+  ]);
   await page.getByRole('button', { name: '文字', exact: true }).click();
   await expect(page.getByRole('button', { name: '文字', exact: true })).toHaveAttribute(
     'aria-pressed',
     'true',
   );
-  await expect(page.locator('.catalog-card')).toHaveCount(0);
+  await expect(page.locator('.catalog-card')).toHaveCount(
+    games.filter((game) => game.tags.includes('文字')).length,
+  );
   await expect(page.getByText('这个分类还在孵化中', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: '查看全部游戏', exact: true }).click();
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   await expect(page.getByRole('button', { name: '全部', exact: true })).toHaveAttribute(
     'aria-pressed',
     'true',
@@ -142,7 +153,9 @@ test('reduced motion keeps the glass readable without elastic displacement', asy
   await expect(surface).toHaveCSS('transform', initialTransform);
   await page.mouse.up();
   await page.getByRole('button', { name: '益智', exact: true }).click();
-  await expect(page.locator('.catalog-card')).toHaveCount(2);
+  await expect(page.locator('.catalog-card')).toHaveCount(
+    games.filter((game) => game.tags.includes('益智')).length,
+  );
 });
 
 test('dock shell and selected tab refract the page before and after navigation', async ({
@@ -233,9 +246,11 @@ test('a browser without WebGL retains a readable and functional platform', async
   );
   await expect(page.locator('.game-search')).toHaveCSS('backdrop-filter', /blur\(8px\)/);
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   await page.getByRole('button', { name: '动作', exact: true }).click();
-  await expect(page.locator('.catalog-card')).toHaveCount(2);
+  await expect(page.locator('.catalog-card')).toHaveCount(
+    games.filter((game) => game.tags.includes('动作')).length,
+  );
   await expect(page.getByRole('button', { name: /大肥鱼跑酷/ })).toBeVisible();
 });
 
@@ -251,7 +266,7 @@ test('search can be cleared and empty results reset both search and category', a
   await expect(page.getByRole('button', { name: /大肥鱼 · 搬家日记/ })).toBeVisible();
   await page.getByRole('button', { name: '清除搜索', exact: true }).click();
   await expect(search).toHaveValue('');
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
 
   await page.getByRole('button', { name: '动作', exact: true }).click();
   await search.fill('搬家');
@@ -262,7 +277,7 @@ test('search can be cleared and empty results reset both search and category', a
     'aria-pressed',
     'true',
   );
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
 });
 
 test('wallpaper loading failure leaves the CSS glass platform usable', async ({ page }) => {
@@ -279,9 +294,11 @@ test('wallpaper loading failure leaves the CSS glass platform usable', async ({ 
   );
   await expect(page.locator('.game-search')).toHaveCSS('backdrop-filter', /blur\(8px\)/);
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   await page.getByRole('button', { name: '益智', exact: true }).click();
-  await expect(page.locator('.catalog-card')).toHaveCount(2);
+  await expect(page.locator('.catalog-card')).toHaveCount(
+    games.filter((game) => game.tags.includes('益智')).length,
+  );
   await page.getByRole('searchbox', { name: '搜索小游戏' }).fill('搬家');
   await expect(page.getByRole('button', { name: /大肥鱼 · 搬家日记/ })).toBeVisible();
 });

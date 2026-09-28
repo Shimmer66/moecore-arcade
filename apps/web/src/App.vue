@@ -48,6 +48,11 @@ function selectGame(id: string) {
 function leaveGame() {
   window.location.hash = 'games';
 }
+function skipToMain() {
+  const main = document.getElementById('main-content');
+  main?.focus({ preventScroll: true });
+  main?.scrollIntoView({ block: 'start' });
+}
 readRoute();
 
 onMounted(() => {
@@ -62,7 +67,7 @@ onUnmounted(() => window.removeEventListener('hashchange', onRouteChange));
 <template>
   <div id="home" class="platform-shell" :class="selectedGame ? 'platform-game' : 'platform-home'">
     <LiquidGlass v-if="!selectedGame" />
-    <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <a class="skip-link" href="#main-content" @click.prevent="skipToMain">跳到主要内容</a>
     <header v-if="!selectedGame" class="site-header">
       <div class="wordmark">
         <img :src="ASSETS.arcadeMark.url" alt="" width="40" height="40" />
@@ -77,7 +82,7 @@ onUnmounted(() => window.removeEventListener('hashchange', onRouteChange));
       >
     </header>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <GameHost v-if="selectedGame" :key="selectedGame" :game-id="selectedGame" @exit="leaveGame" />
       <HomeView v-else @select="selectGame" />
     </main>

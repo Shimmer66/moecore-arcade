@@ -12,10 +12,14 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@moecore/game-duel": "file:../../games/duel",
+    "@moecore/game-steady": "file:../../games/steady",
+    "@moecore/game-arena": "file:../../games/arena",
     "@moecore/assets": "file:../../packages/assets",
     "@moecore/game-sdk": "file:../../packages/game-sdk",
     "@moecore/game-match3": "file:../../games/match3",
     "@moecore/game-parkour": "file:../../games/parkour",
+    "@moecore/game-rewrite": "file:../../games/rewrite",
     "@moecore/game-sokoban": "file:../../games/sokoban",
     "@moecore/game-whale-queue": "file:../../games/whale-queue",
     "@lucide/vue": "1.47.0",

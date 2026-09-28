@@ -5,20 +5,22 @@ import {
   Check,
   Code,
   FileText,
-  Printer as PrinterIcon,
+  MessageCircle,
   Send,
   ShieldCheck,
   Undo2,
 } from '@lucide/vue';
-import { ASSETS } from '@moecore/assets';
+import { ASSETS, PARKOUR_BACKGROUNDS } from '@moecore/assets';
 import {
-  ANSWER_DISTANCE,
+  BURST_TICKS,
   CONTEXT_CAPACITY,
-  SHIFT_DISTANCE,
   TAIL_REACH,
+  TAIL_TICKS,
+  levelFor,
   type Adventure,
 } from '../rules';
 import { poseId, type Pose } from '../config/art';
+import { reactionActionSprites } from '../config/reactions';
 
 const props = defineProps<{
   state: Adventure;
@@ -27,6 +29,7 @@ const props = defineProps<{
   paused: boolean;
   reduceMotion: boolean;
 }>();
+const level = computed(() => levelFor(props.state.levelId));
 const emit = defineEmits<{ jump: []; slide: []; tail: [] }>();
 const root = ref<HTMLElement>();
 const width = ref(960);
@@ -47,7 +50,6 @@ const hallucinations = computed(() => props.state.hallucinations.filter((item) =
 const debris = computed(() =>
   props.state.feedback.filter((item) => item.kind === 'break' && inView(item.x)),
 );
-const floorCount = computed(() => Math.ceil(width.value / 192) + 2);
 const pose = computed<Pose>(() => {
   if (props.phase === 'ended') return props.state.health === 0 ? 'fail' : 'win';
   if (props.phase !== 'running') return 'idle';
@@ -56,8 +58,25 @@ const pose = computed<Pose>(() => {
   if (!props.state.run.player.grounded) return 'jump';
   return props.state.run.player.crouching ? 'slide' : 'run';
 });
+const reaction = computed<keyof typeof reactionActionSprites | undefined>(() => {
+  if (props.phase !== 'running' || props.state.hurtUntil > props.state.realTick) return undefined;
+  if (props.state.run.player.crouching) return undefined;
+  if (props.state.dashTicks > BURST_TICKS - 45) return 'burst';
+  if (props.state.quip === 'hallucination' && props.state.quipUntil - props.state.realTick > 90)
+    return 'overload';
+  if (
+    props.state.feedback.some(
+      (effect) =>
+        (effect.kind === 'rice' || effect.kind === 'feast') &&
+        effect.until - props.state.realTick > 35,
+    )
+  )
+    return 'rice';
+  return undefined;
+});
 const sprite = computed(
   () =>
+    (reaction.value && reactionActionSprites[reaction.value]) ||
     props.art[
       poseId(pose.value, props.state.run.tick, props.state.run.player.velocityY, props.reduceMotion)
     ],
@@ -113,6 +132,7 @@ onUnmounted(() => {
       rushing: state.dashTicks > 0,
       'motion-paused': paused || reduceMotion,
       'ready-scene': phase === 'ready',
+      [`level-${state.levelId + 1}`]: true,
     }"
     :data-phase="phase"
     :data-tick="state.run.tick"
@@ -132,50 +152,30 @@ onUnmounted(() => {
     :data-context="state.context"
     :data-verified="state.verified"
     role="application"
-    aria-label="回答生成中心跑道"
+    aria-label="数据海送答跑道"
     tabindex="0"
     @pointerdown="down"
     @pointerup="up"
     @pointercancel="gesture = undefined"
     @lostpointercapture="gesture = undefined"
   >
-    <img v-if="art.bg_far" class="office-background" :src="art.bg_far" alt="" />
-    <div v-else class="office-windows" aria-hidden="true">
-      <span v-for="i in 7" :key="i"></span>
-    </div>
+    <img
+      class="office-background"
+      :src="PARKOUR_BACKGROUNDS[state.levelId === 3 ? 0 : state.levelId]"
+      alt=""
+    />
     <div class="office-midground" aria-hidden="true">
-      <img
-        v-if="art.bg_mid"
-        :src="art.bg_mid"
-        alt=""
-        :style="{
-          transform: `translateX(${-(reduceMotion ? 0 : (state.run.distance * 3) % 100)}px)`,
-        }"
-      />
-      <template v-for="(id, index) in ['decor_plant', 'decor_desk', 'decor_water']" :key="id">
-        <img
-          v-if="art[id]"
-          class="office-decoration"
-          :src="art[id]"
-          alt=""
-          :style="{
-            left: `${((((index * 46 + 20 - (reduceMotion ? 0 : state.run.distance * 0.6)) % 150) + 150) % 150) - 20}%`,
-          }"
-        />
-      </template>
-      <div v-if="state.run.distance < 78" class="canteen-window">
-        <img :src="ASSETS.canteen.url" alt="" /><span>算力补给 · 管饭</span>
+      <div v-if="state.run.distance < 78" class="rice-island">
+        <img :src="ASSETS.riceBowl.url" alt="" /><span>白饭补给 · 路过别忘了</span>
       </div>
     </div>
-    <div class="office-floor" aria-hidden="true">
-      <img
-        v-for="i in art.tile_ground_mid ? floorCount : 0"
-        :key="i"
-        :src="art.tile_ground_mid"
-        alt=""
-        :style="{ left: `${(i - 2) * 192 - ((state.run.distance * meter) % 192)}px` }"
-      />
-    </div>
+    <div
+      class="office-floor"
+      :style="{
+        backgroundPositionX: `${reduceMotion ? 0 : -(state.run.distance * meter) % 120}px`,
+      }"
+      aria-hidden="true"
+    ></div>
     <template v-if="phase !== 'ready'">
       <div
         v-for="obstacle in obstacles"
@@ -192,18 +192,12 @@ onUnmounted(() => {
             v-if="captionVisible(obstacle.x)"
             class="beam-label"
             :style="captionStyle(obstacle.x + 0.4)"
-            >最后再改亿点</span
+            >推理断流</span
           >
-          <img v-if="art.obstacle_beam" :src="art.obstacle_beam" alt="" />
-          <span v-else class="drawn-beam"></span><ArrowDown :size="15" class="beam-arrow" />
+          <span class="drawn-beam"></span><ArrowDown :size="15" class="beam-arrow" />
         </template>
         <template v-else>
-          <img
-            v-if="art.obstacle_docs_small"
-            :src="art[obstacle.id % 2 ? 'obstacle_docs_large' : 'obstacle_docs_small']"
-            alt=""
-          />
-          <FileText v-else :size="29" />
+          <FileText :size="29" />
         </template>
       </div>
       <div
@@ -241,30 +235,16 @@ onUnmounted(() => {
           v-if="printer.receiptUntil > state.realTick && captionVisible(printer.x)"
           class="printer-receipt"
           :style="captionStyle(printer.x)"
-          >退订成功<br />停止叭叭</span
+          >回音已停<br />继续送答</span
         >
         <span
           v-else-if="!printer.fired && printer.fireTick !== null && captionVisible(printer.x)"
           class="printer-warning"
           :style="captionStyle(printer.x)"
-          >还有亿点补充！</span
+          >还有一点补充！</span
         >
-        <img
-          v-if="art.printer_idle"
-          :src="
-            art[
-              printer.jammed
-                ? 'printer_idle'
-                : printer.fired
-                  ? 'printer_fire'
-                  : printer.fireTick === null
-                    ? 'printer_idle'
-                    : 'printer_warning'
-            ]
-          "
-          alt=""
-        />
-        <PrinterIcon v-else :size="44" />
+        <MessageCircle :size="36" />
+        <b>...</b>
       </div>
       <div
         v-for="paper in papers"
@@ -277,8 +257,7 @@ onUnmounted(() => {
         :style="{ left: `${worldLeft(paper.x)}px`, bottom: `${52 + paper.y * 48}px` }"
         aria-hidden="true"
       >
-        <img v-if="art.projectile_paper" :src="art.projectile_paper" alt="" />
-        <span v-else class="drawn-paper"></span>
+        <span class="drawn-paper"></span>
         <Undo2 v-if="paper.returned" class="paper-return-icon" :size="14" />
       </div>
       <div
@@ -324,35 +303,29 @@ onUnmounted(() => {
         }"
         aria-hidden="true"
       >
-        <img v-if="art.obstacle_docs_broken" :src="art.obstacle_docs_broken" alt="" />
-        <FileText v-else :size="28" />
+        <FileText :size="28" />
       </div>
     </template>
     <div
-      v-if="!state.hasAnswer && inView(ANSWER_DISTANCE)"
+      v-if="state.levelId !== 3 && !state.hasAnswer && inView(level.answerDistance)"
       class="answer-package"
-      :style="{ left: `${worldLeft(ANSWER_DISTANCE)}px` }"
+      :style="{ left: `${worldLeft(level.answerDistance)}px` }"
       aria-label="真正可运行的小游戏"
     >
       <img v-if="art.pickup_bubble" :src="art.pickup_bubble" alt="" /><Code :size="24" />
-      <span v-if="captionVisible(ANSWER_DISTANCE)" :style="captionStyle(ANSWER_DISTANCE)"
-        >这次真能运行</span
+      <span v-if="captionVisible(level.answerDistance)" :style="captionStyle(level.answerDistance)"
+        >答案在这儿</span
       >
     </div>
     <div
-      v-if="inView(SHIFT_DISTANCE - 1)"
+      v-if="state.levelId !== 3 && inView(level.finishDistance - 1)"
       class="office-exit"
-      :style="{ left: `${worldLeft(SHIFT_DISTANCE - 1)}px` }"
+      :style="{ left: `${worldLeft(level.finishDistance - 1)}px` }"
     >
-      <img
-        v-if="art.exit_closed"
-        :src="art[state.hasAnswer ? 'exit_open' : 'exit_closed']"
-        alt="发送出口"
-      />
-      <Send v-else :size="46" /><span
-        v-if="captionVisible(SHIFT_DISTANCE - 1)"
-        :style="captionStyle(SHIFT_DISTANCE - 1)"
-        >发送，开饭！</span
+      <Send :size="46" /><span
+        v-if="captionVisible(level.finishDistance - 1)"
+        :style="captionStyle(level.finishDistance - 1)"
+        >答案送达，开饭！</span
       >
     </div>
     <div
@@ -363,7 +336,7 @@ onUnmounted(() => {
         left: `${anchor + meter * 0.35}px`,
         width: `${meter * TAIL_REACH}px`,
         bottom: `${52 + (state.run.player.y + 0.5) * 48}px`,
-        transform: `rotate(${reduceMotion ? 0 : (state.tailTicks / 18 - 0.5) * 35}deg)`,
+        transform: `rotate(${reduceMotion ? 0 : (state.tailTicks / TAIL_TICKS - 0.5) * 35}deg)`,
       }"
     >
       <Undo2 :size="22" />
@@ -374,9 +347,13 @@ onUnmounted(() => {
       :data-y="state.run.player.y.toFixed(3)"
       :data-vy="state.run.player.velocityY"
       :data-air-jumps="state.airJumps"
+      :data-reaction="reaction ?? ''"
       :class="{
         protected: state.invulnerableTicks > 0 && phase === 'running',
         slapping: state.tailTicks > 0,
+        'reacting-rice': reaction === 'rice',
+        'reacting-overload': reaction === 'overload',
+        'reacting-burst': reaction === 'burst',
       }"
       :style="{ left: `${anchor - 42}px`, transform: `translateY(${-state.run.player.y * 48}px)` }"
       data-testid="runner-player"
@@ -409,7 +386,7 @@ onUnmounted(() => {
   height: 340px;
   overflow: hidden;
   isolation: isolate;
-  background: #eef3f3;
+  background: #244b98;
   touch-action: none;
   user-select: none;
 }
@@ -419,96 +396,71 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center bottom;
+  object-position: center 43%;
 }
 .ready-scene .office-background {
-  opacity: 0.55;
+  opacity: 0.85;
 }
-.office-windows {
-  display: flex;
-  gap: 24px;
-  position: absolute;
-  top: 40px;
-  left: 3%;
-  right: 3%;
-  height: 156px;
-  border-block: 10px solid #c4cedb;
+.level-2 .office-floor {
+  filter: hue-rotate(55deg);
 }
-.office-windows span {
-  flex: 1;
-  border-inline: 5px solid #ced6df;
-  background: #deebef;
+.level-3 .office-floor {
+  filter: hue-rotate(-42deg);
+}
+.level-4 .office-background {
+  filter: brightness(0.84) saturate(0.85);
+}
+.level-4 .office-floor {
+  filter: hue-rotate(145deg);
 }
 .office-midground {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
-.office-midground > img:not(.office-decoration) {
+.rice-island {
   position: absolute;
-  width: calc(100% + 110px);
-  height: 180px;
-  bottom: 67px;
+  right: 11%;
+  bottom: 69px;
+  display: grid;
+  place-items: center;
+  width: 138px;
+  height: 74px;
+  border-radius: 50% 50% 12px 12px;
+  background: #fffbefdb;
+  border: 3px solid #bee7f5;
+  box-shadow:
+    0 9px 0 #3473a3,
+    0 12px 28px #0e3a7880;
+}
+.rice-island img {
+  width: 58px;
+  height: 46px;
   object-fit: contain;
-  object-position: bottom;
-  opacity: 0.55;
 }
-.office-decoration {
+.rice-island > span {
   position: absolute;
-  width: 75px;
-  height: 86px;
-  bottom: 60px;
-  object-fit: contain;
-  object-position: bottom;
-  opacity: 0.55;
-}
-.canteen-window {
-  position: absolute;
-  left: 55%;
-  bottom: 90px;
-  width: 190px;
-  height: 144px;
-}
-.canteen-window img {
-  width: 100%;
-  height: 100%;
-}
-.canteen-window > span {
-  position: absolute;
-  top: 45px;
-  left: 15%;
-  right: 15%;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
   font-size: 10px;
-  color: #305d4e;
-  background: #f1faf4;
-  padding: 4px;
+  color: #184d83;
+  background: #fffdf4e8;
+  padding: 4px 8px;
+  border-radius: 20px;
   text-align: center;
-}
-.ready-scene .canteen-window {
-  left: auto;
-  right: 5%;
-  bottom: 53px;
-  width: 150px;
-  height: 114px;
-}
-.ready-scene .canteen-window > span {
-  top: 32px;
-  font-size: 9px;
 }
 .office-floor {
   position: absolute;
   height: 52px;
   inset: auto 0 0;
-  background: #91a5a4;
-  border-top: 7px solid #d2dedd;
-}
-.office-floor img {
-  position: absolute;
-  width: 194px;
-  height: 45px;
-  top: -3px;
-  object-fit: fill;
-  opacity: 0.85;
+  background: repeating-linear-gradient(110deg, #9ed2ee 0 30px, #75b6e1 30px 60px);
+  background-size: 120px 52px;
+  border-top: 7px solid #d6f5ff;
+  box-shadow:
+    inset 0 8px 0 #478fcc,
+    0 -6px 20px #b9eaff8c;
 }
 .office-obstacle {
   position: absolute;
@@ -517,26 +469,25 @@ onUnmounted(() => {
 }
 .office-obstacle.ground {
   height: 29px;
-  color: #526880;
-  background: #d9e1eab0;
-  border-bottom: 2px solid #596f83;
+  color: #2d356c;
+  background: #fff0db;
+  border: 3px solid #534579;
+  border-radius: 8px 8px 3px 3px;
+  box-shadow:
+    0 4px 0 #28305d,
+    0 0 8px #f8e6ff;
 }
-.office-obstacle.ground img {
+.office-obstacle.ground > svg {
   position: absolute;
-  width: 52px;
-  height: 38px;
   left: 50%;
-  bottom: 0;
+  bottom: 1px;
   transform: translateX(-50%);
-  object-fit: contain;
-  object-position: bottom;
 }
 .office-obstacle.air {
   height: 154px;
   bottom: 100px;
-  border-left: 1px dashed #8197aa;
+  border-left: 2px dashed #d9f5ff;
 }
-.office-obstacle.air img,
 .drawn-beam {
   position: absolute;
   bottom: 0;
@@ -544,11 +495,12 @@ onUnmounted(() => {
   height: 20px;
   left: 50%;
   transform: translateX(-50%);
-  object-fit: fill;
 }
 .drawn-beam {
-  background: #c9b6b9;
-  border: 3px solid #946a78;
+  background: linear-gradient(90deg, #8b61b9, #d3a6e9, #8b61b9);
+  border: 3px solid #573e91;
+  border-radius: 12px;
+  box-shadow: 0 0 12px #eeceff;
 }
 .beam-label {
   position: absolute;
@@ -573,9 +525,9 @@ onUnmounted(() => {
   bottom: 55px;
   height: 34px;
   z-index: 4;
-  color: #6a8052;
-  background: #deebc5;
-  border: 2px solid #8a9d68;
+  color: #793657;
+  background: #ffcfb7;
+  border: 3px solid #a54869;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -585,11 +537,11 @@ onUnmounted(() => {
   bottom: 42px;
   left: 50%;
   transform: translateX(-50%);
-  background: #f4fae7;
+  background: #fff2e9;
   padding: 3px 5px;
   font-size: 10px;
   white-space: nowrap;
-  color: #5c753e;
+  color: #793657;
 }
 .office-queue i {
   position: absolute;
@@ -598,7 +550,7 @@ onUnmounted(() => {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #566a56;
+  background: #633848;
 }
 .office-queue i:last-child {
   left: auto;
@@ -611,16 +563,25 @@ onUnmounted(() => {
   height: 62px;
   z-index: 3;
   transform: translateX(-50%);
-  color: #566f89;
+  color: #fff8ff;
+  display: grid;
+  place-items: center;
+  border: 3px solid #d8a5eb;
+  border-radius: 50% 50% 40% 40%;
+  background: linear-gradient(#a267cc, #654ca7);
+  box-shadow:
+    0 5px 0 #463e84,
+    0 0 16px #e8b4ff99;
 }
-.office-printer img {
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
+.office-printer > b {
+  position: absolute;
+  bottom: 9px;
+  letter-spacing: 2px;
+  font-size: 13px;
 }
-.office-printer.jammed > img {
-  transform: rotate(9deg) scaleY(0.9);
-  filter: saturate(0.35);
+.office-printer.jammed {
+  transform: translateX(-50%) rotate(9deg) scaleY(0.9);
+  filter: saturate(0.45);
 }
 .printer-warning,
 .printer-receipt {
@@ -762,6 +723,38 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+.reacting-rice .maid-sprite {
+  animation: rice-munch 0.24s ease-in-out infinite alternate;
+}
+.reacting-overload .maid-sprite {
+  animation: overload-wobble 0.16s ease-in-out infinite alternate;
+}
+.reacting-burst .maid-sprite {
+  animation: whale-dash 0.18s ease-in-out infinite alternate;
+}
+.motion-paused .maid-sprite {
+  animation: none;
+}
+@keyframes rice-munch {
+  to {
+    transform: translateY(2px) rotate(-3deg);
+  }
+}
+@keyframes overload-wobble {
+  to {
+    transform: translateX(3px) rotate(5deg);
+  }
+}
+@keyframes whale-dash {
+  to {
+    transform: translateX(5px) skewX(-5deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .maid-sprite {
+    animation: none !important;
+  }
 }
 .office-player.protected {
   opacity: 0.6;
@@ -920,11 +913,13 @@ onUnmounted(() => {
   display: grid;
   place-items: center;
   transform: translateX(-50%);
-}
-.office-exit img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  color: #fff8d6;
+  background: linear-gradient(#abc8fb, #426bb9);
+  border: 3px solid #def4ff;
+  border-radius: 45% 45% 8px 8px;
+  box-shadow:
+    0 0 25px #fff3a4,
+    inset 0 0 14px #e7f3ff;
 }
 .office-exit span {
   position: absolute;
@@ -941,43 +936,22 @@ onUnmounted(() => {
   .office-world {
     height: 286px;
   }
-  .office-midground > img:not(.office-decoration) {
-    min-width: 640px;
-    left: -90px;
-  }
-  .office-decoration {
-    width: 58px;
-    height: 65px;
-  }
   .office-player {
     width: 88px;
     height: 105px;
   }
-  .canteen-window {
-    width: 140px;
-    height: 105px;
-    left: 48%;
-    bottom: 104px;
+  .rice-island {
+    width: 96px;
+    height: 58px;
+    right: 4%;
+    bottom: 65px;
   }
-  .canteen-window > span {
-    top: 33px;
-    font-size: 9px;
-    padding: 2px;
+  .rice-island img {
+    width: 48px;
   }
-  .ready-scene .canteen-window {
-    width: 120px;
-    height: 90px;
-    right: 3%;
-  }
-  .ready-scene .canteen-window > span {
-    top: 28px;
+  .rice-island > span {
     font-size: 8px;
-    padding: 1px;
   }
-  .office-obstacle.ground img {
-    width: 38px;
-  }
-  .office-obstacle.air img,
   .drawn-beam {
     width: 40px;
   }

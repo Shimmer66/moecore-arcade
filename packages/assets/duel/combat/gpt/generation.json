@@ -1,0 +1,13 @@
+{
+  "generator": "built-in image_gen",
+  "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-9709a503-e91c-40e8-885c-a73a7597224c.png",
+  "prompt": "Create ONE production sprite atlas PNG for a 2D anime fighting game on a genuinely TRANSPARENT background. Reference: exact GPT white dragon girl identity ONLY. White long hair, ivory curved dragon horns, mint-green eyes, small white wings and tail, white-and-mint ruffled dress, green bows, white boots; no stack of papers in any pose. Match clean cel shading and dark outlines. COMPOSITION: exactly FOUR equal columns and THREE equal rows, 12 separate full-body sprites, one centered inside each invisible equal-size cell. Wide 4:3 canvas, ideally 1536x1152. Every sprite faces SCREEN RIGHT in side-on three-quarter fighting view, compact 3-head proportions, SAME SIZE from pose to pose, feet baseline at 90% of EACH cell; 12% padding, no overlap across cells. Absolutely no grid lines, frames, text, labels, numbers or background. Every sprite complete, no cropped horns/feet. Row1 left-to-right: (1) ready boxing guard, (2) leaning forward sprint with hair trailing, (3) airborne knee-raised jump, (4) fist pulled back at chest preparing jab. Row2 left-to-right: (5) fully extended horizontal jab to right, (6) spinning backfist with BACK turned to camera, (7) horizontal high side kick right, (8) rising uppercut fist above head. Row3 left-to-right: (9) both open palms forcefully pushing right to cast skill, (10) crossed forearms blocking in front of face, (11) torso bent backward recoiling from hit from right eyes squeezed shut, (12) lying sideways head left feet right with one fist weakly raised, body low in cell and SAME scale. Bold readable action silhouettes, no aura, no motion effects, no extra characters. This is a SINGLE 12-cell sprite atlas, not twelve independent illustrations arranged loosely. Enforce uniform grid spacing.",
+  "references": ["../../first-batch/duel_gpt_base.png"],
+  "layout": "4 columns x 3 rows; runtime uses individually inspected viewports, no PNG cutting or resampling.",
+  "width": 1448,
+  "height": 1086,
+  "mode": "RGBA",
+  "alphaRange": [0, 255],
+  "sha256": "42844005ab3deb92cd85295e324d79d941476d0f8f8efa171bf032839ce0c7c5",
+  "status": "generated-visually-reviewed-and-integrated"
+}

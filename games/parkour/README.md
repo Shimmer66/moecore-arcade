@@ -2,17 +2,23 @@
 
 This package exports a Vue game through `GameDefinition`. The fixed-step rules were imported
 from `feat/parkour` at commit `5d6268f`, without merging other branch changes.
-`rules/adventure.ts` implements a short Answer Generation Center shift: double jump, fast fall,
+`rules/adventure.ts` implements a short answer-delivery run across a data sea: double jump, fast fall,
 rice detours, timed tail returns, automatic parry slow motion, charged whale bursts, moving request
 queues, a context shield and verifiable hallucinations. The three actions are jump, slide and tail.
-The authored 480m course lives in `config/shift.ts`; deterministic pilots target 45–60 seconds.
+Three authored courses of 600m, 650m and 740m plus an endless scoring mode live in `config/shift.ts`; each has its own speed curve. Endless mode reuses the base generator beyond 1200m and spawns rice/Token pickups as new obstacles enter view.
+Starting a run scrolls the three controls into view; short in-track cues introduce jump, slide, tail return and fake-rice verification. Two consecutive rice bowls grant a bonus without adding an input.
+Space can start a new run; the floor scrolls with distance and a broader tail-return window gives new players time to react.
+During play, short meme lines and action feedback appear in a speech bubble beside the runner, keeping attention on the character and obstacles.
+`AnswerSeaStage.vue` layers a generated data-sea backdrop behind CSS/SVG obstacles and the existing character sprites.
+Three project-generated reaction portraits give rice collection, fake-rice mistakes and whale bursts distinct goofy faces; see `assets/reactions/README.md`.
+Three short-lived full-body action poses make those reactions visible on the runner; see `assets/actions/README.md`.
 There are no mid-run reading stops. Retries skip the initial one-line exchange.
 The original base rules remain separately testable. The previous ocean story and character roster
 are replaced, not offered as a parallel game mode.
 
 The Web entry is `/#/games/parkour`, titled 大肥鱼跑酷：答案马上就到.
 Keyboard, touch buttons and pointer gestures are supported.
-Game art is previewed only during development; production uses original geometric placeholders.
+The production build uses selected generated character sprites and one distinct data-sea backdrop per level.
 No Phaser dependency or manual game-mount compatibility layer is introduced.
 See `docs/games/parkour.md` at the repository root for gameplay and current limits.
 
@@ -35,8 +41,8 @@ including zero and non-finite values, throw. The host must convert elapsed time 
 Pausing means not calling `step`; wall-clock time never enters the rules.
 
 This API describes the base simulation, whose default finish remains 1200m. The Vue game uses
-`beginAdventure` and `advanceAdventure`, sets `finishDistance` to 480m and supplies an authored
-course. Energy, slow motion, printers and answer pickup do not apply to base `step`.
+`beginAdventure` and `advanceAdventure`, selects one of three authored finish distances and courses.
+Energy, slow motion, printers and answer pickup do not apply to base `step`.
 Real ticks and world ticks separate ability time from slowed motion. No second physics engine
 or old UI compatibility mode is introduced.
 

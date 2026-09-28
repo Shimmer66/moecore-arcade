@@ -1,4 +1,4 @@
-const loaders = import.meta.glob<string>('../whale-queue/**/*.png', {
+const loaders = import.meta.glob<string>('../whale-queue/**/*.webp', {
   eager: true,
   import: 'default',
   query: '?url',
@@ -37,7 +37,7 @@ export const WHALE_QUEUE_ASSET_FILES = {
 export type WhaleQueueAssetId = keyof typeof WHALE_QUEUE_ASSET_FILES;
 
 function urlFor(file: string): string {
-  const url = loaders[`../whale-queue/${file}`];
+  const url = loaders[`../whale-queue/${file.replace(/\.png$/, '.webp')}`];
   if (!url) throw new Error(`Missing whale queue asset: ${file}`);
   return url;
 }

@@ -30,10 +30,11 @@ export function obstacleBox(obstacle: Obstacle): Box {
 export function generateObstacles(
   state: GeneratorState,
   throughDistance: number,
+  unbounded = false,
 ): { readonly generator: GeneratorState; readonly obstacles: readonly Obstacle[] } {
   assertDistance(throughDistance);
   assertDistance(state.nextDistance);
-  if (throughDistance > FINISH_DISTANCE + LOOKAHEAD_DISTANCE) {
+  if (!unbounded && throughDistance > FINISH_DISTANCE + LOOKAHEAD_DISTANCE) {
     throw new RangeError('Obstacle horizon exceeds the finite prototype course.');
   }
   let generator = state;
