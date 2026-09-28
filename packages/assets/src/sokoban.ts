@@ -5,12 +5,25 @@ const loaders = import.meta.glob<string>('../sokoban/runtime/*.png', {
   import: 'default',
   query: '?url',
 });
+const displayLoaders = import.meta.glob<string>('../sokoban/runtime-display/*.webp', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+});
 
 export const SOKOBAN_MANIFEST = manifest;
 export type SokobanAsset = (typeof manifest.assets)[number] & { readonly url: string };
 export type SokobanAssetId = (typeof manifest.assets)[number]['id'];
 
 function resolveAssetUrl(file: string): string {
+  const display =
+    displayLoaders[
+      `../sokoban/runtime-display/${file
+        .split('/')
+        .at(-1)
+        ?.replace(/\.png$/, '.webp')}`
+    ];
+  if (display) return display;
   const url = loaders[`../sokoban/${file}`];
   if (!url) throw new Error(`Missing sokoban asset: ${file}`);
   return url;

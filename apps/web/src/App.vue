@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref } from 'vue';
+import { defineAsyncComponent, h, nextTick, onMounted, onUnmounted, ref } from 'vue';
 import { ASSETS } from '@moecore/assets';
-import HomeView from './features/HomeView.vue';
 import GameHost from './games/GameHost.vue';
 import LiquidGlass from './features/liquid-glass/LiquidGlass.vue';
 import LiquidDock from './features/liquid-glass/LiquidDock.vue';
+
+const ViewLoading = {
+  render: () => h('div', { class: 'view-loading', role: 'status' }, '正在加载…'),
+};
+const HomeView = defineAsyncComponent({
+  loader: () => import('./features/HomeView.vue'),
+  loadingComponent: ViewLoading,
+  delay: 120,
+});
 
 const selectedGame = ref('');
 const activeSection = ref<'home' | 'games' | 'about'>('home');
@@ -48,6 +56,11 @@ function selectGame(id: string) {
 function leaveGame() {
   window.location.hash = 'games';
 }
+function skipToMain() {
+  const main = document.getElementById('main-content');
+  main?.focus({ preventScroll: true });
+  main?.scrollIntoView({ block: 'start' });
+}
 readRoute();
 
 onMounted(() => {
@@ -62,26 +75,31 @@ onUnmounted(() => window.removeEventListener('hashchange', onRouteChange));
 <template>
   <div id="home" class="platform-shell" :class="selectedGame ? 'platform-game' : 'platform-home'">
     <LiquidGlass v-if="!selectedGame" />
-    <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <a class="skip-link" href="#main-content" @click.prevent="skipToMain">跳到主要内容</a>
     <header v-if="!selectedGame" class="site-header">
-      <div class="wordmark">
+      <a
+        class="wordmark"
+        href="#home"
+        aria-label="摸鱼局首页"
+        @click.prevent="navigateSection('home')"
+      >
         <img :src="ASSETS.arcadeMark.url" alt="" width="40" height="40" />
         <div>
-          <span class="brand-name">萌芯游乐园</span>
-          <span class="brand-subtitle" lang="en">MoeCore Arcade</span>
+          <span class="brand-name">摸鱼局</span>
+          <span class="brand-subtitle">玩点有趣的</span>
         </div>
-      </div>
+      </a>
       <LiquidDock :active-section="activeSection" @select="navigateSection" />
       <span class="development-label"
-        ><span aria-hidden="true" class="status-dot"></span>原型试玩</span
+        ><span aria-hidden="true" class="status-dot"></span>免费试玩</span
       >
     </header>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <GameHost v-if="selectedGame" :key="selectedGame" :game-id="selectedGame" @exit="leaveGame" />
       <HomeView v-else @select="selectGame" />
     </main>
 
-    <footer class="site-footer">MoeCore Arcade · 非官方同人项目</footer>
+    <footer class="site-footer">摸鱼局 · AI 角色小游戏合集 <span>非官方同人项目</span></footer>
   </div>
 </template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { createGlassRenderer, type GlassSurface } from './renderer';
-import landscapeBackdropUrl from '../../assets/images/bg_menu_landscape.png';
-import portraitBackdropUrl from '../../assets/images/bg_menu_portrait.png';
+import landscapeBackdropUrl from '../../assets/images/bg_menu_landscape.webp';
+import portraitBackdropUrl from '../../assets/images/bg_menu_portrait.webp';
 
 const canvas = ref<HTMLCanvasElement>();
 const rendererMode = ref<'webgl' | 'fallback'>('fallback');
