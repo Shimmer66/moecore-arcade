@@ -17,12 +17,12 @@
 16,角色头像,claude_avatar,Claude · 头像,assets/avatars/claude_avatar.png,384,384,sources/latest/02_avatars.png
 17,角色头像,gemini_avatar,Gemini · 头像,assets/avatars/gemini_avatar.png,384,384,sources/latest/02_avatars.png
 18,角色头像,kimi_avatar,Kimi · 头像,assets/avatars/kimi_avatar.png,384,384,sources/latest/02_avatars.png
-19,普通棋子,deepseek_tile_portrait,DeepSeek · 头像棋子,assets/tiles/deepseek_tile_portrait.png,384,384,sources/latest/03_tiles.png
-20,普通棋子,glm_tile_portrait,GLM · 头像棋子,assets/tiles/glm_tile_portrait.png,384,384,sources/latest/03_tiles.png
-21,普通棋子,gpt_tile_portrait,ChatGPT / GPT · 头像棋子,assets/tiles/gpt_tile_portrait.png,384,384,sources/latest/03_tiles.png
-22,普通棋子,claude_tile_portrait,Claude · 头像棋子,assets/tiles/claude_tile_portrait.png,384,384,sources/latest/03_tiles.png
-23,普通棋子,gemini_tile_portrait,Gemini · 头像棋子,assets/tiles/gemini_tile_portrait.png,384,384,sources/latest/03_tiles.png
-24,普通棋子,kimi_tile_portrait,Kimi · 头像棋子,assets/tiles/kimi_tile_portrait.png,384,384,sources/latest/03_tiles.png
+19,普通棋子,deepseek_tile_portrait,DeepSeek · 头像棋子,assets/tiles/deepseek_tile_portrait.png,1254,1254,imagegen/2026-09-25
+20,普通棋子,glm_tile_portrait,GLM · 头像棋子,assets/tiles/glm_tile_portrait.png,1254,1254,imagegen/2026-09-25
+21,普通棋子,gpt_tile_portrait,ChatGPT / GPT · 头像棋子,assets/tiles/gpt_tile_portrait.png,1254,1254,imagegen/2026-09-25
+22,普通棋子,claude_tile_portrait,Claude · 头像棋子,assets/tiles/claude_tile_portrait.png,1254,1254,imagegen/2026-09-25
+23,普通棋子,gemini_tile_portrait,Gemini · 头像棋子,assets/tiles/gemini_tile_portrait.png,1254,1254,imagegen/2026-09-25
+24,普通棋子,kimi_tile_portrait,Kimi · 头像棋子,assets/tiles/kimi_tile_portrait.png,1254,1254,imagegen/2026-09-25
 25,普通棋子,deepseek_tile_symbol,DeepSeek · 主题符号棋子,assets/tiles/deepseek_tile_symbol.png,384,384,sources/latest/03_tiles.png
 26,普通棋子,glm_tile_symbol,GLM · 主题符号棋子,assets/tiles/glm_tile_symbol.png,384,384,sources/latest/03_tiles.png
 27,普通棋子,gpt_tile_symbol,ChatGPT / GPT · 主题符号棋子,assets/tiles/gpt_tile_symbol.png,384,384,sources/latest/03_tiles.png
@@ -59,3 +59,13 @@
 58,界面按钮,button_confirm,确认按钮,assets/ui/button_confirm.png,384,384,sources/latest/07_ui_buttons.png
 59,界面按钮,button_menu,菜单按钮,assets/ui/button_menu.png,384,384,sources/latest/07_ui_buttons.png
 60,界面按钮,button_gift,礼物按钮,assets/ui/button_gift.png,384,384,sources/latest/07_ui_buttons.png
+61,消除表情,deepseek_tile_reaction_01,DEEPSEEK · 搞怪表情 1,assets/tiles/deepseek_tile_reaction_01.png,1254,1254,imagegen/2026-09-26
+62,消除表情,deepseek_tile_reaction_02,DEEPSEEK · 搞怪表情 2,assets/tiles/deepseek_tile_reaction_02.png,1254,1254,imagegen/2026-09-26
+63,消除表情,deepseek_tile_reaction_03,DEEPSEEK · 搞怪表情 3,assets/tiles/deepseek_tile_reaction_03.png,1254,1254,imagegen/2026-09-26
+64,消除表情,gpt_tile_reaction_01,GPT · 搞怪表情 1,assets/tiles/gpt_tile_reaction_01.png,1254,1254,imagegen/2026-09-26
+65,消除表情,gpt_tile_reaction_02,GPT · 搞怪表情 2,assets/tiles/gpt_tile_reaction_02.png,1254,1254,imagegen/2026-09-26
+66,消除表情,gpt_tile_reaction_03,GPT · 搞怪表情 3,assets/tiles/gpt_tile_reaction_03.png,1254,1254,imagegen/2026-09-26
+67,消除表情,claude_tile_reaction_01,CLAUDE · 搞怪表情 1,assets/tiles/claude_tile_reaction_01.png,1254,1254,imagegen/2026-09-26
+68,消除表情,glm_tile_reaction_01,GLM · 搞怪表情 1,assets/tiles/glm_tile_reaction_01.png,1254,1254,imagegen/2026-09-26
+69,消除表情,gemini_tile_reaction_01,GEMINI · 搞怪表情 1,assets/tiles/gemini_tile_reaction_01.png,1254,1254,imagegen/2026-09-26
+70,消除表情,kimi_tile_reaction_01,KIMI · 搞怪表情 1,assets/tiles/kimi_tile_reaction_01.png,1254,1254,imagegen/2026-09-26

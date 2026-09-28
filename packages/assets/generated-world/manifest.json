@@ -1,0 +1,90 @@
+{
+  "batch": "2026-09-26",
+  "tool": "built-in image_gen (GPT Image)",
+  "assets": [
+    {
+      "id": "deepseek-idle",
+      "file": "first-batch/deepseek-idle.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "transparent": true,
+      "visibleBounds": [192, 25, 1053, 1230],
+      "sha256": "53211b6db7eecd0b23e3f7f1be1ccd879e10c7322d3e119c0fabcdbfb720512c",
+      "role": "runtime-first-batch",
+      "reviewStatus": "generated-pending-review"
+    },
+    {
+      "id": "deepseek-run",
+      "file": "first-batch/deepseek-run.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "transparent": true,
+      "visibleBounds": [95, 47, 1176, 1220],
+      "sha256": "4a980772d51100a734621d2b9658967b553ce0f00008540ca99421e1f27dea65",
+      "role": "runtime-first-batch",
+      "reviewStatus": "generated-pending-review"
+    },
+    {
+      "id": "background",
+      "file": "first-batch/bg-floating-islands.png",
+      "width": 1897,
+      "height": 829,
+      "mode": "RGB",
+      "transparent": false,
+      "visibleBounds": [0, 0, 1897, 829],
+      "sha256": "7c3055e649ff3c0fca1abbaee051eb719b1ea9fed4c348b10ffbbf0135509b2f",
+      "role": "runtime-first-batch",
+      "reviewStatus": "generated-pending-review"
+    },
+    {
+      "id": "platform",
+      "file": "first-batch/platform.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "transparent": true,
+      "visibleBounds": [19, 228, 2154, 545],
+      "sha256": "be0676922dc684f12335de37dffd01b35ea6e78ed8868f0e74f673f02f32aa0d",
+      "role": "runtime-first-batch",
+      "reviewStatus": "generated-pending-review"
+    },
+    {
+      "id": "bridge",
+      "file": "first-batch/bridge.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "transparent": true,
+      "visibleBounds": [25, 295, 2148, 475],
+      "sha256": "49ee4cb5158c719da5e7e211c6345094bb3dab48af570b6cbab268a57a11cca8",
+      "role": "runtime-first-batch",
+      "reviewStatus": "generated-pending-review"
+    },
+    {
+      "id": "dragon-idle",
+      "file": "first-batch/player-idle.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "transparent": true,
+      "visibleBounds": [114, 61, 1028, 1201],
+      "sha256": "62c76132a1b6a27c196d76357f687d89a021de142bed7c367d12062369487a6b",
+      "role": "retained-alternative",
+      "reviewStatus": "generated-pending-review"
+    },
+    {
+      "id": "dragon-run",
+      "file": "first-batch/player-run.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "transparent": true,
+      "visibleBounds": [39, 55, 1159, 1202],
+      "sha256": "6e0756e73f2ce26d99b406e829a32d474112cad02d24e14c4d311c61f2fc09f3",
+      "role": "retained-alternative",
+      "reviewStatus": "generated-pending-review"
+    }
+  ]
+}

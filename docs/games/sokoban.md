@@ -8,4 +8,4 @@
 
 素材从 `packages/assets/sokoban/manifest.json` 按需加载。当前运行时 PNG 的状态是 `generated-pending-review`；正式发布前需要补齐来源、生成模型、授权边界和人工视觉审查，不能把当前原型验收视为素材发行许可。
 
-规则测试：`npm --workspace @moecore/game-sokoban run test`。
+规则测试：`pnpm --filter @moecore/game-sokoban run test`。

@@ -1,0 +1,74 @@
+{
+  "generator": "built-in image_gen",
+  "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-0e2c1633-a364-44b7-b44b-bacc8910508d.png",
+  "prompt": "Produce ONE transparent 2D fighting-game sprite atlas, exactly TWO COLUMNS by THREE ROWS, portrait canvas 2:3. Six full-body sprites total with clean equal cell spacing, no grid lines or labels. Row 1: DeepSeek blue whale maid from reference 1. Row 2: GPT white dragon girl from reference 2. Row 3: Doubao dark-brown side-parted chin-length bob, RED scarf and charcoal sweatshirt/black shorts/opaque leggings from reference 3. Preserve each identity, outfit, hair, facial style and cel-shaded dark-outline game art. Every sprite faces SCREEN RIGHT, side-on three-quarter view. LEFT column: TRUE DEEP FIGHTING CROUCH, knees folded sharply, hips dropped almost to heels, both boot soles visibly planted at same baseline, torso low leaning slightly forward, two closed fists protecting head. RIGHT column: SAME DEEP CROUCH with one fist extended horizontally right at knee/waist height, rear fist guarding cheek: a crouching low punch, never a standing punch. Character heads retain their normal round proportions, never squash or stretch the entire figure. Full folded knees and both feet must be visible, clear crouched silhouette. Same character SCALE and foot baseline between both poses in each row. Each figure occupies the LOWER 60% of its cell, leaving clear empty space above; crouched height approximately 65% of its standing height. Each character stays inside its own cell with 12% transparent side margins; no overlap or clipping. Whole tail, horns, hair, fists, shoes visible. Genuinely transparent alpha background, no scenery, floor, shadow, effects, speech bubbles, text, numbers, watermark or checkerboard. Single six-cell atlas specifically for CROUCH and CROUCH PUNCH.",
+  "transparencyRevision": "Edit this sprite atlas ONLY to REMOVE ALL BACKGROUND. Preserve exactly the six characters, positions, size, poses, linework and 2-column 3-row layout. Remove the entire blue/grey/red gradient, colored glow, halo, cast shadows and all backdrop pixels between and around the characters. Output an RGBA PNG with REAL TRANSPARENT ALPHA outside the six character silhouettes, including gaps inside limbs. Do NOT paint a black, white, checkerboard or colored background. No glow or outline haze. Character pixels and pose arrangement unchanged. This asset must overlay cleanly on a game stage without any rectangular background.",
+  "initialSource": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-33409db3-d11f-4a8c-87c3-90c8b0ccdc2e.png",
+  "notes": "Atlas RGBA alpha checked independently. RGB-only previews show hidden background colors; use actual alpha compositing. No raster processing or resampling performed.",
+  "width": 1024,
+  "height": 1536,
+  "alphaRange": [0, 254],
+  "sha256": "e275710ef32890a75161c80db812fdde3699d20e7076b6de413375d7be5b8408",
+  "geometry": {
+    "deepseek": {
+      "crouch": {
+        "x": -64.352,
+        "y": -99.927,
+        "width": 100.913,
+        "height": 100.913,
+        "viewBox": "0 0 512 512",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536
+      },
+      "low_hit": {
+        "x": -55.088,
+        "y": -100.322,
+        "width": 100.913,
+        "height": 100.913,
+        "viewBox": "512 0 512 512",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536
+      }
+    },
+    "gpt": {
+      "crouch": {
+        "x": -64.259,
+        "y": -98.065,
+        "width": 98.065,
+        "height": 98.065,
+        "viewBox": "0 512 512 512",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536
+      },
+      "low_hit": {
+        "x": -54.204,
+        "y": -98.065,
+        "width": 98.065,
+        "height": 98.065,
+        "viewBox": "512 512 512 512",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536
+      }
+    },
+    "doubao": {
+      "crouch": {
+        "x": -63.777,
+        "y": -95.0,
+        "width": 104.828,
+        "height": 104.828,
+        "viewBox": "0 1024 512 512",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536
+      },
+      "low_hit": {
+        "x": -54.564,
+        "y": -95.205,
+        "width": 104.828,
+        "height": 104.828,
+        "viewBox": "512 1024 512 512",
+        "sourceWidth": 1024,
+        "sourceHeight": 1536
+      }
+    }
+  }
+}

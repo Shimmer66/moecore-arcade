@@ -412,11 +412,8 @@ onUnmounted(() => {
 <style scoped>
 .sokoban {
   position: relative;
-  padding: 24px;
-  border: 1px solid #efe9df;
-  border-radius: 24px;
-  background: #fffdfa;
-  color: #354a50;
+  padding: 0;
+  color: var(--home-ink);
 }
 .sokoban-heading {
   display: flex;
@@ -426,28 +423,29 @@ onUnmounted(() => {
   margin-bottom: 20px;
 }
 .sokoban-kicker {
-  color: #839a96;
+  color: var(--home-purple);
   font-size: 12px;
-  letter-spacing: 2px;
+  font-weight: 500;
 }
 .sokoban-heading h2 {
   margin: 4px 0;
-  font-size: 26px;
+  font-size: 24px;
+  font-weight: 600;
 }
 .sokoban-heading p {
   margin: 0;
-  color: #83908b;
+  color: var(--home-muted);
   font-size: 13px;
 }
 .sokoban-progress {
   display: grid;
   text-align: right;
   font-size: 12px;
-  color: #84968b;
+  color: var(--home-muted);
 }
 .sokoban-progress strong {
   font-size: 22px;
-  color: #46665b;
+  color: var(--home-ink);
 }
 .sokoban-layout {
   display: grid;
@@ -468,18 +466,18 @@ onUnmounted(() => {
 .sokoban-level-result button {
   min-width: 44px;
   min-height: 44px;
-  border: 1px solid #dce9e0;
-  border-radius: 12px;
-  background: #fff;
-  color: #527563;
+  border: 0;
+  border-radius: 9px;
+  background: var(--ui-subtle);
+  color: var(--home-ink);
   cursor: pointer;
 }
 .sokoban-levels .active {
-  background: #5a8772;
+  background: var(--ui-accent);
   color: #fff;
 }
 .sokoban-levels .completed {
-  border-color: #b3d2bd;
+  box-shadow: inset 0 0 0 1px var(--ui-accent);
 }
 .sokoban-board-wrap {
   display: flex;
@@ -554,7 +552,7 @@ onUnmounted(() => {
   min-height: 28px;
   margin: 14px 0 8px;
   font-size: 13px;
-  color: #657e70;
+  color: var(--home-muted);
 }
 .sokoban-actions {
   display: flex;
@@ -562,7 +560,7 @@ onUnmounted(() => {
   justify-content: space-between;
   gap: 12px;
   font-size: 12px;
-  color: #74857a;
+  color: var(--home-muted);
 }
 .sokoban-actions > div {
   display: flex;
@@ -573,9 +571,8 @@ onUnmounted(() => {
 }
 .sokoban-side {
   padding: 20px;
-  border-radius: 20px;
-  background: #fff;
-  border: 1px solid #eeeade;
+  border-radius: 16px;
+  background: var(--ui-subtle);
 }
 .sokoban-portrait {
   display: grid;
@@ -594,10 +591,10 @@ onUnmounted(() => {
 }
 .sokoban-side p {
   font-size: 14px;
-  color: #60786c;
+  color: var(--home-ink);
 }
 .sokoban-side small {
-  color: #91a197;
+  color: var(--home-muted);
 }
 .sokoban-side details {
   margin-top: 20px;
@@ -615,15 +612,15 @@ onUnmounted(() => {
   margin-top: 22px;
   padding: 20px;
   border-radius: 18px;
-  background: #eef6e9;
-  color: #4b735b;
+  background: var(--ui-accent-soft);
+  color: var(--ui-accent);
 }
 .sokoban-level-result button {
   padding: 0 18px;
 }
 @media (max-width: 760px) {
   .sokoban {
-    padding: 14px;
+    padding: 0;
   }
   .sokoban-layout {
     grid-template-columns: minmax(0, 1fr);

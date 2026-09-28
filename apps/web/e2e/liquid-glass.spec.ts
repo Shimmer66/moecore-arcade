@@ -1,4 +1,5 @@
 import { expect, test, type Locator } from '@playwright/test';
+import { games } from '../src/games/registry';
 
 async function centerOf(locator: Locator) {
   const bounds = await locator.boundingBox();
@@ -36,14 +37,11 @@ async function expectRefraction(lens: Locator, optics = lens.locator('filter')) 
   try {
     // Keep the same CSS filter, tint and blur; only disable its displacement.
     await displacement.evaluate((element) => element.setAttribute('scale', '0'));
-    const unshifted = await screenshot();
-    expect(refracted.equals(unshifted), `${lens} should visibly bend its backdrop`).toBe(false);
+    await expect.poll(async () => refracted.equals(await screenshot())).toBe(false);
   } finally {
     await displacement.evaluate((element, value) => element.setAttribute('scale', value), scale);
   }
-  expect(refracted.equals(await screenshot()), 'Restoring displacement restores the image').toBe(
-    true,
-  );
+  await expect.poll(async () => refracted.equals(await screenshot())).toBe(true);
 }
 
 test('renders the glass platform and lets a surface stretch and settle', async ({ page }) => {
@@ -58,7 +56,7 @@ test('renders the glass platform and lets a surface stretch and settle', async (
   await expect(canvas).toHaveAttribute('data-renderer', 'webgl');
   await expect(canvas).toHaveCSS('pointer-events', 'none');
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
@@ -91,15 +89,16 @@ test('renders the glass platform and lets a surface stretch and settle', async (
 
 test('filters remain usable and game glass stays within the toolbar', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: '文字', exact: true }).click();
-  await expect(page.getByRole('button', { name: '文字', exact: true })).toHaveAttribute(
+  await page.getByRole('button', { name: '动作', exact: true }).click();
+  await expect(page.getByRole('button', { name: '动作', exact: true })).toHaveAttribute(
     'aria-pressed',
     'true',
   );
+  await page.getByRole('searchbox', { name: '搜索小游戏' }).fill('没有这款游戏');
   await expect(page.locator('.catalog-card')).toHaveCount(0);
-  await expect(page.getByText('这个分类还在孵化中', { exact: true })).toBeVisible();
+  await expect(page.getByText('还没有找到这款游戏', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: '查看全部游戏', exact: true }).click();
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   await expect(page.getByRole('button', { name: '全部', exact: true })).toHaveAttribute(
     'aria-pressed',
     'true',
@@ -142,7 +141,9 @@ test('reduced motion keeps the glass readable without elastic displacement', asy
   await expect(surface).toHaveCSS('transform', initialTransform);
   await page.mouse.up();
   await page.getByRole('button', { name: '益智', exact: true }).click();
-  await expect(page.locator('.catalog-card')).toHaveCount(2);
+  await expect(page.locator('.catalog-card')).toHaveCount(
+    games.filter((game) => game.tags.includes('益智')).length,
+  );
 });
 
 test('dock shell and selected tab refract the page before and after navigation', async ({
@@ -176,10 +177,12 @@ test('game panels and modal buttons refract their backdrop beyond a blur', async
 
   await expectRefraction(page.locator('.game-stage > .liquid-surface'));
   await page.getByRole('button', { name: '暂停', exact: true }).click();
+  await expect(page.getByRole('button', { name: '继续游戏', exact: true })).toBeFocused();
   await expectRefraction(page.locator('.stage-overlay > .liquid-surface'));
   await expectRefraction(page.locator('.stage-overlay .primary-button > .liquid-surface'));
   await page.getByRole('button', { name: '继续游戏', exact: true }).click();
   await expect(page.getByRole('region', { name: '暂停菜单' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: '暂停', exact: true })).toBeFocused();
   await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
   await expectRefraction(page.locator('.confirm-dialog > .liquid-surface'));
   await expectRefraction(page.locator('.confirm-dialog .primary-button > .liquid-surface'));
@@ -233,9 +236,11 @@ test('a browser without WebGL retains a readable and functional platform', async
   );
   await expect(page.locator('.game-search')).toHaveCSS('backdrop-filter', /blur\(8px\)/);
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   await page.getByRole('button', { name: '动作', exact: true }).click();
-  await expect(page.locator('.catalog-card')).toHaveCount(2);
+  await expect(page.locator('.catalog-card')).toHaveCount(
+    games.filter((game) => game.tags.includes('动作')).length,
+  );
   await expect(page.getByRole('button', { name: /大肥鱼跑酷/ })).toBeVisible();
 });
 
@@ -251,7 +256,7 @@ test('search can be cleared and empty results reset both search and category', a
   await expect(page.getByRole('button', { name: /大肥鱼 · 搬家日记/ })).toBeVisible();
   await page.getByRole('button', { name: '清除搜索', exact: true }).click();
   await expect(search).toHaveValue('');
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
 
   await page.getByRole('button', { name: '动作', exact: true }).click();
   await search.fill('搬家');
@@ -262,15 +267,18 @@ test('search can be cleared and empty results reset both search and category', a
     'aria-pressed',
     'true',
   );
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
 });
 
 test('wallpaper loading failure leaves the CSS glass platform usable', async ({ page }) => {
   let failedWallpaperRequests = 0;
-  await page.route(/\/bg_menu_(?:landscape|portrait)[^/]*\.png(?:\?.*)?$/, async (route) => {
-    failedWallpaperRequests += 1;
-    await route.abort('failed');
-  });
+  await page.route(
+    /\/bg_menu_(?:landscape|portrait)[^/]*\.(?:png|webp)(?:\?.*)?$/,
+    async (route) => {
+      failedWallpaperRequests += 1;
+      await route.abort('failed');
+    },
+  );
   await page.goto('/');
   await expect.poll(() => failedWallpaperRequests).toBeGreaterThan(0);
   await expect(page.locator('canvas.liquid-glass-canvas')).toHaveAttribute(
@@ -279,9 +287,11 @@ test('wallpaper loading failure leaves the CSS glass platform usable', async ({ 
   );
   await expect(page.locator('.game-search')).toHaveCSS('backdrop-filter', /blur\(8px\)/);
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
-  await expect(page.locator('.catalog-card')).toHaveCount(4);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   await page.getByRole('button', { name: '益智', exact: true }).click();
-  await expect(page.locator('.catalog-card')).toHaveCount(2);
+  await expect(page.locator('.catalog-card')).toHaveCount(
+    games.filter((game) => game.tags.includes('益智')).length,
+  );
   await page.getByRole('searchbox', { name: '搜索小游戏' }).fill('搬家');
   await expect(page.getByRole('button', { name: /大肥鱼 · 搬家日记/ })).toBeVisible();
 });
@@ -326,9 +336,9 @@ test('dock clicks navigate within the page and home returns to the top', async (
   await aboutLink.click();
   await expect(page).toHaveURL(/#about$/);
   await expect(aboutLink).toHaveAttribute('aria-current', 'location');
-  const banner = page.getByRole('region', { name: '下一款心动，由你创造。' });
+  const banner = page.getByRole('region', { name: '一点灵感，就能开始。' });
   await expect(banner).toBeInViewport();
-  const contributeLink = banner.getByRole('link', { name: '加入共创', exact: true });
+  const contributeLink = banner.getByRole('link', { name: '在 GitHub 一起共创', exact: true });
   await expect(contributeLink).toHaveAttribute(
     'href',
     'https://github.com/Shimmer66/moecore-arcade',

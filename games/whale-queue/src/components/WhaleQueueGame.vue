@@ -215,7 +215,7 @@ onUnmounted(() => {
   >
     <header class="wq-heading">
       <div>
-        <span class="wq-kicker">✦ DEEPSEA DATA · MOECORE ✦</span>
+        <span class="wq-kicker">灵感收集 · 单人挑战</span>
         <h2>鲸鲸的灵感长队</h2>
         <p>带着小鲸伙伴收集星光，整理出一份温柔答案。</p>
       </div>
@@ -256,10 +256,7 @@ onUnmounted(() => {
 
     <div class="wq-layout">
       <section class="wq-play-panel" aria-label="数据海棋盘">
-        <div
-          class="wq-board-frame"
-          :style="{ '--wq-frame-url': `url(${getWhaleQueueAsset('boardFrame')})` }"
-        >
+        <div class="wq-board-frame">
           <div
             class="whale-queue-board"
             :style="{ '--wq-board-url': `url(${getWhaleQueueAsset('boardBackground')})` }"
@@ -366,58 +363,35 @@ onUnmounted(() => {
         <button v-else class="wq-restart-local" type="button" @click="restartLocal">
           <RotateCcw :size="17" />这一局重来
         </button>
+        <div class="wq-direction-pad" aria-label="触屏方向键">
+          <span aria-hidden="true"></span>
+          <button type="button" aria-label="向上" @click="steer('up')">↑</button>
+          <span aria-hidden="true"></span>
+          <button type="button" aria-label="向左" @click="steer('left')">←</button>
+          <button type="button" aria-label="向下" @click="steer('down')">↓</button>
+          <button type="button" aria-label="向右" @click="steer('right')">→</button>
+        </div>
       </aside>
     </div>
 
-    <div class="wq-direction-pad" aria-label="触屏方向键">
-      <span aria-hidden="true"></span>
-      <button type="button" aria-label="向上" @click="steer('up')">↑</button>
-      <span aria-hidden="true"></span>
-      <button type="button" aria-label="向左" @click="steer('left')">←</button>
-      <button type="button" aria-label="向下" @click="steer('down')">↓</button>
-      <button type="button" aria-label="向右" @click="steer('right')">→</button>
-    </div>
     <p class="wq-footer-note"><Sparkles :size="14" />收集 30 颗灵感星，鲸鲸就能把答案送给朋友。</p>
   </section>
 </template>
 
 <style scoped>
 .whale-queue-game {
-  --wq-navy: #172040;
-  --wq-navy-soft: #2b3a67;
-  --wq-blue: #3d5aa9;
+  --wq-navy: var(--ui-ink);
+  --wq-navy-soft: #344c78;
+  --wq-blue: var(--ui-accent);
   --wq-sky: #5b8fd9;
-  --wq-pale: #eaf3ff;
+  --wq-pale: var(--ui-accent-soft);
   --wq-gold: #d9b45e;
-  --wq-text: #2b3a67;
-  --wq-sub: #5a6b93;
+  --wq-text: var(--ui-ink);
+  --wq-sub: var(--ui-muted);
   position: relative;
   overflow: hidden;
   color: var(--wq-text);
-  padding: 22px;
-  border: 2px solid #d9e9fc;
-  border-radius: 26px;
-  background:
-    radial-gradient(600px 280px at 100% 0, #dbeeff 0%, transparent 70%),
-    linear-gradient(180deg, #f4faff, #fff 70%);
-}
-.whale-queue-game::before,
-.whale-queue-game::after {
-  content: '✦';
-  position: absolute;
-  color: var(--wq-gold);
-  opacity: 0.55;
-  pointer-events: none;
-}
-.whale-queue-game::before {
-  top: 16px;
-  left: 42%;
-  font-size: 16px;
-}
-.whale-queue-game::after {
-  right: 32px;
-  bottom: 98px;
-  font-size: 22px;
+  padding: 0;
 }
 .wq-heading {
   display: flex;
@@ -427,16 +401,15 @@ onUnmounted(() => {
   padding: 0 10px 8px;
 }
 .wq-kicker {
-  color: var(--wq-blue);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 3px;
+  color: var(--home-purple);
+  font-size: 12px;
+  font-weight: 500;
 }
 .wq-heading h2 {
   margin: 5px 0 2px;
   color: var(--wq-navy);
-  font-size: clamp(23px, 4vw, 31px);
-  letter-spacing: 1px;
+  font-size: 24px;
+  font-weight: 600;
 }
 .wq-heading p {
   margin: 0;
@@ -473,10 +446,9 @@ onUnmounted(() => {
   align-items: center;
   gap: 12px;
   padding: 11px 12px;
-  border: 1px solid #d4e5fa;
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 13px 28px -22px #17204080;
+  border: 0;
+  border-radius: 13px;
+  background: var(--ui-subtle);
 }
 .wq-stat {
   display: grid;
@@ -523,8 +495,8 @@ onUnmounted(() => {
   gap: 6px;
   min-height: 46px;
   padding: 6px 12px;
-  border: 1px solid #cfdef5;
-  border-radius: 999px;
+  border: 0;
+  border-radius: 9px;
   background: var(--wq-pale);
   color: var(--wq-blue);
   cursor: pointer;
@@ -545,7 +517,8 @@ onUnmounted(() => {
 }
 .wq-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 210px;
+  grid-template-columns: minmax(0, 560px) 230px;
+  justify-content: center;
   align-items: start;
   gap: 18px;
   margin-top: 18px;
@@ -555,34 +528,22 @@ onUnmounted(() => {
 }
 .wq-board-frame {
   position: relative;
-  width: min(100%, 850px);
+  width: 100%;
   margin: 0 auto;
   aspect-ratio: 1;
-}
-.wq-board-frame::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-position: center;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-image: var(--wq-frame-url);
-  pointer-events: none;
-  z-index: 3;
+  background: var(--ui-subtle);
+  border-radius: var(--ui-radius);
 }
 .whale-queue-board {
   position: absolute;
-  inset: 16.67%;
+  inset: 8px;
   display: grid;
   grid-template-columns: repeat(16, 1fr);
   grid-template-rows: repeat(16, 1fr);
   overflow: hidden;
-  border: 2px solid #79b9e8;
-  border-radius: 18px;
+  border: 1px solid #badbed;
+  border-radius: 10px;
   background-color: #b8e8f7;
-  box-shadow:
-    inset 0 0 35px #2b3a6730,
-    0 10px 24px -16px #17204099;
   outline: none;
   isolation: isolate;
 }
@@ -712,11 +673,11 @@ onUnmounted(() => {
   gap: 12px;
 }
 .wq-side-card {
+  order: 3;
   padding: 16px;
-  border: 1px solid #d9e8f7;
-  border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 13px 28px -25px #17204080;
+  border: 0;
+  border-radius: 13px;
+  background: var(--ui-subtle);
 }
 .wq-side-label {
   color: #b8933f;
@@ -737,6 +698,7 @@ onUnmounted(() => {
 }
 .wq-start,
 .wq-restart-local {
+  order: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -744,42 +706,39 @@ onUnmounted(() => {
   min-height: 46px;
   padding: 10px 14px;
   border: 0;
-  border-radius: 999px;
-  background: linear-gradient(120deg, var(--wq-navy-soft), var(--wq-sky));
-  box-shadow: 0 12px 22px -12px #2b3a67b3;
+  border-radius: 9px;
+  background: var(--ui-accent);
   color: #fff;
   cursor: pointer;
   font-size: 13px;
   font-weight: 800;
 }
 .wq-restart-local {
-  background: #fff;
-  border: 1px solid #cfdef5;
+  background: var(--ui-subtle);
   color: var(--wq-blue);
-  box-shadow: none;
 }
 .wq-start:hover,
 .wq-restart-local:hover {
   transform: translateY(-2px);
 }
 .wq-direction-pad {
+  order: 2;
   display: grid;
   grid-template-columns: repeat(3, 48px);
   justify-content: center;
   gap: 6px;
-  margin-top: 14px;
+  margin-block: 2px 6px;
 }
 .wq-direction-pad button {
   width: 48px;
   height: 42px;
-  border: 1px solid #c8ddf5;
-  border-radius: 14px;
-  background: #fff;
+  border: 0;
+  border-radius: 9px;
+  background: var(--ui-subtle);
   color: var(--wq-blue);
   cursor: pointer;
   font-size: 23px;
   line-height: 1;
-  box-shadow: 0 6px 13px -10px #17204099;
   touch-action: manipulation;
 }
 .wq-direction-pad button:hover {
@@ -797,15 +756,17 @@ onUnmounted(() => {
 }
 @media (max-width: 760px) {
   .whale-queue-game {
-    padding: 14px;
-    border-radius: 21px;
+    padding: 0;
   }
   .wq-heading {
     padding-inline: 3px;
   }
   .wq-character {
-    width: 84px;
-    height: 68px;
+    width: 68px;
+    height: 56px;
+  }
+  .wq-heading h2 {
+    display: none;
   }
   .wq-hud {
     flex-wrap: wrap;
@@ -827,15 +788,15 @@ onUnmounted(() => {
     gap: 10px;
   }
   .wq-side-panel {
-    grid-template-columns: 1fr auto;
-    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
   }
   .wq-side-card {
-    grid-row: span 2;
+    grid-column: 1 / -1;
   }
   .wq-start,
   .wq-restart-local {
-    min-width: 132px;
+    min-width: 0;
   }
   .wq-board-status {
     display: grid;
@@ -852,8 +813,7 @@ onUnmounted(() => {
     font-size: 11px;
   }
   .wq-kicker {
-    font-size: 8px;
-    letter-spacing: 2px;
+    font-size: 11px;
   }
   .wq-hud {
     padding: 8px;
@@ -884,7 +844,7 @@ onUnmounted(() => {
     height: 22px;
   }
   .wq-side-panel {
-    grid-template-columns: 1fr;
+    gap: 10px;
   }
   .wq-side-card {
     grid-row: auto;

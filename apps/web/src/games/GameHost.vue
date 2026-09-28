@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { computed, onErrorCaptured, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue';
+import {
+  computed,
+  nextTick,
+  onErrorCaptured,
+  onMounted,
+  onUnmounted,
+  ref,
+  shallowRef,
+  watch,
+} from 'vue';
 import { ArrowLeft, Maximize2, Minimize2, Pause, Play, RotateCcw, X } from '@lucide/vue';
 import type { GameDefinition, GameResult } from '@moecore/game-sdk';
 import { findGame } from './registry';
@@ -9,10 +18,14 @@ import LiquidSurface from '../features/liquid-glass/LiquidSurface.vue';
 const props = defineProps<{ gameId: string }>();
 const emit = defineEmits<{ exit: [] }>();
 const definition = shallowRef<GameDefinition>();
+const displayTitle = computed(
+  () => findGame(props.gameId)?.title ?? definition.value?.title ?? '未找到游戏',
+);
 const error = ref('');
 const loading = ref(false);
 const sessionId = ref('');
 const attempt = ref(0);
+const restartMode = ref<'replay' | 'select'>('select');
 const manuallyPaused = ref(false);
 const autoPaused = ref(false);
 const result = shallowRef<GameResult>();
@@ -20,6 +33,9 @@ const confirmation = ref<HTMLDialogElement>();
 const pendingAction = ref<'restart' | 'exit'>();
 const reduceMotion = ref(false);
 const gameHost = ref<HTMLElement>();
+const pauseControl = ref<HTMLButtonElement>();
+const resumeControl = ref<HTMLButtonElement>();
+const resultControl = ref<HTMLButtonElement>();
 const fullscreen = ref(false);
 const fullscreenSupported = ref(false);
 const paused = computed(
@@ -32,7 +48,8 @@ const paused = computed(
 const settings = computed(() => ({ masterVolume: 1, reduceMotion: reduceMotion.value }));
 let loadRevision = 0;
 
-function restart() {
+function restart(mode: 'replay' | 'select' = 'replay') {
+  restartMode.value = mode;
   attempt.value += 1;
   result.value = undefined;
   manuallyPaused.value = false;
@@ -72,6 +89,7 @@ onErrorCaptured(() => {
 function finish(value: GameResult) {
   if (result.value || value.sessionId !== sessionId.value || value.gameId !== props.gameId) return;
   result.value = value;
+  void nextTick(() => resultControl.value?.focus());
 }
 
 function requestAction(action: 'restart' | 'exit') {
@@ -99,6 +117,12 @@ function confirmAction() {
 function resume() {
   manuallyPaused.value = false;
   autoPaused.value = false;
+  void nextTick(() => pauseControl.value?.focus());
+}
+
+function pauseManually() {
+  manuallyPaused.value = true;
+  void nextTick(() => resumeControl.value?.focus());
 }
 
 function reload() {
@@ -128,8 +152,32 @@ function pauseForBackground() {
   if (definition.value && !result.value) autoPaused.value = true;
 }
 
+function focusBackgroundPause() {
+  if (autoPaused.value && !pendingAction.value && !result.value) {
+    void nextTick(() => resumeControl.value?.focus());
+  }
+}
+
 function visibilityChanged() {
   if (document.hidden) pauseForBackground();
+  else focusBackgroundPause();
+}
+
+function pauseWithEscape(event: KeyboardEvent) {
+  if (
+    props.gameId === 'parkour' &&
+    result.value &&
+    !event.repeat &&
+    ['Space', 'Enter'].includes(event.code) &&
+    !(event.target instanceof HTMLElement && event.target.closest('button, input, textarea'))
+  ) {
+    event.preventDefault();
+    restart();
+    return;
+  }
+  if (event.code === 'Escape' && definition.value && !result.value && !pendingAction.value) {
+    pauseManually();
+  }
 }
 
 onMounted(() => {
@@ -139,6 +187,8 @@ onMounted(() => {
   );
   syncFullscreen();
   window.addEventListener('blur', pauseForBackground);
+  window.addEventListener('focus', focusBackgroundPause);
+  window.addEventListener('keydown', pauseWithEscape);
   document.addEventListener('visibilitychange', visibilityChanged);
   document.addEventListener('fullscreenchange', syncFullscreen);
 });
@@ -146,6 +196,8 @@ onUnmounted(() => {
   loadRevision += 1;
   confirmation.value?.close();
   window.removeEventListener('blur', pauseForBackground);
+  window.removeEventListener('focus', focusBackgroundPause);
+  window.removeEventListener('keydown', pauseWithEscape);
   document.removeEventListener('visibilitychange', visibilityChanged);
   document.removeEventListener('fullscreenchange', syncFullscreen);
 });
@@ -166,20 +218,21 @@ onUnmounted(() => {
         >
           <ArrowLeft :size="20" />
         </button>
-        <h1>{{ definition?.title ?? findGame(gameId)?.title ?? '未找到游戏' }}</h1>
+        <h1>{{ displayTitle }}</h1>
       </div>
       <div class="game-actions">
         <label class="motion-toggle" data-glass
           ><input v-model="reduceMotion" type="checkbox" />减少动态效果</label
         >
         <button
+          ref="pauseControl"
           type="button"
           class="icon-button"
           data-glass
           :disabled="!definition || !!result"
           title="暂停"
           aria-label="暂停"
-          @click="manuallyPaused = true"
+          @click="pauseManually"
         >
           <Pause :size="20" />
         </button>
@@ -231,6 +284,7 @@ onUnmounted(() => {
           :attempt="attempt"
           :paused="paused"
           :settings="settings"
+          :restart-mode="restartMode"
           @finish="finish"
           @exit="requestAction('exit')"
         />
@@ -251,11 +305,26 @@ onUnmounted(() => {
           width="136"
           height="136"
         />
-        <h2>{{ result.story?.title ?? (result.outcome === 'win' ? '挑战完成！' : '本局结束') }}</h2>
+        <h2>
+          {{ result.story?.title ?? (result.outcome === 'win' ? '挑战完成！' : '本局结束') }}
+        </h2>
         <p v-if="result.story" class="story-ending">{{ result.story.body }}</p>
         <p>{{ result.summary }}</p>
-        <button class="primary-button" type="button" @click="restart">
-          <LiquidSurface interactive /><RotateCcw :size="18" /><span>再来一局</span>
+        <button ref="resultControl" class="primary-button" type="button" @click="restart()">
+          <LiquidSurface interactive /><RotateCcw :size="18" /><span>{{
+            gameId === 'parkour' && result.outcome === 'win' && Number(result.stats.level) < 3
+              ? '下一关'
+              : '再来一局'
+          }}</span>
+        </button>
+        <span v-if="gameId === 'parkour'" class="retry-key-hint">按空格也能马上重来</span>
+        <button
+          v-if="result.reselectLabel"
+          class="text-button"
+          type="button"
+          @click="restart('select')"
+        >
+          <LiquidSurface interactive /><span>{{ result.reselectLabel }}</span>
         </button>
         <button class="text-button" type="button" @click="emit('exit')">
           <LiquidSurface interactive /><span>返回游戏列表</span>
@@ -270,7 +339,7 @@ onUnmounted(() => {
         <LiquidSurface />
         <Pause :size="32" />
         <h2>已暂停</h2>
-        <button class="primary-button" type="button" @click="resume">
+        <button ref="resumeControl" class="primary-button" type="button" @click="resume">
           <LiquidSurface interactive /><Play :size="18" /><span>继续游戏</span>
         </button>
       </div>

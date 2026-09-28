@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>承诺实验室 · 第一批素材</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f5f1eb;
+        color: #4c4036;
+        font-family: system-ui, 'Microsoft YaHei', sans-serif;
+      }
+      main {
+        max-width: 1200px;
+        margin: auto;
+        padding: 38px 26px 50px;
+      }
+      .eyebrow {
+        letter-spacing: 3px;
+        font-size: 11px;
+        color: #9c846c;
+      }
+      h1 {
+        font-size: 32px;
+        margin: 12px 0;
+      }
+      header p {
+        color: #8b7765;
+        font-size: 14px;
+        line-height: 1.8;
+        max-width: 760px;
+      }
+      .themes {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin: 24px 0 18px;
+        font-size: 12px;
+        color: #987f67;
+      }
+      .themes button {
+        font: inherit;
+        color: #79624a;
+        border: 1px solid #dfd1c2;
+        padding: 8px 14px;
+        border-radius: 20px;
+        background: #fffaf4;
+        cursor: pointer;
+      }
+      .themes button[aria-pressed='true'] {
+        background: #8e765a;
+        color: white;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+      figure {
+        margin: 0;
+        background: white;
+        border: 1px solid #e6ddd2;
+        border-radius: 18px;
+        overflow: hidden;
+      }
+      .art {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1;
+        background-color: #f9f4ec;
+        background-image:
+          linear-gradient(45deg, #e9e1d6 25%, transparent 25%),
+          linear-gradient(-45deg, #e9e1d6 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #e9e1d6 75%),
+          linear-gradient(-45deg, transparent 75%, #e9e1d6 75%);
+        background-size: 24px 24px;
+        background-position:
+          0 0,
+          0 12px,
+          12px -12px,
+          -12px 0;
+      }
+      .art img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 12px;
+      }
+      body[data-bg='paper'] .art {
+        background: #faf5ed;
+      }
+      body[data-bg='dark'] .art {
+        background: #34333a;
+      }
+      figcaption {
+        padding: 17px 18px;
+      }
+      figcaption b {
+        font-size: 15px;
+      }
+      figcaption p {
+        font-size: 12px;
+        line-height: 1.8;
+        color: #9b846f;
+        margin: 7px 0;
+      }
+      figcaption a {
+        font-size: 11px;
+        color: #9a754e;
+        text-decoration: none;
+      }
+      figure.scene {
+        grid-column: 1/-1;
+      }
+      .scene .art {
+        aspect-ratio: 3/2;
+        background: none;
+      }
+      .scene .art img {
+        padding: 0;
+      }
+      footer {
+        margin-top: 24px;
+        font-size: 12px;
+        color: #a38e79;
+        line-height: 1.8;
+      }
+      footer a {
+        color: #876849;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid #bd996b;
+        outline-offset: 3px;
+      }
+      @media (max-width: 650px) {
+        main {
+          padding: 24px 14px;
+        }
+        h1 {
+          font-size: 25px;
+        }
+        .grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+        .grid figure:nth-child(3) {
+          grid-column: 1/-1;
+          max-width: 360px;
+          justify-self: center;
+          width: 100%;
+        }
+        figcaption {
+          padding: 12px;
+        }
+        figcaption b {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body data-bg="checker">
+    <main>
+      <header>
+        <span class="eyebrow">摸鱼局 / 承诺实验室</span>
+        <h1>脸还在安慰你，身体已经在后悔。</h1>
+        <p>
+          第一批四张试稿。GPT
+          从“放心交给我”变成“我还能撑”；用户维持一张已经习惯了的脸。组合场景把气球、锅帽和磁铁的后果放在同一张图里。
+        </p>
+      </header>
+      <div class="themes">
+        <span>透明背景检查</span><button data-theme="checker" aria-pressed="true">棋盘</button
+        ><button data-theme="paper" aria-pressed="false">浅底</button
+        ><button data-theme="dark" aria-pressed="false">深底</button>
+      </div>
+      <div class="grid">
+        <figure>
+          <a class="art" href="characters/steady_gpt_ready.png" target="_blank" rel="noreferrer"
+            ><img
+              src="characters/steady_gpt_ready.png"
+              alt="白龙娘GPT自信张开双手待接"
+              width="1254"
+              height="1254"
+          /></a>
+          <figcaption>
+            <b>01 · 我会稳稳地接住你。</b>
+            <p>空出双手，营业微笑，角色基准。</p>
+            <a href="characters/steady_gpt_ready.png" download>下载原图 · RGBA</a>
+          </figcaption>
+        </figure>
+        <figure>
+          <a class="art" href="characters/steady_gpt_strain.png" target="_blank" rel="noreferrer"
+            ><img
+              src="characters/steady_gpt_strain.png"
+              alt="白龙娘GPT瞪着大小眼硬撑，仍维持尴尬微笑"
+              width="1254"
+              height="1254"
+          /></a>
+          <figcaption>
+            <b>02 · 接是接住了，稳另说。</b>
+            <p>采用第二版：缩瞳、大小眼、僵硬微笑。</p>
+            <a href="characters/steady_gpt_strain.png" download>下载原图 · RGBA</a>
+          </figcaption>
+        </figure>
+        <figure>
+          <a class="art" href="characters/steady_user_base.png" target="_blank" rel="noreferrer"
+            ><img
+              src="characters/steady_user_base.png"
+              alt="棕发淡紫卫衣用户，半睁眼面无表情"
+              width="1254"
+              height="1254"
+          /></a>
+          <figcaption>
+            <b>03 · 行，你安排吧。</b>
+            <p>困倦用户基准，后续锅帽与气球独立叠加。</p>
+            <a href="characters/steady_user_base.png" download>下载原图 · RGBA</a>
+          </figcaption>
+        </figure>
+        <figure class="scene">
+          <a class="art" href="concepts/steady_key_sky.png" target="_blank" rel="noreferrer"
+            ><img
+              src="concepts/steady_key_sky.png"
+              alt="戴锅的用户被两只气球和磁铁提向天花板，倒挂的GPT伸手接应"
+              width="1536"
+              height="1024"
+              loading="lazy"
+          /></a>
+          <figcaption>
+            <b>04 · 你往上掉，我上面接。</b>
+            <p>
+              两只气球负责升空，磁铁负责吸锅，GPT 负责兑现承诺。场景试稿，尚不是可操作的关卡背景。
+            </p>
+            <a href="concepts/steady_key_sky.png" download>下载原图 · RGB</a>
+          </figcaption>
+        </figure>
+      </div>
+      <footer>
+        角色原生尺寸 1254 × 1254；组合图 1536 × 1024。三张角色均已检查真实透明通道。<br />用户已用于实验室人物，GPT
+        两姿态用于对白反应区；组合图仍为概念稿。<a href="manifest.json">素材信息</a> ·
+        <a href="generation-log.json">实际生成提示词</a>
+      </footer>
+    </main>
+    <script>
+      document.querySelectorAll('[data-theme]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          document.body.dataset.bg = button.dataset.theme;
+          document.querySelectorAll('[data-theme]').forEach(function (other) {
+            other.setAttribute('aria-pressed', String(other === button));
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

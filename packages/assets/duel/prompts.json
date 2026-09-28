@@ -1,0 +1,130 @@
+[
+  {
+    "id": "duel_ds_base",
+    "prompt": "Use case: stylized-concept. Create ONE game character reference asset, square composition, genuinely transparent background. Reference image 1 is the existing project's DeepSeek whale-girl identity, not an edit target. Keep her cobalt-blue hair with cyan ends, small whale fin ears, frilly white headband, navy-and-white maid-inspired outfit and blue bow. Reinterpret as a bold funny 2.7-head-tall chibi fighting-game mascot with thick crisp dark outlines, limited bright cel-shaded colors, broad legible shapes, polished hand-drawn anime meme sticker style. Full body entirely visible, standing in a relaxed three-quarter stance facing right, empty hands ready at her sides, short sturdy boots, a large blue whale tail drooping on the ground behind. Expression: half-lidded sleepy eyes, one raised eyebrow and tiny overconfident smirk, as if pretending to be a genius while barely awake. Add exactly one small rice grain stuck on her cheek as a visual gag. Cute but hilariously self-assured, not a generic sweet smile. No text, letters, numbers, brand logos, watermark, frame, scenery, floor or checkerboard. Leave 8 percent transparent padding around all extremities; consistent silhouette for subsequent character variants. This is asset duel_ds_base.",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\match3\\assets\\tiles\\deepseek_tile_portrait.png"
+    ],
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-b1ee1013-655f-4b8b-af11-47ac51433ba5.png"
+  },
+  {
+    "id": "duel_gpt_base",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\match3\\assets\\tiles\\gpt_tile_portrait.png",
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_ds_base.png"
+    ],
+    "prompt": "Use case: stylized-concept. ONE full-body character asset on genuinely transparent background, square canvas. Image 1 is the established identity reference: GPT white dragon girl, preserve white hair, ivory swept-back dragon horns, small white dragon wings and tail, mint eyes and mint accents. Image 2 is the exact rendering/proportion reference for this game's asset series: thick clean dark contours, bright cel shading, humorous 2.7-head chibi proportions. Draw GPT alone, facing slightly right, full feet/horns/tail visible with padding. Fully clothed in a white-and-mint fantasy office dress with short boots, modest and readable. She smiles with absurd confidence while hugging a HUGE crooked stack of blank draft paper taller than her torso; one sheet secretly slipping away underneath. Her little dragon tail tries to catch the sheet. One raised eyebrow, slightly smug business smile. No text, numbers, logos, frame, watermark, ground, cast shadow or background. One coherent standalone character, no character sheet or collage. Asset duel_gpt_base.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-db5c5db8-c5bb-46e1-88d9-2451debc4f9a.png"
+  },
+  {
+    "id": "duel_doubao_base",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_ds_base.png"
+    ],
+    "prompt": "Use case: stylized-concept. Create ONE full-body transparent game mascot asset, square canvas. Reference image is STYLE AND PROPORTIONS ONLY: same thick clean dark contours, polished anime meme sticker cel shading and funny 2.7-head chibi body; do not copy the reference's blue hair, maid costume, whale tail or fin ears. New character: Doubao girl, warm dark-brown short hair with two round steamed-bun-shaped hair buns, copper-brown eyes, peachy cheeks, orange short jacket over a cream shirt, orange shorts with opaque cream leggings and chunky short boots. Fully clothed modest chibi mascot. Standing three-quarter facing right, one hand gives an outrageously confident thumbs up, other hand holds a small BLANK speech-bubble-shaped sign. Big round cheeks, half closed pleased eyes, grin like she just promised she can handle absolutely everything. The twin hair buns have cute visible folded bun shapes but are hair. Entire body visible with 8 percent transparent padding. Genuinely transparent background, no text, numbers, logo, watermark, frame, scenery or ground. Asset duel_doubao_base.",
+    "status": "rejected-identity",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-b1b334f9-4dfb-42a1-bdd2-32941fe6f082.png"
+  },
+  {
+    "id": "duel_ds_thinking",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_ds_base.png"
+    ],
+    "prompt": "Use case: stylized-concept. Generate ONE square upper-body game reaction cutout on a genuinely transparent background. Reference image is the exact character identity and rendering guide: preserve hair, outfit, accessories, colors, thick dark outlines and bright cel shading. Use a BIG outrageous expressive head readable as a meme even without a caption. One character, no panel grid, no words, letters, numbers, logos, watermark, frame or scenery. Keep the entire hair silhouette, horns/buns/fin ears and props inside the canvas with generous 10 percent padding. DeepSeek whale girl is trying MUCH too hard to think: both hands press her temples, eyes have tiny vacant pupils staring in different directions, mouth makes a tiny strained triangle, one cheek rice grain preserved. Above her head a clean pale-blue steam squiggle tangles itself into a ridiculous noodle knot. Her huge blue hair curl droops under the knot like a tired antenna. The comic emotion is serious brain overheating, not sadness or pain. Navy maid outfit and white headband exactly match reference. Cropped at mid torso but no cutoff hands. Asset duel_ds_thinking.",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-27fe0d3b-7500-4e96-ad9a-e7b744c65912.png",
+    "status": "generated-and-visually-reviewed"
+  },
+  {
+    "id": "duel_doubao_base_v2",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_ds_base.png"
+    ],
+    "prompt": "Use case: stylized-concept. ONE NEW full-body Doubao AI meme girl cutout, square canvas, genuinely transparent background. Supplied blue whale girl is STYLE REFERENCE ONLY: match thick dark contours, crisp bright anime cel shading and funny 2.7-head chibi scale. Doubao's IDENTITY MUST be: chin-length dark near-black straight bob haircut, simple blunt bangs, NO twin buns, NO ponytails, NO animal ears, and a prominent bright RED SCARF wrapped around her neck with two long loose ends. Plain cream oversized casual shirt, charcoal shorts over opaque black leggings, chunky red-and-cream sneakers. No maid clothes, orange Chinese outfit, tassels or frills. She stands fully visible facing slightly right with a blank little speech-bubble placard in one hand and an awkward thumbs up in the other. Comically vacant large simple eyes, little open mouth, innocent confused face with totally unjustified confidence, tiny subtle drool bead at one mouth corner. Red scarf and bob must be unmistakable even at thumbnail size. Full feet and all hair visible with at least 8 percent padding. No words, logo, numbers, watermark, floor or scenery. Asset duel_doubao_base_v2, corrected researched identity.",
+    "status": "superseded-by-user-reference",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-9b773b4f-6d78-4a4e-ac65-b2825ba88dcd.png"
+  },
+  {
+    "id": "duel_gpt_confident",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_gpt_base.png"
+    ],
+    "prompt": "Use case: stylized-concept. ONE square upper-body game reaction cutout, genuinely transparent background. Reference is exact GPT white dragon girl identity: preserve white hair, ivory swept horns, small dragon wings, mint eyes, white-and-mint outfit and rose accents. Same thick dark contours and crisp cel shading. She gives an absurdly overconfident lecture, chin lifted, comically tiny knowing grin, one very raised eyebrow, one index finger confidently up beside her face; other arm embracing loose blank draft pages. Several blank draft papers form a chaotic halo behind her while she remains completely certain everything is under control. The joke is professional confidence versus paperwork chaos. Large expressive face, both hands anatomically coherent. Entire horns and props inside frame with 10 percent padding. No text, letters, numbers, logos, watermark, frame, checkerboard or background. Asset duel_gpt_confident.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-bb44ac9e-6667-4705-b75f-fcf4b1b38652.png"
+  },
+  {
+    "id": "duel_doubao_base_v3",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\references\\doubao-user-reference.png",
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_ds_base.png"
+    ],
+    "prompt": "Use case: identity-preserve character adaptation. Create ONE full-body game character cutout on genuinely transparent background, square composition. IMAGE 1 supplied by the user is the PRIMARY and authoritative Doubao appearance reference. IMAGE 2 is ONLY a light guide to chibi scale and clean cel-shaded linework, never a costume or hair reference. Faithfully translate the girl in image 1 into a 2.7-head-tall 2D game mascot. MUST preserve her smooth deep-brown chin-length asymmetric SIDE-PARTED bob: broad hair sweep at viewer-left temple, visible exposed forehead, the ear on viewer-right visible. NO straight-across bangs, NO bowl cut, NO hair buns, NO top curl/ahoge, NO ponytail, NO animal features. Big round dark-brown eyes, softly curved brows, round face and small natural friendly smile, no drool in this neutral base. Clearly visible rich red scarf wrapped around neck over a plain DARK charcoal/black long-sleeved top matching the reference shoulders. Complete the unseen lower body simply with dark shorts over opaque dark leggings and small dark sneakers with muted red accents. Standing relaxed three-quarter toward the right, arms at sides, no signs or props. Full body and feet entirely inside image, keep a generous clear transparent margin on every side. Bold clean dark outlines and simple polished cel shading compatible with image 2, but exact face/hair/scarf identity from image 1 is more important than exaggerated anime features. No text, caption, logo, watermark, blue circle, white backdrop or floor. Asset duel_doubao_base_v3.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-3a8790f7-f05b-4cc4-8db8-0ce36cb41f8a.png"
+  },
+  {
+    "id": "duel_ds_busted",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_ds_base.png"
+    ],
+    "prompt": "Use case: identity-preserve cartoon reaction. ONE square upper-body cutout on a genuinely transparent background. Reference is exact character identity; preserve hair silhouette and parting, clothes, accessories and colors. Match its clean dark outline and cel shading. Give an exaggerated comic expression readable without words. No text, numbers, watermark, logos, frames, background or multiple panels. All head extremities and props fully visible with clear padding, crop only at lower torso. DeepSeek blue whale maid has just realized her perfect calculation was hilariously wrong: one cheek smooshed sideways by her own palm, pupils shrunken and looking to the side, mouth an awkward zigzag desperately pretending she is fine. Other hand holds up one uncertain finger as if asking for a retry. Her white headband is tilted but still present, blue fin ears droop, one tiny sweat bead, hair curl forms a tired hook. A small detached pale-blue loading ring floats above her head, continuing its futile work. Keep navy-white maid outfit, cobalt-to-cyan hair and one cheek rice grain. Slapstick embarrassment, no injury, no blood. Asset duel_ds_busted.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-f293e41c-46ad-48d5-997d-a43b94cf6164.png"
+  },
+  {
+    "id": "duel_gpt_revision",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_gpt_base.png"
+    ],
+    "prompt": "Use case: identity-preserve cartoon reaction. ONE square upper-body cutout on a genuinely transparent background. Reference is exact character identity; preserve hair silhouette and parting, clothes, accessories and colors. Match its clean dark outline and cel shading. Give an exaggerated comic expression readable without words. No text, numbers, watermark, logos, frames, background or multiple panels. All head extremities and props fully visible with clear padding, crop only at lower torso. GPT white dragon girl suddenly changes her story. Stiff painfully polite grin, one eyebrow twitching, huge sweat bead; exactly TWO hands: one dabs her forehead, the other desperately crumples a blank sheet against the remaining blank draft pages held to her chest. A small blank sticky note hangs awkwardly from one ivory dragon horn. Preserve long white hair, two ivory horns, little white wings, mint accents and rose accessories. Make this clearly different from her smug confident lecture: a comedic caught-out apologetic expression, nervous side-eye, flushed cheeks. No written words on the papers or note. Asset duel_gpt_revision.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-96c3144f-fee5-4366-ab73-a3e44271b133.png"
+  },
+  {
+    "id": "duel_doubao_guarantee",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_doubao_base_v3.png"
+    ],
+    "prompt": "Use case: identity-preserve cartoon reaction. ONE square upper-body cutout on a genuinely transparent background. Reference is exact character identity; preserve hair silhouette and parting, clothes, accessories and colors. Match its clean dark outline and cel shading. Give an exaggerated comic expression readable without words. No text, numbers, watermark, logos, frames, background or multiple panels. All head extremities and props fully visible with clear padding, crop only at lower torso. Doubao MUST retain the reference's SIDE-PARTED dark-brown chin-length bob, EXPOSED FOREHEAD, ear visible at viewer-right, large dark round eyes, rich red scarf and plain DARK charcoal sweater. No straight bangs, no buns, no orange outfit. She enthusiastically pats her own chest with one hand and gives an exaggerated thumbs-up with the other. Expression is adorably overconfident while slightly vacant: raised brows, tiny proud open-mouth grin, eyes looking just a little past the viewer. Behind her a single huge pale peach BLANK speech bubble swells absurdly like a balloon about to burst; she is blissfully unaware. Red scarf ends flap from her enthusiasm. Identity from reference must stay clear. Asset duel_doubao_guarantee.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-3d853543-61bf-42e6-a221-b3b9dc528c6c.png"
+  },
+  {
+    "id": "duel_doubao_oops",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_doubao_base_v3.png"
+    ],
+    "prompt": "Use case: identity-preserve cartoon reaction. ONE square upper-body cutout on a genuinely transparent background. Reference is exact character identity; preserve hair silhouette and parting, clothes, accessories and colors. Match its clean dark outline and cel shading. Give an exaggerated comic expression readable without words. No text, numbers, watermark, logos, frames, background or multiple panels. All head extremities and props fully visible with clear padding, crop only at lower torso. Doubao after her guarantee fails: same SIDE-PARTED dark brown bob with exposed forehead and one visible ear, rich RED scarf and DARK sweater. No bangs, buns or white top. Her face is a gloriously blank stunned expression with small round pupils, mouth half open and exactly one tiny drool bead. Both hands hug a limp deflated pale peach speech bubble like a punctured balloon. Her scarf ends droop as if also embarrassed. Tilt her head slightly, puff one cheek and give her eyebrows an innocent 'what just happened?' look. Funny and still lovable, not crying, frightened or hurt. Blank bubble, no lettering. Asset duel_doubao_oops.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-548ed172-77ae-4163-82f8-0c57717b501e.png"
+  },
+  {
+    "id": "duel_ds_ultimate_key",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_ds_base.png"
+    ],
+    "prompt": "Use case: stylized-concept. Create ONE wide 16:9 fighting-game ultimate key illustration, NOT a comic page, with a genuinely transparent background outside all characters and props. Reference is the exact heroine identity. Preserve her face, hair, costume and colors; crisp dark comic outlines, bright limited cel shading, chibi scale. Make the action hilarious, dynamic and clearly readable without captions. Keep ALL limbs, horns, tails and props inside the frame with generous margins. No words, numbers, logos, watermark, border, floor or environment. This is a standalone cutout composition for animation planning, not a UI screenshot. DeepSeek cobalt-blue whale maid stands near center with a calm sleepy genius smirk, pointing firmly forward. Two SMALL ROUND BLUE WHALE EXPERTS in hilariously oversized white lab coats scramble into action on either side, each carrying a comically massive foam mallet. They are animal whale mascots with fins, not copies of the girl. One expert's glasses slide down; the other's lab-coat sleeve nearly swallows its fin. Behind them are exactly six EMPTY simple office chairs in a low-contrast shallow row; two experts working while the rest of the seats are vacant is the visual gag. An energetic blue whale-shaped swoosh ties the two mallet paths together, contained within the transparent composition. Heroine retains white frill headband, blue fin ears, navy-white dress, cobalt-to-cyan hair and whale tail. Dynamic impact-ready pose, no victim, no injury. Asset duel_ds_ultimate_key.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-a03e165c-7b35-475b-854e-72c6aee5efb3.png"
+  },
+  {
+    "id": "duel_gpt_ultimate_key",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_gpt_base.png"
+    ],
+    "prompt": "Use case: stylized-concept. Create ONE wide 16:9 fighting-game ultimate key illustration, NOT a comic page, with a genuinely transparent background outside all characters and props. Reference is the exact heroine identity. Preserve her face, hair, costume and colors; crisp dark comic outlines, bright limited cel shading, chibi scale. Make the action hilarious, dynamic and clearly readable without captions. Keep ALL limbs, horns, tails and props inside the frame with generous margins. No words, numbers, logos, watermark, border, floor or environment. This is a standalone cutout composition for animation planning, not a UI screenshot. GPT white dragon girl is being dragged forward by the sheer weight of an ABSURDLY HUGE RUBBER DOCUMENT STAMP, about twice her head's size. Exactly two hands grip its wooden mint-accented handle; her small booted feet have lifted off the ground, tiny white wings flail uselessly, long white hair and dragon tail trail behind. Her grin is determined but hilariously strained. A fan of blank draft pages bursts around the stamp like playing cards. The stamp's broad rectangular imprint face is EMPTY so game text can be added later. Compose diagonally left to right with the giant stamp leading and her body pulled along; readable silhouette and comic motion streaks. Preserve two ivory dragon horns, white/mint outfit and rose accents. No written text anywhere. Asset duel_gpt_ultimate_key.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-603a9673-323d-4a8a-9bd3-4a094e0dae1f.png"
+  },
+  {
+    "id": "duel_doubao_ultimate_key",
+    "references": [
+      "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_doubao_base_v3.png"
+    ],
+    "prompt": "Use case: stylized-concept. Create ONE wide 16:9 fighting-game ultimate key illustration, NOT a comic page, with a genuinely transparent background outside all characters and props. Reference is the exact heroine identity. Preserve her face, hair, costume and colors; crisp dark comic outlines, bright limited cel shading, chibi scale. Make the action hilarious, dynamic and clearly readable without captions. Keep ALL limbs, horns, tails and props inside the frame with generous margins. No words, numbers, logos, watermark, border, floor or environment. This is a standalone cutout composition for animation planning, not a UI screenshot. Doubao girl with the exact SIDE-PARTED dark brown short bob, exposed forehead, red scarf and DARK charcoal casual outfit from reference is vigorously compressing a long chain of BLANK pale-peach speech bubbles like an accordion between her two hands. On the other side, those bubbles balloon into a HUGE steamed-bun boxing glove that drags her forward. The bun glove is round and creamy with a pleated bun seam, clenched-fist silhouette and a clean blank central patch for later game text. Her red scarf flies backward, boots slip forward, eyes intensely serious while her mouth is still trying to finish explaining. This is a funny cause-and-effect scene: long explanation squeezed into a gigantic fist. Girl toward left, glove toward right, wide readable composition. No bangs, hair buns, orange outfit, extra arms, captions or text. Asset duel_doubao_ultimate_key.",
+    "status": "generated-and-visually-reviewed",
+    "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-9f6948ba-ed90-4328-9646-a662b1523a36.png"
+  }
+]

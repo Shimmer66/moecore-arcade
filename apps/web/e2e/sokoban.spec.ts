@@ -10,15 +10,17 @@ async function enterSokoban(page: Page) {
 
 test('loads the Fatfish Sokoban game from the arcade registry', async ({ page }) => {
   await enterSokoban(page);
-  await expect(page.getByText('大肥鱼 · 搬家日记', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: '大肥鱼 · 搬家日记' })).toBeVisible();
   await expect(page.locator('.sokoban-cell')).toHaveCount(42);
-  expect(
-    await page
-      .locator('img')
-      .evaluateAll((images) =>
-        images.every((image) => (image as HTMLImageElement).naturalWidth > 0),
-      ),
-  ).toBe(true);
+  await expect
+    .poll(() =>
+      page
+        .locator('img')
+        .evaluateAll((images) =>
+          images.every((image) => (image as HTMLImageElement).naturalWidth > 0),
+        ),
+    )
+    .toBe(true);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,

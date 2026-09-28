@@ -14,6 +14,8 @@ export interface GameResult {
   readonly summary: string;
   readonly story?: { readonly title: string; readonly body: string; readonly imageUrl?: string };
   readonly stats: Readonly<Record<string, number>>;
+  /** Optional result action: restart this game at its selection screen. */
+  readonly reselectLabel?: string;
 }
 
 export interface GameStorage {
@@ -26,6 +28,7 @@ export interface GameProps {
   readonly attempt: number;
   readonly paused: boolean;
   readonly settings: Readonly<GameSettings>;
+  readonly restartMode?: 'replay' | 'select';
 }
 
 export type GameEvents = {
