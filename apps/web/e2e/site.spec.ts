@@ -12,7 +12,6 @@ test('game pages return to the catalog and anchor links land on their sections',
   } else {
     await page.getByRole('button', { name: '返回游戏列表' }).click();
     await page.getByRole('button', { name: '确认', exact: true }).click();
-    await page.getByRole('link', { name: '发现小游戏' }).click();
   }
   await expect(page).toHaveURL(/#games$/);
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
@@ -26,13 +25,23 @@ test('game pages return to the catalog and anchor links land on their sections',
   await expect(page.getByRole('heading', { name: '一点灵感，就能开始。' })).toBeVisible();
 });
 
-test('home cover art uses display-sized images', async ({ page }) => {
+test('home catalogue renders all current games with display-sized art', async ({ page }) => {
   await page.goto('/');
-  const hero = page.locator('.hero-character-front');
-  await expect(hero).toHaveJSProperty('complete', true);
-  await expect(hero).toHaveAttribute('src', /gpt-portrait.*\.webp/);
-  await expect(page.locator('.catalog-card.tone-lav img').first()).toHaveAttribute(
-    'src',
-    /gpt-portrait.*\.webp/,
-  );
+  await expect(page.locator('.catalog-card')).toHaveCount(8);
+  const portraits = page.locator('.catalog-portrait');
+  await expect(portraits).toHaveCount(8);
+  await expect
+    .poll(() =>
+      portraits.evaluateAll((images) =>
+        images.every(
+          (image) =>
+            image instanceof HTMLImageElement &&
+            image.complete &&
+            image.naturalWidth > 0 &&
+            (image.currentSrc.startsWith('data:image/svg+xml') ||
+              /\.(?:webp|svg)(?:$|\?)/.test(image.currentSrc)),
+        ),
+      ),
+    )
+    .toBe(true);
 });

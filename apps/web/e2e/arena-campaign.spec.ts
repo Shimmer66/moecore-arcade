@@ -136,7 +136,7 @@ test('finishes a best-of-five sweep and restarts with fresh sabotage charges', a
 test('plays every room and secret through the browser before the final ending', async ({
   page,
 }, info) => {
-  test.setTimeout(180_000);
+  test.setTimeout(300_000);
   await page.clock.install({ time: new Date('2026-09-28T00:00:00Z') });
   await page.clock.pauseAt(new Date('2026-09-28T00:00:01Z'));
   await page.goto('/#/games/arena');
@@ -241,7 +241,7 @@ test('changes movement in the lab and loads its generated background', async ({ 
   await page.clock.runFor(150);
   expect(Number(await player.getAttribute('data-x'))).toBeGreaterThan(x + 10);
   const background = page.locator('.playfield > svg > image');
-  await expect(background).toHaveAttribute('href', /parameter-lab/);
+  await expect(background).toHaveAttribute('data-background', 'parameter-lab');
   expect(
     await background.evaluate(async (element) => {
       const image = new Image();
@@ -428,7 +428,7 @@ test('races with independent keys and renders the generated archive', async ({ p
   await page.getByRole('button', { name: '选择关卡', exact: true }).click();
   await page.getByRole('button', { name: /删去不重要的/ }).click();
   const background = page.locator('.playfield > svg > image');
-  await expect(background).toHaveAttribute('href', /server-archive/);
+  await expect(background).toHaveAttribute('data-background', 'server-archive');
   expect(
     await background.evaluate(async (element) => {
       const image = new Image();

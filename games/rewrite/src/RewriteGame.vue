@@ -2597,6 +2597,17 @@ h2 span {
     min-height: 49px;
   }
 }
+@media (max-width: 360px) {
+  .rewrite-control-deck.duo .rewrite-dpad,
+  .rewrite-control-deck.duo .rewrite-action-buttons {
+    grid-template-columns: repeat(3, 40px);
+  }
+  .rewrite-control-deck.duo .rewrite-dpad button,
+  .rewrite-control-deck.duo .rewrite-action-buttons button,
+  .rewrite-control-deck.duo .rewrite-action-buttons .rewrite-fire {
+    width: 40px;
+  }
+}
 .rewrite-loadout-panel {
   border-top: 1px solid #315064;
   border-bottom: 1px solid #315064;

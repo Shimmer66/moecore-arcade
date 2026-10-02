@@ -521,7 +521,8 @@ onUnmounted(() => {
 }
 @media (max-width: 360px) {
   .journey-hero h2 {
-    font-size: 20px;
+    font-size: 18px;
+    white-space: nowrap;
   }
 }
 </style>

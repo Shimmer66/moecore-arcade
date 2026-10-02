@@ -10,7 +10,7 @@ async function enterSokoban(page: Page) {
 
 test('loads the Fatfish Sokoban game from the arcade registry', async ({ page }) => {
   await enterSokoban(page);
-  await expect(page.getByText('大肥鱼 · 搬家日记', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: '大肥鱼 · 搬家日记' })).toBeVisible();
   await expect(page.locator('.sokoban-cell')).toHaveCount(42);
   await expect
     .poll(() =>

@@ -302,6 +302,15 @@ const background = computed(() =>
         ? art.serverArchive
         : art.background,
 );
+const backgroundKind = computed(() =>
+  endless.value
+    ? ['floating-islands', 'server-archive', 'parameter-lab'][endless.value.stage % 3]!
+    : index.value >= 24
+      ? 'parameter-lab'
+      : index.value >= 4
+        ? 'server-archive'
+        : 'floating-islands',
+);
 const worldWidth = computed(() => room.value.width ?? 1000);
 const cameraFrame = computed(() =>
   frameActors(worldWidth.value, raceMode.value ? 1000 : viewportWidth.value, [
@@ -914,6 +923,7 @@ onUnmounted(() => {
           :key="`background-${tile}`"
           :x="(tile - 1) * 1000"
           :href="background"
+          :data-background="backgroundKind"
           width="1000"
           height="440"
           preserveAspectRatio="xMidYMid slice"

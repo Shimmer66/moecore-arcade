@@ -1,12 +1,26 @@
 <script setup lang="ts">
-import { computed, onErrorCaptured, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue';
+import {
+  computed,
+  nextTick,
+  onErrorCaptured,
+  onMounted,
+  onUnmounted,
+  ref,
+  shallowRef,
+  watch,
+} from 'vue';
 import { ArrowLeft, Maximize2, Minimize2, Pause, Play, RotateCcw, X } from '@lucide/vue';
 import type { GameDefinition, GameResult } from '@moecore/game-sdk';
 import { findGame } from './registry';
+import LiquidGlass from '../features/liquid-glass/LiquidGlass.vue';
+import LiquidSurface from '../features/liquid-glass/LiquidSurface.vue';
 
 const props = defineProps<{ gameId: string }>();
 const emit = defineEmits<{ exit: [] }>();
 const definition = shallowRef<GameDefinition>();
+const displayTitle = computed(
+  () => findGame(props.gameId)?.title ?? definition.value?.title ?? '未找到游戏',
+);
 const error = ref('');
 const loading = ref(false);
 const sessionId = ref('');
@@ -19,6 +33,9 @@ const confirmation = ref<HTMLDialogElement>();
 const pendingAction = ref<'restart' | 'exit'>();
 const reduceMotion = ref(false);
 const gameHost = ref<HTMLElement>();
+const pauseControl = ref<HTMLButtonElement>();
+const resumeControl = ref<HTMLButtonElement>();
+const resultControl = ref<HTMLButtonElement>();
 const fullscreen = ref(false);
 const fullscreenSupported = ref(false);
 const paused = computed(
@@ -72,6 +89,7 @@ onErrorCaptured(() => {
 function finish(value: GameResult) {
   if (result.value || value.sessionId !== sessionId.value || value.gameId !== props.gameId) return;
   result.value = value;
+  void nextTick(() => resultControl.value?.focus());
 }
 
 function requestAction(action: 'restart' | 'exit') {
@@ -99,6 +117,12 @@ function confirmAction() {
 function resume() {
   manuallyPaused.value = false;
   autoPaused.value = false;
+  void nextTick(() => pauseControl.value?.focus());
+}
+
+function pauseManually() {
+  manuallyPaused.value = true;
+  void nextTick(() => resumeControl.value?.focus());
 }
 
 function reload() {
@@ -128,8 +152,15 @@ function pauseForBackground() {
   if (definition.value && !result.value) autoPaused.value = true;
 }
 
+function focusBackgroundPause() {
+  if (autoPaused.value && !pendingAction.value && !result.value) {
+    void nextTick(() => resumeControl.value?.focus());
+  }
+}
+
 function visibilityChanged() {
   if (document.hidden) pauseForBackground();
+  else focusBackgroundPause();
 }
 
 function pauseWithEscape(event: KeyboardEvent) {
@@ -145,7 +176,7 @@ function pauseWithEscape(event: KeyboardEvent) {
     return;
   }
   if (event.code === 'Escape' && definition.value && !result.value && !pendingAction.value) {
-    manuallyPaused.value = true;
+    pauseManually();
   }
 }
 
@@ -156,6 +187,7 @@ onMounted(() => {
   );
   syncFullscreen();
   window.addEventListener('blur', pauseForBackground);
+  window.addEventListener('focus', focusBackgroundPause);
   window.addEventListener('keydown', pauseWithEscape);
   document.addEventListener('visibilitychange', visibilityChanged);
   document.addEventListener('fullscreenchange', syncFullscreen);
@@ -164,6 +196,7 @@ onUnmounted(() => {
   loadRevision += 1;
   confirmation.value?.close();
   window.removeEventListener('blur', pauseForBackground);
+  window.removeEventListener('focus', focusBackgroundPause);
   window.removeEventListener('keydown', pauseWithEscape);
   document.removeEventListener('visibilitychange', visibilityChanged);
   document.removeEventListener('fullscreenchange', syncFullscreen);
@@ -171,37 +204,42 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section ref="gameHost" class="game-host">
+  <section ref="gameHost" class="game-host" :data-reduce-motion="reduceMotion">
     <div class="game-toolbar">
+      <LiquidGlass />
       <div class="game-heading">
         <button
           type="button"
           class="icon-button"
+          data-glass
           title="返回游戏列表"
           aria-label="返回游戏列表"
           @click="requestAction('exit')"
         >
           <ArrowLeft :size="20" />
         </button>
-        <h1>{{ definition?.title ?? findGame(gameId)?.title ?? '未找到游戏' }}</h1>
+        <h1>{{ displayTitle }}</h1>
       </div>
       <div class="game-actions">
-        <label class="motion-toggle"
+        <label class="motion-toggle" data-glass
           ><input v-model="reduceMotion" type="checkbox" />减少动态效果</label
         >
         <button
+          ref="pauseControl"
           type="button"
           class="icon-button"
+          data-glass
           :disabled="!definition || !!result"
           title="暂停"
           aria-label="暂停"
-          @click="manuallyPaused = true"
+          @click="pauseManually"
         >
           <Pause :size="20" />
         </button>
         <button
           type="button"
           class="icon-button"
+          data-glass
           :disabled="!definition"
           title="重新开始"
           aria-label="重新开始"
@@ -212,6 +250,7 @@ onUnmounted(() => {
         <button
           type="button"
           class="icon-button"
+          data-glass
           :disabled="!definition || !fullscreenSupported"
           :title="fullscreen ? '退出全屏' : '全屏'"
           :aria-label="fullscreen ? '退出全屏' : '全屏'"
@@ -224,13 +263,20 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div v-if="loading" class="host-state" role="status">正在加载游戏…</div>
+    <div v-if="loading" class="host-state" role="status">
+      <LiquidSurface />
+      <span>正在加载游戏…</span>
+    </div>
     <div v-else-if="error" class="host-state" role="alert">
+      <LiquidSurface />
       <h2>{{ error }}</h2>
-      <button class="primary-button" type="button" @click="reload">重新加载</button>
+      <button class="primary-button" type="button" @click="reload">
+        <LiquidSurface interactive /><span>重新加载</span>
+      </button>
     </div>
     <div v-else-if="definition" class="game-stage">
-      <div :inert="paused" :aria-hidden="paused ? true : undefined">
+      <LiquidSurface />
+      <div class="game-content" :inert="paused" :aria-hidden="paused ? true : undefined">
         <component
           :is="definition.component"
           :key="sessionId"
@@ -250,38 +296,39 @@ onUnmounted(() => {
         aria-label="对局结算"
         aria-live="polite"
       >
-        <div class="overlay-panel">
-          <img
-            v-if="result.story?.imageUrl"
-            class="story-ending-image"
-            :src="result.story.imageUrl"
-            alt=""
-            width="136"
-            height="136"
-          />
-          <h2>
-            {{ result.story?.title ?? (result.outcome === 'win' ? '挑战完成！' : '本局结束') }}
-          </h2>
-          <p v-if="result.story" class="story-ending">{{ result.story.body }}</p>
-          <p>{{ result.summary }}</p>
-          <button class="primary-button" type="button" @click="restart()">
-            <RotateCcw :size="18" />{{
-              gameId === 'parkour' && result.outcome === 'win' && Number(result.stats.level) < 3
-                ? '下一关'
-                : '再来一局'
-            }}
-          </button>
-          <span v-if="gameId === 'parkour'" class="retry-key-hint">按空格也能马上重来</span>
-          <button
-            v-if="result.reselectLabel"
-            class="text-button"
-            type="button"
-            @click="restart('select')"
-          >
-            {{ result.reselectLabel }}
-          </button>
-          <button class="text-button" type="button" @click="emit('exit')">返回游戏列表</button>
-        </div>
+        <LiquidSurface />
+        <img
+          v-if="result.story?.imageUrl"
+          class="story-ending-image"
+          :src="result.story.imageUrl"
+          alt=""
+          width="136"
+          height="136"
+        />
+        <h2>
+          {{ result.story?.title ?? (result.outcome === 'win' ? '挑战完成！' : '本局结束') }}
+        </h2>
+        <p v-if="result.story" class="story-ending">{{ result.story.body }}</p>
+        <p>{{ result.summary }}</p>
+        <button ref="resultControl" class="primary-button" type="button" @click="restart()">
+          <LiquidSurface interactive /><RotateCcw :size="18" /><span>{{
+            gameId === 'parkour' && result.outcome === 'win' && Number(result.stats.level) < 3
+              ? '下一关'
+              : '再来一局'
+          }}</span>
+        </button>
+        <span v-if="gameId === 'parkour'" class="retry-key-hint">按空格也能马上重来</span>
+        <button
+          v-if="result.reselectLabel"
+          class="text-button"
+          type="button"
+          @click="restart('select')"
+        >
+          <LiquidSurface interactive /><span>{{ result.reselectLabel }}</span>
+        </button>
+        <button class="text-button" type="button" @click="emit('exit')">
+          <LiquidSurface interactive /><span>返回游戏列表</span>
+        </button>
       </div>
       <div
         v-else-if="paused && !pendingAction"
@@ -289,13 +336,12 @@ onUnmounted(() => {
         role="region"
         aria-label="暂停菜单"
       >
-        <div class="overlay-panel">
-          <Pause :size="32" />
-          <h2>已暂停</h2>
-          <button class="primary-button" type="button" @click="resume">
-            <Play :size="18" />继续游戏
-          </button>
-        </div>
+        <LiquidSurface />
+        <Pause :size="32" />
+        <h2>已暂停</h2>
+        <button ref="resumeControl" class="primary-button" type="button" @click="resume">
+          <LiquidSurface interactive /><Play :size="18" /><span>继续游戏</span>
+        </button>
       </div>
     </div>
 
@@ -305,6 +351,7 @@ onUnmounted(() => {
       @cancel.prevent="cancelAction"
       @close="pendingAction = undefined"
     >
+      <LiquidSurface />
       <div class="dialog-heading">
         <h2>{{ pendingAction === 'restart' ? '重新开始？' : '离开本局？' }}</h2>
         <button
@@ -314,13 +361,18 @@ onUnmounted(() => {
           aria-label="取消"
           @click="cancelAction"
         >
+          <LiquidSurface interactive />
           <X :size="18" />
         </button>
       </div>
       <p>本局进度不会保留。</p>
       <div class="dialog-actions">
-        <button class="text-button" type="button" autofocus @click="cancelAction">继续本局</button
-        ><button class="primary-button" type="button" @click="confirmAction">确认</button>
+        <button class="text-button" type="button" autofocus @click="cancelAction">
+          <LiquidSurface interactive /><span>继续本局</span>
+        </button>
+        <button class="primary-button" type="button" @click="confirmAction">
+          <LiquidSurface interactive /><span>确认</span>
+        </button>
       </div>
     </dialog>
   </section>

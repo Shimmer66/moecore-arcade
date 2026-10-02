@@ -1,10 +1,19 @@
 import manifest from '../match3/asset-manifest.json';
 
-const assetUrls = import.meta.glob('../match3/assets/**/*.png', {
-  eager: true,
-  import: 'default',
-  query: '?url',
-}) as Record<string, string>;
+// The portrait and reaction PNG masters have runtime WebP derivatives. Keep
+// them out of the production bundle while retaining the original art pack.
+const assetUrls = import.meta.glob(
+  [
+    '../match3/assets/**/*.png',
+    '!../match3/assets/tiles/*_tile_portrait.png',
+    '!../match3/assets/tiles/*_tile_reaction_*.png',
+  ],
+  {
+    eager: true,
+    import: 'default',
+    query: '?url',
+  },
+) as Record<string, string>;
 const displayTileUrls = import.meta.glob('../match3/runtime-tiles/*.webp', {
   eager: true,
   import: 'default',

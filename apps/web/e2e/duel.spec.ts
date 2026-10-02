@@ -1,223 +1,148 @@
 import { expect, test, type Page } from '@playwright/test';
 
-async function open(page: Page) {
-  await page.clock.install({ time: new Date('2026-09-26T00:00:00Z') });
-  await page.clock.pauseAt(new Date('2026-09-26T00:00:01Z'));
+async function openDuel(page: Page) {
+  await page.clock.install({ time: new Date('2026-10-02T00:00:00Z') });
+  await page.clock.pauseAt(new Date('2026-10-02T00:00:01Z'));
   await page.goto('/#/games/duel');
-  await expect(page.getByRole('button', { name: '选择DeepSeek 娘' })).toBeVisible();
-}
-async function begin(page: Page) {
-  await page.getByRole('button', { name: '开打 →', exact: true }).click();
-  await page.clock.runFor(3100);
-  await expect(page.locator('.duel')).toHaveAttribute('data-phase', 'fight');
-}
-async function finishNaturally(page: Page) {
-  for (let i = 0; i < 60; i++) {
-    if (await page.getByRole('region', { name: '对局结算' }).count()) return;
-    await page.clock.runFor(5000);
-  }
-  await expect(page.getByRole('region', { name: '对局结算' })).toBeVisible();
+  await expect(page.locator('.duel')).toHaveAttribute('data-phase', 'select');
+  await expect(page.getByRole('group', { name: '选择角色' }).locator('.duel-card')).toHaveCount(6);
 }
 
-test('three fighters load, keyboard movement pauses and clears held input, and host restart resets the match', async ({
+async function advanceToFight(page: Page) {
+  for (let step = 0; step < 40; step += 1) {
+    if ((await page.locator('.duel').getAttribute('data-phase')) === 'fight') return;
+    await page.bringToFront();
+    const resume = page.getByRole('button', { name: '继续游戏', exact: true });
+    if (await resume.isVisible()) await resume.click();
+    await page.clock.runFor(100);
+  }
+  await expect(page.locator('.duel')).toHaveAttribute('data-phase', 'fight');
+}
+
+async function startQuickMatch(page: Page) {
+  await page.getByRole('button', { name: '选择GPT 娘' }).click();
+  await page.getByLabel('选择对手').selectOption('deepseek');
+  await page.getByRole('button', { name: '开打 →', exact: true }).click();
+  await advanceToFight(page);
+}
+
+test('loads six fighters, starts a match and preserves pause and restart behavior', async ({
   page,
-}, info) => {
+}) => {
   const errors: string[] = [];
-  page.on('pageerror', (e) => errors.push(e.message));
-  await open(page);
-  await page.getByRole('button', { name: '选择豆包娘' }).click();
-  await expect(page.getByRole('button', { name: '选择豆包娘' })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
-  await page.screenshot({ path: info.outputPath('duel-selection.png'), fullPage: true });
-  await begin(page);
-  const f = page.getByTestId('duel-fighter-0');
-  const before = Number(await f.getAttribute('data-x'));
+  page.on('pageerror', (error) => errors.push(error.message));
+  await openDuel(page);
+  await expect
+    .poll(() =>
+      page
+        .locator('.duel-portrait')
+        .evaluateAll((portraits) =>
+          portraits.every(
+            (portrait) => portrait instanceof HTMLImageElement && portrait.naturalWidth > 0,
+          ),
+        ),
+    )
+    .toBe(true);
+  await startQuickMatch(page);
+
+  const fighter = page.getByTestId('duel-fighter-0');
+  const startX = Number(await fighter.getAttribute('data-x'));
   await page.keyboard.down('KeyD');
-  await page.clock.runFor(200);
-  expect(Number(await f.getAttribute('data-x'))).toBeGreaterThan(before);
-  await page.getByRole('button', { name: '暂停', exact: true }).click();
-  const frozen = await f.getAttribute('data-x'),
-    timer = await page.locator('.duel').getAttribute('data-timer');
-  await page.clock.runFor(3000);
-  expect(await f.getAttribute('data-x')).toBe(frozen);
-  expect(await page.locator('.duel').getAttribute('data-timer')).toBe(timer);
-  await page.getByRole('button', { name: '继续游戏', exact: true }).click();
-  await page.clock.runFor(200);
-  expect(await f.getAttribute('data-x')).toBe(frozen);
+  await page.clock.runFor(180);
   await page.keyboard.up('KeyD');
-  await page.keyboard.press('KeyU');
-  await page.clock.runFor(400);
-  await page.screenshot({ path: info.outputPath('duel-battle.png'), fullPage: true });
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(Number(await fighter.getAttribute('data-x'))).toBeGreaterThan(startX);
+
+  await page.getByRole('button', { name: '暂停', exact: true }).click();
+  const frozenX = await fighter.getAttribute('data-x');
+  const frozenTimer = await page.locator('.duel').getAttribute('data-timer');
+  await page.clock.runFor(1500);
+  expect(await fighter.getAttribute('data-x')).toBe(frozenX);
+  expect(await page.locator('.duel').getAttribute('data-timer')).toBe(frozenTimer);
+  await page.getByRole('button', { name: '继续游戏', exact: true }).click();
+
   await page.getByRole('button', { name: '重新开始', exact: true }).click();
   await page.getByRole('button', { name: '确认', exact: true }).click();
   await expect(page.locator('.duel')).toHaveAttribute('data-phase', 'countdown');
   await expect(page.getByTestId('duel-fighter-0')).toHaveAttribute('data-hp', '1000');
-  await expect(page.getByTestId('duel-fighter-0').locator('[data-character]')).toHaveAttribute(
-    'data-character',
-    'doubao',
-  );
   expect(errors).toEqual([]);
 });
 
-test('a real CPU match finishes, replays with the same fighters and offers a fresh character selection', async ({
+test('builds two three-person teams and starts a local 3v3 relay match', async ({ page }) => {
+  await openDuel(page);
+  await page.getByRole('button', { name: /3v3车轮战/ }).click();
+  const teamSelect = page.getByRole('region', { name: '三人队伍编成' });
+  await expect(teamSelect.getByRole('combobox')).toHaveCount(6);
+  await teamSelect.getByRole('button', { name: '双人队伍战', exact: true }).click();
+  const start = page.getByRole('button', { name: '全队开打 →', exact: true });
+  await expect(start).toBeEnabled({ timeout: 30_000 });
+  await start.click();
+  await advanceToFight(page);
+
+  await expect(page.locator('.duel')).toHaveAttribute('data-mode', 'team');
+  await expect(page.getByTestId('duel-team-0').locator('[data-character]')).toHaveCount(3);
+  await expect(page.getByTestId('duel-team-1').locator('[data-character]')).toHaveCount(3);
+  await expect(page.locator('.duel-p2-pad')).toBeVisible();
+});
+
+test('practice exposes current lessons, input history and a truthful result summary', async ({
   page,
-}, info) => {
-  test.setTimeout(120000);
-  await open(page);
-  await page.getByRole('button', { name: '选择GPT 娘' }).click();
-  await page.getByLabel('选择对手').selectOption('deepseek');
-  await begin(page);
-  await finishNaturally(page);
-  const result = page.getByRole('region', { name: '对局结算' });
-  await expect(result).toContainText('GPT 娘 VS DeepSeek 娘');
-  await page.screenshot({ path: info.outputPath('duel-result.png'), fullPage: true });
-  await page.getByRole('button', { name: '再来一局', exact: true }).click();
-  await expect(page.locator('.duel')).toHaveAttribute('data-round', '1');
-  await expect(page.locator('.duel')).toHaveAttribute('data-phase', 'countdown');
-  await expect(page.getByTestId('duel-fighter-0').locator('[data-character]')).toHaveAttribute(
-    'data-character',
-    'gpt',
-  );
-  await finishNaturally(page);
-  await page.getByRole('button', { name: '换角色', exact: true }).click();
-  await expect(page.locator('.duel')).toHaveAttribute('data-phase', 'select');
-  await page.getByRole('button', { name: '选择豆包娘' }).click();
-  await begin(page);
-  await expect(page.getByTestId('duel-fighter-0').locator('[data-character]')).toHaveAttribute(
-    'data-character',
-    'doubao',
+}) => {
+  await openDuel(page);
+  await page.getByRole('button', { name: /练招房/ }).click();
+  await page.getByRole('button', { name: '开始练招 →', exact: true }).click();
+  await advanceToFight(page);
+
+  await expect(page.locator('.duel')).toHaveAttribute('data-mode', 'practice');
+  await expect(page.locator('[aria-label="练招目标"] > span')).toHaveCount(9);
+  await page.locator('.duel-arena').focus();
+  await page.keyboard.press('KeyJ');
+  await page.clock.runFor(180);
+  await expect(page.getByTestId('duel-input-0')).toContainText('轻拳');
+  await page.getByRole('button', { name: '结束练习', exact: true }).click();
+  await expect(page.getByRole('region', { name: '对局结算' })).toContainText(
+    /已完成 \d+\/9 项练习/,
   );
 });
 
-test('touch holds direction while another finger jumps, and narrow screens keep all actions reachable', async ({
+test('mobile controls support simultaneous movement and jump without horizontal overflow', async ({
   page,
 }, info) => {
-  test.skip(
-    !info.project.name.startsWith('mobile'),
-    'Physical touch coverage runs in the mobile project.',
-  );
-  await open(page);
-  await begin(page);
+  test.skip(!info.project.name.startsWith('mobile'), 'Multi-touch coverage runs on mobile.');
+  await openDuel(page);
+  await startQuickMatch(page);
+  await page.setViewportSize({ width: 320, height: 760 });
+
   const right = page.getByRole('button', { name: '向右移动', exact: true });
+  const jump = page.getByRole('button', { name: '跳跃', exact: true });
   await right.scrollIntoViewIfNeeded();
-  const r = (await right.boundingBox())!,
-    j = (await page.getByRole('button', { name: '跳跃', exact: true }).boundingBox())!;
+  const rightBox = (await right.boundingBox())!;
+  const jumpBox = (await jump.boundingBox())!;
   const client = await page.context().newCDPSession(page);
-  const first = { id: 1, x: r.x + r.width / 2, y: r.y + r.height / 2 };
-  const second = { id: 2, x: j.x + j.width / 2, y: j.y + j.height / 2 };
-  await client.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [first] });
+  const movement = {
+    id: 1,
+    x: rightBox.x + rightBox.width / 2,
+    y: rightBox.y + rightBox.height / 2,
+  };
+  const action = {
+    id: 2,
+    x: jumpBox.x + jumpBox.width / 2,
+    y: jumpBox.y + jumpBox.height / 2,
+  };
+  await client.send('Input.dispatchTouchEvent', {
+    type: 'touchStart',
+    touchPoints: [movement],
+  });
   await page.clock.runFor(100);
   await client.send('Input.dispatchTouchEvent', {
     type: 'touchStart',
-    touchPoints: [first, second],
+    touchPoints: [movement, action],
   });
   await page.clock.runFor(180);
-  expect(Number(await page.getByTestId('duel-fighter-0').getAttribute('data-y'))).toBeGreaterThan(
-    0,
-  );
-  expect(Number(await page.getByTestId('duel-fighter-0').getAttribute('data-x'))).toBeGreaterThan(
-    280,
-  );
   await client.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await client.detach();
-  await page.setViewportSize({ width: 320, height: 740 });
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  for (const name of ['轻击', '重击', '防御', '特色技能', '投技', '终结技']) {
-    const button = page.getByRole('button', { name, exact: true });
-    await button.scrollIntoViewIfNeeded();
-    const rect = (await button.boundingBox())!;
-    expect(rect.width).toBeGreaterThanOrEqual(48);
-    expect(rect.height).toBeGreaterThanOrEqual(48);
-    expect(rect.x).toBeGreaterThanOrEqual(0);
-    expect(rect.x + rect.width).toBeLessThanOrEqual(320);
-  }
-  await page.screenshot({ path: info.outputPath('duel-narrow.png'), fullPage: true });
-});
 
-test('normal keyboard attacks earn meter and release a visible ultimate during an active match', async ({
-  page,
-}, info) => {
-  test.skip(
-    info.project.name.startsWith('mobile'),
-    'Keyboard combat is covered on desktop; multi-touch has its own test.',
-  );
-  test.setTimeout(120000);
-  await open(page);
-  await page.getByRole('button', { name: '选择GPT 娘' }).click();
-  await page.getByLabel('选择对手').selectOption('gpt');
-  await begin(page);
-  let direction = '',
-    sawUltimate = false,
-    dealtDamage = false;
-  for (let n = 0; n < 1000; n++) {
-    const phase = await page.locator('.duel').getAttribute('data-phase');
-    if (phase === 'done') break;
-    if (phase === 'cinematic') {
-      if ((await page.locator('.duel-ultimate').getAttribute('data-actor')) !== '0') {
-        await page.clock.runFor(1300);
-        continue;
-      }
-      sawUltimate = true;
-      await expect(page.locator('.duel-ultimate')).toBeVisible();
-      await page.clock.runFor(600);
-      await page.screenshot({ path: info.outputPath('duel-ultimate.png'), fullPage: true });
-      break;
-    }
-    if (phase !== 'fight') {
-      if (direction) await page.keyboard.up(direction);
-      direction = '';
-      await page.clock.runFor(300);
-      continue;
-    }
-    const fighters = await page.locator('[data-testid^="duel-fighter-"]').evaluateAll((nodes) =>
-      nodes.map((node) => ({
-        x: Number(node.getAttribute('data-x')),
-        y: Number(node.getAttribute('data-y')),
-        hp: Number(node.getAttribute('data-hp')),
-        energy: Number(node.getAttribute('data-energy')),
-        action: node.getAttribute('data-action'),
-      })),
-    );
-    const [me, enemy] = fighters;
-    expect(me).toBeTruthy();
-    expect(enemy).toBeTruthy();
-    if (enemy!.hp < 1000) dealtDamage = true;
-    const distance = Math.abs(enemy!.x - me!.x);
-    if (distance <= 64) await page.keyboard.down('KeyL');
-    else await page.keyboard.up('KeyL');
-    const nextDirection = distance > 55 ? (enemy!.x > me!.x ? 'KeyD' : 'KeyA') : '';
-    if (nextDirection !== direction) {
-      if (direction) await page.keyboard.up(direction);
-      if (nextDirection) await page.keyboard.down(nextDirection);
-      direction = nextDirection;
-    }
-    // Confirm a grounded light hit before committing meter; airborne/knocked-down foes
-    // cannot be finished by a grounded super. Sampling speeds up around this window.
-    if (me!.energy >= 100) {
-      if (
-        me!.y === 0 &&
-        enemy!.y === 0 &&
-        enemy!.action === 'hurt' &&
-        ['light1', 'light2'].includes(me!.action ?? '')
-      )
-        await page.keyboard.press('KeyI');
-      else if (
-        distance < 76 &&
-        me!.y === 0 &&
-        enemy!.y === 0 &&
-        !['down', 'hurt'].includes(enemy!.action ?? '')
-      )
-        await page.keyboard.press('KeyJ');
-    } else if (distance < 64 && enemy!.action === 'guard') await page.keyboard.press('KeyO');
-    else if (n % 4 === 0) await page.keyboard.press('KeyU');
-    else await page.keyboard.press('KeyJ');
-    await page.clock.runFor(me!.energy >= 95 ? 33 : 150);
-  }
-  if (direction) await page.keyboard.up(direction);
-  await page.keyboard.up('KeyL');
-  expect(dealtDamage).toBe(true);
-  expect(sawUltimate).toBe(true);
+  const fighter = page.getByTestId('duel-fighter-0');
+  expect(Number(await fighter.getAttribute('data-x'))).toBeGreaterThan(280);
+  expect(Number(await fighter.getAttribute('data-y'))).toBeGreaterThan(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

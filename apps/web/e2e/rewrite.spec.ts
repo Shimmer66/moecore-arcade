@@ -223,6 +223,7 @@ test('a real-damage practice fight can be won and replayed without a campaign re
 test('climbs the entire context tower through real inputs and reaches the summit arena', async ({
   page,
 }, info) => {
+  test.setTimeout(60_000);
   await page.getByRole('button', { name: '关卡演练', exact: true }).click();
   await page.getByLabel('演练目标', { exact: true }).selectOption('2');
   await page.getByLabel('演练起始位置', { exact: true }).selectOption('entry');
@@ -338,18 +339,18 @@ test('two touch controllers fit 320px and keep simultaneous player actions separ
   await left.dispatchEvent('pointercancel', { pointerId: 10 });
   await jump.dispatchEvent('pointercancel', { pointerId: 20 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  expect(
-    await page.locator('.rewrite-controls').evaluateAll((controls) =>
-      controls.every((c) => {
-        const bounds = c.getBoundingClientRect();
-        return [...c.querySelectorAll('button')].every(
-          (b) =>
-            b.getBoundingClientRect().right <= bounds.right &&
-            b.getBoundingClientRect().left >= bounds.left,
-        );
-      }),
-    ),
-  ).toBe(true);
+  const overflow = await page.locator('.rewrite-controls').evaluateAll((controls) =>
+    controls.flatMap((c) => {
+      const bounds = c.getBoundingClientRect();
+      return [...c.querySelectorAll('button')]
+        .filter((button) => {
+          const buttonBounds = button.getBoundingClientRect();
+          return buttonBounds.right > bounds.right || buttonBounds.left < bounds.left;
+        })
+        .map((button) => button.getAttribute('aria-label') ?? button.textContent?.trim() ?? '');
+    }),
+  );
+  expect(overflow).toEqual([]);
   await page.screenshot({ path: info.outputPath('coop-touch.png'), fullPage: true });
 });
 

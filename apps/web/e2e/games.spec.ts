@@ -40,7 +40,7 @@ test('opens the Vue game, renders assets, and fits the viewport', async ({ page 
   await enterGame(page);
   await expect(page).toHaveURL(/#\/games\/match3$/);
   await expect(page.getByRole('heading', { name: 'AI 娘消消乐', exact: true })).toBeVisible();
-  await expect(page.locator('canvas')).toHaveCount(0);
+  await expect(page.locator('.match3-game canvas')).toHaveCount(0);
   await expect
     .poll(() =>
       page
