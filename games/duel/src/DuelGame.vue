@@ -5303,7 +5303,7 @@ onUnmounted(() => {
     overflow: hidden;
   }
   .duel:not([data-phase='select']) .duel-arena {
-    width: calc(100% - 310px);
+    width: 100%;
     height: 100%;
     margin: 0;
   }
@@ -5313,24 +5313,28 @@ onUnmounted(() => {
   }
   .duel:not([data-phase='select']) .duel-controls {
     position: absolute;
-    inset: 0 0 0 auto;
+    inset: 0;
     z-index: 5;
-    width: 310px;
+    display: block;
+    width: 100%;
     height: 100%;
-    grid-template-columns: 108px minmax(0, 1fr);
-    align-content: center;
-    gap: 8px;
-    padding: 8px;
-    overflow-y: auto;
+    padding: 0;
+    overflow: hidden;
     border-top: 0;
-    border-left: 1px solid #3b4965;
+    background: transparent;
+    pointer-events: none;
   }
   .duel:not([data-phase='select']) .duel-coach {
     display: none;
   }
   .duel:not([data-phase='select']) .duel-directions {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
     width: 108px;
     height: 108px;
+    background-color: #142039d9;
+    pointer-events: auto;
   }
   .duel:not([data-phase='select']) .duel-directions .control-jump,
   .duel:not([data-phase='select']) .duel-directions .control-crouch {
@@ -5353,8 +5357,17 @@ onUnmounted(() => {
     display: none;
   }
   .duel:not([data-phase='select']) .duel-action-pad {
+    position: absolute;
+    right: 14px;
+    bottom: 12px;
+    width: 184px;
+    padding: 6px;
+    border: 1px solid #53647f;
+    border-radius: 8px;
+    background: #142039d9;
     grid-template-columns: repeat(3, minmax(44px, 1fr));
     gap: 4px;
+    pointer-events: auto;
   }
   .duel:not([data-phase='select']) .duel-action-pad button,
   .duel:not([data-phase='select']) .duel-action-pad .control-light {

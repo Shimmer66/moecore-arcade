@@ -2668,7 +2668,7 @@ h2 span {
     left: 6px;
     z-index: 7;
     display: flex;
-    width: calc(100% - 266px);
+    width: calc(100% - 12px);
     align-items: center;
     justify-content: space-between;
     gap: 8px;
@@ -2684,7 +2684,7 @@ h2 span {
     display: none;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-stage {
-    width: calc(100% - 250px);
+    width: 100%;
     height: 100%;
     min-height: 0;
   }
@@ -2694,37 +2694,40 @@ h2 span {
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-control-deck {
     position: absolute;
-    inset: 0 0 0 auto;
+    inset: 0;
     z-index: 6;
     display: block;
-    width: 250px;
-    overflow-y: auto;
-    border-left: 1px solid #304151;
-    background: #101e2c;
+    width: 100%;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    pointer-events: none;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-control-deck.duo {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr;
+    display: block;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-controls {
-    min-height: 100%;
-    flex-direction: row;
-    justify-content: center;
-    gap: 6px;
-    padding: 22px 6px 6px;
+    position: absolute;
+    inset: 0;
+    display: block;
+    min-height: 0;
+    padding: 0;
     overflow: hidden;
+    border: 0;
+    background: transparent;
+    pointer-events: none;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-key-help {
     display: none;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-control-deck.duo .rewrite-controls {
-    min-height: 0;
-    padding-top: 18px;
-    border-right: 0;
-    border-bottom: 1px solid #304151;
+    padding: 0;
+    border: 0;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-joystick {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
     width: 108px;
     height: 108px;
     flex: 0 0 108px;
@@ -2739,6 +2742,7 @@ h2 span {
       inset 0 0 0 6px #0d1c29,
       inset 0 0 24px #70e1d41a;
     touch-action: none;
+    pointer-events: auto;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-joystick button {
     width: 32px;
@@ -2754,9 +2758,17 @@ h2 span {
     box-shadow: 0 3px 10px #07131db8;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons {
+    position: absolute;
+    right: 14px;
+    bottom: 12px;
     display: grid;
     grid-template-columns: repeat(2, 46px);
     gap: 4px;
+    padding: 6px;
+    border: 1px solid #496274;
+    border-radius: 8px;
+    background: #101e2cd9;
+    pointer-events: auto;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons button,
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons .rewrite-fire {
@@ -2768,6 +2780,26 @@ h2 span {
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons small {
     display: none;
+  }
+  .rewrite-game:not(:has(.rewrite-select))
+    .rewrite-control-deck.duo
+    .rewrite-controls:last-child
+    .rewrite-joystick {
+    right: 14px;
+    left: auto;
+  }
+  .rewrite-game:not(:has(.rewrite-select))
+    .rewrite-control-deck.duo
+    .rewrite-controls:first-child
+    .rewrite-action-buttons {
+    right: auto;
+    left: 132px;
+  }
+  .rewrite-game:not(:has(.rewrite-select))
+    .rewrite-control-deck.duo
+    .rewrite-controls:last-child
+    .rewrite-action-buttons {
+    right: 132px;
   }
   .rewrite-game:has(.rewrite-select) .rewrite-heading {
     padding: 8px 14px;

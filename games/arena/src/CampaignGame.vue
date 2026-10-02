@@ -1980,7 +1980,7 @@ button:disabled {
     padding: 5px;
   }
   .playfield {
-    width: calc(100% - 184px);
+    width: 100%;
     height: 100%;
   }
   .playfield > svg {
@@ -1989,29 +1989,31 @@ button:disabled {
   }
   .controls {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 184px;
+    inset: 0;
+    width: 100%;
     min-height: 0;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    padding: 6px;
-    border-left: 1px solid #65837a;
-    background: #162a30;
+    display: block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    pointer-events: none;
   }
   .campaign-game:has(.second-controls) .controls:not(.second-controls) {
-    bottom: 50%;
+    bottom: 0;
   }
   .second-controls {
-    top: 50%;
-    border-top: 1px solid #65837a;
+    top: 0;
+    border: 0;
   }
   .arena-stick {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
     width: 92px;
     height: 92px;
     flex-basis: 92px;
+    background-color: #162a30d9;
+    pointer-events: auto;
   }
   .arena-stick::after {
     top: 28px;
@@ -2025,9 +2027,28 @@ button:disabled {
     height: 52px;
   }
   .controls .jump {
+    position: absolute;
+    right: 18px;
+    bottom: 28px;
     width: 54px;
     height: 54px;
     margin: 0;
+    pointer-events: auto;
+  }
+  .campaign-game:has(.second-controls) .controls:not(.second-controls) .jump {
+    right: auto;
+    left: 120px;
+  }
+  .second-controls .arena-stick {
+    right: 14px;
+    left: auto;
+  }
+  .second-controls .jump {
+    right: 120px;
+  }
+  .controls > button:not(.jump),
+  .controls > .player-label {
+    pointer-events: auto;
   }
   .sound-control {
     position: absolute;

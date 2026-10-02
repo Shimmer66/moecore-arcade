@@ -27,8 +27,10 @@ test('landscape duel keeps the fight and core controls side by side', async ({ p
   }
   await expect(page.locator('.duel')).toHaveAttribute('data-phase', 'fight');
   const arena = (await page.locator('.duel-arena').boundingBox())!;
-  const controls = (await page.locator('.duel-controls').boundingBox())!;
-  expect(arena.x + arena.width).toBeLessThanOrEqual(controls.x + 1);
+  const joystick = (await page.locator('.duel-directions').boundingBox())!;
+  const actions = (await page.locator('.duel-action-pad').boundingBox())!;
+  expect(joystick.x).toBeLessThan(arena.x + arena.width / 2);
+  expect(actions.x).toBeGreaterThan(arena.x + arena.width / 2);
   await expect(page.locator('.duel-coach')).toBeHidden();
   await expectOneScreen(page);
 });
@@ -36,8 +38,10 @@ test('landscape duel keeps the fight and core controls side by side', async ({ p
 test('landscape arena exposes the stage, joystick and jump together', async ({ page }) => {
   await page.goto('/#/games/arena');
   const stage = (await page.locator('.playfield').boundingBox())!;
-  const controls = (await page.locator('.controls').first().boundingBox())!;
-  expect(stage.x + stage.width).toBeLessThanOrEqual(controls.x + 1);
+  const joystick = (await page.locator('.arena-stick').first().boundingBox())!;
+  const jump = (await page.getByRole('button', { name: '跳跃', exact: true }).boundingBox())!;
+  expect(joystick.x).toBeLessThan(stage.x + stage.width / 2);
+  expect(jump.x).toBeGreaterThan(stage.x + stage.width / 2);
   await expect(page.locator('.arena-stick')).toHaveCSS('border-radius', '50%');
   await expect(page.getByRole('button', { name: '跳跃', exact: true })).toBeVisible();
   await expectOneScreen(page);
@@ -50,8 +54,10 @@ test('landscape run and gun removes keyboard copy and keeps touch controls besid
   await page.getByRole('button', { name: '单人出击', exact: true }).click();
   await page.getByRole('button', { name: /DeepSeek 娘/ }).click();
   const stage = (await page.locator('.rewrite-stage').boundingBox())!;
-  const controls = (await page.locator('.rewrite-control-deck').boundingBox())!;
-  expect(stage.x + stage.width).toBeLessThanOrEqual(controls.x + 1);
+  const joystick = (await page.locator('.rewrite-joystick').boundingBox())!;
+  const actions = (await page.locator('.rewrite-action-buttons').boundingBox())!;
+  expect(joystick.x).toBeLessThan(stage.x + stage.width / 2);
+  expect(actions.x).toBeGreaterThan(stage.x + stage.width / 2);
   await expect(page.locator('.rewrite-key-help')).toBeHidden();
   await expect(page.locator('.rewrite-joystick')).toHaveCSS('border-radius', '50%');
   await expectOneScreen(page);
