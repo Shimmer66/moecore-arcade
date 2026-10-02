@@ -1,4 +1,10 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+async function expandAudio(page: Page) {
+  const panel = page.locator('.rewrite-audio');
+  if (!(await panel.evaluate((element) => (element as HTMLDetailsElement).open)))
+    await panel.locator('summary').click();
+}
 
 test.beforeEach(async ({ page }) => {
   await page.clock.install({ time: new Date('2026-10-01T08:00:00Z') });
@@ -37,6 +43,7 @@ test('rapid fire respects the voice cap and the sound toggle stays silent', asyn
     expect(Number(await game.getAttribute('data-audio-voices'))).toBeLessThanOrEqual(24);
   }
   await page.keyboard.up('KeyJ');
+  await expandAudio(page);
   await page.getByRole('button', { name: '声音 开', exact: true }).click();
   await expect(game).toHaveAttribute('data-audio-voices', '0');
   await expect(game).toHaveAttribute('data-music-beat', '');
@@ -50,6 +57,7 @@ test('rapid fire respects the voice cap and the sound toggle stays silent', asyn
 test('music and effects volumes are independent and survive a host restart', async ({
   page,
 }, info) => {
+  await expandAudio(page);
   const music = page.getByRole('slider', { name: '音乐音量' });
   const effects = page.getByRole('slider', { name: '效果音量' });
   await expect(music).toHaveValue('0.55');
@@ -65,6 +73,7 @@ test('music and effects volumes are independent and survive a host restart', asy
   await page.getByRole('dialog').getByRole('button', { name: '确认', exact: true }).click();
   await expect(game).toHaveAttribute('data-music-volume', '0.25');
   await expect(game).toHaveAttribute('data-effects-volume', '0.4');
+  await expandAudio(page);
   await music.fill('0');
   await effects.fill('0');
   await page.clock.runFor(500);

@@ -68,8 +68,7 @@ test('locked weapons cannot be selected and the battlefield uses distinct loot a
 }, info) => {
   await page.getByRole('button', { name: /DeepSeek 娘/ }).click();
   const panel = page.locator('.rewrite-loadout-panel');
-  const compact = (await page.viewportSize())!.width < 760;
-  expect(await panel.evaluate((element) => (element as HTMLDetailsElement).open)).toBe(!compact);
+  expect(await panel.evaluate((element) => (element as HTMLDetailsElement).open)).toBe(false);
   await expandLoadout(page);
   await expect(page.getByRole('button', { name: 'P1 装备思维链激光', exact: true })).toBeDisabled();
   await page.keyboard.press('Digit4');

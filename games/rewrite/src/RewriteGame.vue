@@ -706,35 +706,41 @@ onUnmounted(() => {
         <span class="rewrite-eyebrow">NEURAL FRONT / RUN & GUN</span>
         <h2>AI 娘闯关 <span>模型战争</span></h2>
       </div>
-      <div class="rewrite-sound-controls">
-        <button class="rewrite-sound" :aria-pressed="sound" @click="sound = !sound">
-          声音 {{ sound ? '开' : '关' }}
-        </button>
-        <label>
-          音乐
-          <input
-            v-model.number="musicVolume"
-            aria-label="音乐音量"
-            type="range"
-            min="0"
-            max="1"
-            step="0.05"
-            :disabled="!sound"
-          />
-        </label>
-        <label>
-          效果
-          <input
-            v-model.number="effectsVolume"
-            aria-label="效果音量"
-            type="range"
-            min="0"
-            max="1"
-            step="0.05"
-            :disabled="!sound"
-          />
-        </label>
-      </div>
+      <details class="rewrite-audio">
+        <summary aria-label="声音设置">
+          <span aria-hidden="true">{{ sound ? '♪' : '×' }}</span>
+          音频
+        </summary>
+        <div class="rewrite-sound-controls">
+          <button class="rewrite-sound" :aria-pressed="sound" @click="sound = !sound">
+            声音 {{ sound ? '开' : '关' }}
+          </button>
+          <label>
+            音乐
+            <input
+              v-model.number="musicVolume"
+              aria-label="音乐音量"
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              :disabled="!sound"
+            />
+          </label>
+          <label>
+            效果
+            <input
+              v-model.number="effectsVolume"
+              aria-label="效果音量"
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              :disabled="!sound"
+            />
+          </label>
+        </div>
+      </details>
     </header>
     <div v-if="selected && !state.partner" class="rewrite-hud">
       <div>
@@ -781,7 +787,34 @@ onUnmounted(() => {
         ><span>共同续关 {{ state.continues }} 次 · {{ difficultyNames[state.difficulty] }}</span>
       </div>
     </div>
-    <details v-if="selected" class="rewrite-loadout-panel" :open="measuredWidth >= 760">
+    <div v-if="selected" class="rewrite-combat-dock">
+      <div class="rewrite-quick-deck">
+        <button
+          v-for="p in players"
+          :key="p.playerId"
+          :aria-label="`P${p.playerId} 切换下一把武器`"
+          :disabled="
+            props.paused || state.phase !== 'running' || p.lives <= 0 || p.arsenal.length < 2
+          "
+          @click="cycleControl(p.playerId)"
+        >
+          <ItemArt :kind="p.weapon" /><span
+            ><b>P{{ p.playerId }} · {{ weapons[p.weapon].name }}</b
+            ><small>{{ p.arsenal.length }} 把武器 · 点击轮换 ↻</small></span
+          >
+        </button>
+      </div>
+      <div class="rewrite-combat-status" aria-label="当前增益与补给">
+        <span v-for="p in players" :key="p.playerId">
+          <b v-if="state.partner">P{{ p.playerId }}</b>
+          <span title="护盾"><ItemArt kind="shield" />{{ p.shield }}</span>
+          <span title="手雷"><ItemArt kind="grenade" />{{ p.grenades }}</span>
+          <em v-if="p.overclock > 0"><ItemArt kind="overclock" />{{ Math.ceil(p.overclock) }}s</em>
+          <em v-if="p.barrier > 0"><ItemArt kind="barrier" />{{ Math.ceil(p.barrier) }}s</em>
+        </span>
+      </div>
+    </div>
+    <details v-if="selected" class="rewrite-loadout-panel">
       <summary aria-label="装备库">
         <b>装备库</b>
         <span v-for="p in players" :key="p.playerId">
@@ -1620,26 +1653,6 @@ onUnmounted(() => {
     <div v-if="selected && sector && !state.arena" class="rewrite-sector" aria-live="polite">
       <b>{{ sector.title }}</b
       ><span>{{ sector.hint }}</span>
-    </div>
-    <div v-if="selected" class="rewrite-quick-deck">
-      <button
-        v-for="p in players"
-        :key="p.playerId"
-        :aria-label="`P${p.playerId} 切换下一把武器`"
-        :disabled="
-          props.paused || state.phase !== 'running' || p.lives <= 0 || p.arsenal.length < 2
-        "
-        @click="cycleControl(p.playerId)"
-      >
-        <ItemArt :kind="p.weapon" /><span
-          ><b>P{{ p.playerId }} · {{ weapons[p.weapon].name }}</b
-          ><small
-            >点击换枪 ↻<template v-if="p.overclock > 0">
-              · 超频 {{ Math.ceil(p.overclock) }}s</template
-            ><template v-if="p.barrier > 0"> · 力场 {{ Math.ceil(p.barrier) }}s</template></small
-          ></span
-        >
-      </button>
     </div>
     <div v-if="selected" class="rewrite-control-deck" :class="{ duo: state.partner }">
       <div
@@ -2681,9 +2694,9 @@ h2 span {
   .rewrite-game:not(:has(.rewrite-select))
     > :is(
       .rewrite-heading,
+      .rewrite-combat-dock,
       .rewrite-loadout-panel,
       .rewrite-sector,
-      .rewrite-quick-deck,
       .rewrite-guide
     ) {
     display: none;
@@ -3120,6 +3133,183 @@ h2 span {
   }
   .rewrite-loadout {
     padding: 7px;
+  }
+}
+.rewrite-audio {
+  position: relative;
+  z-index: 12;
+}
+.rewrite-audio > summary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 7px 11px;
+  border: 1px solid #384c5d;
+  border-radius: 7px;
+  color: #bdd1da;
+  background: #132334;
+  cursor: pointer;
+  list-style: none;
+  font-size: 11px;
+  font-weight: 700;
+}
+.rewrite-audio > summary::-webkit-details-marker {
+  display: none;
+}
+.rewrite-audio > summary span {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #0c1c28;
+  background: var(--mission);
+  font-size: 13px;
+}
+.rewrite-audio[open] > summary {
+  border-color: var(--mission);
+}
+.rewrite-audio .rewrite-sound-controls {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 210px;
+  padding: 10px;
+  border: 1px solid #466175;
+  border-radius: 9px;
+  background: #0d1d2bed;
+  box-shadow: 0 14px 32px #020a12b8;
+  backdrop-filter: blur(12px);
+}
+.rewrite-audio .rewrite-sound-controls label {
+  grid-template-columns: 38px 1fr;
+  align-items: center;
+  text-align: left;
+}
+.rewrite-audio .rewrite-sound-controls input {
+  width: 100%;
+}
+.rewrite-combat-dock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 1px;
+  border-top: 1px solid #315064;
+  background: #315064;
+}
+.rewrite-combat-dock .rewrite-quick-deck {
+  min-width: 0;
+  padding: 6px 8px;
+}
+.rewrite-combat-dock .rewrite-quick-deck button {
+  justify-content: flex-start;
+  min-height: 42px;
+  border-color: #3f766d;
+  background: #19383c;
+}
+.rewrite-combat-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #102231;
+}
+.rewrite-combat-status > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.rewrite-combat-status > span > b {
+  color: #9cfbe4;
+  font: 700 10px monospace;
+}
+.rewrite-combat-status > span > span,
+.rewrite-combat-status > span > em {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 40px;
+  min-height: 32px;
+  padding: 3px 6px;
+  border: 1px solid #324d60;
+  border-radius: 6px;
+  color: #d7e6ed;
+  background: #192f40;
+  font: 700 11px monospace;
+  font-style: normal;
+}
+.rewrite-combat-status > span > em {
+  color: #ffe0a3;
+  border-color: #70576f;
+  background: #362e45;
+}
+.rewrite-combat-status svg {
+  width: 24px;
+  height: 24px;
+}
+@media (max-width: 520px) {
+  .rewrite-heading {
+    padding: 10px 12px;
+  }
+  .rewrite-audio > summary {
+    min-height: 34px;
+    padding: 5px 8px;
+  }
+  .rewrite-audio > summary span {
+    width: 18px;
+    height: 18px;
+  }
+  .rewrite-audio .rewrite-sound-controls {
+    width: min(210px, calc(100vw - 42px));
+  }
+  .rewrite-audio .rewrite-sound-controls label {
+    display: grid;
+  }
+  .rewrite-hud {
+    grid-template-columns: 1fr auto;
+  }
+  .rewrite-hud > div:nth-child(2) {
+    display: none;
+  }
+  .rewrite-combat-dock {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .rewrite-combat-dock .rewrite-quick-deck {
+    padding: 4px 6px;
+  }
+  .rewrite-combat-dock .rewrite-quick-deck button {
+    min-height: 38px;
+    padding: 3px 6px;
+  }
+  .rewrite-combat-dock .rewrite-quick-deck svg {
+    width: 30px;
+    height: 30px;
+  }
+  .rewrite-combat-dock .rewrite-quick-deck small {
+    font-size: 9px;
+  }
+  .rewrite-combat-status {
+    gap: 4px;
+    padding: 4px 6px;
+  }
+  .rewrite-combat-status > span {
+    gap: 3px;
+  }
+  .rewrite-combat-status > span > span,
+  .rewrite-combat-status > span > em {
+    min-width: 34px;
+    min-height: 34px;
+    padding: 2px 4px;
+  }
+  .rewrite-combat-status svg {
+    width: 22px;
+    height: 22px;
+  }
+  .rewrite-loadout-panel > summary {
+    min-height: 36px;
   }
 }
 </style>
