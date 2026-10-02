@@ -109,8 +109,12 @@ test('mobile controls support simultaneous movement and jump without horizontal 
 }, info) => {
   test.skip(!info.project.name.startsWith('mobile'), 'Multi-touch coverage runs on mobile.');
   await openDuel(page);
-  await startQuickMatch(page);
+  const quickStart = page.locator('.duel-mobile-quick');
+  await expect(quickStart).toBeVisible();
+  await quickStart.click();
+  await advanceToFight(page);
   await page.setViewportSize({ width: 320, height: 760 });
+  await expect(page.locator('.duel-directions')).toHaveCSS('border-radius', '50%');
 
   const right = page.getByRole('button', { name: '向右移动', exact: true });
   const jump = page.getByRole('button', { name: '跳跃', exact: true });

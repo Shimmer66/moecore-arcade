@@ -1487,6 +1487,26 @@ onUnmounted(() => {
           ><span>{{ item.text }}</span>
         </button>
       </div>
+      <button
+        class="duel-mobile-quick"
+        type="button"
+        :disabled="mode === 'team' && !artReady"
+        @click="start"
+      >
+        <span>{{
+          mode === 'team'
+            ? '默认队伍开打'
+            : mode === 'practice'
+              ? '直接练招'
+              : mode === 'arcade'
+                ? '开始连战'
+                : '快速开打'
+        }}</span>
+        <small v-if="mode !== 'team'"
+          >{{ ROSTER[player].short }} VS
+          {{ mode === 'arcade' ? '三站挑战' : ROSTER[opponent].short }}</small
+        >
+      </button>
       <TeamSelect v-if="mode === 'team'" v-model="teamLineups" v-model:local="teamLocal" />
       <template v-else>
         <div class="duel-section-label">
@@ -4220,6 +4240,9 @@ onUnmounted(() => {
   line-height: 1.7;
   margin-top: 6px;
 }
+.duel-mobile-quick {
+  display: none;
+}
 .duel-loadout {
   margin: 14px 0;
   border: 1px solid #40516a;
@@ -4896,6 +4919,30 @@ onUnmounted(() => {
   }
 }
 @media (max-width: 700px) and (pointer: coarse) {
+  .duel-mobile-quick {
+    position: sticky;
+    bottom: 10px;
+    z-index: 6;
+    display: flex;
+    width: 100%;
+    min-height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: -8px 0 14px;
+    padding: 10px 16px;
+    border: 1px solid #ffe398;
+    border-radius: 7px;
+    background: #ffd369;
+    box-shadow: 0 10px 24px #060d1c99;
+    color: #18233a;
+    font-weight: 900;
+  }
+  .duel-mobile-quick small {
+    color: #4a3d2a;
+    font-size: 10px;
+    font-weight: 700;
+  }
   .duel-action-pad :is(.control-exSkill, .control-exVariant, .control-max),
   .duel-advanced-pad {
     display: none;
