@@ -2729,7 +2729,14 @@ onUnmounted(() => {
       </button>
     </div>
     <div v-if="!choosing" class="duel-controls" aria-label="对战操作">
-      <div class="duel-directions" @pointermove.prevent="moveDirectionPointer">
+      <div
+        class="duel-directions"
+        :style="{
+          '--stick-x': `${(Number(pressedControls.has('right')) - Number(pressedControls.has('left'))) * 27}px`,
+          '--stick-y': `${(Number(pressedControls.has('crouch')) - Number(pressedControls.has('jump'))) * 27}px`,
+        }"
+        @pointermove.prevent="moveDirectionPointer"
+      >
         <button
           v-for="c in directions"
           :key="c.action"
@@ -2882,7 +2889,14 @@ onUnmounted(() => {
     <details v-if="!choosing && localVersus" class="duel-p2-pad" open>
       <summary>P2 触屏 / 鼠标操作区</summary>
       <div class="duel-p2-controls">
-        <div class="duel-p2-directions" @pointermove.prevent="moveSecondDirectionPointer">
+        <div
+          class="duel-p2-directions"
+          :style="{
+            '--stick-x': `${(Number(pressed2.has('right')) - Number(pressed2.has('left'))) * 27}px`,
+            '--stick-y': `${(Number(pressed2.has('crouch')) - Number(pressed2.has('jump'))) * 27}px`,
+          }"
+          @pointermove.prevent="moveSecondDirectionPointer"
+        >
           <button
             v-for="c in directions"
             :key="c.action"
@@ -4072,6 +4086,8 @@ onUnmounted(() => {
     gap: 6px;
   }
   .duel-directions {
+    --stick-x: 0px;
+    --stick-y: 0px;
     grid-template-columns: repeat(3, 48px);
     gap: 3px;
   }
@@ -4878,6 +4894,24 @@ onUnmounted(() => {
     gap: 4px;
     width: auto;
   }
+  .duel-directions::after {
+    position: absolute;
+    top: 41px;
+    left: 41px;
+    z-index: 2;
+    width: 46px;
+    height: 46px;
+    border: 1px solid #c6ddf8;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #d7e7fa, #718aa8);
+    box-shadow:
+      0 6px 14px #050b14b8,
+      inset 0 2px 4px #fff9;
+    content: '';
+    pointer-events: none;
+    transform: translate(var(--stick-x), var(--stick-y));
+    transition: transform 55ms linear;
+  }
   .duel-directions button[class] {
     grid-column: auto;
     grid-row: auto;
@@ -5004,7 +5038,7 @@ onUnmounted(() => {
     border: 0;
     border-radius: 50%;
     background: transparent;
-    color: #91a8c4;
+    color: transparent;
     font-size: 11px;
   }
   .duel-directions .control-jump {
@@ -5024,10 +5058,9 @@ onUnmounted(() => {
     right: 4px;
   }
   .duel-directions button.held {
-    background: #ffe08a;
-    color: #243149;
-    box-shadow: 0 4px 13px #050b14b8;
-    transform: scale(1.07);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
   }
 }
 @media (max-width: 360px) {
@@ -5239,6 +5272,8 @@ onUnmounted(() => {
     gap: 10px;
   }
   .duel-p2-directions {
+    --stick-x: 0px;
+    --stick-y: 0px;
     position: relative;
     display: block;
     width: 128px;
@@ -5253,6 +5288,24 @@ onUnmounted(() => {
       inset 0 0 24px #d2b9ff1a;
     touch-action: none;
   }
+  .duel-p2-directions::after {
+    position: absolute;
+    top: 41px;
+    left: 41px;
+    z-index: 2;
+    width: 46px;
+    height: 46px;
+    border: 1px solid #eadcff;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #eadcff, #8a75a9);
+    box-shadow:
+      0 6px 14px #090613b8,
+      inset 0 2px 4px #fff9;
+    content: '';
+    pointer-events: none;
+    transform: translate(var(--stick-x), var(--stick-y));
+    transition: transform 55ms linear;
+  }
   .duel-p2-directions button {
     position: absolute;
     width: 44px;
@@ -5262,7 +5315,7 @@ onUnmounted(() => {
     border: 0;
     border-radius: 50%;
     background: transparent;
-    color: #b5a7ce;
+    color: transparent;
   }
   .duel-p2-directions .control-jump {
     top: 4px;
@@ -5281,10 +5334,9 @@ onUnmounted(() => {
     right: 4px;
   }
   .duel-p2-directions button.held {
-    background: #dfc8ff;
-    color: #2b2340;
-    box-shadow: 0 4px 13px #090613b8;
-    transform: scale(1.07);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
   }
   .duel-p2-actions {
     display: grid;
@@ -5329,12 +5381,16 @@ onUnmounted(() => {
   }
   .duel:not([data-phase='select']) .duel-directions {
     position: absolute;
-    bottom: 12px;
-    left: 14px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    left: max(14px, env(safe-area-inset-left));
     width: 108px;
     height: 108px;
     background-color: #142039d9;
     pointer-events: auto;
+  }
+  .duel:not([data-phase='select']) .duel-directions::after {
+    top: 31px;
+    left: 31px;
   }
   .duel:not([data-phase='select']) .duel-directions .control-jump,
   .duel:not([data-phase='select']) .duel-directions .control-crouch {
@@ -5358,8 +5414,8 @@ onUnmounted(() => {
   }
   .duel:not([data-phase='select']) .duel-action-pad {
     position: absolute;
-    right: 14px;
-    bottom: 12px;
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
     width: 184px;
     padding: 6px;
     border: 1px solid #53647f;

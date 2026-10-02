@@ -2007,8 +2007,8 @@ button:disabled {
   }
   .arena-stick {
     position: absolute;
-    bottom: 12px;
-    left: 14px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    left: max(14px, env(safe-area-inset-left));
     width: 92px;
     height: 92px;
     flex-basis: 92px;
@@ -2028,8 +2028,8 @@ button:disabled {
   }
   .controls .jump {
     position: absolute;
-    right: 18px;
-    bottom: 28px;
+    right: max(18px, env(safe-area-inset-right));
+    bottom: max(28px, env(safe-area-inset-bottom));
     width: 54px;
     height: 54px;
     margin: 0;
@@ -2040,7 +2040,7 @@ button:disabled {
     left: 120px;
   }
   .second-controls .arena-stick {
-    right: 14px;
+    right: max(14px, env(safe-area-inset-right));
     left: auto;
   }
   .second-controls .jump {

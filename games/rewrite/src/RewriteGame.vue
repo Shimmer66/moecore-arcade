@@ -1654,7 +1654,13 @@ onUnmounted(() => {
           >P{{ controller.playerId }} ·
           {{ controller.playerId === 1 ? 'WASD + J K L' : '方向键 + , . /' }}</span
         >
-        <div class="rewrite-dpad rewrite-joystick">
+        <div
+          class="rewrite-dpad rewrite-joystick"
+          :style="{
+            '--stick-x': `${(Number(has('right', controller.playerId)) - Number(has('left', controller.playerId))) * 27}px`,
+            '--stick-y': `${(Number(has('down', controller.playerId)) - Number(has('up', controller.playerId))) * 27}px`,
+          }"
+        >
           <button
             v-for="key in dpad"
             :key="key.label"
@@ -2562,6 +2568,9 @@ h2 span {
 }
 @media (max-width: 760px) and (pointer: coarse) {
   .rewrite-joystick {
+    --stick-x: 0px;
+    --stick-y: 0px;
+    position: relative;
     width: 132px;
     height: 132px;
     padding: 5px;
@@ -2575,20 +2584,37 @@ h2 span {
       inset 0 0 28px #70e1d41a;
     touch-action: none;
   }
+  .rewrite-joystick::after {
+    position: absolute;
+    top: 42px;
+    left: 42px;
+    z-index: 2;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #cafff2;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #cafff2, #4da99e);
+    box-shadow:
+      0 6px 14px #07131db8,
+      inset 0 2px 4px #fff9;
+    content: '';
+    pointer-events: none;
+    transform: translate(var(--stick-x), var(--stick-y));
+    transition: transform 55ms linear;
+  }
   .rewrite-joystick button {
     width: 40px;
     height: 40px;
     border: 0;
     border-radius: 50%;
     background: transparent;
-    color: #7694a5;
+    color: transparent;
     font-size: 14px;
   }
   .rewrite-joystick button.joystick-active {
-    background: #9cfbe4;
-    color: #14363c;
-    box-shadow: 0 4px 14px #07131db8;
-    transform: scale(1.08);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
   }
 }
 @media (max-width: 360px) {
@@ -2725,9 +2751,11 @@ h2 span {
     border: 0;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-joystick {
+    --stick-x: 0px;
+    --stick-y: 0px;
     position: absolute;
-    bottom: 12px;
-    left: 14px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    left: max(14px, env(safe-area-inset-left));
     width: 108px;
     height: 108px;
     flex: 0 0 108px;
@@ -2744,23 +2772,28 @@ h2 span {
     touch-action: none;
     pointer-events: auto;
   }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-joystick::after {
+    top: 31px;
+    left: 31px;
+    width: 46px;
+    height: 46px;
+  }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-joystick button {
     width: 32px;
     height: 32px;
     border: 0;
     border-radius: 50%;
     background: transparent;
-    color: #7694a5;
+    color: transparent;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-joystick button.joystick-active {
-    background: #9cfbe4;
-    color: #14363c;
-    box-shadow: 0 3px 10px #07131db8;
+    background: transparent;
+    box-shadow: none;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons {
     position: absolute;
-    right: 14px;
-    bottom: 12px;
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
     display: grid;
     grid-template-columns: repeat(2, 46px);
     gap: 4px;
@@ -2785,7 +2818,7 @@ h2 span {
     .rewrite-control-deck.duo
     .rewrite-controls:last-child
     .rewrite-joystick {
-    right: 14px;
+    right: max(14px, env(safe-area-inset-right));
     left: auto;
   }
   .rewrite-game:not(:has(.rewrite-select))
