@@ -3,6 +3,7 @@ import type { GameDefinition } from '@moecore/game-sdk';
 export interface GameEntry {
   readonly id: string;
   readonly title: string;
+  readonly toolbarTitle?: string;
   readonly category: string;
   readonly icon: 'grid' | 'runner' | 'box' | 'whale';
   readonly description: string;
@@ -38,6 +39,7 @@ export const games: ReadonlyArray<GameEntry> = [
   {
     id: 'arena',
     title: 'AI 娘：别乱生成！',
+    toolbarTitle: '别乱生成！',
     category: '动作 · 闯关',
     icon: 'runner',
     description: '地板会消失，出口会跑路。记住陷阱，再试一次。',
@@ -60,6 +62,7 @@ export const games: ReadonlyArray<GameEntry> = [
   {
     id: 'parkour',
     title: '大肥鱼跑酷：答案马上就到',
+    toolbarTitle: '大肥鱼跑酷',
     category: '动作 · 单人',
     icon: 'runner',
     description: '白饭照吃，答案照送。跑过四段离谱路程。',
@@ -82,6 +85,7 @@ export const games: ReadonlyArray<GameEntry> = [
   {
     id: 'whale-queue',
     title: '鲸鲸的灵感长队',
+    toolbarTitle: '鲸鲸长队',
     category: '动作 · 单人',
     icon: 'whale',
     description: '带着小鲸穿过数据海，收集 30 颗灵感星。',
