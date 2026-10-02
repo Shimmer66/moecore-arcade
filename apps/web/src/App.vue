@@ -78,7 +78,7 @@ onUnmounted(() => window.removeEventListener('hashchange', onRouteChange));
       </div>
       <LiquidDock :active-section="activeSection" @select="navigateSection" />
       <span class="development-label"
-        ><span aria-hidden="true" class="status-dot"></span>原型试玩</span
+        ><span aria-hidden="true" class="status-dot"></span>持续更新</span
       >
     </header>
 

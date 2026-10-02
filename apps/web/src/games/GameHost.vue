@@ -9,7 +9,7 @@ import {
   shallowRef,
   watch,
 } from 'vue';
-import { ArrowLeft, Maximize2, Minimize2, Pause, Play, RotateCcw, X } from '@lucide/vue';
+import { ArrowLeft, Maximize2, Minimize2, Pause, Play, RotateCcw, Waves, X } from '@lucide/vue';
 import type { GameDefinition, GameResult } from '@moecore/game-sdk';
 import { findGame } from './registry';
 import LiquidGlass from '../features/liquid-glass/LiquidGlass.vue';
@@ -221,9 +221,16 @@ onUnmounted(() => {
         <h1>{{ displayTitle }}</h1>
       </div>
       <div class="game-actions">
-        <label class="motion-toggle" data-glass
-          ><input v-model="reduceMotion" type="checkbox" />减少动态效果</label
+        <label
+          class="motion-toggle"
+          :class="{ active: reduceMotion }"
+          data-glass
+          title="减少动态效果"
         >
+          <input v-model="reduceMotion" type="checkbox" />
+          <Waves :size="18" aria-hidden="true" />
+          <span>减少动态</span>
+        </label>
         <button
           ref="pauseControl"
           type="button"

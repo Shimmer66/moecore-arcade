@@ -96,20 +96,17 @@ test('filters remain usable and game glass stays within the toolbar', async ({ p
     '全部',
     '益智',
     '动作',
-    '文字',
-    '卡牌',
-    '多人',
+    '双人',
   ]);
-  await page.getByRole('button', { name: '文字', exact: true }).click();
-  await expect(page.getByRole('button', { name: '文字', exact: true })).toHaveAttribute(
+  await page.getByRole('button', { name: '双人', exact: true }).click();
+  await expect(page.getByRole('button', { name: '双人', exact: true })).toHaveAttribute(
     'aria-pressed',
     'true',
   );
   await expect(page.locator('.catalog-card')).toHaveCount(
-    games.filter((game) => game.tags.includes('文字')).length,
+    games.filter((game) => game.tags.includes('双人')).length,
   );
-  await expect(page.getByText('这个分类还在孵化中', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: '查看全部游戏', exact: true }).click();
+  await page.getByRole('button', { name: '全部', exact: true }).click();
   await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   await expect(page.getByRole('button', { name: '全部', exact: true })).toHaveAttribute(
     'aria-pressed',
@@ -270,7 +267,7 @@ test('search can be cleared and empty results reset both search and category', a
 
   await page.getByRole('button', { name: '动作', exact: true }).click();
   await search.fill('搬家');
-  await expect(page.getByText('还没有找到这款游戏', { exact: true })).toBeVisible();
+  await expect(page.getByText('没有找到', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: '查看全部游戏', exact: true }).click();
   await expect(search).toHaveValue('');
   await expect(page.getByRole('button', { name: '全部', exact: true })).toHaveAttribute(

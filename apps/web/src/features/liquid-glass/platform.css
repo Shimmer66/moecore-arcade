@@ -15,7 +15,7 @@
   background: #183e69;
   color: #fff;
 }
-.skip-link:focus {
+.skip-link:focus-visible {
   top: 16px;
 }
 .platform-shell {
@@ -495,6 +495,12 @@
   margin: 0;
   accent-color: var(--glass-accent);
 }
+.platform-game .motion-toggle svg {
+  flex: none;
+}
+.platform-game .motion-toggle.active {
+  color: var(--glass-accent);
+}
 .platform-game :is(.game-stage, .host-state, .stage-overlay, .confirm-dialog) {
   border: 0;
   border-radius: 30px;
@@ -769,30 +775,64 @@
     background-image: url('../../assets/images/bg_menu_portrait.png');
   }
   .platform-game main {
-    width: calc(100% - 32px);
-    padding-block: 20px 12px;
+    width: calc(100% - 16px);
+    padding-block: 8px 4px;
   }
   .platform-game .game-toolbar {
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 20px;
+    position: sticky;
+    top: 4px;
+    z-index: 20;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    min-height: 48px;
+    margin-bottom: 8px;
+    padding: 3px;
   }
   .platform-game .game-heading {
-    gap: 12px;
-  }
-  .platform-game .game-actions {
-    width: 100%;
+    min-width: 0;
+    flex: 1;
     gap: 8px;
   }
+  .platform-game .game-heading h1 {
+    overflow: hidden;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .platform-game .game-actions {
+    width: auto;
+    flex-shrink: 0;
+    gap: 4px;
+  }
+  .platform-game .game-toolbar .icon-button,
   .platform-game .motion-toggle {
-    margin-right: auto;
-    padding-inline: 12px;
-    font-size: 11px;
+    width: 42px;
+    height: 42px;
+    min-height: 42px;
+  }
+  .platform-game .motion-toggle {
+    position: relative;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  .platform-game .motion-toggle input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .platform-game .motion-toggle span {
+    display: none;
   }
   .platform-game .game-stage {
-    padding: 12px;
-    border-radius: 24px;
+    padding: 8px;
+    border-radius: 20px;
+  }
+  .platform-game .site-footer {
+    display: none;
   }
   .platform-home :is(.site-header, .site-footer, main) {
     width: calc(100% - 40px);
@@ -835,23 +875,38 @@
   }
   .platform-home .game-catalog {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 15px;
+    gap: 14px 10px;
   }
   .platform-home .catalog-card {
     border-radius: 29px;
   }
   .platform-home .catalog-cover {
-    height: 159px;
+    height: 132px;
   }
   .platform-home .catalog-body {
-    min-height: 185px;
-    padding: 13px 17px 18px;
+    min-height: 130px;
+    padding: 11px 13px 13px;
   }
   .platform-home .catalog-body h3 {
-    min-height: 43px;
+    min-height: 38px;
+    margin-block: 3px;
+    line-height: 1.35;
   }
   .platform-home .catalog-body p {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-bottom: 8px;
     font-size: 11px;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .platform-home .catalog-ready {
+    font-size: 10px;
+  }
+  .platform-home .catalog-play {
+    width: 32px;
+    height: 32px;
   }
   .platform-home .contribute-banner {
     flex-wrap: wrap;
@@ -877,7 +932,7 @@
     font-size: 17px;
   }
   .platform-home .development-label {
-    font-size: 10px;
+    display: none;
   }
   .platform-home .arcade-hero h1 {
     font-size: 38px;

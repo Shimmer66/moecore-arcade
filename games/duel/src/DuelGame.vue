@@ -84,11 +84,11 @@ const campaign = shallowRef<Campaign | null>(
 );
 const intermission = ref(false);
 const modes: { id: GameMode; title: string; text: string }[] = [
-  { id: 'quick', title: '快速对战', text: '先打一局，饭等会儿吃。' },
-  { id: 'arcade', title: '三站连战', text: '连打三场，赢了加菜。' },
-  { id: 'practice', title: '练招房', text: '先揍木桩，别先揍朋友。' },
-  { id: 'versus', title: '双人对战', text: '叫上朋友，输的人盛饭。' },
-  { id: 'team', title: '3v3车轮战', text: '你先上，我最后兜底。' },
+  { id: 'quick', title: '快速对战', text: '三局两胜' },
+  { id: 'arcade', title: '三站连战', text: '连胜加菜' },
+  { id: 'practice', title: '练招房', text: '自由练习' },
+  { id: 'versus', title: '双人对战', text: '同屏开打' },
+  { id: 'team', title: '3v3车轮战', text: '三人接力' },
 ];
 const failedArt = ref(new Set<string>());
 const artLoader = new BattleArtLoader();
@@ -355,6 +355,10 @@ const advancedControls: typeof controls = [
   { action: 'climax', label: '终结技', key: 'T', title: '终结超必杀' },
   { action: 'blowback', label: '击飞 / 防反', key: 'G', title: '击飞与防御反击' },
   { action: 'commandGrab', label: '合同锁人', key: 'Y', title: '甲方指令投' },
+];
+const mobileAdvancedControls: typeof controls = [
+  ...controls.filter((control) => ['exSkill', 'exVariant', 'max'].includes(control.action)),
+  ...advancedControls,
 ];
 const secondLabels: Record<Control, string> = {
   left: '←',
@@ -765,6 +769,27 @@ function pointerUp(e: PointerEvent) {
   sources.delete(`pointer:${e.pointerId}`);
   pressedControls.value = new Set(sources.values());
 }
+function moveDirectionPointer(e: PointerEvent) {
+  const source = `pointer:${e.pointerId}`;
+  if (!sources.has(source)) return;
+  const bounds = (e.currentTarget as HTMLElement).getBoundingClientRect();
+  const x = (e.clientX - (bounds.left + bounds.width / 2)) / (bounds.width / 2);
+  const y = (e.clientY - (bounds.top + bounds.height / 2)) / (bounds.height / 2);
+  const action: Control | undefined =
+    Math.hypot(x, y) < 0.28
+      ? undefined
+      : Math.abs(x) > Math.abs(y)
+        ? x < 0
+          ? 'left'
+          : 'right'
+        : y < 0
+          ? 'jump'
+          : 'crouch';
+  if (sources.get(source) === action) return;
+  sources.delete(source);
+  pressedControls.value = new Set(sources.values());
+  if (action) down(source, action);
+}
 function controlKey(e: KeyboardEvent, action: Control, press: boolean) {
   if (!['Space', 'Enter'].includes(e.code)) return;
   e.preventDefault();
@@ -851,6 +876,27 @@ function secondPointer(e: PointerEvent, action?: Control) {
     sources2.delete(key);
     pressed2.value = new Set(sources2.values());
   }
+}
+function moveSecondDirectionPointer(e: PointerEvent) {
+  const source = `pointer:${e.pointerId}`;
+  if (!sources2.has(source)) return;
+  const bounds = (e.currentTarget as HTMLElement).getBoundingClientRect();
+  const x = (e.clientX - (bounds.left + bounds.width / 2)) / (bounds.width / 2);
+  const y = (e.clientY - (bounds.top + bounds.height / 2)) / (bounds.height / 2);
+  const action: Control | undefined =
+    Math.hypot(x, y) < 0.28
+      ? undefined
+      : Math.abs(x) > Math.abs(y)
+        ? x < 0
+          ? 'left'
+          : 'right'
+        : y < 0
+          ? 'jump'
+          : 'crouch';
+  if (sources2.get(source) === action) return;
+  sources2.delete(source);
+  pressed2.value = new Set(sources2.values());
+  if (action) downSecond(source, action);
 }
 function enableAudio() {
   if (!sound.value) return;
@@ -1421,9 +1467,9 @@ onUnmounted(() => {
     <div v-if="choosing" class="duel-select">
       <div class="duel-intro">
         <div>
-          <span class="duel-kicker">大肥鱼的饭碗，谁动谁挨揍</span>
+          <span class="duel-kicker">大肥鱼的饭碗保卫战</span>
           <h2>战斗吧，<em>大肥鱼！</em></h2>
-          <p>白饭我吃，拳头你挨。叫上朋友，看看谁先躺下。</p>
+          <p>六人开打：单挑、练招，或者三人接力。</p>
         </div>
         <div class="duel-match-seal" aria-hidden="true">
           <span>先放饭碗</span><strong>VS</strong><span>再讲拳理</span>
@@ -1478,13 +1524,18 @@ onUnmounted(() => {
             }}</span>
           </button>
         </div>
-        <div class="duel-loadout">
-          <strong>U · {{ ROSTER[player].skill }}</strong
-          ><span>{{ ROSTER[player].keyTip }}</span> <strong>F · {{ signature[player].name }}</strong
-          ><span>{{ signature[player].tip }}</span> <strong>V · {{ ROSTER[player].variant }}</strong
-          ><span>{{ ROSTER[player].variantTip }} 消耗 25 能量。</span
-          ><small>P · 别连我了：挨打或挡招时按一下，花50能量把人推开。每回合一次。</small>
-        </div>
+        <details class="duel-loadout">
+          <summary>{{ ROSTER[player].short }}招式</summary>
+          <div>
+            <strong>U · {{ ROSTER[player].skill }}</strong
+            ><span>{{ ROSTER[player].keyTip }}</span>
+            <strong>F · {{ signature[player].name }}</strong
+            ><span>{{ signature[player].tip }}</span>
+            <strong>V · {{ ROSTER[player].variant }}</strong
+            ><span>{{ ROSTER[player].variantTip }} 消耗 25 能量。</span
+            ><small>P · 脱身：花 50 能量打断连段，每回合一次。</small>
+          </div>
+        </details>
       </template>
       <div class="duel-launch">
         <span class="duel-setup-label">02 / 对局设置</span>
@@ -1510,14 +1561,14 @@ onUnmounted(() => {
         >
         <span>{{
           mode === 'team'
-            ? '75秒一战 · 胜者留场，败者接力 · 能量继承 · 打光三人才算赢'
+            ? '三人接力 · 打光对方全队'
             : mode === 'versus'
-              ? '同机双人 · P1 字母键 / P2 方向键＋数字键'
+              ? '同机双人'
               : mode === 'quick'
-                ? '75 秒 / 回合 · 最多三回合'
+                ? '75 秒 · 三局两胜'
                 : mode === 'arcade'
-                  ? '三站 · 每站 60 秒一回合 · 胜利选加菜奖励，失败或平局结束'
-                  : '不限时 · 木桩被击倒会重新站起 · 可以随时结束'
+                  ? '三站连战 · 胜利后选强化'
+                  : '不限时 · 随时结束'
         }}</span>
         <button
           class="duel-primary"
@@ -2658,7 +2709,7 @@ onUnmounted(() => {
       </button>
     </div>
     <div v-if="!choosing" class="duel-controls" aria-label="对战操作">
-      <div class="duel-directions">
+      <div class="duel-directions" @pointermove.prevent="moveDirectionPointer">
         <button
           v-for="c in directions"
           :key="c.action"
@@ -2761,6 +2812,27 @@ onUnmounted(() => {
         </button>
       </div>
     </div>
+    <details v-if="!choosing" class="duel-mobile-more">
+      <summary>更多招式</summary>
+      <div>
+        <button
+          v-for="c in mobileAdvancedControls.filter(
+            (c) => c.action !== 'commandGrab' || self.id === 'client',
+          )"
+          :key="c.action"
+          type="button"
+          :aria-label="c.title"
+          :disabled="!canInput(0, c.action) || offline(0, c.action)"
+          @pointerdown.prevent="pointerDown($event, c.action)"
+          @pointerup="pointerUp"
+          @pointercancel="pointerUp"
+          @lostpointercapture="pointerUp"
+        >
+          <b>{{ c.label }}</b
+          ><small>{{ c.key }}</small>
+        </button>
+      </div>
+    </details>
     <details v-if="!choosing" class="duel-advanced-pad">
       <summary>
         进阶：R 二阶大招 · T 终结 · G 击飞 / 防反{{ self.id === 'client' ? ' · Y 合同锁人' : '' }}
@@ -2789,47 +2861,65 @@ onUnmounted(() => {
     </details>
     <details v-if="!choosing && localVersus" class="duel-p2-pad" open>
       <summary>P2 触屏 / 鼠标操作区</summary>
-      <div>
-        <button
-          v-for="c in [
-            ...directions,
-            ...controls,
-            ...advancedControls.filter(
-              (c) => c.action !== 'commandGrab' || battle.fighters[1].id === 'client',
-            ),
-          ]"
-          :key="c.action"
-          type="button"
-          :aria-label="`P2 ${c.title}`"
-          :class="{
-            held: pressed2.has(c.action),
-            'link-ready': linkActions2.has(c.action),
-          }"
-          :disabled="!canInput(1, c.action) || offline(1, c.action)"
-          @pointerdown.prevent="secondPointer($event, c.action)"
-          @pointerup="secondPointer($event)"
-          @pointercancel="secondPointer($event)"
-          @lostpointercapture="secondPointer($event)"
-          @keydown.enter.prevent="downSecond(`button:${c.action}`, c.action)"
-          @keyup.enter="
-            sources2.delete(`button:${c.action}`);
-            pressed2 = new Set(sources2.values());
-          "
-          @keydown.space.prevent="downSecond(`button:${c.action}`, c.action)"
-          @keyup.space="
-            sources2.delete(`button:${c.action}`);
-            pressed2 = new Set(sources2.values());
-          "
-        >
-          <b>{{ c.label }}</b
-          ><small>{{
-            offline(1, c.action)
-              ? '断网中'
-              : c.action === 'meme' && battle.rice?.holder === 1
-                ? '开吃'
-                : secondLabels[c.action]
-          }}</small>
-        </button>
+      <div class="duel-p2-controls">
+        <div class="duel-p2-directions" @pointermove.prevent="moveSecondDirectionPointer">
+          <button
+            v-for="c in directions"
+            :key="c.action"
+            type="button"
+            :aria-label="`P2 ${c.title}`"
+            :class="[`control-${c.action}`, { held: pressed2.has(c.action) }]"
+            :disabled="!canInput(1, c.action) || offline(1, c.action)"
+            @pointerdown.prevent="secondPointer($event, c.action)"
+            @pointerup="secondPointer($event)"
+            @pointercancel="secondPointer($event)"
+            @lostpointercapture="secondPointer($event)"
+          >
+            <b>{{ c.label }}</b
+            ><small>{{ secondLabels[c.action] }}</small>
+          </button>
+        </div>
+        <div class="duel-p2-actions">
+          <button
+            v-for="c in [
+              ...controls,
+              ...advancedControls.filter(
+                (c) => c.action !== 'commandGrab' || battle.fighters[1].id === 'client',
+              ),
+            ]"
+            :key="c.action"
+            type="button"
+            :aria-label="`P2 ${c.title}`"
+            :class="{
+              held: pressed2.has(c.action),
+              'link-ready': linkActions2.has(c.action),
+            }"
+            :disabled="!canInput(1, c.action) || offline(1, c.action)"
+            @pointerdown.prevent="secondPointer($event, c.action)"
+            @pointerup="secondPointer($event)"
+            @pointercancel="secondPointer($event)"
+            @lostpointercapture="secondPointer($event)"
+            @keydown.enter.prevent="downSecond(`button:${c.action}`, c.action)"
+            @keyup.enter="
+              sources2.delete(`button:${c.action}`);
+              pressed2 = new Set(sources2.values());
+            "
+            @keydown.space.prevent="downSecond(`button:${c.action}`, c.action)"
+            @keyup.space="
+              sources2.delete(`button:${c.action}`);
+              pressed2 = new Set(sources2.values());
+            "
+          >
+            <b>{{ c.label }}</b
+            ><small>{{
+              offline(1, c.action)
+                ? '断网中'
+                : c.action === 'meme' && battle.rice?.holder === 1
+                  ? '开吃'
+                  : secondLabels[c.action]
+            }}</small>
+          </button>
+        </div>
       </div>
     </details>
     <div v-if="!choosing && mode === 'practice'" class="duel-practice-bar">
@@ -3419,6 +3509,9 @@ onUnmounted(() => {
 .duel-super-links button:disabled {
   opacity: 0.4;
   cursor: default;
+}
+.duel-mobile-more {
+  display: none;
 }
 .duel-super-links {
   display: flex;
@@ -4128,14 +4221,23 @@ onUnmounted(() => {
   margin-top: 6px;
 }
 .duel-loadout {
+  margin: 14px 0;
+  border: 1px solid #40516a;
+  border-radius: 5px;
+  color: #c1d2e8;
+  font-size: 13px;
+}
+.duel-loadout summary {
+  padding: 11px 13px;
+  color: #ffd369;
+  cursor: pointer;
+  font-weight: 800;
+}
+.duel-loadout > div {
   display: flex;
   flex-wrap: wrap;
   gap: 7px 14px;
-  margin: 14px 0;
-  padding-left: 12px;
-  border-left: 3px solid #ffd369;
-  color: #c1d2e8;
-  font-size: 13px;
+  padding: 0 13px 13px;
 }
 .duel-loadout strong {
   color: #ffd369;
@@ -4670,22 +4772,14 @@ onUnmounted(() => {
     display: block;
   }
   .duel-intro p {
-    font-size: 11px;
-    margin-top: 8px;
+    display: none;
   }
   .duel-intro .duel-kicker {
     font-size: 9px;
     letter-spacing: 1px;
   }
   .duel-match-seal {
-    padding: 0 8px;
-  }
-  .duel-match-seal strong {
-    font-size: 48px;
-  }
-  .duel-match-seal span {
-    font-size: 7px;
-    letter-spacing: 1px;
+    display: none;
   }
   .duel-mode-picker {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -4709,8 +4803,15 @@ onUnmounted(() => {
   .duel-card strong {
     font-size: 13px;
   }
+  .duel-card-tip,
   .duel-picked {
-    font-size: 10px;
+    display: none;
+  }
+  .duel-card .duel-portrait {
+    height: 108px;
+  }
+  .duel-card svg {
+    height: 108px;
   }
   .duel-launch {
     padding: 12px;
@@ -4745,7 +4846,7 @@ onUnmounted(() => {
   }
   .duel-controls {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 128px 1fr;
     padding: 12px 10px;
     gap: 14px;
   }
@@ -4794,6 +4895,93 @@ onUnmounted(() => {
     display: none;
   }
 }
+@media (max-width: 700px) and (pointer: coarse) {
+  .duel-action-pad :is(.control-exSkill, .control-exVariant, .control-max),
+  .duel-advanced-pad {
+    display: none;
+  }
+  .duel-mobile-more {
+    display: block;
+    padding: 10px 12px;
+    border-top: 1px solid #405571;
+    background: #152139;
+    color: #c8d9f1;
+  }
+  .duel-mobile-more summary {
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .duel-mobile-more > div {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(44px, 1fr));
+    gap: 6px;
+    margin-top: 9px;
+  }
+  .duel-mobile-more button {
+    min-height: 46px;
+    border: 1px solid #6d83a2;
+    border-radius: 5px;
+    background: #253e60;
+    color: #fff3bd;
+  }
+  .duel-mobile-more b,
+  .duel-mobile-more small {
+    display: block;
+  }
+  .duel-mobile-more small {
+    color: #b9cce5;
+  }
+  .duel-directions {
+    position: relative;
+    display: block;
+    width: 128px;
+    height: 128px;
+    border: 1px solid #58708c;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, #40526b 0 25%, transparent 26%),
+      radial-gradient(circle, #22324a 0 67%, #101a2b 68%);
+    box-shadow:
+      inset 0 0 0 7px #111c2d,
+      inset 0 0 24px #8dbbff1a;
+    touch-action: none;
+  }
+  .duel-directions button[class] {
+    position: absolute;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #91a8c4;
+    font-size: 11px;
+  }
+  .duel-directions .control-jump {
+    top: 4px;
+    left: 42px;
+  }
+  .duel-directions .control-crouch {
+    bottom: 4px;
+    left: 42px;
+  }
+  .duel-directions .control-left {
+    top: 42px;
+    left: 4px;
+  }
+  .duel-directions .control-right {
+    top: 42px;
+    right: 4px;
+  }
+  .duel-directions button.held {
+    background: #ffe08a;
+    color: #243149;
+    box-shadow: 0 4px 13px #050b14b8;
+    transform: scale(1.07);
+  }
+}
 @media (max-width: 360px) {
   .duel-controls {
     gap: 8px;
@@ -4839,10 +5027,14 @@ onUnmounted(() => {
   color: #dfd0ff;
   margin-bottom: 12px;
 }
-.duel-p2-pad > div {
+.duel-p2-controls {
   display: grid;
   grid-template-columns: repeat(7, minmax(48px, 1fr));
   gap: 6px;
+}
+.duel-p2-directions,
+.duel-p2-actions {
+  display: contents;
 }
 .duel-p2-pad button {
   min-height: 48px;
@@ -4979,7 +5171,7 @@ onUnmounted(() => {
   .duel-mode-picker {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .duel-p2-pad > div {
+  .duel-p2-controls {
     grid-template-columns: repeat(3, minmax(48px, 1fr));
   }
   .duel-p2-pad {
@@ -4988,6 +5180,71 @@ onUnmounted(() => {
   .duel-versus-guide {
     font-size: 11px;
     padding: 12px;
+  }
+}
+@media (max-width: 700px) and (pointer: coarse) {
+  .duel-p2-controls {
+    display: grid;
+    grid-template-columns: 128px minmax(0, 1fr);
+    align-items: start;
+    gap: 10px;
+  }
+  .duel-p2-directions {
+    position: relative;
+    display: block;
+    width: 128px;
+    height: 128px;
+    border: 1px solid #8675a8;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, #5a4f70 0 25%, transparent 26%),
+      radial-gradient(circle, #302d48 0 67%, #19172a 68%);
+    box-shadow:
+      inset 0 0 0 7px #1d1b30,
+      inset 0 0 24px #d2b9ff1a;
+    touch-action: none;
+  }
+  .duel-p2-directions button {
+    position: absolute;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #b5a7ce;
+  }
+  .duel-p2-directions .control-jump {
+    top: 4px;
+    left: 42px;
+  }
+  .duel-p2-directions .control-crouch {
+    bottom: 4px;
+    left: 42px;
+  }
+  .duel-p2-directions .control-left {
+    top: 42px;
+    left: 4px;
+  }
+  .duel-p2-directions .control-right {
+    top: 42px;
+    right: 4px;
+  }
+  .duel-p2-directions button.held {
+    background: #dfc8ff;
+    color: #2b2340;
+    box-shadow: 0 4px 13px #090613b8;
+    transform: scale(1.07);
+  }
+  .duel-p2-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(44px, 1fr));
+    gap: 5px;
+  }
+  .duel-p2-actions button {
+    min-width: 44px;
+    min-height: 44px;
   }
 }
 @media (max-width: 600px) {

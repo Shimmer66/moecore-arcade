@@ -141,6 +141,7 @@ const keys = new Set<string>();
 const touch = ref({ left: false, right: false });
 const touch2 = ref({ left: false, right: false });
 const touchJump = ref([false, false]);
+const stickX = ref<[number, number]>([0, 0]);
 let queued = false;
 let queued2 = false;
 let sabotage1 = false;
@@ -342,6 +343,7 @@ function release() {
   touch.value = { left: false, right: false };
   touch2.value = { left: false, right: false };
   touchJump.value = [false, false];
+  stickX.value = [0, 0];
   queued = false;
   queued2 = false;
   sabotage1 = sabotage2 = false;
@@ -658,6 +660,33 @@ function press(e: PointerEvent, direction: 'left' | 'right', player = 0) {
   unlockAudio();
   (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   (player === 0 ? touch.value : touch2.value)[direction] = true;
+  stickX.value = stickX.value.map((value, index) =>
+    index === player ? (direction === 'left' ? -1 : 1) : value,
+  ) as [number, number];
+}
+function moveStick(e: PointerEvent, player: 0 | 1) {
+  if (props.paused) return;
+  const bounds = (e.currentTarget as HTMLElement).getBoundingClientRect();
+  const value = Math.max(
+    -1,
+    Math.min(1, (e.clientX - (bounds.left + bounds.width / 2)) / (bounds.width / 2)),
+  );
+  const movement = player === 0 ? touch.value : touch2.value;
+  movement.left = value < -0.22;
+  movement.right = value > 0.22;
+  stickX.value = stickX.value.map((current, index) => (index === player ? value : current)) as [
+    number,
+    number,
+  ];
+}
+function releaseStick(player: 0 | 1) {
+  const movement = player === 0 ? touch.value : touch2.value;
+  movement.left = false;
+  movement.right = false;
+  stickX.value = stickX.value.map((value, index) => (index === player ? 0 : value)) as [
+    number,
+    number,
+  ];
 }
 watch(
   () => props.paused,
@@ -1452,24 +1481,33 @@ onUnmounted(() => {
     </div>
     <nav class="controls" aria-label="移动控制" :inert="select" @focusout="release">
       <span v-if="raceMode" class="player-label">P1</span>
-      <button
-        aria-label="向左移动"
-        @pointerdown="press($event, 'left')"
-        @pointerup="touch.left = false"
-        @pointercancel="touch.left = false"
-        @lostpointercapture="touch.left = false"
+      <div
+        class="arena-stick"
+        :style="{ '--stick-offset': `${stickX[0] * 27}px` }"
+        @pointermove.prevent="moveStick($event, 0)"
+        @pointerup="releaseStick(0)"
+        @pointercancel="releaseStick(0)"
+        @lostpointercapture="releaseStick(0)"
       >
-        <ArrowLeft />
-      </button>
-      <button
-        aria-label="向右移动"
-        @pointerdown="press($event, 'right')"
-        @pointerup="touch.right = false"
-        @pointercancel="touch.right = false"
-        @lostpointercapture="touch.right = false"
-      >
-        <ArrowRight />
-      </button>
+        <button
+          aria-label="向左移动"
+          @pointerdown="press($event, 'left')"
+          @pointerup="releaseStick(0)"
+          @pointercancel="releaseStick(0)"
+          @lostpointercapture="releaseStick(0)"
+        >
+          <ArrowLeft />
+        </button>
+        <button
+          aria-label="向右移动"
+          @pointerdown="press($event, 'right')"
+          @pointerup="releaseStick(0)"
+          @pointercancel="releaseStick(0)"
+          @lostpointercapture="releaseStick(0)"
+        >
+          <ArrowRight />
+        </button>
+      </div>
       <button
         class="jump"
         aria-label="跳跃"
@@ -1513,24 +1551,33 @@ onUnmounted(() => {
       @focusout="release"
     >
       <span class="player-label">P2</span>
-      <button
-        aria-label="P2 向左移动"
-        @pointerdown="press($event, 'left', 1)"
-        @pointerup="touch2.left = false"
-        @pointercancel="touch2.left = false"
-        @lostpointercapture="touch2.left = false"
+      <div
+        class="arena-stick"
+        :style="{ '--stick-offset': `${stickX[1] * 27}px` }"
+        @pointermove.prevent="moveStick($event, 1)"
+        @pointerup="releaseStick(1)"
+        @pointercancel="releaseStick(1)"
+        @lostpointercapture="releaseStick(1)"
       >
-        <ArrowLeft />
-      </button>
-      <button
-        aria-label="P2 向右移动"
-        @pointerdown="press($event, 'right', 1)"
-        @pointerup="touch2.right = false"
-        @pointercancel="touch2.right = false"
-        @lostpointercapture="touch2.right = false"
-      >
-        <ArrowRight />
-      </button>
+        <button
+          aria-label="P2 向左移动"
+          @pointerdown="press($event, 'left', 1)"
+          @pointerup="releaseStick(1)"
+          @pointercancel="releaseStick(1)"
+          @lostpointercapture="releaseStick(1)"
+        >
+          <ArrowLeft />
+        </button>
+        <button
+          aria-label="P2 向右移动"
+          @pointerdown="press($event, 'right', 1)"
+          @pointerup="releaseStick(1)"
+          @pointercancel="releaseStick(1)"
+          @lostpointercapture="releaseStick(1)"
+        >
+          <ArrowRight />
+        </button>
+      </div>
       <button
         class="jump"
         aria-label="P2 跳跃"
@@ -1642,6 +1689,9 @@ button > svg {
   display: flex;
   gap: 14px;
   padding: 12px 18px;
+}
+.arena-stick {
+  display: contents;
 }
 button:disabled {
   opacity: 0.4;
@@ -1830,6 +1880,70 @@ button:disabled {
   .selector button {
     min-height: 36px;
     font-size: 11px;
+  }
+}
+@media (max-width: 700px) and (pointer: coarse) {
+  .controls {
+    align-items: center;
+    min-height: 126px;
+    padding: 8px 12px;
+  }
+  .arena-stick {
+    --stick-offset: 0px;
+    position: relative;
+    display: block;
+    width: 112px;
+    height: 112px;
+    flex: 0 0 112px;
+    border: 1px solid #577a72;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, #4a6a62 0 25%, transparent 26%),
+      radial-gradient(circle, #263f3e 0 66%, #13272d 67%);
+    box-shadow:
+      inset 0 0 0 7px #14282e,
+      inset 0 0 24px #9dffe21f;
+    touch-action: none;
+  }
+  .arena-stick::after {
+    position: absolute;
+    top: 34px;
+    left: 34px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #d8fff0;
+    box-shadow: 0 5px 14px #061315a8;
+    content: '';
+    pointer-events: none;
+    transform: translateX(var(--stick-offset));
+    transition: transform 60ms linear;
+  }
+  .arena-stick button {
+    position: absolute;
+    top: 27px;
+    z-index: 1;
+    width: 54px;
+    height: 58px;
+    border: 0;
+    background: transparent;
+    color: transparent;
+  }
+  .arena-stick button:first-child {
+    left: 0;
+  }
+  .arena-stick button:last-child {
+    right: 0;
+  }
+  .controls .jump {
+    width: 64px;
+    height: 64px;
+    margin-left: auto;
+    border-radius: 50%;
+  }
+  .controls > button:not(.jump),
+  .controls > .player-label {
+    flex: 0 0 auto;
   }
 }
 </style>

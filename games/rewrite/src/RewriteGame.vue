@@ -1490,8 +1490,8 @@ onUnmounted(() => {
       <div v-if="!selected" class="rewrite-select">
         <div class="rewrite-brief">
           <span class="rewrite-eyebrow">MISSION 01—08</span>
-          <h3>别再让幻觉<br />替你扣下扳机。</h3>
-          <p>八处失控节点，八场守关战。<br />选一位 AI 娘，把这场生成事故打回去。</p>
+          <h3>别让幻觉<br />替你开火。</h3>
+          <p>八关突围，清掉幻觉与限流。选角色，直接开打。</p>
         </div>
         <div class="rewrite-deploy">
           <div class="rewrite-difficulty" aria-label="出击人数">
@@ -1539,10 +1539,10 @@ onUnmounted(() => {
               街机 <small>三格生命</small>
             </button>
             <button :aria-pressed="difficulty === 'classic'" @click="difficulty = 'classic'">
-              经典 <small>基础装备 · 三次续关</small>
+              经典 <small>基础装备</small>
             </button>
             <button :aria-pressed="difficulty === 'hard'" @click="difficulty = 'hard'">
-              硬核 <small>一击倒地 · 敌人加速</small>
+              硬核 <small>一击倒地</small>
             </button>
           </div>
           <div class="rewrite-personas">
@@ -1563,8 +1563,8 @@ onUnmounted(() => {
               practice
                 ? '独立演练 · 不计入战役通关 · 可反复挑战'
                 : difficulty === 'classic'
-                  ? '经典试炼 · 一击倒地 · 3 条命 / 3 次续关 · 基础步枪'
-                  : '点击角色出击 · 3 条命 / 2 次续关 · 无限弹药'
+                  ? '经典试炼 · 基础步枪 · 三次续关'
+                  : '三条命 · 两次续关 · 无限弹药'
             }}
           </p>
         </div>
@@ -1641,7 +1641,7 @@ onUnmounted(() => {
         >
       </button>
     </div>
-    <div class="rewrite-control-deck" :class="{ duo: state.partner }">
+    <div v-if="selected" class="rewrite-control-deck" :class="{ duo: state.partner }">
       <div
         v-for="controller in players"
         :key="`controls${controller.playerId}`"
@@ -1654,10 +1654,13 @@ onUnmounted(() => {
           >P{{ controller.playerId }} ·
           {{ controller.playerId === 1 ? 'WASD + J K L' : '方向键 + , . /' }}</span
         >
-        <div class="rewrite-dpad">
+        <div class="rewrite-dpad rewrite-joystick">
           <button
             v-for="key in dpad"
             :key="key.label"
+            :class="{
+              'joystick-active': key.actions.every((action) => has(action, controller.playerId)),
+            }"
             :aria-label="controlLabel(key.label, controller.playerId)"
             :disabled="
               !selected || props.paused || state.phase !== 'running' || controller.lives <= 0
@@ -1734,7 +1737,7 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
-    <details class="rewrite-guide">
+    <details v-if="selected" class="rewrite-guide">
       <summary>战地手册 · 武器与生存技巧</summary>
       <div class="rewrite-weapons">
         <p v-for="(w, id) in weapons" :key="id">
@@ -2424,11 +2427,11 @@ h2 span {
     font-size: 11px;
   }
   .rewrite-sound-controls {
-    grid-template-columns: auto 54px 54px;
-    gap: 4px;
+    grid-template-columns: auto;
+    gap: 0;
   }
   .rewrite-sound-controls label {
-    font-size: 8px;
+    display: none;
   }
   .rewrite-sound-controls input {
     width: 54px;
@@ -2450,7 +2453,10 @@ h2 span {
     display: none;
   }
   .rewrite-stage:has(.rewrite-select) {
-    min-height: 470px;
+    min-height: 420px;
+  }
+  .rewrite-stage.has-coop:has(.rewrite-select) {
+    min-height: 460px;
   }
   .rewrite-stage:has(.rewrite-practice) {
     min-height: 600px;
@@ -2552,6 +2558,37 @@ h2 span {
   }
   .rewrite-hud .rewrite-hearts {
     letter-spacing: 2px;
+  }
+}
+@media (max-width: 760px) and (pointer: coarse) {
+  .rewrite-joystick {
+    width: 132px;
+    height: 132px;
+    padding: 5px;
+    border: 1px solid #496274;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, #29475b 0 26%, transparent 27%),
+      radial-gradient(circle, #172c3c 0 66%, #0c1924 67%);
+    box-shadow:
+      inset 0 0 0 7px #0d1c29,
+      inset 0 0 28px #70e1d41a;
+    touch-action: none;
+  }
+  .rewrite-joystick button {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #7694a5;
+    font-size: 14px;
+  }
+  .rewrite-joystick button.joystick-active {
+    background: #9cfbe4;
+    color: #14363c;
+    box-shadow: 0 4px 14px #07131db8;
+    transform: scale(1.08);
   }
 }
 @media (max-width: 360px) {
