@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>新三人 · 48 帧动作预览</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #111a2a;
+      color: #e9f0ff;
+      font:
+        15px system-ui,
+        'Microsoft YaHei',
+        sans-serif;
+    }
+    main {
+      max-width: 1080px;
+      padding: 32px 20px;
+      margin: auto;
+    }
+    h1 {
+      font-size: clamp(26px, 5vw, 42px);
+      margin-bottom: 8px;
+    }
+    p {
+      color: #afbdd4;
+      line-height: 1.8;
+    }
+    a {
+      color: #ffd47a;
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 20px 0;
+    }
+    select,
+    button {
+      font: inherit;
+      background: #26334c;
+      color: #f5f7ff;
+      border: 1px solid #596e8f;
+      padding: 10px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+    button:focus-visible,
+    select:focus-visible {
+      outline: 3px solid #ffdc88;
+    }
+    button[aria-pressed='true'] {
+      background: #ffc76b;
+      color: #152035;
+    }
+    .stage {
+      background: #e6ede4;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .stage svg {
+      width: 100%;
+      display: block;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .frame {
+      padding: 4px;
+      background: #26334c;
+    }
+    .frame svg {
+      background: #e6ede4;
+      width: 100%;
+      border-radius: 4px;
+      display: block;
+    }
+    .frame span {
+      display: block;
+      padding: 8px;
+      font-size: 12px;
+    }
+    #readout {
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+    }
+    footer {
+      border-top: 1px solid #37445a;
+      margin-top: 26px;
+      padding-top: 20px;
+      font-size: 13px;
+    }
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      main {
+        padding: 20px 12px;
+      }
+      label {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+    }
+  </style>
+  <main>
+    <p>战斗吧，大肥鱼 / 动作扩充</p>
+    <h1>拳要打出去，也要收回来。</h1>
+    <p>
+      甲方、提示词仙人、断网大爷，每人 48
+      帧。逐帧检查跑跳、低位、受击与起身、拳脚、挑空、空中踢、投技和防御。
+    </p>
+    <div class="controls">
+      <label
+        >角色
+        <select id="character">
+          <option value="client">甲方</option>
+          <option value="prompt_sage">提示词仙人</option>
+          <option value="unplug_uncle">断网大爷</option>
+        </select></label
+      ><label
+        >动作组
+        <select id="group"></select></label
+      ><button id="play" aria-pressed="false">播放本组</button><button id="next">下一帧</button
+      ><button id="mirror" aria-pressed="false">镜像</button>
+    </div>
+    <div class="stage" id="stage"></div>
+    <p id="readout" aria-live="polite">正在载入…</p>
+    <p>
+      下方显示当前图集的 16 帧，点击可查看。动作组播放用于核对姿态；游戏内按出招与落地时序播放。
+    </p>
+    <div class="grid" id="grid"></div>
+    <footer>
+      <a href="http://127.0.0.1:5197/#/games/duel">进入游戏</a> ·
+      <a href="prompts.json">生成提示词</a> · <a href="generation-record.json">生成与返修记录</a> ·
+      <a href="geometry.json">逐帧取图坐标</a>
+    </footer>
+  </main>
+  <script type="module">
+    const $ = (id) => document.getElementById(id);
+    const groups = [
+      ['mobility', 0, '跑动'],
+      ['mobility', 1, '起跳 / 下落 / 落地'],
+      ['mobility', 2, '下蹲 / 蹲防 / 蹲拳 / 扫腿'],
+      ['mobility', 3, '受击 / 腾空 / 倒地 / 起身'],
+      ['ground', 0, '轻拳'],
+      ['ground', 1, '重击'],
+      ['ground', 2, '站立踢'],
+      ['ground', 3, '招牌技'],
+      ['aerial', 0, '挑空'],
+      ['aerial', 1, '空中踢'],
+      ['aerial', 2, '投技'],
+      ['aerial', 3, '待机 / 防御'],
+    ];
+    groups.forEach((g, i) => $('group').add(new Option(g[2], String(i))));
+    let geometry,
+      manifest,
+      index = 0,
+      playing = false,
+      flipped = false;
+    function path(id, sheet) {
+      return manifest.files.find((f) => f.path.startsWith(id + '-' + sheet + '-')).path;
+    }
+    function svg(g, url, large = false) {
+      return `<svg viewBox="-170 -220 340 250" role="img" aria-label="角色动作第${index + 1}帧"><path d="M-160 2H160" stroke="#b2c1b0"/><g transform="scale(${flipped ? -1 : 1},1)"><svg x="${g.x}" y="${g.y}" width="${g.width}" height="${g.height}" viewBox="${g.viewBox}" overflow="hidden"><image href="${url}" width="${g.sourceWidth}" height="${g.sourceHeight}"/></svg></g></svg>`;
+    }
+    function render() {
+      if (!geometry) return;
+      const id = $('character').value,
+        [sheet, row] = groups[+$('group').value],
+        url = path(id, sheet);
+      $('stage').innerHTML = svg(geometry[id][sheet][index], url, true);
+      $('readout').textContent =
+        `${$('character').selectedOptions[0].text} · ${groups[+$('group').value][2]} · 图集帧 ${index + 1}/16`;
+      $('grid').replaceChildren();
+      geometry[id][sheet].forEach((g, i) => {
+        const b = document.createElement('button');
+        b.className = 'frame';
+        b.setAttribute('aria-label', `查看第${i + 1}帧`);
+        b.setAttribute('aria-pressed', String(i === index));
+        b.innerHTML =
+          svg(g, url) +
+          `<span>${i + 1} / ${groups.find((x) => x[0] === sheet && x[1] === Math.floor(i / 4))[2]}</span>`;
+        b.onclick = () => {
+          playing = false;
+          $('play').textContent = '播放本组';
+          $('play').setAttribute('aria-pressed', 'false');
+          index = i;
+          $('group').value = String(
+            groups.findIndex((x) => x[0] === sheet && x[1] === Math.floor(i / 4)),
+          );
+          render();
+        };
+        $('grid').append(b);
+      });
+    }
+    $('character').onchange = render;
+    $('group').onchange = () => {
+      index = groups[+$('group').value][1] * 4;
+      render();
+    };
+    $('next').onclick = () => {
+      index = groups[+$('group').value][1] * 4 + ((index + 1) % 4);
+      render();
+    };
+    $('mirror').onclick = () => {
+      flipped = !flipped;
+      $('mirror').setAttribute('aria-pressed', String(flipped));
+      render();
+    };
+    $('play').onclick = () => {
+      playing = !playing;
+      $('play').setAttribute('aria-pressed', String(playing));
+      $('play').textContent = playing ? '暂停' : '播放本组';
+    };
+    setInterval(() => {
+      if (playing && !document.hidden) {
+        index = groups[+$('group').value][1] * 4 + ((index + 1) % 4);
+        render();
+      }
+    }, 180);
+    try {
+      [geometry, manifest] = await Promise.all(
+        ['geometry.json', 'manifest.json'].map(async (p) => {
+          const r = await fetch(p);
+          if (!r.ok) throw Error(p);
+          return r.json();
+        }),
+      );
+      render();
+    } catch (e) {
+      $('readout').textContent = '素材载入失败，请刷新重试。';
+      console.error(e);
+    }
+  </script>
+</html>

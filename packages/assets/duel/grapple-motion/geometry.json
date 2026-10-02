@@ -1,0 +1,108 @@
+{
+  "gpt": [
+    {
+      "x": -69.751,
+      "y": -143.498,
+      "width": 123.189,
+      "height": 144.164,
+      "viewBox": "36 8 370 433",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [38, 10, 404, 439],
+      "pivot": [245.5, 439],
+      "scale": 0.332943,
+      "edgeTrimPx": [0, 0]
+    },
+    {
+      "x": -69.918,
+      "y": -127.85,
+      "width": 128.849,
+      "height": 128.516,
+      "viewBox": "479 52 387 386",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [481, 54, 864, 436],
+      "pivot": [689.0, 436],
+      "scale": 0.332943,
+      "edgeTrimPx": [0, 0]
+    },
+    {
+      "x": -63.925,
+      "y": -136.839,
+      "width": 133.177,
+      "height": 137.505,
+      "viewBox": "930 26 400 413",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [932, 28, 1328, 437],
+      "pivot": [1122.0, 437],
+      "scale": 0.332943,
+      "edgeTrimPx": [0, 0]
+    },
+    {
+      "x": -78.907,
+      "y": -138.504,
+      "width": 115.531,
+      "height": 139.17,
+      "viewBox": "1385 21 347 418",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [1387, 23, 1730, 437],
+      "pivot": [1622.0, 437],
+      "scale": 0.332943,
+      "edgeTrimPx": [0, 0]
+    },
+    {
+      "x": -68.42,
+      "y": -134.842,
+      "width": 119.859,
+      "height": 135.508,
+      "viewBox": "38 468 360 407",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [40, 470, 396, 873],
+      "pivot": [243.5, 873],
+      "scale": 0.332943,
+      "edgeTrimPx": [0, 0]
+    },
+    {
+      "x": -69.086,
+      "y": -142.166,
+      "width": 106.209,
+      "height": 142.832,
+      "viewBox": "493 447 319 429",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [495, 449, 810, 874],
+      "pivot": [700.5, 874],
+      "scale": 0.332943,
+      "edgeTrimPx": [0, 0]
+    },
+    {
+      "x": -51.273,
+      "y": -125.852,
+      "width": 128.849,
+      "height": 126.518,
+      "viewBox": "931 495 387 380",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [933, 497, 1316, 873],
+      "pivot": [1085.0, 873],
+      "scale": 0.332943,
+      "edgeTrimPx": [0, 0]
+    },
+    {
+      "x": -76.077,
+      "y": -141.834,
+      "width": 124.521,
+      "height": 142.499,
+      "viewBox": "1365 448 374 428",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [1367, 450, 1737, 874],
+      "pivot": [1593.5, 874],
+      "scale": 0.332943,
+      "edgeTrimPx": [0, 0]
+    }
+  ]
+}

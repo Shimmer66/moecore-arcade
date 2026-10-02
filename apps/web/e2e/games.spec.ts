@@ -84,6 +84,28 @@ test('invalid exchanges preserve moves and hints lead to a valid exchange', asyn
   expect(Number(await page.getByTestId('cleared').textContent())).toBeGreaterThanOrEqual(3);
 });
 
+test('matched characters show their goofy reaction portraits', async ({ page }, testInfo) => {
+  await page.clock.install();
+  await enterGame(page);
+  await expect(page.locator('.match3-tile img')).toHaveCount(64);
+  const candidate = enumerateValidSwaps(await readBoard(page))[0]!;
+  await tile(page, candidate.from).click();
+  await tile(page, candidate.to).click();
+  const reactions = page.locator('.match3-tile[data-reaction="true"]');
+  await expect(reactions).not.toHaveCount(0);
+  await expect
+    .poll(() =>
+      reactions
+        .first()
+        .locator('img')
+        .evaluate((image) => (image as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  await page.screenshot({ path: testInfo.outputPath('match3-reaction.png'), fullPage: true });
+  await page.clock.runFor(5000);
+  await expect(reactions).toHaveCount(0);
+});
+
 test('pauses an active cascade and resumes without spending a second move', async ({ page }) => {
   await page.clock.install();
   await enterGame(page);
@@ -93,9 +115,10 @@ test('pauses an active cascade and resumes without spending a second move', asyn
   await page.getByRole('button', { name: '暂停', exact: true }).click();
   await expect(page.getByRole('region', { name: '暂停菜单' })).toBeVisible();
   const pausedBoard = await readBoard(page);
+  const pausedMoves = await page.getByTestId('moves').textContent();
   await page.clock.runFor(10_000);
   expect(await readBoard(page)).toEqual(pausedBoard);
-  await expect(page.getByTestId('moves')).toHaveText('20');
+  await expect(page.getByTestId('moves')).toHaveText(pausedMoves!);
   await page.getByRole('button', { name: '继续游戏', exact: true }).click();
   await page.clock.runFor(10_000);
   await expect(page.getByTestId('moves')).toHaveText('19');

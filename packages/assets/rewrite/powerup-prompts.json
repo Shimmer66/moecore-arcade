@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-29",
+  "tool": "built-in image_gen.imagegen",
+  "file": "runtime/powerup-atlas-v1.png",
+  "result": "call_XH0Xh5uF8oHuOGN9ZuZKiksb.png",
+  "size": [1536, 1024],
+  "transparent_background": true,
+  "references": [],
+  "cells": ["capsule", "cache", "overclock", "barrier", "purge", "cache-open"],
+  "prompt": "Create a production sprite atlas for an original anime AI meme arcade run-and-gun game, fully transparent background. Exactly 3 columns x 2 rows equal square cells on 1536x1024 canvas, generous transparent gutters, six complete separate objects fully contained within their cells. Consistent polished colorful anime sci-fi arcade item art, thick clean readable contours, three-quarter side view. Top row left: mint and white flying supply capsule drone, rounded cargo pod with two small wings and tiny orange thrusters, absolutely no gun. Top row middle: blue-gray armored supply cache with glowing latch, stable low rectangular futuristic crate. Top row right: orange overclock microchip power-up, golden lightning bolt inside a glowing CPU with four cooling fins. Bottom row left: violet force-field emitter power-up, small circular generator projecting a complete transparent spherical violet energy bubble with hexagon patterns. Bottom row middle: cyan and white purge pulse power-up, a radiant compact starburst orb inside a mechanical ring, clearly different from a hand grenade. Bottom row right: same blue-gray supply cache as top middle but now opened with lid raised and empty dark interior, no loot visible. No text, no letters, no numbers, no labels, no UI, no floor or background. Assets must remain readable at 48px. Full objects and 12% margins in every cell, no overlap.",
+  "integration": "ItemArt.vue crops six 512x512 cells. Used for shootable side capsules and closed/open caches, depth cache nodes, released power-ups and timed buff HUD."
+}

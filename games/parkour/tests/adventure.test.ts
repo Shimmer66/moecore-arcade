@@ -5,13 +5,16 @@ import {
   ANSWER_DISTANCE,
   BURST_TICKS,
   CONTEXT_CAPACITY,
+  levelFor,
   SHIFT_DISTANCE,
   SLOW_TICKS,
   TAIL_COOLDOWN,
   TAIL_TICKS,
+  tailActionFor,
   seedForSession,
   type Adventure,
   type AdventureInput,
+  type LevelId,
 } from '../src/rules';
 import { freezeTree } from './helpers';
 
@@ -45,9 +48,45 @@ function ticks(state: Adventure, count: number, input = idle) {
 function incoming(x = 2.5): Adventure {
   return fixture({
     papers: [{ id: 1, x, y: 1.02, returned: false }],
-    printers: [{ id: 1, x: 10, fireTick: 0, fired: true, jammed: false, receiptUntil: 0 }],
+    printers: [
+      { id: 1, x: 10, fireTick: 0, fired: true, shotsRemaining: 0, jammed: false, receiptUntil: 0 },
+    ],
   });
 }
+describe('precise counters and charged targeting', () => {
+  it('keeps full energy when returning a nearby paper', () => {
+    const state = { ...incoming(2), energy: 100 };
+    expect(tailActionFor(state)).toBe('return');
+    const next = advanceAdventure(state, tail);
+    expect(next.parries).toBe(1);
+    expect(next.bursts).toBe(0);
+    expect(next.energy).toBe(100);
+  });
+  it('only gives precise rewards for a close, freshly timed counter', () => {
+    const precise = advanceAdventure(incoming(1.5), tail);
+    expect(precise.perfectParries).toBe(1);
+    expect(precise.feedback.some((item) => item.kind === 'perfect')).toBe(true);
+    expect(precise.tailCooldown).toBe(12);
+    expect(advanceAdventure(incoming(3), tail).perfectParries).toBe(0);
+    const held = advanceAdventure({ ...incoming(1.5), tailTicks: 10, tailHeld: true }, tail);
+    expect(held.parries).toBe(1);
+    expect(held.perfectParries).toBe(0);
+  });
+  it('checks target height and still bursts away from a target', () => {
+    const state = { ...incoming(2), energy: 100 };
+    const high = {
+      ...state,
+      run: { ...state.run, player: { ...state.run.player, y: 4, grounded: false } },
+    };
+    expect(tailActionFor(high)).toBe('burst');
+    expect(tailActionFor({ ...incoming(8), energy: 100 })).toBe('burst');
+    const fake = fixture({ energy: 100, hallucinations: [{ id: 0, x: 2, y: 1.8 }] });
+    expect(tailActionFor(fake)).toBe('verify');
+    const next = advanceAdventure(fake, tail);
+    expect(next.verified).toBe(1);
+    expect(next.bursts).toBe(0);
+  });
+});
 function pilot(state: Adventure, food = true): AdventureInput {
   const distance = state.run.distance;
   const obstacles = [
@@ -82,13 +121,29 @@ function pilot(state: Adventure, food = true): AdventureInput {
   };
 }
 
-describe('short office shift', () => {
+describe('answer sea levels', () => {
   it('starts a finite authored course, not the base 1200m generator', () => {
     const state = beginAdventure(42);
     expect(state.run.finishDistance).toBe(SHIFT_DISTANCE);
-    expect(state.run.obstacles).toHaveLength(14);
-    expect(state.printers).toHaveLength(3);
+    expect(state.run.obstacles).toHaveLength(18);
+    expect(state.printers).toHaveLength(4);
     expect(state.run.generator.nextDistance).toBeGreaterThan(SHIFT_DISTANCE);
+  });
+  it('maps thinking strength to run speed and post-return slow motion', () => {
+    const quick = beginAdventure(0, 'quick');
+    const normal = beginAdventure(0);
+    const deep = beginAdventure(0, 'deep');
+    expect(quick.run.speed).toBeGreaterThan(normal.run.speed);
+    expect(deep.run.speed).toBeLessThan(normal.run.speed);
+    expect(advanceAdventure({ ...incoming(), thinkingMode: 'quick' }, tail).slowTicks).toBe(18);
+    expect(advanceAdventure({ ...incoming(), thinkingMode: 'deep' }, tail).slowTicks).toBe(60);
+  });
+  it.each(['quick', 'deep'] as const)('%s keeps the answer deliverable', (mode) => {
+    let state = beginAdventure(42, mode);
+    for (let index = 0; index < 6000 && state.run.status === 'running'; index += 1)
+      state = advanceAdventure(state, pilot(state));
+    expect(state.run.result?.reason).toBe('distance-limit');
+    expect(state.hasAnswer).toBe(true);
   });
   it('supports a fresh second jump, not held jumps or a third jump', () => {
     let state = advanceAdventure(fixture(), jump);
@@ -157,6 +212,7 @@ describe('short office shift', () => {
   });
   it('cannot hit a distant paper or a low paper from a high jump', () => {
     expect(advanceAdventure(incoming(8), tail).parries).toBe(0);
+    expect(advanceAdventure(incoming(3.6), tail).parries).toBe(1);
     const state = incoming();
     const airborne = { ...state.run.player, grounded: false, y: 3, velocityY: 0 };
     expect(
@@ -232,9 +288,41 @@ describe('short office shift', () => {
     expect(double.energy).toBe(55);
     expect(ticks(double, 70).rice).toBe(1);
   });
+  it('rewards two consecutive real rice bowls and resets the streak on a miss', () => {
+    let state = fixture();
+    const bowl = (id: string, x: number) => ({ id, kind: 'rice' as const, x, y: 0.6 });
+    state = advanceAdventure(
+      { ...state, pickups: [bowl('first', state.run.distance + 0.3)] },
+      idle,
+    );
+    expect(state.riceStreak).toBe(1);
+    expect(state.energy).toBe(55);
+    state = advanceAdventure(
+      { ...state, pickups: [bowl('second', state.run.distance + 0.3)] },
+      idle,
+    );
+    expect(state.riceStreak).toBe(2);
+    expect(state.riceFeasts).toBe(1);
+    expect(state.energy).toBe(90);
+    expect(state.context).toBe(1);
+    expect(state.feedback.some((item) => item.kind === 'feast')).toBe(true);
+    expect(state.quip).toBe('riceFeast');
+    state = advanceAdventure({ ...state, pickups: [bowl('missed', state.run.distance - 2)] }, idle);
+    expect(state.riceStreak).toBe(0);
+  });
   it('warns before a single printer projectile and does not need a physical printer collision', () => {
     let state = fixture({
-      printers: [{ id: 1, x: 19, fireTick: null, fired: false, jammed: false, receiptUntil: 0 }],
+      printers: [
+        {
+          id: 1,
+          x: 19,
+          fireTick: null,
+          fired: false,
+          shotsRemaining: 1,
+          jammed: false,
+          receiptUntil: 0,
+        },
+      ],
     });
     state = advanceAdventure(state, idle);
     expect(state.printers[0]?.fireTick).toBe(43);
@@ -247,6 +335,49 @@ describe('short office shift', () => {
     expect(state.health).toBe(3);
     expect(state.papers).toHaveLength(0);
   });
+  it('the echo reef fires a second paper unless the printer is jammed', () => {
+    let state = fixture({
+      levelId: 1,
+      printers: [
+        {
+          id: 1,
+          x: 19,
+          fireTick: null,
+          fired: false,
+          shotsRemaining: 2,
+          jammed: false,
+          receiptUntil: 0,
+        },
+      ],
+    });
+    state = advanceAdventure(state, idle);
+    state = ticks(state, 42, crouch);
+    expect(state.papers).toHaveLength(1);
+    expect(state.printers[0]?.shotsRemaining).toBe(1);
+    state = ticks(state, 18, crouch);
+    expect(state.papers).toHaveLength(2);
+    expect(state.printers[0]?.fired).toBe(true);
+    const returned = fixture({
+      levelId: 1,
+      printers: [
+        {
+          id: 1,
+          x: 8,
+          fireTick: 20,
+          fired: false,
+          shotsRemaining: 1,
+          jammed: false,
+          receiptUntil: 0,
+        },
+      ],
+      papers: [{ id: 1, x: 2.5, y: 1.02, returned: false }],
+    });
+    const jammed = ticks(advanceAdventure(returned, tail), 25);
+    expect(jammed.printers[0]?.jammed).toBe(true);
+    expect(jammed.printers[0]?.shotsRemaining).toBe(0);
+    expect(jammed.returns).toBe(1);
+    expect(jammed.papers).toHaveLength(0);
+  });
   it('queues really move, collide, and can be jumped or burst through', () => {
     const base = fixture({ queues: [{ id: 0, home: 10, x: 10 }] });
     expect(ticks(base, 10).queues[0]!.x).not.toBe(10);
@@ -257,6 +388,11 @@ describe('short office shift', () => {
     expect(advanceAdventure({ ...close, run: { ...close.run, player: high } }, idle).health).toBe(
       3,
     );
+  });
+  it('the final level moves its queues through a wider arc', () => {
+    const first = beginAdventure(0).queues[1]!;
+    const final = beginAdventure(0, 'normal', 2).queues[1]!;
+    expect(Math.abs(final.x - final.home)).toBeGreaterThan(Math.abs(first.x - first.home));
   });
   it('suspicious food can be verified, ducked, or mistakenly consumed', () => {
     const base = fixture({ hallucinations: [{ id: 1, x: 0.7, y: 1.8 }], combo: 10, energy: 50 });
@@ -315,7 +451,7 @@ describe('short office shift', () => {
     expect(beginAdventure(seed).context).toBe(0);
   });
   it.each(Array.from({ length: 32 }, (_, index) => index))(
-    'seed %i can deliver without reading stops in 45–60 seconds',
+    'seed %i can deliver the longer first level in 38–52 seconds',
     (seed) => {
       let state = beginAdventure(seed);
       let firstReturnAt = Infinity;
@@ -323,21 +459,83 @@ describe('short office shift', () => {
         state = advanceAdventure(state, pilot(state));
         if (state.returns > 0 && firstReturnAt === Infinity) firstReturnAt = state.realTick / 60;
         expect(state.health).toBeGreaterThan(0);
-        expect(state.run.speed).toBeLessThanOrEqual(18.9 + 1e-9);
+        expect(state.run.speed).toBeLessThanOrEqual(levelFor(state.levelId).maxSpeed * 1.75 + 1e-9);
         expect(state.feedback.length).toBeLessThan(30);
       }
       expect(state.run.result?.reason).toBe('distance-limit');
       expect(state.run.distance).toBe(SHIFT_DISTANCE);
       expect(state.hasAnswer).toBe(true);
-      expect(state.realTick / 60).toBeGreaterThanOrEqual(45);
-      expect(state.realTick / 60).toBeLessThanOrEqual(60);
+      expect(state.realTick / 60).toBeGreaterThanOrEqual(38);
+      expect(state.realTick / 60).toBeLessThanOrEqual(52);
       expect(state.rice).toBeGreaterThan(0);
       expect(state.returns).toBeGreaterThan(0);
-      expect(firstReturnAt).toBeLessThan(15);
+      expect(firstReturnAt).toBeLessThan(25);
       expect(state.verified).toBeGreaterThan(0);
       expect(state.breaks).toBeGreaterThan(0);
     },
   );
+  it.each([1, 2] as const)('level %i has a complete playable route', (levelId) => {
+    for (const seed of [0, 1, 2]) {
+      let state = beginAdventure(seed, 'normal', levelId as LevelId);
+      for (let index = 0; index < 9000 && state.run.status === 'running'; index += 1)
+        state = advanceAdventure(state, pilot(state));
+      expect(state.run.result?.reason).toBe('distance-limit');
+      expect(state.run.distance).toBe(levelFor(levelId).finishDistance);
+      expect(state.hasAnswer).toBe(true);
+      expect(state.health).toBeGreaterThan(0);
+      expect(state.realTick / 60).toBeLessThan(70);
+    }
+  });
+  it('endless mode keeps generating obstacles and score beyond the finite course', () => {
+    let state = beginAdventure(17, 'normal', 3);
+    expect(state.run.endless).toBe(true);
+    expect(state.run.obstacles.length).toBeGreaterThan(0);
+    expect(state.pickups.filter((item) => item.kind === 'bubble')).toHaveLength(
+      state.run.obstacles.length,
+    );
+    state = { ...state, health: 1_000_000, invulnerableTicks: 1_000_000 };
+    let sawQueue = false;
+    let sawFakeRice = false;
+    for (let index = 0; index < 12_000 && state.run.distance < 1_500; index += 1) {
+      state = advanceAdventure(state, idle);
+      sawQueue ||= state.queues.length > 0;
+      sawFakeRice ||= state.hallucinations.length > 0;
+    }
+    expect(state.run.status).toBe('running');
+    expect(state.run.distance).toBeGreaterThan(1_200);
+    expect(state.run.score).toBeGreaterThan(12_000);
+    expect(state.run.obstacles.length).toBeLessThan(12);
+    expect(state.pickups.length).toBeLessThan(70);
+    expect(state.queues.length).toBeLessThan(12);
+    expect(state.hallucinations.length).toBeLessThan(12);
+    expect(state.milestones).toBeGreaterThanOrEqual(2);
+    expect(state.bonus).toBeGreaterThanOrEqual(500);
+    expect(sawQueue && sawFakeRice).toBe(true);
+    expect(state.hasAnswer).toBe(false);
+  });
+  it.each([0, 1, 2])('endless seed %i has a playable first 800 meters', (seed) => {
+    let state = beginAdventure(seed, 'normal', 3);
+    for (
+      let index = 0;
+      index < 7_000 && state.run.status === 'running' && state.run.distance < 800;
+      index += 1
+    )
+      state = advanceAdventure(state, pilot(state));
+    expect(state.run.distance).toBeGreaterThanOrEqual(800);
+    expect(state.health).toBeGreaterThan(0);
+    expect(state.milestones).toBeGreaterThanOrEqual(1);
+  });
+  it('endless mode saves a terminal score after three hits and allows uncharged counters', () => {
+    let state = beginAdventure(5, 'normal', 3);
+    expect(advanceAdventure(state, tail).slaps).toBe(1);
+    state = advanceAdventure(obstacle(state), idle);
+    expect(state.health).toBe(2);
+    state = advanceAdventure(obstacle({ ...state, invulnerableTicks: 0 }), idle);
+    state = advanceAdventure(obstacle({ ...state, invulnerableTicks: 0 }), idle);
+    expect(state.run.status).toBe('ended');
+    expect(state.run.result?.reason).toBe('ground-collision');
+    expect(state.run.result!.score).toBeGreaterThanOrEqual(0);
+  });
   it('also allows a no-rice route and does not auto-complete without input', () => {
     let state = beginAdventure(42);
     for (let index = 0; index < 5000 && state.run.status === 'running'; index += 1)

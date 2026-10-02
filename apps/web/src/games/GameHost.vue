@@ -11,6 +11,7 @@ const error = ref('');
 const loading = ref(false);
 const sessionId = ref('');
 const attempt = ref(0);
+const restartMode = ref<'replay' | 'select'>('select');
 const manuallyPaused = ref(false);
 const autoPaused = ref(false);
 const result = shallowRef<GameResult>();
@@ -30,7 +31,8 @@ const paused = computed(
 const settings = computed(() => ({ masterVolume: 1, reduceMotion: reduceMotion.value }));
 let loadRevision = 0;
 
-function restart() {
+function restart(mode: 'replay' | 'select' = 'replay') {
+  restartMode.value = mode;
   attempt.value += 1;
   result.value = undefined;
   manuallyPaused.value = false;
@@ -130,6 +132,23 @@ function visibilityChanged() {
   if (document.hidden) pauseForBackground();
 }
 
+function pauseWithEscape(event: KeyboardEvent) {
+  if (
+    props.gameId === 'parkour' &&
+    result.value &&
+    !event.repeat &&
+    ['Space', 'Enter'].includes(event.code) &&
+    !(event.target instanceof HTMLElement && event.target.closest('button, input, textarea'))
+  ) {
+    event.preventDefault();
+    restart();
+    return;
+  }
+  if (event.code === 'Escape' && definition.value && !result.value && !pendingAction.value) {
+    manuallyPaused.value = true;
+  }
+}
+
 onMounted(() => {
   reduceMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   fullscreenSupported.value = Boolean(
@@ -137,6 +156,7 @@ onMounted(() => {
   );
   syncFullscreen();
   window.addEventListener('blur', pauseForBackground);
+  window.addEventListener('keydown', pauseWithEscape);
   document.addEventListener('visibilitychange', visibilityChanged);
   document.addEventListener('fullscreenchange', syncFullscreen);
 });
@@ -144,6 +164,7 @@ onUnmounted(() => {
   loadRevision += 1;
   confirmation.value?.close();
   window.removeEventListener('blur', pauseForBackground);
+  window.removeEventListener('keydown', pauseWithEscape);
   document.removeEventListener('visibilitychange', visibilityChanged);
   document.removeEventListener('fullscreenchange', syncFullscreen);
 });
@@ -217,6 +238,7 @@ onUnmounted(() => {
           :attempt="attempt"
           :paused="paused"
           :settings="settings"
+          :restart-mode="restartMode"
           @finish="finish"
           @exit="requestAction('exit')"
         />
@@ -228,21 +250,38 @@ onUnmounted(() => {
         aria-label="对局结算"
         aria-live="polite"
       >
-        <img
-          v-if="result.story?.imageUrl"
-          class="story-ending-image"
-          :src="result.story.imageUrl"
-          alt=""
-          width="136"
-          height="136"
-        />
-        <h2>{{ result.story?.title ?? (result.outcome === 'win' ? '挑战完成！' : '本局结束') }}</h2>
-        <p v-if="result.story" class="story-ending">{{ result.story.body }}</p>
-        <p>{{ result.summary }}</p>
-        <button class="primary-button" type="button" @click="restart">
-          <RotateCcw :size="18" />再来一局
-        </button>
-        <button class="text-button" type="button" @click="emit('exit')">返回游戏列表</button>
+        <div class="overlay-panel">
+          <img
+            v-if="result.story?.imageUrl"
+            class="story-ending-image"
+            :src="result.story.imageUrl"
+            alt=""
+            width="136"
+            height="136"
+          />
+          <h2>
+            {{ result.story?.title ?? (result.outcome === 'win' ? '挑战完成！' : '本局结束') }}
+          </h2>
+          <p v-if="result.story" class="story-ending">{{ result.story.body }}</p>
+          <p>{{ result.summary }}</p>
+          <button class="primary-button" type="button" @click="restart()">
+            <RotateCcw :size="18" />{{
+              gameId === 'parkour' && result.outcome === 'win' && Number(result.stats.level) < 3
+                ? '下一关'
+                : '再来一局'
+            }}
+          </button>
+          <span v-if="gameId === 'parkour'" class="retry-key-hint">按空格也能马上重来</span>
+          <button
+            v-if="result.reselectLabel"
+            class="text-button"
+            type="button"
+            @click="restart('select')"
+          >
+            {{ result.reselectLabel }}
+          </button>
+          <button class="text-button" type="button" @click="emit('exit')">返回游戏列表</button>
+        </div>
       </div>
       <div
         v-else-if="paused && !pendingAction"
@@ -250,11 +289,13 @@ onUnmounted(() => {
         role="region"
         aria-label="暂停菜单"
       >
-        <Pause :size="32" />
-        <h2>已暂停</h2>
-        <button class="primary-button" type="button" @click="resume">
-          <Play :size="18" />继续游戏
-        </button>
+        <div class="overlay-panel">
+          <Pause :size="32" />
+          <h2>已暂停</h2>
+          <button class="primary-button" type="button" @click="resume">
+            <Play :size="18" />继续游戏
+          </button>
+        </div>
       </div>
     </div>
 

@@ -5,6 +5,11 @@ const assetUrls = import.meta.glob('../match3/assets/**/*.png', {
   import: 'default',
   query: '?url',
 }) as Record<string, string>;
+const displayTileUrls = import.meta.glob('../match3/runtime-tiles/*.webp', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+}) as Record<string, string>;
 
 export const MATCH3_ASSET_MANIFEST = manifest;
 
@@ -15,6 +20,14 @@ export type Match3Asset = (typeof manifest.assets)[number] & {
 export type Match3AssetId = (typeof manifest.assets)[number]['id'];
 
 function resolveAssetUrl(path: string): string {
+  const displayTile =
+    displayTileUrls[
+      `../match3/runtime-tiles/${path
+        .split('/')
+        .at(-1)
+        ?.replace(/\.png$/, '.webp')}`
+    ];
+  if (displayTile) return displayTile;
   const url = assetUrls[`../match3/${path}`];
   if (!url) {
     throw new Error(`Missing match3 asset: ${path}`);

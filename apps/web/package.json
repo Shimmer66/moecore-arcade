@@ -9,13 +9,18 @@
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "vue-tsc --project tsconfig.json",
     "lint": "eslint .",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:rewrite-campaign": "playwright test --config playwright.rewrite-campaign.config.ts"
   },
   "dependencies": {
+    "@moecore/game-duel": "file:../../games/duel",
+    "@moecore/game-steady": "file:../../games/steady",
+    "@moecore/game-arena": "file:../../games/arena",
     "@moecore/assets": "file:../../packages/assets",
     "@moecore/game-sdk": "file:../../packages/game-sdk",
     "@moecore/game-match3": "file:../../games/match3",
     "@moecore/game-parkour": "file:../../games/parkour",
+    "@moecore/game-rewrite": "file:../../games/rewrite",
     "@moecore/game-sokoban": "file:../../games/sokoban",
     "@moecore/game-whale-queue": "file:../../games/whale-queue",
     "@lucide/vue": "1.47.0",

@@ -1,105 +1,139 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { ArrowUpRight } from '@lucide/vue';
+import { computed, onMounted, ref } from 'vue';
+import { ArrowUpRight, ArrowRight, Play, Gamepad2, Crosshair } from '@lucide/vue';
+import { HOME_ART, HOME_COVER_ART } from '@moecore/assets';
 import { games } from '../games/registry';
 
 const emit = defineEmits<{ select: [gameId: string] }>();
-const filters = ['全部', '益智', '动作', '文字', '卡牌', '多人'] as const;
+const filters = ['全部', '益智', '动作'] as const;
 const selectedFilter = ref<(typeof filters)[number]>('全部');
 const visibleGames = computed(() =>
   games.filter(
     (game) => selectedFilter.value === '全部' || game.tags.includes(selectedFilter.value),
   ),
 );
+const coverArt: Record<string, string> = {
+  duel: HOME_ART.duel,
+  steady: HOME_COVER_ART.match3,
+  arena: HOME_COVER_ART.arena,
+  match3: HOME_COVER_ART.match3,
+  parkour: HOME_ART.parkour,
+  sokoban: HOME_COVER_ART.sokoban,
+  'whale-queue': HOME_COVER_ART.whaleQueue,
+  rewrite: HOME_ART.rewrite,
+};
+onMounted(() => {
+  const section = window.location.hash.slice(1);
+  if (section === 'games' || section === 'about') {
+    document.getElementById(section)?.scrollIntoView();
+  }
+});
 </script>
 
 <template>
   <div class="arcade-home">
-    <div class="home-bubble home-bubble-peach" aria-hidden="true"></div>
-    <div class="home-bubble home-bubble-mint" aria-hidden="true"></div>
-    <div class="home-bubble home-bubble-lav" aria-hidden="true"></div>
-
     <section class="arcade-hero" aria-labelledby="arcade-hero-title">
-      <span class="hero-tag">🌸 AI 大模型娘化企划 · 非官方同人</span>
-      <h1 id="arcade-hero-title">和<span>AI 娘</span>一起，<br />把大模型玩成小游戏</h1>
-      <p>消消乐、跑酷、推箱子……每款游戏都由一位模型角色担当主角，全部免费试玩。</p>
-      <div class="hero-actions">
-        <a class="home-button home-button-primary" href="#games">🎮 立即开玩</a>
-        <a class="home-button home-button-ghost" href="#about">了解企划 →</a>
+      <div class="hero-copy">
+        <span class="hero-eyebrow"><Gamepad2 :size="16" /> AI 角色小游戏合集</span>
+        <h1 id="arcade-hero-title">给今天，<br /><span>留一点好玩的。</span></h1>
+        <p>
+          和熟悉的 AI 角色一起闯关、解谜、收集灵感。<br
+            class="desktop-break"
+          />无需下载，点开就能玩。
+        </p>
+        <a class="home-button home-button-primary" href="#games"
+          >发现小游戏 <ArrowRight :size="17"
+        /></a>
+        <span class="hero-note">免费试玩 · 无需登录</span>
       </div>
-      <div class="hero-stats" aria-label="游乐园数据">
-        <div>
-          <strong>{{ games.length }}</strong
-          ><span>试玩游戏</span>
-        </div>
-        <div><strong>12</strong><span>娘化角色</span></div>
-        <div><strong>8w+</strong><span>累计游玩</span></div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-halo"></div>
+        <img
+          class="hero-character hero-character-back"
+          :src="HOME_COVER_ART.whaleQueue"
+          alt=""
+          width="512"
+          height="512"
+          decoding="async"
+        />
+        <img
+          class="hero-character hero-character-front"
+          :src="HOME_COVER_ART.match3"
+          alt=""
+          width="640"
+          height="640"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <span class="hero-art-caption"><span></span> 快乐，正在加载中</span>
       </div>
     </section>
 
     <section id="games" class="games-section" aria-labelledby="games-title">
       <div class="games-toolbar">
-        <h2 id="games-title">小游戏</h2>
-        <div class="game-filters" role="tablist" aria-label="游戏分类">
+        <div class="games-intro">
+          <h2 id="games-title">小游戏</h2>
+          <span class="game-count">{{ games.length }} 款可玩</span>
+        </div>
+        <div class="game-filters" role="group" aria-label="游戏分类">
           <button
             v-for="filter in filters"
             :key="filter"
             type="button"
             :class="{ active: selectedFilter === filter }"
-            role="tab"
-            :aria-selected="selectedFilter === filter"
+            :aria-pressed="selectedFilter === filter"
             @click="selectedFilter = filter"
           >
             {{ filter }}
           </button>
         </div>
       </div>
-
       <div class="game-catalog">
         <button
           v-for="game in visibleGames"
           :key="game.id"
           type="button"
           class="catalog-card"
+          :class="`tone-${game.tone}`"
           @click="emit('select', game.id)"
         >
-          <div class="catalog-cover" :class="`tone-${game.tone}`" aria-hidden="true">
+          <span class="catalog-cover" aria-hidden="true">
+            <span class="cover-grid"></span>
             <span v-if="game.badge" class="catalog-badge">{{ game.badge }}</span>
-            <span class="catalog-emoji">{{
-              game.icon === 'box'
-                ? '📦'
-                : game.icon === 'runner'
-                  ? '🏃‍♀️'
-                  : game.icon === 'whale'
-                    ? '🐋'
-                    : '🧩'
-            }}</span>
-          </div>
-          <div class="catalog-body">
+            <img
+              v-if="coverArt[game.id]"
+              :src="coverArt[game.id]"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            <Crosshair v-else class="catalog-fallback" :size="96" :stroke-width="1" />
+            <span class="catalog-play"><Play :size="20" fill="currentColor" /></span>
+          </span>
+          <span class="catalog-body">
             <span class="catalog-category">{{ game.category }}</span>
-            <h3>{{ game.title }}</h3>
-            <p>{{ game.description }}</p>
-            <div class="catalog-meta">
-              <div class="catalog-tags">
-                <span v-for="tag in game.tags" :key="tag">{{ tag }}</span>
-              </div>
-              <span class="catalog-play" aria-hidden="true"><ArrowUpRight :size="18" /></span>
-            </div>
-          </div>
+            <span class="catalog-title-row"
+              ><span class="catalog-title">{{ game.title }}</span
+              ><ArrowUpRight :size="18"
+            /></span>
+            <span class="catalog-description">{{ game.description }}</span>
+          </span>
         </button>
       </div>
     </section>
 
     <section id="about" class="contribute-banner" aria-labelledby="contribute-title">
-      <h2 id="contribute-title">想让你推的模型娘登场？</h2>
-      <p>提交你的游戏创意或角色设定，被采纳即可上线游乐园并获得专属徽章。</p>
+      <div>
+        <h2 id="contribute-title">一点灵感，就能开始。</h2>
+        <p>摸鱼局是一个非官方 AI 角色小游戏企划。欢迎带着你的点子，一起做些好玩的。</p>
+      </div>
       <a
-        class="home-button home-button-light"
+        class="contribute-link"
         href="https://github.com/Shimmer66/moecore-arcade"
         target="_blank"
         rel="noreferrer"
-        >✨ 加入共创</a
-      >
+        >在 GitHub 一起共创 <ArrowUpRight :size="17"
+      /></a>
     </section>
   </div>
 </template>

@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-01",
+  "tool": "built-in image_gen",
+  "sourceFilename": "call_RxYsLeb64AGXTFDeW5UL2mOr.png",
+  "selectedRepairFilename": "call_HF7rTe37wWVVHsymZDVy6sBr.png",
+  "reference": "../newcomers/motion/client-ground-v1.png",
+  "discardedVariant": "client-v1.png (not retained in workspace)",
+  "output": "client-v2.png",
+  "prompt": "prompts.md",
+  "geometry": "geometry.json",
+  "manifest": "manifest.json",
+  "pixelsModified": false,
+  "repair": "imagegen-only spacing repair; sprites uniformly reduced and rows separated",
+  "purpose": "Client command-grab contract, lift, stamp, slam and recovery"
+}

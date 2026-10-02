@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { defineAsyncComponent, h, onMounted, onUnmounted, ref } from 'vue';
 import { ASSETS } from '@moecore/assets';
-import HomeView from './features/HomeView.vue';
+import { ArrowUpRight } from '@lucide/vue';
 import GameHost from './games/GameHost.vue';
+const ViewLoading = {
+  render: () => h('div', { class: 'view-loading', role: 'status' }, '正在加载…'),
+};
+const HomeView = defineAsyncComponent({
+  loader: () => import('./features/HomeView.vue'),
+  loadingComponent: ViewLoading,
+  delay: 120,
+});
 
 const selectedGame = ref('');
 function readRoute() {
@@ -27,25 +35,24 @@ onUnmounted(() => window.removeEventListener('hashchange', readRoute));
 
 <template>
   <header class="site-header">
-    <div class="wordmark">
+    <a class="wordmark" href="#/" aria-label="摸鱼局首页">
       <img :src="ASSETS.arcadeMark.url" alt="" width="40" height="40" />
       <div>
-        <span class="brand-name">萌芯游乐园</span>
-        <span class="brand-subtitle" lang="en">MoeCore Arcade</span>
+        <span class="brand-name">摸鱼局</span>
       </div>
-    </div>
+      <span class="brand-subtitle">玩点有趣的</span>
+    </a>
     <nav class="site-nav" aria-label="主导航">
-      <a href="#games">小游戏</a>
-      <a href="#about">关于企划</a>
+      <a href="#games">发现游戏</a>
+      <a href="#about">关于</a>
       <a
         class="site-nav-cta"
         href="https://github.com/Shimmer66/moecore-arcade"
         target="_blank"
         rel="noreferrer"
-        >加入共创</a
-      >
+        >GitHub <ArrowUpRight :size="15"
+      /></a>
     </nav>
-    <span class="development-label">原型试玩</span>
   </header>
 
   <main id="main-content">
@@ -53,5 +60,5 @@ onUnmounted(() => window.removeEventListener('hashchange', readRoute));
     <HomeView v-else @select="selectGame" />
   </main>
 
-  <footer class="site-footer">MoeCore Arcade · 非官方同人项目</footer>
+  <footer class="site-footer">摸鱼局 · AI 角色小游戏合集 <span>非官方同人项目</span></footer>
 </template>

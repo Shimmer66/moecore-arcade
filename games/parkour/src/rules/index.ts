@@ -23,6 +23,7 @@ export {
   beginAdventure,
   advanceAdventure,
   multiplierFor,
+  tailActionFor,
   seedForSession,
   TAIL_TICKS,
   TAIL_COOLDOWN,
@@ -33,7 +34,10 @@ export {
   RETURN_SPEED,
   CONTEXT_CAPACITY,
 } from './adventure';
-export { ANSWER_DISTANCE, SHIFT_DISTANCE, departmentAt } from '../config/shift';
+export { ANSWER_DISTANCE, SHIFT_DISTANCE, departmentAt, levelFor, levels } from '../config/shift';
+export type { LevelId, LevelConfig } from '../config/shift';
+export { thinkingModes } from '../config/thinking';
+export type { ThinkingMode } from '../config/thinking';
 export type {
   Adventure,
   AdventureInput,

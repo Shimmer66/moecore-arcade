@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-01",
+  "tool": "built-in image_gen",
+  "sourceFilename": "call_gW4KHgNMmikk2q4bMcSD1WZp.png",
+  "reference": "../normal-motion/deepseek-v1.png",
+  "output": "deepseek-v1.png",
+  "prompt": "prompts.md",
+  "geometry": "geometry.json",
+  "manifest": "manifest.json",
+  "pixelsModified": false,
+  "purpose": "DeepSeek rice present, eat, swallow, payoff and recovery"
+}

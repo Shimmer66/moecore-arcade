@@ -1,0 +1,21 @@
+{
+  "generator": "built-in image_gen",
+  "repairs": [
+    {
+      "id": "client",
+      "sheet": "aerial",
+      "reference": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/newcomers/motion/client-aerial-v1.png",
+      "prompt": "Edit this exact 16-frame atlas to fix CLIPPING AND MARGINS ONLY. Preserve the same adult chibi client-boss identity, same sixteen poses, same row order, costume, linework and props. Keep four columns and four rows. Uniformly shrink all sprites by 25 percent and reposition them to the centers of their own cells, leaving large fully transparent margins on all sides. MOST IMPORTANT: top row third pose has the red rubber stamp clipped against the TOP EDGE of the canvas; reconstruct the entire stamp head and keep it fully visible with at least 50 pixels of empty space above it. Nothing may touch any outer image border or neighboring sprite. Keep all characters the same body scale relative to each other, including crouched and airborne poses. Actual RGBA transparent background, no new background, no checkerboard, no text, no labels, no grid lines, no extra figures. Original image pixels are a style and layout reference; do not repeat cropped top stamp. Output a square 4x4 character sprite atlas.",
+      "path": "client-aerial-v2.png",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-4d2ccccb-e577-49f5-affa-81fd533ebf93.png"
+    },
+    {
+      "id": "unplug_uncle",
+      "sheet": "mobility",
+      "reference": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/newcomers/motion/unplug_uncle-mobility-v1.png",
+      "prompt": "Edit the TOP ROW ONLY of this exact 4-column 4-row 16-frame transparent sprite atlas. Preserve all twelve poses in rows 2,3,4 unchanged, same old-man identity, bald crown, gray moustache, white tank top, blue floral shorts, green slippers, orange extension cord, ivory power strip and blue ethernet cord. FIX RUN CYCLE: top row currently shows almost the same stride four times. Replace top row with four CLEARLY DIFFERENT RUNNING frames facing RIGHT: frame1 LEFT leg reaches forward and RIGHT leg stretches backward; frame2 BOTH LEGS PASS below hips, one knee raised, near vertical shin, compact silhouette; frame3 RIGHT leg reaches forward and LEFT leg stretches backward (opposite arm swing to frame1); frame4 other passing pose, both feet near each other below body, knees bent. Show visible alternating knee positions, arm swings and body compression, not four copies of a split-leg pose. Keep top-row body scale the same as current row, all foot and prop pixels within their own columns, transparent gaps. Preserve entire character and slippers. Real RGBA transparency, no shadows, backgrounds, checkerboard, labels, text, grid or extra figures.",
+      "path": "unplug_uncle-mobility-v2.png",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-d2f306ff-277e-4357-ba9c-53497ead3c39.png"
+    }
+  ]
+}

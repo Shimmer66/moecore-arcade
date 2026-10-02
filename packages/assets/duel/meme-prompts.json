@@ -1,0 +1,78 @@
+{
+  "generator": "built-in image_gen",
+  "status": "generated-and-visually-reviewed",
+  "assets": [
+    {
+      "id": "duel_ds_cache_hit",
+      "character": "deepseek",
+      "label": "缓存命中",
+      "trigger": "同一回合再次用架势接住同一角色的同一招",
+      "references": [
+        "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_ds_base.png"
+      ],
+      "prompt": "Use case: stylized-concept. Create ONE polished comedic game meme cutout on a genuinely transparent background, square canvas. The reference image defines exact character identity, hair, clothing, accessories and bright cel-shaded rendering with clean dark outlines. Keep those intact. Large legible comic shapes, funny exaggerated expression, all extremities and props inside frame with padding. No text, letters, numbers, brand logo, watermark, scenery, frame, floor or checkerboard. This is a single standalone character asset, not a comic strip or sprite sheet. DeepSeek blue whale maid, waist-up, looks impossibly smug and relaxed. One hand cradles a chunky little portable replay monitor with a tiny VHS cassette attached; the screen contains only a simple circular rewind arrow symbol. She glances lazily at that screen while extending her other hand forward for an effortless counter-punch, as if she has already watched this exact move yesterday. Half-lidded bright blue eyes, sly tiny smile, cobalt-to-cyan hair, whale fin ears, white frilly headband, navy-white maid outfit, cheek rice grain. The monitor is comically old-fashioned next to her futuristic confidence. Entire head, punching hand and monitor fully visible. Asset duel_ds_cache_hit.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-5f9234f1-2a80-4ad0-bec2-2508e848c3e0.png",
+      "path": "memes/duel_ds_cache_hit.png"
+    },
+    {
+      "id": "duel_gpt_muffled",
+      "character": "gpt",
+      "label": "已读已堵",
+      "trigger": "豆包气泡有效命中 GPT",
+      "references": [
+        "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_gpt_base.png"
+      ],
+      "prompt": "Use case: stylized-concept. Create ONE polished comedic game meme cutout on a genuinely transparent background, square canvas. The reference image defines exact character identity, hair, clothing, accessories and bright cel-shaded rendering with clean dark outlines. Keep those intact. Large legible comic shapes, funny exaggerated expression, all extremities and props inside frame with padding. No text, letters, numbers, brand logo, watermark, scenery, frame, floor or checkerboard. This is a single standalone character asset, not a comic strip or sprite sheet. GPT white dragon girl, waist-up, has a soft inflated pale-peach SPEECH BUBBLE stuck across her mouth like a silly harmless bubble-gum mask. Her eyes are wide with indignant professional frustration. Despite the blocked mouth, several tiny BLANK paper slips pop out beside BOTH EARS like an unstoppable printing machine. One hand tries politely to peel the bubble away, the other points up as though she must finish one more important point. Preserve white flowing hair, ivory dragon horns, small white wings, mint eyes, white-and-mint dress and rose ornaments. No distress injury or violence, just funny irrepressible talking. All papers blank. Asset duel_gpt_muffled.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-aa75e022-462f-413b-8b94-9dee2e7b0115.png",
+      "path": "memes/duel_gpt_muffled.png"
+    },
+    {
+      "id": "duel_gpt_rollback",
+      "character": "gpt",
+      "label": "版本回滚",
+      "trigger": "GPT 变招完整打空或被挡住后结束",
+      "references": [
+        "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_gpt_base.png"
+      ],
+      "prompt": "Use case: stylized-concept. Create ONE polished comedic game meme cutout on a genuinely transparent background, square canvas. The reference image defines exact character identity, hair, clothing, accessories and bright cel-shaded rendering with clean dark outlines. Keep those intact. Large legible comic shapes, funny exaggerated expression, all extremities and props inside frame with padding. No text, letters, numbers, brand logo, watermark, scenery, frame, floor or checkerboard. This is a single standalone character asset, not a comic strip or sprite sheet. GPT white dragon girl in a full-body comic retreat, leaning backward on her heels, trying to pull back her own oversized mint-accented punching glove with both hands as if undoing an embarrassing missed punch. The glove is a standalone prop, no extra human limbs. Her expression is a very strained polite smile with a huge sweat bead. A few faint ghost motion contours show the glove retracing its path backward; add two simple translucent left-pointing rewind triangles behind the glove, not text. Preserve white hair, ivory horns, white wings and dragon tail, mint-white outfit, rose accents and boots. One main character only. Funny 'pretend that never happened' pose, coherent limbs and readable silhouette. Asset duel_gpt_rollback.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-d685c8dd-a652-4c33-b3bf-935c74d8f93c.png",
+      "path": "memes/duel_gpt_rollback.png"
+    },
+    {
+      "id": "duel_ds_sore_loser",
+      "character": "deepseek",
+      "label": "嘴硬结算 · DeepSeek",
+      "trigger": "DeepSeek 输掉回合",
+      "references": [
+        "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_ds_base.png"
+      ],
+      "prompt": "Use case: stylized-concept. Create ONE polished comedic game meme cutout on a genuinely transparent background, square canvas. The reference image defines exact character identity, hair, clothing, accessories and bright cel-shaded rendering with clean dark outlines. Keep those intact. Large legible comic shapes, funny exaggerated expression, all extremities and props inside frame with padding. No text, letters, numbers, brand logo, watermark, scenery, frame, floor or checkerboard. This is a single standalone character asset, not a comic strip or sprite sheet. DeepSeek blue whale maid lying comfortably on her side after losing a cartoon duel, using her large curled whale tail as a pillow. Eyes half closed but smug, a tiny exhausted sweat bead, completely determined to look like this was planned. One hand casually raises a BLANK rectangular double-sided placard on a short handle; one corner is bent as if she just flipped it over to hide the losing side. Other hand rests under cheek. Keep blue-cyan hair, fin ears, white frill headband and navy-white outfit. Full curled body, tail, feet and board visible. No injuries, blood, defeated sobbing or labels. Asset duel_ds_sore_loser.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-6fc1cb89-87e1-490e-88a0-1c01232042d1.png",
+      "path": "memes/duel_ds_sore_loser.png"
+    },
+    {
+      "id": "duel_gpt_sore_loser",
+      "character": "gpt",
+      "label": "嘴硬结算 · GPT",
+      "trigger": "GPT 输掉回合",
+      "references": [
+        "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_gpt_base.png"
+      ],
+      "prompt": "Use case: stylized-concept. Create ONE polished comedic game meme cutout on a genuinely transparent background, square canvas. The reference image defines exact character identity, hair, clothing, accessories and bright cel-shaded rendering with clean dark outlines. Keep those intact. Large legible comic shapes, funny exaggerated expression, all extremities and props inside frame with padding. No text, letters, numbers, brand logo, watermark, scenery, frame, floor or checkerboard. This is a single standalone character asset, not a comic strip or sprite sheet. GPT white dragon girl sprawled sideways on a tiny pile of blank draft pages after losing a cartoon duel. She is clearly exhausted but keeps a stubborn business smile and one eyebrow raised. One hand proudly raises a BLANK double-sided clipboard sign, angled to suggest she has just flipped the losing label out of sight; the other hand secretly crumples one blank page. One blank sticky note clings to her ivory horn. Preserve white hair, dragon horns, small wings and tail, mint-white outfit, rose accents and boots. Full body and sign visible, no floor or backdrop. Harmless slapstick, no injuries or written words. Asset duel_gpt_sore_loser.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-555f3448-4840-42fb-aa9e-862c3aad0e60.png",
+      "path": "memes/duel_gpt_sore_loser.png"
+    },
+    {
+      "id": "duel_doubao_sore_loser",
+      "character": "doubao",
+      "label": "嘴硬结算 · 豆包",
+      "trigger": "豆包输掉回合",
+      "references": [
+        "C:\\home\\yuki\\projects\\moecore-arcade\\packages\\assets\\duel\\first-batch\\duel_doubao_base_v3.png"
+      ],
+      "prompt": "Use case: stylized-concept. Create ONE polished comedic game meme cutout on a genuinely transparent background, square canvas. The reference image defines exact character identity, hair, clothing, accessories and bright cel-shaded rendering with clean dark outlines. Keep those intact. Large legible comic shapes, funny exaggerated expression, all extremities and props inside frame with padding. No text, letters, numbers, brand logo, watermark, scenery, frame, floor or checkerboard. This is a single standalone character asset, not a comic strip or sprite sheet. Doubao girl after losing a cartoon duel, sitting slumped sideways with one knee bent and leaning her cheek on a folded end of her RED SCARF like a pillow. Her other hand raises a BLANK double-sided little placard, clearly trying to pretend she is only resting. Vacant slightly sleepy round dark eyes, tiny innocent awkward grin, one subtle drool bead, lovable and unbothered. Preserve exact SIDE-PARTED dark-brown chin-length bob with EXPOSED FOREHEAD and one visible ear, red scarf, DARK charcoal sweater, dark shorts over opaque dark leggings and dark/red sneakers. No bangs, twin buns, orange costume or white shirt. Full body and sign within frame, no text. Asset duel_doubao_sore_loser.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-37428986-a5d3-4c18-83b0-f832847adf26.png",
+      "path": "memes/duel_doubao_sore_loser.png"
+    }
+  ]
+}

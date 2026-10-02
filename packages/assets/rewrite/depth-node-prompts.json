@@ -1,0 +1,18 @@
+{
+  "date": "2026-09-30",
+  "tool": "built-in image_gen.imagegen",
+  "file": "runtime/depth-node-atlas-v1.png",
+  "size": [1254, 1254],
+  "transparent_background": true,
+  "cells": ["planner-blue", "execution-mint", "reflection-amber", "verification-violet"],
+  "generation": {
+    "result": "call_L7XUswlifAF3DxWYyyIuNmfy.png",
+    "prompt": "Use case: stylized-concept. Asset type: production 2D videogame boss weak-point sprite atlas, original anime AI meme run-and-gun. Create exactly four separate front-facing floating mechanical AI sentry head modules in a 2x2 equal square grid, on genuine fully transparent alpha background. Each full module centered within its own cell with at least 15% clear padding. No bodies or people. Top left: blue armored planner module, round robot face with one bright cyan camera eye, small antenna crown and angular cheek plates. Top right: mint execution module, rounded mechanical face with paired glowing eyes and short side fins. Bottom left: amber reflection module, hexagonal mechanical face with a central orange lens, heat sink fins and compact bolts. Bottom right: violet verification module, oval robot face with one bright magenta eye, small curved antennae and crisp metal trim. Consistent polished hand-painted anime arcade equipment art, readable thick contours, softly shaded metal, charming but hostile, clear silhouettes at 48px. These are separate detachable nodes of a giant AI boss, neutral forward-facing view, all same approximate scale. No text, letters, labels, logos, UI, borders, floor, shadows on a ground plane, beams, wires outside the individual silhouettes, or background scenery. Transparent gaps between all four modules."
+  },
+  "selected_edit": {
+    "reference": "call_L7XUswlifAF3DxWYyyIuNmfy.png",
+    "result": "call_ksPxtCHhWlqcDnj7UscbYOkf.png",
+    "prompt": "Edit this sprite atlas only to correct layout and clipping. Keep all four robot module designs, colors, front-facing poses, details and painting style. Place them in an exact 2x2 grid on a square transparent canvas, each robot reduced to about 72% of its current cell size and centered in its own equal square cell. Restore the complete blue module antenna tips and any right-edge fin tips that are clipped. Leave at least 12% transparent margin around every full silhouette on every side of each cell, including antennae and fins. No robot may touch a canvas edge or neighboring cell. Preserve true transparent alpha. No other changes, no background, no text."
+  },
+  "integration": "DepthBattle.vue crops four 627x627 cells. Base 1 uses blue/mint relays; Base 2 uses two pairs of aligned modules. Vulnerability rings and health bars are rendered separately from the art, from the same depthTargetOpen used by collision."
+}

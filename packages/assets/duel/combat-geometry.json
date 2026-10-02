@@ -1,0 +1,404 @@
+{
+  "deepseek": {
+    "ready": {
+      "x": -90.232,
+      "y": -156.358,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [685.0, 1187],
+      "path": "combat/deepseek/ready.png"
+    },
+    "dash": {
+      "x": -127.576,
+      "y": -152.406,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [968.5, 1157],
+      "path": "combat/deepseek/dash.png"
+    },
+    "jump": {
+      "x": -84.244,
+      "y": -153.065,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [639.54, 1162],
+      "path": "combat/deepseek/jump.png"
+    },
+    "jab_start": {
+      "x": -91.681,
+      "y": -156.885,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [696.0, 1191],
+      "path": "combat/deepseek/jab_start.png"
+    },
+    "jab_hit": {
+      "x": -90.429,
+      "y": -157.017,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [686.5, 1192],
+      "path": "combat/deepseek/jab_hit.png"
+    },
+    "cross_hit": {
+      "x": -100.111,
+      "y": -155.963,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [760.0, 1184],
+      "path": "combat/deepseek/cross_hit_v2.png"
+    },
+    "kick_hit": {
+      "x": -72.844,
+      "y": -157.544,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [553.0, 1196],
+      "path": "combat/deepseek/kick_hit.png"
+    },
+    "upper_hit": {
+      "x": -73.042,
+      "y": -159.651,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [554.5, 1212],
+      "path": "combat/deepseek/upper_hit.png"
+    },
+    "skill_cast": {
+      "x": -93.986,
+      "y": -157.412,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [713.5, 1195],
+      "path": "combat/deepseek/skill_cast.png"
+    },
+    "guard": {
+      "x": -97.147,
+      "y": -158.729,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [737.5, 1205],
+      "path": "combat/deepseek/guard.png"
+    },
+    "hurt": {
+      "x": -71.461,
+      "y": -154.119,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [542.5, 1170],
+      "path": "combat/deepseek/hurt.png"
+    },
+    "down": {
+      "x": -82.592,
+      "y": -149.904,
+      "width": 165.184,
+      "height": 165.184,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [627.0, 1138],
+      "path": "combat/deepseek/down.png"
+    }
+  },
+  "doubao": {
+    "ready": {
+      "x": -87.252,
+      "y": -160.18,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [633.5, 1163],
+      "path": "combat/doubao/ready.png"
+    },
+    "dash": {
+      "x": -89.112,
+      "y": -155.084,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [647.0, 1126],
+      "path": "combat/doubao/dash.png"
+    },
+    "jump": {
+      "x": -88.084,
+      "y": -155.084,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [639.54, 1126],
+      "path": "combat/doubao/jump.png"
+    },
+    "jab_start": {
+      "x": -89.387,
+      "y": -160.731,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [649.0, 1167],
+      "path": "combat/doubao/jab_start.png"
+    },
+    "jab_hit": {
+      "x": -86.564,
+      "y": -160.456,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [628.5, 1165],
+      "path": "combat/doubao/jab_hit.png"
+    },
+    "cross_hit": {
+      "x": -95.998,
+      "y": -157.977,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [697.0, 1147],
+      "path": "combat/doubao/cross_hit_v2.png"
+    },
+    "kick_hit": {
+      "x": -69.21,
+      "y": -160.043,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [502.5, 1162],
+      "path": "combat/doubao/kick_hit.png"
+    },
+    "upper_hit": {
+      "x": -72.515,
+      "y": -162.109,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [526.5, 1177],
+      "path": "combat/doubao/upper_hit.png"
+    },
+    "skill_cast": {
+      "x": -86.839,
+      "y": -159.905,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [630.5, 1161],
+      "path": "combat/doubao/skill_cast.png"
+    },
+    "guard": {
+      "x": -97.72,
+      "y": -159.354,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [709.5, 1157],
+      "path": "combat/doubao/guard.png"
+    },
+    "hurt": {
+      "x": -83.602,
+      "y": -159.905,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [607.0, 1161],
+      "path": "combat/doubao/hurt.png"
+    },
+    "down": {
+      "x": -86.357,
+      "y": -146.132,
+      "width": 172.714,
+      "height": 172.714,
+      "viewBox": "0 0 1254 1254",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "anchor": [627.0, 1061],
+      "path": "combat/doubao/down.png"
+    }
+  },
+  "gpt": {
+    "ready": {
+      "x": -88.174,
+      "y": -155.823,
+      "width": 152.891,
+      "height": 157.08,
+      "viewBox": "0 0 365 375",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [210.5, 372],
+      "path": "combat/gpt/atlas.png"
+    },
+    "dash": {
+      "x": -65.764,
+      "y": -154.985,
+      "width": 154.985,
+      "height": 157.08,
+      "viewBox": "365 0 370 375",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [157.0, 370],
+      "path": "combat/gpt/atlas.png"
+    },
+    "jump": {
+      "x": -74.351,
+      "y": -153.31,
+      "width": 148.702,
+      "height": 157.08,
+      "viewBox": "735 0 355 375",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [177.5, 366],
+      "path": "combat/gpt/atlas.png"
+    },
+    "jab_start": {
+      "x": -85.451,
+      "y": -157.08,
+      "width": 149.959,
+      "height": 157.08,
+      "viewBox": "1090 0 358 375",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [204.0, 375],
+      "path": "combat/gpt/atlas.png"
+    },
+    "jab_hit": {
+      "x": -87.336,
+      "y": -144.513,
+      "width": 163.363,
+      "height": 147.864,
+      "viewBox": "0 375 390 353",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [208.5, 345],
+      "path": "combat/gpt/atlas.png"
+    },
+    "cross_hit": {
+      "x": -86.08,
+      "y": -143.676,
+      "width": 141.581,
+      "height": 147.864,
+      "viewBox": "390 375 338 353",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [205.5, 343],
+      "path": "combat/gpt/atlas.png"
+    },
+    "kick_hit": {
+      "x": -51.941,
+      "y": -144.932,
+      "width": 166.714,
+      "height": 147.864,
+      "viewBox": "728 375 398 353",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [124.0, 346],
+      "path": "combat/gpt/atlas.png"
+    },
+    "upper_hit": {
+      "x": -77.702,
+      "y": -145.77,
+      "width": 134.879,
+      "height": 147.864,
+      "viewBox": "1126 375 322 353",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [185.5, 348],
+      "path": "combat/gpt/atlas.png"
+    },
+    "skill_cast": {
+      "x": -94.248,
+      "y": -138.649,
+      "width": 159.174,
+      "height": 149.959,
+      "viewBox": "0 728 380 358",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [225.0, 331],
+      "path": "combat/gpt/atlas.png"
+    },
+    "guard": {
+      "x": -88.802,
+      "y": -139.487,
+      "width": 141.162,
+      "height": 149.959,
+      "viewBox": "380 728 337 358",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [212.0, 333],
+      "path": "combat/gpt/atlas.png"
+    },
+    "hurt": {
+      "x": -90.268,
+      "y": -138.23,
+      "width": 147.027,
+      "height": 149.959,
+      "viewBox": "717 728 351 358",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [215.5, 330],
+      "path": "combat/gpt/atlas.png"
+    },
+    "down": {
+      "x": -79.587,
+      "y": -135.717,
+      "width": 159.174,
+      "height": 149.959,
+      "viewBox": "1068 728 380 358",
+      "sourceWidth": 1448,
+      "sourceHeight": 1086,
+      "anchor": [190.0, 324],
+      "path": "combat/gpt/atlas.png"
+    }
+  }
+}

@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>推演对决 · 18 张角色与梗图</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f3f1eb;
+        color: #202938;
+        font-family: system-ui, 'Microsoft YaHei', sans-serif;
+      }
+      main {
+        max-width: 1440px;
+        margin: auto;
+        padding: 40px 28px 70px;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 3px;
+        color: #637589;
+        font-weight: 700;
+      }
+      h1 {
+        font-size: clamp(28px, 4vw, 46px);
+        letter-spacing: -1px;
+        margin: 12px 0;
+      }
+      header p {
+        color: #657181;
+        line-height: 1.8;
+        margin: 0 0 20px;
+      }
+      .tools {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+        margin: 24px 0 30px;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: 1px solid #c8d0d8;
+        background: white;
+        color: #263548;
+        border-radius: 8px;
+        padding: 10px 16px;
+        min-height: 44px;
+      }
+      button[aria-pressed='true'] {
+        background: #20374f;
+        color: white;
+        border-color: #20374f;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid #479fde;
+        outline-offset: 3px;
+      }
+      section {
+        margin-top: 35px;
+      }
+      h2 {
+        font-size: 25px;
+        margin: 0 0 7px;
+      }
+      .intro {
+        color: #677387;
+        margin: 0 0 17px;
+        font-size: 14px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #dedfdc;
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .preview {
+        display: block;
+        padding: 10px;
+        width: 100%;
+        border: 0;
+        border-radius: 0;
+        aspect-ratio: 1;
+        background: #e9edf3;
+      }
+      .preview img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .info {
+        padding: 15px 17px 18px;
+      }
+      .info h3 {
+        font-size: 16px;
+        margin: 0 0 9px;
+      }
+      .info p {
+        font-size: 13px;
+        line-height: 1.6;
+        color: #647386;
+        min-height: 42px;
+        margin: 0 0 10px;
+      }
+      .info small {
+        font-size: 11px;
+        color: #7f8b9a;
+      }
+      .info a {
+        display: block;
+        font-size: 12px;
+        color: #236a9d;
+        margin-top: 10px;
+      }
+      body[data-bg='dark'] .preview,
+      body[data-bg='dark'] .zoom-stage {
+        background: #152336;
+      }
+      body[data-bg='checker'] .preview,
+      body[data-bg='checker'] .zoom-stage {
+        background-color: #fff;
+        background-image:
+          linear-gradient(45deg, #e1e5e9 25%, transparent 25%),
+          linear-gradient(-45deg, #e1e5e9 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #e1e5e9 75%),
+          linear-gradient(-45deg, transparent 75%, #e1e5e9 75%);
+        background-size: 20px 20px;
+        background-position:
+          0 0,
+          0 10px,
+          10px -10px,
+          -10px 0;
+      }
+      footer {
+        margin-top: 32px;
+        padding-top: 20px;
+        border-top: 1px solid #d9dcde;
+        color: #697788;
+        font-size: 13px;
+        line-height: 1.8;
+      }
+      footer a {
+        color: #236a9d;
+      }
+      dialog {
+        padding: 0;
+        border: 0;
+        border-radius: 14px;
+        background: white;
+        max-width: min(94vw, 1200px);
+        max-height: 94vh;
+      }
+      dialog::backdrop {
+        background: #081526bf;
+      }
+      .zoom-stage {
+        height: min(75vh, 920px);
+        min-width: min(85vw, 950px);
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e9edf3;
+      }
+      .zoom-stage img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+      .zoom-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+      }
+      .zoom-toolbar strong {
+        flex: 1;
+      }
+      @media (max-width: 1000px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 560px) {
+        main {
+          padding: 24px 14px 40px;
+        }
+        .grid {
+          gap: 10px;
+        }
+        .info {
+          padding: 12px;
+        }
+        .info h3 {
+          font-size: 14px;
+        }
+        .info p {
+          font-size: 12px;
+          min-height: 58px;
+        }
+        .info small {
+          font-size: 10px;
+        }
+        .tools button {
+          padding: 9px 12px;
+        }
+        .zoom-toolbar {
+          flex-wrap: wrap;
+        }
+        .zoom-toolbar strong {
+          width: 100%;
+          flex: auto;
+        }
+      }
+    </style>
+    <style>
+      body[data-collection='memes'] .card:not([data-kind='meme-cutout']) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body data-bg="dark" data-collection="memes">
+    <main>
+      <header>
+        <span class="eyebrow">MOECORE · DUEL ART STUDY 01</span>
+        <h1>先看认不认得出，<br />再看会不会笑。</h1>
+        <p>
+          12 张角色样张 + 6 张新梗图片：让对局自己产出笑点。<br />豆包以用户头像为准：侧分露额、红围巾、深色上衣。
+        </p>
+      </header>
+      <div class="tools" role="group" aria-label="素材预览背景">
+        <button data-background="dark" aria-pressed="true">深色底</button
+        ><button data-background="light" aria-pressed="false">浅色底</button
+        ><button data-background="checker" aria-pressed="false">透明检查</button>
+      </div>
+      <p><a href="combat-preview.html">新增：30 张战斗动作与独立特效 →</a></p>
+      <div class="tools" role="group" aria-label="素材批次">
+        <button data-collection="memes" aria-pressed="true">新梗图片 · 6</button
+        ><button data-collection="all" aria-pressed="false">全部素材 · 18</button>
+      </div>
+      <div id="gallery"></div>
+      <footer>
+        这是静态视觉样张，完整战斗动作和大招分层仍需后续制作。PNG
+        保留原始透明通道；点击卡片放大。<br /><a href="manifest.json">素材清单与哈希</a> ·
+        <a href="prompts.json">首批提示词</a> · <a href="meme-prompts.json">新梗提示词</a> ·
+        <a href="doubao-reference.md">豆包参考与纠正记录</a>
+      </footer>
+    </main>
+    <dialog id="viewer">
+      <div class="zoom-stage"><img id="zoom-image" alt="" /></div>
+      <div class="zoom-toolbar">
+        <strong id="zoom-title"></strong><button id="previous" aria-label="上一张">←</button
+        ><button id="next" aria-label="下一张">→</button><button id="close">关闭</button>
+      </div>
+    </dialog>
+    <script>
+      const assets = [
+        {
+          id: 'duel_ds_base',
+          character: 'deepseek',
+          label: '全身基准',
+          description: '困得睁不开眼，但坚信自己很懂。',
+          path: 'first-batch/duel_ds_base.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1373710,
+          alphaChannel: true,
+          sha256: '65f8d03f27e7931193f336c44d9f11c0d3078a80dcedd7044338ef92bee4e953',
+          alphaRange: [0, 255],
+          opaqueBounds: [74, 21, 1181, 1234],
+          transparentPixelPercent: 50.18,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'character-reference',
+        },
+        {
+          id: 'duel_ds_thinking',
+          character: 'deepseek',
+          label: '正在用力思考',
+          description: '思维线先打结，脑袋后冒烟。',
+          path: 'first-batch/duel_ds_thinking.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1720229,
+          alphaChannel: true,
+          sha256: 'abf9a650311ed8624ac07a9bf5dd64b0e2802a4098587ec19cde519a80469f52',
+          alphaRange: [0, 255],
+          opaqueBounds: [11, 12, 1247, 1242],
+          transparentPixelPercent: 35.7,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'reaction-cutout',
+        },
+        {
+          id: 'duel_ds_busted',
+          character: 'deepseek',
+          label: '思考了个寂寞',
+          description: '脸已经慌了，加载圈还在坚持。',
+          path: 'first-batch/duel_ds_busted.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1642014,
+          alphaChannel: true,
+          sha256: '2c46cb141e446b512ee6d7f8065b40a26a41593f1873adcf7da97e595f3847d4',
+          alphaRange: [0, 255],
+          opaqueBounds: [41, 18, 1227, 1229],
+          transparentPixelPercent: 36.88,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'reaction-cutout',
+        },
+        {
+          id: 'duel_ds_ultimate_key',
+          character: 'deepseek',
+          label: '专家会诊',
+          description: '专家很多，上班俩。',
+          path: 'first-batch/duel_ds_ultimate_key.png',
+          width: 1672,
+          height: 941,
+          bytes: 1974618,
+          alphaChannel: true,
+          sha256: '1bacb9a38ae01d44957d3e6bfe22d49678a7ae11223230c6e8a58f89a3cfc004',
+          alphaRange: [0, 255],
+          opaqueBounds: [11, 13, 1666, 928],
+          transparentPixelPercent: 35.86,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'static-ultimate-concept',
+        },
+        {
+          id: 'duel_gpt_base',
+          character: 'gpt',
+          label: '全身基准',
+          description: '稿子已经滑走，笑容依然专业。',
+          path: 'first-batch/duel_gpt_base.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1761072,
+          alphaChannel: true,
+          sha256: '66a06d6a0e360a660dd7c622299a7876769afc18bff5c059118928fa45e399bb',
+          alphaRange: [0, 255],
+          opaqueBounds: [19, 2, 1236, 1246],
+          transparentPixelPercent: 43.56,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'character-reference',
+        },
+        {
+          id: 'duel_gpt_confident',
+          character: 'gpt',
+          label: '我讲两句',
+          description: '纸张失控，主讲人非常自信。',
+          path: 'first-batch/duel_gpt_confident.png',
+          width: 1254,
+          height: 1254,
+          bytes: 2191492,
+          alphaChannel: true,
+          sha256: 'f66ecc3dff2004b356a5fe90ce1b636e8271fbfa5f311e72d657fbda00483117',
+          alphaRange: [0, 255],
+          opaqueBounds: [8, 3, 1250, 1252],
+          transparentPixelPercent: 24.73,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'reaction-cutout',
+        },
+        {
+          id: 'duel_gpt_revision',
+          character: 'gpt',
+          label: '上一版比较好',
+          description: '一边擦汗，一边销毁刚才的答案。',
+          path: 'first-batch/duel_gpt_revision.png',
+          width: 1254,
+          height: 1254,
+          bytes: 2082010,
+          alphaChannel: true,
+          sha256: 'a2c2fc6c32718c324935d13a5909a3454001a71a6e6e990451cac259f6cd2ef1',
+          alphaRange: [0, 255],
+          opaqueBounds: [8, 1, 1248, 1252],
+          transparentPixelPercent: 28.87,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'reaction-cutout',
+        },
+        {
+          id: 'duel_gpt_ultimate_key',
+          character: 'gpt',
+          label: '综上所述 · 已发送',
+          description: '章比人重，人随章走。',
+          path: 'first-batch/duel_gpt_ultimate_key.png',
+          width: 1672,
+          height: 941,
+          bytes: 2006250,
+          alphaChannel: true,
+          sha256: '8de80a66dea6c0b1a6999792d65270222c50ff4d0d30f782d1e02dc3db52fd27',
+          alphaRange: [0, 255],
+          opaqueBounds: [11, 3, 1668, 930],
+          transparentPixelPercent: 34.85,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'static-ultimate-concept',
+        },
+        {
+          id: 'duel_doubao_base_v3',
+          character: 'doubao',
+          label: '全身基准 · 用户头像版',
+          description: '侧分露额、红围巾、深色上衣。',
+          path: 'first-batch/duel_doubao_base_v3.png',
+          width: 1254,
+          height: 1254,
+          bytes: 652424,
+          alphaChannel: true,
+          sha256: '043f1feab5ac60c7a014debed7a93c3abeeb85918b78cc5511a3035b30295867',
+          alphaRange: [0, 255],
+          opaqueBounds: [363, 52, 902, 1219],
+          transparentPixelPercent: 73.97,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'character-reference',
+        },
+        {
+          id: 'duel_doubao_guarantee',
+          character: 'doubao',
+          label: '包的',
+          description: '胸口拍响了，气泡快撑爆了。',
+          path: 'first-batch/duel_doubao_guarantee.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1436946,
+          alphaChannel: true,
+          sha256: 'bfc6da2a1a905e751f22059b7017b087c4a62272242d03ece36d56a9253cbeee',
+          alphaRange: [0, 255],
+          opaqueBounds: [34, 19, 1222, 1225],
+          transparentPixelPercent: 31.93,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'reaction-cutout',
+        },
+        {
+          id: 'duel_doubao_oops',
+          character: 'doubao',
+          label: '没包住',
+          description: '气泡漏气，解释还没停止。',
+          path: 'first-batch/duel_doubao_oops.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1003662,
+          alphaChannel: true,
+          sha256: 'df8b8d085afacc2dab90b68beb46878fe75633ad321f70d678dd05b06ca43c32',
+          alphaRange: [0, 255],
+          opaqueBounds: [237, 40, 1018, 1209],
+          transparentPixelPercent: 54.92,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'reaction-cutout',
+        },
+        {
+          id: 'duel_doubao_ultimate_key',
+          character: 'doubao',
+          label: '省字不省拳',
+          description: '话越挤越短，拳头越来越大。',
+          path: 'first-batch/duel_doubao_ultimate_key.png',
+          width: 1672,
+          height: 941,
+          bytes: 1161300,
+          alphaChannel: true,
+          sha256: 'd3e9a60cb14a71b1878020bf15093f1d853858d82726f607c20157f3b32771c2',
+          alphaRange: [0, 255],
+          opaqueBounds: [17, 106, 1658, 845],
+          transparentPixelPercent: 55.09,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'static-ultimate-concept',
+        },
+        {
+          id: 'duel_ds_cache_hit',
+          character: 'deepseek',
+          label: '缓存命中',
+          description: '抱着录像机接招：这题做过。',
+          path: 'memes/duel_ds_cache_hit.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1738519,
+          alphaChannel: true,
+          sha256: '64069d3d280767e2475039d41fb8d8e43396b8b1f2a2c7dbe6e55f6b7d834799',
+          alphaRange: [0, 255],
+          opaqueBounds: [29, 0, 1251, 1254],
+          transparentPixelPercent: 32.62,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'meme-cutout',
+        },
+        {
+          id: 'duel_gpt_muffled',
+          character: 'gpt',
+          label: '已读已堵',
+          description: '嘴被气泡堵住，耳朵还在输出。',
+          path: 'memes/duel_gpt_muffled.png',
+          width: 1254,
+          height: 1254,
+          bytes: 2173602,
+          alphaChannel: true,
+          sha256: '23d8dda3ecae8133a808e66bf0c0a707171aa694fcd9269c692c45f9a9c9e5f2',
+          alphaRange: [0, 255],
+          opaqueBounds: [10, 2, 1247, 1252],
+          transparentPixelPercent: 27.63,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'meme-cutout',
+        },
+        {
+          id: 'duel_gpt_rollback',
+          character: 'gpt',
+          label: '版本回滚',
+          description: '把打空的拳头拽回去，假装没发生。',
+          path: 'memes/duel_gpt_rollback.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1859814,
+          alphaChannel: true,
+          sha256: 'ced9bf389ab1152c521582c0f5c4b1cd4301555e2248403ef8c000c355bc3543',
+          alphaRange: [0, 255],
+          opaqueBounds: [10, 26, 1241, 1226],
+          transparentPixelPercent: 41.66,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'meme-cutout',
+        },
+        {
+          id: 'duel_ds_sore_loser',
+          character: 'deepseek',
+          label: '战略性休息 · DeepSeek',
+          description: '拿鲸尾当枕头，还要偷偷翻牌。',
+          path: 'memes/duel_ds_sore_loser.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1534455,
+          alphaChannel: true,
+          sha256: '32a847658897850509e3c7fd2134ab95aba25c75bec0a027d0ccad4458c45c02',
+          alphaRange: [0, 255],
+          opaqueBounds: [7, 70, 1235, 1224],
+          transparentPixelPercent: 42.33,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'meme-cutout',
+        },
+        {
+          id: 'duel_gpt_sore_loser',
+          character: 'gpt',
+          label: '战略性休息 · GPT',
+          description: '躺在废稿上，也要保持营业笑容。',
+          path: 'memes/duel_gpt_sore_loser.png',
+          width: 1254,
+          height: 1254,
+          bytes: 2005274,
+          alphaChannel: true,
+          sha256: 'a6a5f38a576fb8035d88060865753b615b67086d795dc97c778c895e6d654c7c',
+          alphaRange: [0, 255],
+          opaqueBounds: [37, 20, 1240, 1237],
+          transparentPixelPercent: 34.54,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'meme-cutout',
+        },
+        {
+          id: 'duel_doubao_sore_loser',
+          character: 'doubao',
+          label: '战略性休息 · 豆包',
+          description: '围巾一垫，宣布进入休息模式。',
+          path: 'memes/duel_doubao_sore_loser.png',
+          width: 1254,
+          height: 1254,
+          bytes: 1044038,
+          alphaChannel: true,
+          sha256: '694f13358a75cd49585d14f5178db22f7bcbfc0d718e784851619c8bffb3c97a',
+          alphaRange: [0, 255],
+          opaqueBounds: [156, 124, 1159, 1165],
+          transparentPixelPercent: 55.55,
+          source: 'built-in-image-gen',
+          reviewStatus: 'generated-pending-review',
+          kind: 'meme-cutout',
+        },
+      ];
+      const groups = [
+        ['deepseek', 'DeepSeek 娘', '思考很认真，翻车也很认真。'],
+        ['gpt', 'GPT 娘', '永远还有下一版，永远保持营业笑容。'],
+        ['doubao', '豆包娘', '形象来自用户参考，反差来自表情和动作。'],
+      ];
+      const gallery = document.querySelector('#gallery');
+      for (const [id, name, caption] of groups) {
+        const section = document.createElement('section');
+        const title = document.createElement('h2');
+        title.textContent = name;
+        const intro = document.createElement('p');
+        intro.className = 'intro';
+        intro.textContent = caption;
+        const grid = document.createElement('div');
+        grid.className = 'grid';
+        for (const asset of assets.filter((a) => a.character === id)) {
+          const card = document.createElement('article');
+          card.className = 'card';
+          card.dataset.kind = asset.kind;
+          const button = document.createElement('button');
+          button.className = 'preview';
+          button.setAttribute('aria-label', '放大：' + name + ' · ' + asset.label);
+          const img = document.createElement('img');
+          img.src = asset.path;
+          img.alt = name + ' · ' + asset.label;
+          img.loading = 'lazy';
+          button.append(img);
+          button.addEventListener('click', () => show(assets.indexOf(asset)));
+          const info = document.createElement('div');
+          info.className = 'info';
+          const h3 = document.createElement('h3');
+          h3.textContent = asset.label;
+          const p = document.createElement('p');
+          p.textContent = asset.description;
+          const small = document.createElement('small');
+          small.textContent =
+            asset.width +
+            ' × ' +
+            asset.height +
+            ' · PNG · ' +
+            (asset.bytes / 1048576).toFixed(2) +
+            ' MB';
+          const link = document.createElement('a');
+          link.href = asset.path;
+          link.download = asset.id + '.png';
+          link.textContent = '下载原图';
+          info.append(h3, p, small, link);
+          card.append(button, info);
+          grid.append(card);
+        }
+        section.append(title, intro, grid);
+        gallery.append(section);
+      }
+      document.querySelectorAll('[data-background]').forEach((button) =>
+        button.addEventListener('click', () => {
+          document.body.dataset.bg = button.dataset.background;
+          document
+            .querySelectorAll('[data-background]')
+            .forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+        }),
+      );
+      const viewer = document.querySelector('#viewer');
+      let active = 0;
+      function show(index) {
+        active = (index + assets.length) % assets.length;
+        const a = assets[active];
+        document.querySelector('#zoom-image').src = a.path;
+        document.querySelector('#zoom-image').alt = a.label;
+        document.querySelector('#zoom-title').textContent = a.label;
+        if (!viewer.open) viewer.showModal();
+      }
+      document.querySelector('#close').onclick = () => viewer.close();
+      document.querySelector('#previous').onclick = () => show(active - 1);
+      document.querySelector('#next').onclick = () => show(active + 1);
+      viewer.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') show(active - 1);
+        if (e.key === 'ArrowRight') show(active + 1);
+      });
+      document.querySelectorAll('[data-collection]').forEach((button) => {
+        if (button.tagName !== 'BUTTON') return;
+        button.addEventListener('click', () => {
+          document.body.dataset.collection = button.dataset.collection;
+          document
+            .querySelectorAll('button[data-collection]')
+            .forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+        });
+      });
+    </script>
+  </body>
+</html>

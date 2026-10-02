@@ -10,6 +10,8 @@ import {
   PLAYER_WIDTH,
 } from '../config/constants';
 import { speedAtDistance } from './difficulty';
+import { shiftSpeed } from '../config/shift';
+import { thinkingModes } from '../config/thinking';
 import { createRandom, nextRandom } from './random';
 import type { Box, GeneratorState, Obstacle } from './types';
 import { assertDistance } from './validation';
@@ -30,10 +32,11 @@ export function obstacleBox(obstacle: Obstacle): Box {
 export function generateObstacles(
   state: GeneratorState,
   throughDistance: number,
+  unbounded = false,
 ): { readonly generator: GeneratorState; readonly obstacles: readonly Obstacle[] } {
   assertDistance(throughDistance);
   assertDistance(state.nextDistance);
-  if (throughDistance > FINISH_DISTANCE + LOOKAHEAD_DISTANCE) {
+  if (!unbounded && throughDistance > FINISH_DISTANCE + LOOKAHEAD_DISTANCE) {
     throw new RangeError('Obstacle horizon exceeds the finite prototype course.');
   }
   let generator = state;
@@ -42,7 +45,9 @@ export function generateObstacles(
     const kind = nextRandom(generator.randomState);
     const spacing = nextRandom(kind.state);
     // Use the obstacle's world distance, so generation is independent of batching.
-    const speed = speedAtDistance(generator.nextDistance);
+    const speed = unbounded
+      ? shiftSpeed(generator.nextDistance, 3) * thinkingModes.quick.speed
+      : speedAtDistance(generator.nextDistance);
     const gap =
       Math.max(MIN_OBSTACLE_GAP, speed * 1.25 + PLAYER_WIDTH) + spacing.value * speed * 0.5;
     obstacles.push({

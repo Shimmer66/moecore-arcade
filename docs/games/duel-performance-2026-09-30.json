@@ -1,0 +1,132 @@
+{
+  "recorded": "2026-09-30",
+  "environment": "Local headless Chromium, actual Vite production page on loopback. Mobile sample uses 390x844 viewport and CDP 4x CPU throttling, not physical phone hardware.",
+  "method": "One cold page per mode; scripted keyboard fight for about five seconds. Frame interval from requestAnimationFrame timestamps; callback work excludes later Vue microtasks, layout and paint. Long tasks observed separately.",
+  "memoryDefinition": "Sum of unique predecoded image width * height * 4; a texture-sized RGBA estimate, NOT browser process RSS or measured GPU allocation.",
+  "limitations": [
+    "Single-run snapshots; readiness wall time varies with machine and filesystem cache",
+    "No network bandwidth throttling",
+    "Short scripted fights do not prove sustained frame rate or thermal stability",
+    "Dedicated library build embeds images and is not the measured build"
+  ],
+  "samples": {
+    "before": [
+      {
+        "mode": "practice",
+        "readyMs": 1813,
+        "decodedURLs": 30,
+        "decodeCalls": 60,
+        "duplicateDecodeCalls": 30,
+        "requestedImages": 36,
+        "imageBodyBytes": 28548675,
+        "estimatedDecodedBytes": 188708888,
+        "frames": 326,
+        "frameIntervalP50": 16.699999999999818,
+        "frameIntervalP95": 16.700000000000728,
+        "callbackP95": 0.30000000447034836,
+        "framesAbove25ms": 0,
+        "longTasks": [],
+        "fightDecodeCalls": 32,
+        "errors": []
+      },
+      {
+        "mode": "team",
+        "readyMs": 2750,
+        "decodedURLs": 65,
+        "decodeCalls": 135,
+        "duplicateDecodeCalls": 70,
+        "requestedImages": 68,
+        "imageBodyBytes": 59554366,
+        "estimatedDecodedBytes": 408866696,
+        "frames": 311,
+        "frameIntervalP50": 16.699999999999818,
+        "frameIntervalP95": 16.799999999999272,
+        "callbackP95": 0.3999999985098839,
+        "framesAbove25ms": 2,
+        "longTasks": [240],
+        "fightDecodeCalls": 1,
+        "errors": []
+      }
+    ],
+    "after": [
+      {
+        "mode": "practice",
+        "readyMs": 1234,
+        "decodedURLs": 27,
+        "decodeCalls": 27,
+        "duplicateDecodeCalls": 0,
+        "requestedImages": 33,
+        "imageBodyBytes": 28494089,
+        "estimatedDecodedBytes": 169845384,
+        "frames": 322,
+        "frameIntervalP50": 16.699999999999818,
+        "frameIntervalP95": 16.799999999999272,
+        "callbackP95": 0.29999999701976776,
+        "framesAbove25ms": 0,
+        "longTasks": [],
+        "fightDecodeCalls": 0,
+        "errors": []
+      },
+      {
+        "mode": "team",
+        "readyMs": 1524,
+        "decodedURLs": 55,
+        "decodeCalls": 55,
+        "duplicateDecodeCalls": 0,
+        "requestedImages": 58,
+        "imageBodyBytes": 53596433,
+        "estimatedDecodedBytes": 345971912,
+        "frames": 321,
+        "frameIntervalP50": 16.699999999999818,
+        "frameIntervalP95": 16.700000000000728,
+        "callbackP95": 0.30000001192092896,
+        "framesAbove25ms": 0,
+        "longTasks": [],
+        "fightDecodeCalls": 0,
+        "errors": []
+      }
+    ],
+    "mobileCpu4": [
+      {
+        "mode": "practice",
+        "mobile": true,
+        "cpuRate": 4,
+        "readyMs": 1449,
+        "decodedURLs": 27,
+        "decodeCalls": 27,
+        "duplicateDecodeCalls": 0,
+        "requestedImages": 33,
+        "imageBodyBytes": 28494089,
+        "estimatedDecodedBytes": 169845384,
+        "frames": 327,
+        "frameIntervalP50": 16.699999999999818,
+        "frameIntervalP95": 16.799999999999272,
+        "callbackP95": 0.8000000002793968,
+        "framesAbove25ms": 1,
+        "longTasks": [52],
+        "fightDecodeCalls": 0,
+        "errors": []
+      },
+      {
+        "mode": "team",
+        "mobile": true,
+        "cpuRate": 4,
+        "readyMs": 1627,
+        "decodedURLs": 55,
+        "decodeCalls": 55,
+        "duplicateDecodeCalls": 0,
+        "requestedImages": 58,
+        "imageBodyBytes": 53596433,
+        "estimatedDecodedBytes": 345971912,
+        "frames": 328,
+        "frameIntervalP50": 16.699999999999818,
+        "frameIntervalP95": 16.700000000000728,
+        "callbackP95": 1.099999999627471,
+        "framesAbove25ms": 1,
+        "longTasks": [],
+        "fightDecodeCalls": 0,
+        "errors": []
+      }
+    ]
+  }
+}

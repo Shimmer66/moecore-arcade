@@ -1,0 +1,18 @@
+{
+  "status": "calibrated",
+  "frameCount": 8,
+  "rows": ["catch-startup", "throw-followthrough"],
+  "method": "Alpha component bounds and contact pivots; one uniform body scale per character; original PNG preserved.",
+  "characters": {
+    "gpt": {
+      "file": "gpt-v1.png",
+      "sha256": "6825b65e0542ed022267f65bb7921ccb3a153eae4ccd4345f4080c6dd0f39313",
+      "width": 1774,
+      "height": 887,
+      "frames": 8,
+      "scale": 0.332943,
+      "transparentFraction": 0.5011,
+      "bytes": 2028607
+    }
+  }
+}

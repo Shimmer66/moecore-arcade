@@ -1,0 +1,76 @@
+{
+  "status": "integrated",
+  "frameCount": 96,
+  "rows": ["roll", "blowback", "guardCounter", "airBlowback"],
+  "method": "Alpha component bounds and contact pivots; one uniform body scale per character; original PNG preserved.",
+  "characters": {
+    "deepseek": {
+      "file": "deepseek-v1.png",
+      "sha256": "b0bf8f2dbc8d63d7c45e2593cb5047542f587d1209a9ba8b1b1f66639dcff133",
+      "width": 1254,
+      "height": 1254,
+      "frames": 16,
+      "scale": 0.487973,
+      "transparentFraction": 0.5348,
+      "bytes": 1901677
+    },
+    "gpt": {
+      "file": "gpt-v1.png",
+      "sha256": "3314af6650bbc7dd37702bbab919ee55f5e6f36f499085938c2dd5c4ffc6755a",
+      "width": 1254,
+      "height": 1254,
+      "frames": 16,
+      "scale": 0.469421,
+      "transparentFraction": 0.4139,
+      "bytes": 2427415
+    },
+    "doubao": {
+      "file": "doubao-v1.png",
+      "sha256": "f5817c47d1cb64084365e24d4f34bc971716fe564607e25177dac647cb2dfd39",
+      "width": 1254,
+      "height": 1254,
+      "frames": 16,
+      "scale": 0.461789,
+      "transparentFraction": 0.5962,
+      "bytes": 1402677
+    },
+    "client": {
+      "file": "client-v1.png",
+      "sha256": "51f0e7f41718b667b20c15809dc21450c18827896f1fedb7ad717d942030f0d9",
+      "width": 1254,
+      "height": 1254,
+      "frames": 16,
+      "scale": 0.565737,
+      "transparentFraction": 0.5724,
+      "bytes": 1510027
+    },
+    "prompt_sage": {
+      "file": "prompt_sage-v2.png",
+      "sha256": "1af34cd695f419185a0807b5a84720f16edfb79e5d8da4257ed2f8ef42921aa3",
+      "width": 1254,
+      "height": 1254,
+      "frames": 16,
+      "scale": 0.484642,
+      "transparentFraction": 0.5558,
+      "bytes": 1667418
+    },
+    "unplug_uncle": {
+      "file": "unplug_uncle-v1.png",
+      "sha256": "83f845b83f297c10158ede11fce0ddf68d776eb21c75677f038d91d4c3c4ba16",
+      "width": 1254,
+      "height": 1254,
+      "frames": 16,
+      "scale": 0.540952,
+      "transparentFraction": 0.6461,
+      "bytes": 1342494
+    }
+  },
+  "verification": [
+    "All 96 frames sampled in actual browser combat",
+    "Backward rolls mirror travel direction",
+    "Image failure falls back",
+    "Reduced motion avoids upside-down frames",
+    "Preview desktop/mobile controls pass",
+    "Original generated PNG bytes preserved"
+  ]
+}

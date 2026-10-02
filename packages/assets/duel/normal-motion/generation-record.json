@@ -1,0 +1,40 @@
+{
+  "engine": "built-in image_gen",
+  "transparent_background": true,
+  "prompts": "prompts.md",
+  "source_directory": "C:/Users/yan/.codex/generated_images/01a0d947-4fea-7991-b254-ff42df29f49b",
+  "outputs": [
+    {
+      "id": "deepseek",
+      "source": "call_eLYSEM1pebfqMozcnt4L7xiI.png",
+      "selected": "deepseek-v1.png"
+    },
+    {
+      "id": "gpt",
+      "source": "call_0Hv8FyUzBL52AWoqjWfXfxun.png",
+      "selected": "gpt-v1.png"
+    },
+    {
+      "id": "doubao",
+      "source": "call_KQs54sg88lXbJP9dirBbA6rd.png",
+      "selected": "doubao-v1.png"
+    },
+    {
+      "id": "client",
+      "source": "call_3UMXC9tEktzUI2QIWkrVCbnI.png",
+      "selected": "client-v1.png"
+    },
+    {
+      "id": "prompt_sage",
+      "source": "call_EW4o9Nr0SJeFhxxYqRkX8IFi.png",
+      "selected": "prompt_sage-v1.png"
+    },
+    {
+      "id": "unplug_uncle",
+      "source": "call_01CC6C5w1Csm4tOnCJ4AKOmL.png",
+      "selected": "unplug_uncle-v1.png"
+    }
+  ],
+  "pixel_processing": "None; generated originals preserved.",
+  "display_processing": "Alpha-derived viewBox and contact pivot; one scale per character; third cell aligned to active hitbox."
+}

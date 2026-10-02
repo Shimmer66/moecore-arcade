@@ -26,7 +26,10 @@ const busy = ref(false);
 const message = ref('');
 const boardElement = ref<HTMLElement>();
 const urls = shallowRef<Partial<Record<CharacterId, string>>>({});
+const reactionUrls = shallowRef<Partial<Record<CharacterId, readonly string[]>>>({});
+const activeReactions = shallowRef<Partial<Record<CharacterId, string>>>({});
 const portrait = ref('');
+const portraitName = ref('DeepSeek 娘');
 const names = Object.fromEntries(
   CHARACTERS.map((character) => [character.id, character.displayName]),
 );
@@ -66,6 +69,7 @@ let pending: MoveResult | undefined;
 let disposed = false;
 let pointer: { id: number; position: Position; x: number; y: number } | undefined;
 let suppressClick = false;
+let reactionIndex = 0;
 
 onMounted(async () => {
   const { getMatch3Asset } = await import('@moecore/assets/match3');
@@ -73,7 +77,17 @@ onMounted(async () => {
   urls.value = Object.fromEntries(
     CHARACTERS.map(({ id }) => [id, getMatch3Asset(`${id}_tile_portrait`).url]),
   );
-  portrait.value = getMatch3Asset('deepseek_pose_01').url;
+  reactionUrls.value = Object.fromEntries(
+    CHARACTERS.map(({ id }) => [
+      id,
+      Array.from(
+        { length: id === 'deepseek' || id === 'gpt' ? 3 : 1 },
+        (_, index) =>
+          getMatch3Asset(`${id}_tile_reaction_${String(index + 1).padStart(2, '0')}`).url,
+      ),
+    ]),
+  );
+  portrait.value = getMatch3Asset('deepseek_tile_portrait').url;
 });
 
 function setFrame() {
@@ -81,6 +95,23 @@ function setFrame() {
   if (!frame) return;
   displayBoard.value = frame.board;
   highlights.value = frame.matches.map(({ row, column }) => `${row}:${column}`);
+  const reactions: Partial<Record<CharacterId, string>> = {};
+  for (const { row, column } of frame.matches) {
+    const character = frame.board[row]?.[column];
+    if (!character || reactions[character]) continue;
+    const variants = reactionUrls.value[character];
+    if (variants?.length) {
+      reactions[character] = variants[reactionIndex % variants.length]!;
+      reactionIndex += 1;
+    }
+  }
+  activeReactions.value = reactions;
+  const first = frame.matches[0];
+  const character = first && frame.board[first.row]?.[first.column];
+  if (character && reactions[character]) {
+    portrait.value = reactions[character]!;
+    portraitName.value = names[character] ?? character;
+  }
 }
 
 function animate(timestamp: number) {
@@ -99,6 +130,7 @@ function animate(timestamp: number) {
       message.value = pending.rebuilt ? '棋盘已重新排列' : `消除 ${pending.state.cleared} 枚`;
       pending = undefined;
       highlights.value = [];
+      activeReactions.value = {};
       busy.value = false;
       if (state.value.outcome !== 'playing') {
         emit('finish', {
@@ -257,7 +289,7 @@ onUnmounted(() => {
         v-if="portrait"
         class="match3-portrait"
         :src="portrait"
-        alt="DeepSeek 娘"
+        :alt="portraitName"
         width="180"
         height="180"
       />
@@ -297,6 +329,7 @@ onUnmounted(() => {
           :data-row="cell.row"
           :data-column="cell.column"
           :data-character="cell.character"
+          :data-reaction="Boolean(highlights.includes(cell.key) && activeReactions[cell.character])"
           :aria-label="`第${cell.row + 1}行第${cell.column + 1}列 ${names[cell.character]}`"
           :aria-pressed="selected?.row === cell.row && selected.column === cell.column"
           :disabled="!canPlay"
@@ -307,8 +340,20 @@ onUnmounted(() => {
           @lostpointercapture="pointer = undefined"
           @keydown="focusNeighbour($event, cell)"
         >
-          <img v-if="urls[cell.character]" :src="urls[cell.character]" alt="" draggable="false" />
+          <img
+            v-if="urls[cell.character]"
+            :src="
+              highlights.includes(cell.key)
+                ? activeReactions[cell.character] || urls[cell.character]
+                : urls[cell.character]
+            "
+            alt=""
+            draggable="false"
+          />
           <span v-else>{{ initials[cell.character] }}</span>
+          <span v-if="urls[cell.character]" class="match3-tile-code" aria-hidden="true">{{
+            initials[cell.character]
+          }}</span>
         </button>
       </div>
       <div class="match3-board-footer">
@@ -324,16 +369,28 @@ onUnmounted(() => {
 <style scoped>
 .match3 {
   display: grid;
-  grid-template-columns: 200px minmax(0, 560px);
-  gap: 40px;
+  grid-template-columns: 240px minmax(0, 560px);
+  gap: 18px;
   justify-content: center;
   align-items: start;
+}
+.match3-summary,
+.match3-playfield {
+  min-width: 0;
+  padding: 20px;
+  border-radius: var(--ui-radius);
+}
+.match3-summary {
+  background: var(--ui-subtle);
+}
+.match3-playfield {
+  padding-block: 0;
 }
 .level-title {
   display: flex;
   gap: 8px;
   align-items: center;
-  color: #476657;
+  color: var(--home-purple);
   font-size: 14px;
   font-weight: 600;
 }
@@ -343,18 +400,19 @@ onUnmounted(() => {
   align-items: baseline;
   gap: 12px;
   font-size: 14px;
-  color: #5c6d68;
+  color: var(--home-muted);
 }
 .match3-moves strong {
   font-size: 52px;
   line-height: 1.2;
-  color: #28493d;
+  color: var(--home-ink);
   font-variant-numeric: tabular-nums;
   min-width: 2ch;
 }
 .match3-summary h2 {
   font-size: 14px;
   margin: 30px 0 12px;
+  color: var(--home-ink);
 }
 .match3-goals {
   list-style: none;
@@ -396,14 +454,28 @@ onUnmounted(() => {
   font-variant-numeric: tabular-nums;
 }
 .match3-goals progress {
+  appearance: none;
   height: 6px;
   width: 100%;
-  accent-color: #389978;
+  accent-color: var(--home-purple);
   border: 0;
+  border-radius: 4px;
+  overflow: hidden;
   align-self: center;
 }
+.match3-goals progress::-webkit-progress-bar {
+  background: #e1e7f0;
+}
+.match3-goals progress::-webkit-progress-value {
+  background: var(--ui-accent);
+  border-radius: 4px;
+}
+.match3-goals progress::-moz-progress-bar {
+  background: var(--ui-accent);
+  border-radius: 4px;
+}
 .achieved {
-  color: #23815f;
+  color: #5945aa;
 }
 .match3-portrait {
   display: block;
@@ -423,7 +495,7 @@ onUnmounted(() => {
   margin-bottom: 10px;
   font-size: 13px;
   font-weight: 600;
-  color: #415f53;
+  color: var(--home-ink);
 }
 .match3-board {
   display: grid;
@@ -432,9 +504,9 @@ onUnmounted(() => {
   gap: 6px;
   padding: 10px;
   aspect-ratio: 1;
-  background: #dceae4;
-  border: 1px solid #b5ccc0;
-  border-radius: 8px;
+  background: #f0f3f9;
+  border: 1px solid var(--ui-line);
+  border-radius: 13px;
   touch-action: none;
 }
 .match3-tile {
@@ -464,17 +536,31 @@ onUnmounted(() => {
   object-fit: contain;
   pointer-events: none;
 }
+.match3-tile-code {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  padding: 2px 3px;
+  border-radius: 4px;
+  background: #fffffff0;
+  color: #1f2d3a;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+}
 .match3-tile:disabled {
   cursor: default;
 }
 .match3-tile:not(:disabled):hover {
-  outline: 2px solid #638977;
+  outline: 2px solid var(--home-purple);
   outline-offset: 0;
   z-index: 1;
 }
 .match3-tile.selected,
 .match3-tile.hinted {
-  outline: 3px solid #b04368;
+  outline: 3px solid var(--home-purple);
   outline-offset: 0;
   z-index: 2;
 }
@@ -482,13 +568,27 @@ onUnmounted(() => {
   content: '';
   position: absolute;
   inset: 3px;
-  border: 2px dashed #7f294c;
+  border: 2px dashed #49377e;
   border-radius: 5px;
   pointer-events: none;
 }
 .match3-tile.clearing {
-  transform: scale(0.76);
-  opacity: 0.35;
+  z-index: 3;
+  animation: match3-reaction-pop 220ms ease-out both;
+}
+@keyframes match3-reaction-pop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.76);
+    opacity: 0.25;
+  }
 }
 .match3-board-footer {
   display: flex;
@@ -497,7 +597,7 @@ onUnmounted(() => {
   min-height: 38px;
   padding-top: 12px;
   font-size: 12px;
-  color: #596d63;
+  color: var(--home-muted);
 }
 .match3-board-footer strong {
   font-variant-numeric: tabular-nums;
@@ -525,6 +625,8 @@ onUnmounted(() => {
 }
 .reduce-motion .match3-tile.clearing {
   transform: none;
+  opacity: 1;
+  animation: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .match3-tile {
@@ -532,6 +634,8 @@ onUnmounted(() => {
   }
   .match3-tile.clearing {
     transform: none;
+    opacity: 1;
+    animation: none;
   }
 }
 @media (max-width: 740px) {
@@ -545,6 +649,10 @@ onUnmounted(() => {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 10px 16px;
+  }
+  .match3-summary,
+  .match3-playfield {
+    padding: 14px;
   }
   .match3-moves {
     margin: 0;

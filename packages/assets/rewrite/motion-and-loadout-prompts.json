@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-28",
+  "tool": "built-in image_gen.imagegen",
+  "format": "PNG RGBA; originals retained; project copies in runtime/",
+  "assets": [
+    {
+      "files": ["deepseek-motion-v1.png", "gpt-motion-v1.png", "claude-motion-v1.png"],
+      "results": [
+        "call_yJ3415xAJVc4ofvMqzpqtOca.png",
+        "call_sJjmpk3NxDmPBANae7JXgm0H.png",
+        "call_mLl54zw03iTmvo5ENAWtWf0V.png"
+      ],
+      "references": ["deepseek-shoot.webp", "gpt-shoot.webp", "claude-shoot.webp"],
+      "brief_record": "Preserve each original anime chibi girl's identity, costume, colors and weapon. Transparent equal 3x2 grid, four alternating full-body run poses, one tucked jump and one genuinely horizontal prone firing pose. Full silhouettes, transparent padding, no labels. GPT and Claude also use the final DeepSeek atlas as layout reference. Selected final layouts calibrated in source."
+    },
+    {
+      "files": ["aim-motion-v1.png"],
+      "results": ["call_VC1VbJiUP4SLtdXiPO6cfOti.png"],
+      "references": ["deepseek-shoot.webp", "gpt-shoot.webp", "claude-shoot.webp"],
+      "brief_record": "Transparent 4x3 atlas, one persona per row, columns aiming diagonally up-right, straight up, diagonally down-right, straight down. Preserve full character and correct weapon direction. Final edit shrinks complete figures about 30%, restores clipped extremities, and leaves transparent gutters without backgrounds or text."
+    },
+    {
+      "files": ["depth-motion-v1.png"],
+      "results": ["call_5Poz0JQTRWN9PfUV2NYwwcJj.png"],
+      "references": ["depth-operators.png", "claude-shoot.webp"],
+      "brief_record": "Transparent 4x3 atlas, three personas each with three rear-facing alternating stride poses and a low crouching firing pose. Preserve identities, outfits, rear-facing silhouette and Claude book weapon. Final edit shrinks complete figures about 30% to keep all extremities within transparent cells."
+    },
+    {
+      "files": ["loot-atlas-v1.png"],
+      "results": ["call_9bJAyHmE3OaXzGMZd37eD05h.png"],
+      "references": [],
+      "prompt": "Create one production videogame pickup icon atlas, transparent background, 3 columns by 3 rows in equal square cells, 1536x1536. Nine separate full objects, all fully within cell with generous 15% clear margins. Polished colorful anime arcade sci-fi equipment, thick readable contours, subtly shaded, consistent three-quarter side view. Row1: blue short pulse rifle; orange wide-barrel scatter shotgun; mint green drum magazine machinegun. Row2: cyan long railgun; red compact flamethrower with tank; purple homing missile launcher. Row3: teal shield generator with bright shield hologram; green medical supply box with heart emblem; amber futuristic grenade with loop. Each unmistakable silhouette, large centered objects, clean alpha, no labels, no letters, no background, no human figures. These are charming AI meme arcade shooter loot, vibrant high quality assets usable at 48px.",
+      "actual_size": [1254, 1254]
+    },
+    {
+      "files": ["enemy-atlas-v1.png"],
+      "results": ["call_nCEHKWGyksupg0JheazLdG8L.png"],
+      "references": [],
+      "prompt": "Create a polished anime arcade run-and-gun enemy sprite atlas on fully transparent background. 3 columns x 2 rows equal cells, canvas1536x1024. Six complete distinct enemy units, each with 15% transparent margins, no clipping, no text or labels, cute hostile AI office machines, outlined colorful game art, all facing LEFT in side/three-quarter view. Top left: pink crumpled receipt-paper infantry creature with two running boots, angry little face and miniature blaster. Top middle: pink office printer turret on tank treads, tie and front paper slot cannon. Top right: mint quad-rotor surveillance drone with one glowing camera eye and tiny guns. Bottom left: gold long-barrel sniper camera on mechanical tripod legs with red scope. Bottom middle: purple spring-legged spherical spam robot with rabbit antennae, coiled spring feet. Bottom right: orange-red firewall furnace ventilation unit, grounded metal vent with glowing fire opening, pipe and warning stripes. Maintain strong readable silhouette, complete standalone figures, consistent scale/style/shading, ample clear gaps between cells.",
+      "actual_size": [1536, 1024]
+    }
+  ]
+}
