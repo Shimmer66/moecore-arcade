@@ -951,6 +951,68 @@
     width: min(318px, calc(100% - 28px));
   }
 }
+@media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+  .platform-game main {
+    width: calc(100% - 12px);
+    padding-block: 4px 2px;
+  }
+  .platform-game .game-toolbar {
+    position: sticky;
+    top: 2px;
+    z-index: 20;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+    min-height: 42px;
+    margin-bottom: 4px;
+    padding: 2px;
+  }
+  .platform-game .game-heading {
+    min-width: 0;
+    flex: 1;
+    gap: 6px;
+  }
+  .platform-game .game-heading h1 {
+    overflow: hidden;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .platform-game .game-actions {
+    width: auto;
+    flex-shrink: 0;
+    gap: 3px;
+  }
+  .platform-game .game-toolbar .icon-button,
+  .platform-game .motion-toggle {
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
+  }
+  .platform-game .motion-toggle {
+    position: relative;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  .platform-game .motion-toggle input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .platform-game .motion-toggle span {
+    display: none;
+  }
+  .platform-game .game-stage {
+    padding: 4px;
+    border-radius: 16px;
+  }
+  .platform-game .site-footer {
+    display: none;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .platform-shell [data-glass] {
     transform: none !important;

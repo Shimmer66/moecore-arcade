@@ -2645,6 +2645,142 @@ h2 span {
     width: 40px;
   }
 }
+@media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+  .rewrite-game {
+    position: relative;
+    height: calc(100svh - 52px);
+    min-height: 0;
+    border-radius: 8px;
+  }
+  .rewrite-game:not(:has(.rewrite-select))
+    > :is(
+      .rewrite-heading,
+      .rewrite-loadout-panel,
+      .rewrite-sector,
+      .rewrite-quick-deck,
+      .rewrite-guide
+    ) {
+    display: none;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) :is(.rewrite-hud, .rewrite-team-hud) {
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    z-index: 7;
+    display: flex;
+    width: calc(100% - 266px);
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 8px;
+    background: #0c182dcc;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) :is(.rewrite-hud, .rewrite-team-hud) > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) :is(.rewrite-hud, .rewrite-team-hud) small {
+    display: none;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-stage {
+    width: calc(100% - 250px);
+    height: 100%;
+    min-height: 0;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-world {
+    width: 100%;
+    height: 100%;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-control-deck {
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: 6;
+    display: block;
+    width: 250px;
+    overflow-y: auto;
+    border-left: 1px solid #304151;
+    background: #101e2c;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-control-deck.duo {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-controls {
+    min-height: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6px;
+    padding: 22px 6px 6px;
+    overflow: hidden;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-key-help {
+    display: none;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-control-deck.duo .rewrite-controls {
+    min-height: 0;
+    padding-top: 18px;
+    border-right: 0;
+    border-bottom: 1px solid #304151;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-joystick {
+    width: 108px;
+    height: 108px;
+    flex: 0 0 108px;
+    grid-template-columns: repeat(3, 32px);
+    padding: 5px;
+    border: 1px solid #496274;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, #29475b 0 26%, transparent 27%),
+      radial-gradient(circle, #172c3c 0 66%, #0c1924 67%);
+    box-shadow:
+      inset 0 0 0 6px #0d1c29,
+      inset 0 0 24px #70e1d41a;
+    touch-action: none;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-joystick button {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #7694a5;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-joystick button.joystick-active {
+    background: #9cfbe4;
+    color: #14363c;
+    box-shadow: 0 3px 10px #07131db8;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 46px);
+    gap: 4px;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons button,
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons .rewrite-fire {
+    grid-column: auto;
+    grid-row: auto;
+    width: 46px;
+    min-height: 48px;
+    height: 48px;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons small {
+    display: none;
+  }
+  .rewrite-game:has(.rewrite-select) .rewrite-heading {
+    padding: 8px 14px;
+  }
+  .rewrite-game:has(.rewrite-select) .rewrite-stage {
+    min-height: calc(100svh - 104px);
+  }
+  .rewrite-game:has(.rewrite-select) .rewrite-select {
+    min-height: 0;
+    height: 100%;
+    padding: 10px 18px;
+  }
+}
 .rewrite-loadout-panel {
   border-top: 1px solid #315064;
   border-bottom: 1px solid #315064;

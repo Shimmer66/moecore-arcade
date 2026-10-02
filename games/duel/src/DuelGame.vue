@@ -4918,7 +4918,8 @@ onUnmounted(() => {
     display: none;
   }
 }
-@media (max-width: 700px) and (pointer: coarse) {
+@media (max-width: 700px) and (pointer: coarse),
+  (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
   .duel-mobile-quick {
     position: sticky;
     bottom: 10px;
@@ -5229,7 +5230,8 @@ onUnmounted(() => {
     padding: 12px;
   }
 }
-@media (max-width: 700px) and (pointer: coarse) {
+@media (max-width: 700px) and (pointer: coarse),
+  (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
   .duel-p2-controls {
     display: grid;
     grid-template-columns: 128px minmax(0, 1fr);
@@ -5292,6 +5294,73 @@ onUnmounted(() => {
   .duel-p2-actions button {
     min-width: 44px;
     min-height: 44px;
+  }
+}
+@media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+  .duel:not([data-phase='select']) {
+    height: calc(100svh - 52px);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .duel:not([data-phase='select']) .duel-arena {
+    width: calc(100% - 310px);
+    height: 100%;
+    margin: 0;
+  }
+  .duel:not([data-phase='select']) .duel-world {
+    width: 100%;
+    height: 100%;
+  }
+  .duel:not([data-phase='select']) .duel-controls {
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: 5;
+    width: 310px;
+    height: 100%;
+    grid-template-columns: 108px minmax(0, 1fr);
+    align-content: center;
+    gap: 8px;
+    padding: 8px;
+    overflow-y: auto;
+    border-top: 0;
+    border-left: 1px solid #3b4965;
+  }
+  .duel:not([data-phase='select']) .duel-coach {
+    display: none;
+  }
+  .duel:not([data-phase='select']) .duel-directions {
+    width: 108px;
+    height: 108px;
+  }
+  .duel:not([data-phase='select']) .duel-directions .control-jump,
+  .duel:not([data-phase='select']) .duel-directions .control-crouch {
+    left: 32px;
+  }
+  .duel:not([data-phase='select']) .duel-directions .control-left,
+  .duel:not([data-phase='select']) .duel-directions .control-right {
+    top: 32px;
+  }
+  .duel:not([data-phase='select'])
+    > :is(
+      .duel-mobile-more,
+      .duel-advanced-pad,
+      .duel-footer,
+      .duel-versus-guide,
+      .duel-input-readout,
+      .duel-practice-bar,
+      .duel-campaign-strip
+    ) {
+    display: none;
+  }
+  .duel:not([data-phase='select']) .duel-action-pad {
+    grid-template-columns: repeat(3, minmax(44px, 1fr));
+    gap: 4px;
+  }
+  .duel:not([data-phase='select']) .duel-action-pad button,
+  .duel:not([data-phase='select']) .duel-action-pad .control-light {
+    min-width: 44px;
+    min-height: 42px;
+    height: 42px;
   }
 }
 @media (max-width: 600px) {

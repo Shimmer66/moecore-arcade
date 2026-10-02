@@ -1882,7 +1882,8 @@ button:disabled {
     font-size: 11px;
   }
 }
-@media (max-width: 700px) and (pointer: coarse) {
+@media (max-width: 700px) and (pointer: coarse),
+  (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
   .controls {
     align-items: center;
     min-height: 126px;
@@ -1944,6 +1945,96 @@ button:disabled {
   .controls > button:not(.jump),
   .controls > .player-label {
     flex: 0 0 auto;
+  }
+}
+@media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+  .campaign-game {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: calc(100svh - 52px);
+    min-height: 0;
+    position: relative;
+  }
+  .campaign-game > header {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 6;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 6px;
+    background: #142c30d9;
+  }
+  .campaign-game > header > div,
+  .campaign-game > header > .deaths,
+  .campaign-game > .speech,
+  .campaign-game > .storage-error {
+    display: none;
+  }
+  .campaign-game > header button {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    min-height: 38px;
+    padding: 5px;
+  }
+  .playfield {
+    width: calc(100% - 184px);
+    height: 100%;
+  }
+  .playfield > svg {
+    width: 100%;
+    height: 100%;
+  }
+  .controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 184px;
+    min-height: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px;
+    border-left: 1px solid #65837a;
+    background: #162a30;
+  }
+  .campaign-game:has(.second-controls) .controls:not(.second-controls) {
+    bottom: 50%;
+  }
+  .second-controls {
+    top: 50%;
+    border-top: 1px solid #65837a;
+  }
+  .arena-stick {
+    width: 92px;
+    height: 92px;
+    flex-basis: 92px;
+  }
+  .arena-stick::after {
+    top: 28px;
+    left: 28px;
+    width: 36px;
+    height: 36px;
+  }
+  .arena-stick button {
+    top: 20px;
+    width: 46px;
+    height: 52px;
+  }
+  .controls .jump {
+    width: 54px;
+    height: 54px;
+    margin: 0;
+  }
+  .sound-control {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    z-index: 7;
+    padding: 0;
   }
 }
 </style>
