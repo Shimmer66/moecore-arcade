@@ -56,8 +56,12 @@ test('landscape run and gun removes keyboard copy and keeps touch controls besid
   const stage = (await page.locator('.rewrite-stage').boundingBox())!;
   const joystick = (await page.locator('.rewrite-joystick').boundingBox())!;
   const actions = (await page.locator('.rewrite-action-buttons').boundingBox())!;
+  const fire = (await page.getByRole('button', { name: '射击', exact: true }).boundingBox())!;
+  const jump = (await page.getByRole('button', { name: '跳跃', exact: true }).boundingBox())!;
   expect(joystick.x).toBeLessThan(stage.x + stage.width / 2);
   expect(actions.x).toBeGreaterThan(stage.x + stage.width / 2);
+  expect(fire.height).toBeGreaterThan(jump.height);
+  await expect(page.getByRole('button', { name: 'P1 切换下一把武器' })).toBeVisible();
   await expect(page.locator('.rewrite-key-help')).toBeHidden();
   await expect(page.locator('.rewrite-joystick')).toHaveCSS('border-radius', '50%');
   await expectOneScreen(page);

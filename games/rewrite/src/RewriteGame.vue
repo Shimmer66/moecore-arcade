@@ -706,41 +706,45 @@ onUnmounted(() => {
         <span class="rewrite-eyebrow">NEURAL FRONT / RUN & GUN</span>
         <h2>AI 娘闯关 <span>模型战争</span></h2>
       </div>
-      <details class="rewrite-audio">
-        <summary aria-label="声音设置">
+      <div class="rewrite-audio-group">
+        <button
+          class="rewrite-sound rewrite-sound-toggle"
+          :aria-pressed="sound"
+          @click="sound = !sound"
+        >
           <span aria-hidden="true">{{ sound ? '♪' : '×' }}</span>
-          音频
-        </summary>
-        <div class="rewrite-sound-controls">
-          <button class="rewrite-sound" :aria-pressed="sound" @click="sound = !sound">
-            声音 {{ sound ? '开' : '关' }}
-          </button>
-          <label>
-            音乐
-            <input
-              v-model.number="musicVolume"
-              aria-label="音乐音量"
-              type="range"
-              min="0"
-              max="1"
-              step="0.05"
-              :disabled="!sound"
-            />
-          </label>
-          <label>
-            效果
-            <input
-              v-model.number="effectsVolume"
-              aria-label="效果音量"
-              type="range"
-              min="0"
-              max="1"
-              step="0.05"
-              :disabled="!sound"
-            />
-          </label>
-        </div>
-      </details>
+          <span class="rewrite-visually-hidden">声音 {{ sound ? '开' : '关' }}</span>
+        </button>
+        <details class="rewrite-audio">
+          <summary aria-label="声音设置">音量</summary>
+          <div class="rewrite-sound-controls">
+            <label>
+              音乐
+              <input
+                v-model.number="musicVolume"
+                aria-label="音乐音量"
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                :disabled="!sound"
+              />
+            </label>
+            <label>
+              效果
+              <input
+                v-model.number="effectsVolume"
+                aria-label="效果音量"
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                :disabled="!sound"
+              />
+            </label>
+          </div>
+        </details>
+      </div>
     </header>
     <div v-if="selected && !state.partner" class="rewrite-hud">
       <div>
@@ -1596,7 +1600,7 @@ onUnmounted(() => {
               practice
                 ? '独立演练 · 不计入战役通关 · 可反复挑战'
                 : difficulty === 'classic'
-                  ? '经典试炼 · 基础步枪 · 三次续关'
+                  ? '经典试炼 · 一击倒地 · 三次续关'
                   : '三条命 · 两次续关 · 无限弹药'
             }}
           </p>
@@ -2692,13 +2696,7 @@ h2 span {
     border-radius: 8px;
   }
   .rewrite-game:not(:has(.rewrite-select))
-    > :is(
-      .rewrite-heading,
-      .rewrite-combat-dock,
-      .rewrite-loadout-panel,
-      .rewrite-sector,
-      .rewrite-guide
-    ) {
+    > :is(.rewrite-heading, .rewrite-loadout-panel, .rewrite-sector, .rewrite-guide) {
     display: none;
   }
   .rewrite-game:not(:has(.rewrite-select)) :is(.rewrite-hud, .rewrite-team-hud) {
@@ -2730,6 +2728,37 @@ h2 span {
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-world {
     width: 100%;
     height: 100%;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-combat-dock {
+    position: absolute;
+    top: 48px;
+    right: max(14px, env(safe-area-inset-right));
+    z-index: 8;
+    display: block;
+    border: 0;
+    background: transparent;
+    pointer-events: auto;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-combat-dock .rewrite-quick-deck {
+    width: auto;
+    padding: 0;
+    background: transparent;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-combat-dock .rewrite-quick-deck button {
+    width: 118px;
+    min-height: 38px;
+    padding: 4px 7px;
+    border: 1px solid #496274;
+    border-radius: 7px;
+    background: #101e2cd9;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-combat-dock .rewrite-quick-deck svg {
+    width: 27px;
+    height: 27px;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-combat-dock .rewrite-quick-deck small,
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-combat-status {
+    display: none;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-control-deck {
     position: absolute;
@@ -2808,7 +2837,8 @@ h2 span {
     right: max(14px, env(safe-area-inset-right));
     bottom: max(12px, env(safe-area-inset-bottom));
     display: grid;
-    grid-template-columns: repeat(2, 46px);
+    grid-template-columns: 46px 66px;
+    grid-template-rows: repeat(2, 48px);
     gap: 4px;
     padding: 6px;
     border: 1px solid #496274;
@@ -2816,13 +2846,21 @@ h2 span {
     background: #101e2cd9;
     pointer-events: auto;
   }
-  .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons button,
-  .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons .rewrite-fire {
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons button {
     grid-column: auto;
     grid-row: auto;
     width: 46px;
     min-height: 48px;
     height: 48px;
+  }
+  .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons .rewrite-fire {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    width: 66px;
+    min-height: 100px;
+    height: 100px;
+    border-color: #cafff2;
+    font-size: 16px;
   }
   .rewrite-game:not(:has(.rewrite-select)) .rewrite-action-buttons small {
     display: none;
@@ -3135,6 +3173,35 @@ h2 span {
     padding: 7px;
   }
 }
+.rewrite-audio-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.rewrite-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.rewrite-sound-toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  min-height: 38px;
+  padding: 0;
+  border-color: #384c5d;
+  border-radius: 7px;
+  color: #0c1c28;
+  background: var(--mission);
+  font-size: 16px;
+  font-weight: 800;
+}
 .rewrite-audio {
   position: relative;
   z-index: 12;
@@ -3142,9 +3209,8 @@ h2 span {
 .rewrite-audio > summary {
   display: flex;
   align-items: center;
-  gap: 7px;
   min-height: 38px;
-  padding: 7px 11px;
+  padding: 7px 10px;
   border: 1px solid #384c5d;
   border-radius: 7px;
   color: #bdd1da;
@@ -3156,16 +3222,6 @@ h2 span {
 }
 .rewrite-audio > summary::-webkit-details-marker {
   display: none;
-}
-.rewrite-audio > summary span {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  color: #0c1c28;
-  background: var(--mission);
-  font-size: 13px;
 }
 .rewrite-audio[open] > summary {
   border-color: var(--mission);
@@ -3258,9 +3314,9 @@ h2 span {
     min-height: 34px;
     padding: 5px 8px;
   }
-  .rewrite-audio > summary span {
-    width: 18px;
-    height: 18px;
+  .rewrite-sound-toggle {
+    width: 34px;
+    min-height: 34px;
   }
   .rewrite-audio .rewrite-sound-controls {
     width: min(210px, calc(100vw - 42px));

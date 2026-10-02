@@ -94,7 +94,7 @@ function resetFilters() {
             <span v-if="game.badge" class="catalog-badge">{{ game.badge }}</span>
             <img
               :src="portraits[game.id]"
-              class="catalog-portrait"
+              :class="['catalog-portrait', { 'catalog-poster': game.id === 'duel' }]"
               alt=""
               width="164"
               height="164"

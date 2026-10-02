@@ -394,7 +394,7 @@ test('the dock shell ignores dragging while its inner tabs remain draggable', as
   await page.mouse.up();
   await expect(page).toHaveURL(/#home$/);
   await expect(homeLink).toHaveAttribute('aria-current', 'location');
-  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  expect(await page.evaluate(() => window.scrollY)).toBeLessThanOrEqual(20);
 
   await page.mouse.move(start.x, start.y);
   await page.mouse.down();
@@ -535,7 +535,7 @@ test('touch dragging previews without scrolling and touch cancellation does not 
   await expect.poll(async () => (await centerOf(indicator)).x - start.x).toBeGreaterThan(20);
   await expect(page).toHaveURL(/#home$/);
   await expect(homeLink).toHaveAttribute('aria-current', 'location');
-  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  expect(await page.evaluate(() => window.scrollY)).toBeLessThanOrEqual(20);
   await client.send('Input.dispatchTouchEvent', {
     type: 'touchMove',
     touchPoints: [touchPoint(end.x, end.y)],

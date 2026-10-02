@@ -15,12 +15,13 @@ describe('asset manifest', () => {
   });
 
   it('keeps scaffold artwork separate from generated scene art', () => {
-    for (const [key, asset] of Object.entries(ASSETS)) {
-      if (key === 'answerSea') continue;
-      expect(asset.reviewStatus).toBe('original-placeholder');
-      expect(asset.source).toBe('repository');
+    for (const asset of Object.values(ASSETS)) {
+      if (asset.source === 'generated-for-project') {
+        expect(asset.reviewStatus).toBe('generated-pending-review');
+      } else {
+        expect(asset.reviewStatus).toBe('original-placeholder');
+        expect(asset.source).toBe('repository');
+      }
     }
-    expect(ASSETS.answerSea.reviewStatus).toBe('generated-pending-review');
-    expect(ASSETS.answerSea.source).toBe('generated-for-project');
   });
 });

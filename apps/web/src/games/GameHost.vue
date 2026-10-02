@@ -227,7 +227,7 @@ onUnmounted(() => {
           data-glass
           title="减少动态效果"
         >
-          <input v-model="reduceMotion" type="checkbox" />
+          <input v-model="reduceMotion" type="checkbox" aria-label="减少动态效果" />
           <Waves :size="18" aria-hidden="true" />
           <span>减少动态</span>
         </label>

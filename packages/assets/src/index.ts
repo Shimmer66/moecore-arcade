@@ -1,10 +1,10 @@
 export const ASSETS = {
   duelCover: {
     id: 'duel-cover',
-    url: new URL('../resources/duel-cover.svg', import.meta.url).href,
-    author: 'MoeCore Arcade contributors',
-    source: 'repository',
-    reviewStatus: 'original-placeholder',
+    url: new URL('../resources/duel-home-cover-v2.webp', import.meta.url).href,
+    author: 'MoeCore Arcade contributors with GPT Image',
+    source: 'generated-for-project',
+    reviewStatus: 'generated-pending-review',
   },
   answerSea: {
     id: 'answer-sea',
@@ -37,7 +37,7 @@ export const ASSETS = {
 } as const;
 
 export const HOME_ART = {
-  duel: new URL('../resources/duel-cover.svg', import.meta.url).href,
+  duel: new URL('../resources/duel-home-cover-v2.webp', import.meta.url).href,
   match3: new URL('../home-thumbs/gpt-portrait.webp', import.meta.url).href,
   parkour: new URL(
     '../parkour/assets/characters/deepseek/poses/deepseek_pose_001.png',
