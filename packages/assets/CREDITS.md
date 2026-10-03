@@ -42,9 +42,9 @@
 | `parkour`    | `parkour/assets/characters/deepseek/poses/deepseek_pose_001.png` | 跑酷首页封面，来自旧素材包 |
 | `sokoban`    | `sokoban/runtime/char_S_idle_01.png`                             | 推箱子封面                 |
 | `whaleQueue` | `whale-queue/character/portrait_whalegirl_proud.png`             | 首屏角色与鲸鲸封面         |
-| `rewrite`    | `rewrite/runtime/deepseek-shoot.webp`                            | AI 娘闯关封面              |
+| `rewrite`    | `rewrite/runtime/deepseek-shoot.webp`                            | 幻觉防线封面               |
 
-AI 娘闯关首页入口使用 `HOME_ART.rewrite` 映射的 DeepSeek 娘射击姿态；游戏场景结合项目生成位图与 Vue 组件内 SVG。站点标识仍沿用资源元数据中的 `original-placeholder` 分类，当前描述不将其认定为已核验商标。
+幻觉防线首页入口使用 `HOME_ART.rewrite` 映射的 DeepSeek 娘射击姿态；游戏场景结合项目生成位图与 Vue 组件内 SVG。站点标识仍沿用资源元数据中的 `original-placeholder` 分类，当前描述不将其认定为已核验商标。
 
 ## 消消乐素材包
 
@@ -98,7 +98,7 @@ AI 娘闯关首页入口使用 `HOME_ART.rewrite` 映射的 DeepSeek 娘射击�
 
 ## 生成事故冒险复用资源
 
-《AI 娘：别乱生成！》复用 `HOME_ART.match3` 和 `HOME_ART.whaleQueue` 作为玩家与解说角色，保留原素材来源及审核状态。平台、星星、出口和事故演出由 SVG/CSS 绘制，短提示音通过 Web Audio 合成；本次没有调用图片生成。
+《别乱生成！》复用 `HOME_ART.match3` 和 `HOME_ART.whaleQueue` 作为玩家与解说角色，保留原素材来源及审核状态。平台、星星、出口和事故演出由 SVG/CSS 绘制，短提示音通过 Web Audio 合成；本次没有调用图片生成。
 
 历史弹射原型曾使用 `ARENA_ART` 映射的三张消消乐头像；该映射仍保留，但当前冒险界面不引用它。新增素材须先向项目所有者列明需求并获得确认。
 
@@ -108,6 +108,6 @@ AI 娘闯关首页入口使用 `HOME_ART.rewrite` 映射的 DeepSeek 娘射击�
 
 文件、参考来源和接入方式见 [generated-world/README.md](generated-world/README.md)，原始提示词见 [prompts.json](generated-world/prompts.json)，尺寸与哈希见 [manifest.json](generated-world/manifest.json)。状态为 `generated-pending-review`。
 
-## AI 娘闯关第一批 GPT Image 素材
+## 幻觉防线第一批 GPT Image 素材
 
 `rewrite/first-batch/` 收录 DeepSeek 娘与 GPT 娘的射击姿态、Claude 娘待机/奔跑/射击姿态、五关远景、“已读回执怪”、打印机炮台和幻觉大王的两种状态。DeepSeek 与 GPT 分别参考项目已有头像与全身待机图生成。压缩运行图在 `rewrite/runtime/`，现已接入游戏。文件与参考来源见 [rewrite/README.md](rewrite/README.md)，状态为 `generated-pending-review`。

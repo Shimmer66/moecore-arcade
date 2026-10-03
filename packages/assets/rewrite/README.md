@@ -1,4 +1,4 @@
-# AI 娘闯关素材
+# 幻觉防线素材
 
 2026-09-26 使用内置 GPT Image 生成项目素材，状态为 `generated-pending-review`。原始 PNG 保存在 `first-batch/`；`python scripts/prepare-rewrite-assets.py` 从原图和已有角色母版制作 `runtime/` 中的轻量 WebP。游戏通过 `@moecore/assets/rewrite` 加载运行图，不在构建中载入原图。
 

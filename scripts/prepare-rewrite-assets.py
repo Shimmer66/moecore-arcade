@@ -1,4 +1,4 @@
-"""Build small runtime images from the preserved AI 娘闯关 source PNGs."""
+"""Build small runtime images from the preserved 幻觉防线 source PNGs."""
 
 from pathlib import Path
 from PIL import Image

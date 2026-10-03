@@ -165,12 +165,10 @@ test('one opening exchange leads straight into the shared Vue game', async ({ pa
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('button', { name: /AI 娘消消乐/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /幻觉消消乐/ })).toBeVisible();
   await page.getByRole('button', { name: /大肥鱼跑酷：答案马上就到/ }).click();
   await page.getByRole('button', { name: '单项练习', exact: true }).click();
-  await expect(
-    page.getByRole('heading', { name: '大肥鱼跑酷：答案马上就到', exact: true }),
-  ).toBeVisible();
+  await expect(page.getByRole('heading', { name: '大肥鱼跑酷', exact: true })).toBeVisible();
   const opening = page.getByRole('region', { name: '开场故事' });
   await expect(opening).toContainText('访客：');
   await expect(opening).toContainText('DeepSeek 娘：');
@@ -381,7 +379,7 @@ test('leaving removes listeners; re-entry and refresh are new visits, not retrie
   await startOffice(page);
   await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
   await page.getByRole('button', { name: '确认', exact: true }).click();
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /幻觉消消乐/ }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(64);
   await page.keyboard.press('KeyX');
   await page.clock.runFor(15000);

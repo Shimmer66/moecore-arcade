@@ -1,4 +1,4 @@
-# AI 娘：别乱生成！
+# 别乱生成！
 
 入口 `/#/games/arena`，包名 `@moecore/game-arena`。
 

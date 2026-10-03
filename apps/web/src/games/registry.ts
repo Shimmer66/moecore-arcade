@@ -38,7 +38,7 @@ export const games: ReadonlyArray<GameEntry> = [
   },
   {
     id: 'arena',
-    title: 'AI 娘：别乱生成！',
+    title: '别乱生成！',
     toolbarTitle: '别乱生成！',
     category: '动作 · 闯关',
     icon: 'runner',
@@ -50,7 +50,7 @@ export const games: ReadonlyArray<GameEntry> = [
   },
   {
     id: 'match3',
-    title: 'AI 娘消消乐',
+    title: '幻觉消消乐',
     category: '益智 · 单人',
     icon: 'grid',
     description: '交换图块，在 20 步内完成收集目标。',
@@ -96,7 +96,7 @@ export const games: ReadonlyArray<GameEntry> = [
   },
   {
     id: 'rewrite',
-    title: 'AI 娘闯关',
+    title: '幻觉防线',
     category: '动作 · 单人 / 双人',
     icon: 'runner',
     description: '单人或双人打穿八关，六种武器随时切换。',

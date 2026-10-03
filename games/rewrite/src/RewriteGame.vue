@@ -694,7 +694,7 @@ onUnmounted(() => {
 <template>
   <section
     class="rewrite-game"
-    aria-label="AI 娘闯关游戏"
+    aria-label="幻觉防线游戏"
     :style="{ '--mission': level.color }"
     :data-audio-voices="audioVoices"
     :data-music-beat="musicMarker"
@@ -704,7 +704,7 @@ onUnmounted(() => {
     <header class="rewrite-heading">
       <div>
         <span class="rewrite-eyebrow">NEURAL FRONT / RUN & GUN</span>
-        <h2>AI 娘闯关 <span>模型战争</span></h2>
+        <h2>幻觉防线 <span>模型战争</span></h2>
       </div>
       <div class="rewrite-audio-group">
         <button
