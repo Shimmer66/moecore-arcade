@@ -1,0 +1,78 @@
+{
+  "generator": "built-in image_gen",
+  "reason": "Avoid adjacent atlas sprite bleed",
+  "assets": [
+    {
+      "id": "deepseek",
+      "pose": "crouch",
+      "ref": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png",
+      "prompt": "ONE SINGLE isolated FULL BODY character on a genuinely transparent RGBA background. NOT a sprite sheet, NOT a collage, no second figure, no labels, no glow or ground. Identity and costume exactly match the reference: DeepSeek blue whale maid: cobalt hair fading cyan, whale fin ears and large blue tail, white frilly headband, navy and white apron dress, blue boots with gold bows, blue eyes, small rice grain on cheek. Side-on three-quarter facing SCREEN RIGHT. TRUE DEEP CROUCH with both knees sharply bent and hips dropped to heel level, feet planted at same baseline, torso low; round head unchanged in proportion, not vertically squashed. Both fists held beside face in a compact defensive guard. Crisp cel shading, navy outlines, full hair/horns/tail/shoes inside the canvas, at least 12% transparent margin on every side. No effects or props. Character silhouette clean at small game scale.",
+      "path": "combat/crouch/deepseek-crouch.png",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-9ebd0d44-cd17-4c5f-a307-bf7b2c28e486.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaRange": [0, 255],
+      "sha256": "855982f60406b890b2cbed5b244baf084f919af60404cde2d999a515a28f8bbd"
+    },
+    {
+      "id": "deepseek",
+      "pose": "low_hit",
+      "ref": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png",
+      "prompt": "ONE SINGLE isolated FULL BODY character on a genuinely transparent RGBA background. NOT a sprite sheet, NOT a collage, no second figure, no labels, no glow or ground. Identity and costume exactly match the reference: DeepSeek blue whale maid: cobalt hair fading cyan, whale fin ears and large blue tail, white frilly headband, navy and white apron dress, blue boots with gold bows, blue eyes, small rice grain on cheek. Side-on three-quarter facing SCREEN RIGHT. TRUE DEEP CROUCH with both knees sharply bent and hips dropped to heel level, feet planted at same baseline, torso low; round head unchanged in proportion, not vertically squashed. One fist fully extended horizontally to the RIGHT at knee height, the other fist beside face, still deeply crouched; a low punch, not a standing punch. Crisp cel shading, navy outlines, full hair/horns/tail/shoes inside the canvas, at least 12% transparent margin on every side. No effects or props. Character silhouette clean at small game scale.",
+      "path": "combat/crouch/deepseek-low_hit.png",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-63eb1ca3-9da7-42a8-8cc3-9fb306e54d16.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaRange": [0, 255],
+      "sha256": "ecd3d260f56baaec2c9c133212ae4fa14be4abf720e6e2e78c92ca9e87d31004"
+    },
+    {
+      "id": "gpt",
+      "pose": "crouch",
+      "ref": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_gpt_base.png",
+      "prompt": "ONE SINGLE isolated FULL BODY character on a genuinely transparent RGBA background. NOT a sprite sheet, NOT a collage, no second figure, no labels, no glow or ground. Identity and costume exactly match the reference: GPT white dragon girl: white hair and ivory horns, mint eyes, small wings, white scaled tail, white/mint dress with green bows and white boots. Empty hands: NO papers or books. Side-on three-quarter facing SCREEN RIGHT. TRUE DEEP CROUCH with both knees sharply bent and hips dropped to heel level, feet planted at same baseline, torso low; round head unchanged in proportion, not vertically squashed. Both fists held beside face in a compact defensive guard. Crisp cel shading, navy outlines, full hair/horns/tail/shoes inside the canvas, at least 12% transparent margin on every side. No effects or props. Character silhouette clean at small game scale.",
+      "path": "combat/crouch/gpt-crouch.png",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-eeb72dc8-ede9-4839-8e74-42447f860ebb.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaRange": [0, 255],
+      "sha256": "e13c027b3acf1ea31a915d77de6facade5039ad49a862874375345ca66cc6190"
+    },
+    {
+      "id": "gpt",
+      "pose": "low_hit",
+      "ref": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_gpt_base.png",
+      "prompt": "ONE SINGLE isolated FULL BODY character on a genuinely transparent RGBA background. NOT a sprite sheet, NOT a collage, no second figure, no labels, no glow or ground. Identity and costume exactly match the reference: GPT white dragon girl: white hair and ivory horns, mint eyes, small wings, white scaled tail, white/mint dress with green bows and white boots. Empty hands: NO papers or books. Side-on three-quarter facing SCREEN RIGHT. TRUE DEEP CROUCH with both knees sharply bent and hips dropped to heel level, feet planted at same baseline, torso low; round head unchanged in proportion, not vertically squashed. One fist fully extended horizontally to the RIGHT at knee height, the other fist beside face, still deeply crouched; a low punch, not a standing punch. Crisp cel shading, navy outlines, full hair/horns/tail/shoes inside the canvas, at least 12% transparent margin on every side. No effects or props. Character silhouette clean at small game scale.",
+      "path": "combat/crouch/gpt-low_hit.png",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-e76a7ca4-a72a-4d3a-95b8-21346ed24447.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaRange": [0, 255],
+      "sha256": "e7d77b1b2466087a71be30109b9fed0b0c953347c7e25fe0b66661b3eb3f58c9"
+    },
+    {
+      "id": "doubao",
+      "pose": "crouch",
+      "ref": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png",
+      "prompt": "ONE SINGLE isolated FULL BODY character on a genuinely transparent RGBA background. NOT a sprite sheet, NOT a collage, no second figure, no labels, no glow or ground. Identity and costume exactly match the reference: Doubao: chin-length dark brown SIDE-PARTED BOB, exposed forehead, red scarf, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No buns, no straight bangs, no white shirt, no orange clothing. Side-on three-quarter facing SCREEN RIGHT. TRUE DEEP CROUCH with both knees sharply bent and hips dropped to heel level, feet planted at same baseline, torso low; round head unchanged in proportion, not vertically squashed. Both fists held beside face in a compact defensive guard. Crisp cel shading, navy outlines, full hair/horns/tail/shoes inside the canvas, at least 12% transparent margin on every side. No effects or props. Character silhouette clean at small game scale.",
+      "path": "combat/crouch/doubao-crouch.png",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-aa459994-9c34-4dde-a7ba-255c2dde2e26.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaRange": [0, 255],
+      "sha256": "e8e44a1cf0ac8cc2a98fc520e2740b0e81d75f6e709a3fe860f08b36cafdfe83"
+    },
+    {
+      "id": "doubao",
+      "pose": "low_hit",
+      "ref": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png",
+      "prompt": "ONE SINGLE isolated FULL BODY character on a genuinely transparent RGBA background. NOT a sprite sheet, NOT a collage, no second figure, no labels, no glow or ground. Identity and costume exactly match the reference: Doubao: chin-length dark brown SIDE-PARTED BOB, exposed forehead, red scarf, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No buns, no straight bangs, no white shirt, no orange clothing. Side-on three-quarter facing SCREEN RIGHT. TRUE DEEP CROUCH with both knees sharply bent and hips dropped to heel level, feet planted at same baseline, torso low; round head unchanged in proportion, not vertically squashed. One fist fully extended horizontally to the RIGHT at knee height, the other fist beside face, still deeply crouched; a low punch, not a standing punch. Crisp cel shading, navy outlines, full hair/horns/tail/shoes inside the canvas, at least 12% transparent margin on every side. No effects or props. Character silhouette clean at small game scale.",
+      "path": "combat/crouch/doubao-low_hit.png",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-a3240634-c82c-4498-a866-699b4a802d62.png",
+      "width": 1254,
+      "height": 1254,
+      "alphaRange": [0, 255],
+      "sha256": "487e180d6de1d15097d2e0df15ac11a8eb6292a8057864dbe16053b26d3bb67b"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-01",
+  "tool": "built-in image_gen",
+  "sourceFilename": "call_8q0infaw7UPvOvr70lV7j4GN.png",
+  "reference": "../normal-motion/doubao-v1.png",
+  "output": "doubao-v1.png",
+  "prompt": "prompts.md",
+  "geometry": "geometry.json",
+  "manifest": "manifest.json",
+  "pixelsModified": false,
+  "purpose": "Doubao parcel generation, throw, return warning and recovery"
+}

@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-28",
+  "engine": "built-in image_gen",
+  "transparent_background": true,
+  "prompts": "prompts.md",
+  "source_directory": "C:/Users/yan/.codex/generated_images/01a0d947-4fea-7991-b254-ff42df29f49b",
+  "outputs": [
+    {
+      "id": "deepseek",
+      "source": "call_FVGd1XiJcXbD736k3R2B5Ijr.png",
+      "selected": "deepseek-v1.png"
+    },
+    { "id": "gpt", "source": "call_kf72GlIt5pg3yhfgHX0gmoSS.png", "selected": "gpt-v1.png" },
+    { "id": "doubao", "source": "call_HaGm2KD9llImsT651LgEjusV.png", "selected": "doubao-v1.png" },
+    { "id": "client", "source": "call_4YHNHWqVGIFtz3fqooiBrZT0.png", "selected": "client-v1.png" },
+    {
+      "id": "prompt_sage",
+      "source": "call_hqo4Q3TGWNVclrBqRiVrdQZn.png",
+      "draft": "prompt_sage-v1.png"
+    },
+    {
+      "id": "prompt_sage",
+      "source": "call_7hYTAGEeBYeheENg3pVEMXBo.png",
+      "selected": "prompt_sage-v2.png",
+      "repair": "Remove back-mounted duplicate keyboard only in row three; initial edit connection failure, retry succeeded."
+    },
+    {
+      "id": "unplug_uncle",
+      "source": "call_0l7XMYWhe1Hbs18U88UWH1C3.png",
+      "selected": "unplug_uncle-v1.png"
+    }
+  ],
+  "pixel_processing": "None. Original generated PNG bytes are preserved.",
+  "display_processing": "Alpha-derived viewBox rectangles, contact pivots, one scale per character. Near-touching GPT/Doubao rows have adjusted display crop boundaries; maximum one source pixel trimmed at a shared outer edge."
+}

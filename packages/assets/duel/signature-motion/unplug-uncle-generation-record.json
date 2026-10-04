@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-01",
+  "tool": "built-in image_gen",
+  "sourceFilename": "call_4QKHJzENXxZV03jxYJbbPny4.png",
+  "reference": "../newcomers/motion/unplug_uncle-ground-v1.png",
+  "output": "unplug_uncle-v1.png",
+  "prompt": "prompts.md",
+  "geometry": "geometry.json",
+  "manifest": "manifest.json",
+  "pixelsModified": false,
+  "purpose": "Unplug Uncle cable pull, plug yank, disconnect and offline recovery"
+}

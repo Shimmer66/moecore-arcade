@@ -1,0 +1,132 @@
+{
+  "generator": "built-in image_gen",
+  "status": "integrated-key-poses",
+  "alphaBoundsThreshold": 16,
+  "minimumCellPaddingVerified": 24,
+  "assets": [
+    {
+      "id": "client",
+      "path": "client-poses-v2.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "RGBA",
+      "sha256": "df8721fd38f58752f9c788596136d4b68a8b1423b9ff35f374f7d10bdd8c2884",
+      "fullyTransparentPercent": 70.47,
+      "frames": [
+        {
+          "pose": "ready",
+          "sourceRect": [0, 0, 512, 512],
+          "visibleBoundsWithinCell": [126, 112, 462, 451]
+        },
+        {
+          "pose": "punch",
+          "sourceRect": [512, 0, 512, 512],
+          "visibleBoundsWithinCell": [64, 121, 460, 450]
+        },
+        {
+          "pose": "kick",
+          "sourceRect": [1024, 0, 512, 512],
+          "visibleBoundsWithinCell": [59, 119, 414, 451]
+        },
+        {
+          "pose": "guard",
+          "sourceRect": [0, 512, 512, 512],
+          "visibleBoundsWithinCell": [107, 104, 439, 405]
+        },
+        {
+          "pose": "hurt",
+          "sourceRect": [512, 512, 512, 512],
+          "visibleBoundsWithinCell": [86, 92, 465, 409]
+        },
+        {
+          "pose": "special",
+          "sourceRect": [1024, 512, 512, 512],
+          "visibleBoundsWithinCell": [54, 30, 393, 408]
+        }
+      ]
+    },
+    {
+      "id": "prompt_sage",
+      "path": "prompt_sage-poses-v2.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "RGBA",
+      "sha256": "8b0c4124d0657d7068f3f6283c2520185555e8d6fc6227ed9a52976d16c1bbf7",
+      "fullyTransparentPercent": 71.82,
+      "frames": [
+        {
+          "pose": "ready",
+          "sourceRect": [0, 0, 512, 512],
+          "visibleBoundsWithinCell": [128, 84, 415, 470]
+        },
+        {
+          "pose": "punch",
+          "sourceRect": [512, 0, 512, 512],
+          "visibleBoundsWithinCell": [58, 91, 477, 467]
+        },
+        {
+          "pose": "kick",
+          "sourceRect": [1024, 0, 512, 512],
+          "visibleBoundsWithinCell": [76, 92, 422, 476]
+        },
+        {
+          "pose": "guard",
+          "sourceRect": [0, 512, 512, 512],
+          "visibleBoundsWithinCell": [105, 57, 421, 437]
+        },
+        {
+          "pose": "hurt",
+          "sourceRect": [512, 512, 512, 512],
+          "visibleBoundsWithinCell": [88, 63, 432, 437]
+        },
+        {
+          "pose": "special",
+          "sourceRect": [1024, 512, 512, 512],
+          "visibleBoundsWithinCell": [43, 76, 450, 430]
+        }
+      ]
+    },
+    {
+      "id": "unplug_uncle",
+      "path": "unplug_uncle-poses-v2.png",
+      "width": 1536,
+      "height": 1024,
+      "format": "RGBA",
+      "sha256": "c3d3efee2496697d007b5a8b604cef45edc7693884e07916aff364bdc42571da",
+      "fullyTransparentPercent": 75.8,
+      "frames": [
+        {
+          "pose": "ready",
+          "sourceRect": [0, 0, 512, 512],
+          "visibleBoundsWithinCell": [92, 95, 409, 437]
+        },
+        {
+          "pose": "punch",
+          "sourceRect": [512, 0, 512, 512],
+          "visibleBoundsWithinCell": [53, 121, 466, 436]
+        },
+        {
+          "pose": "kick",
+          "sourceRect": [1024, 0, 512, 512],
+          "visibleBoundsWithinCell": [92, 93, 426, 433]
+        },
+        {
+          "pose": "guard",
+          "sourceRect": [0, 512, 512, 512],
+          "visibleBoundsWithinCell": [75, 99, 381, 420]
+        },
+        {
+          "pose": "hurt",
+          "sourceRect": [512, 512, 512, 512],
+          "visibleBoundsWithinCell": [53, 101, 455, 415]
+        },
+        {
+          "pose": "special",
+          "sourceRect": [1024, 512, 512, 512],
+          "visibleBoundsWithinCell": [111, 97, 467, 420]
+        }
+      ]
+    }
+  ],
+  "runtime": "games/duel/src/NewcomerSprite.vue"
+}

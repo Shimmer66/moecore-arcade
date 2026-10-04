@@ -8,7 +8,7 @@ import {
 
 async function enterGame(page: Page) {
   await page.goto('/');
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(64);
   await expect(page.getByTestId('moves')).toHaveText('20');
 }
@@ -39,8 +39,8 @@ test('opens the Vue game, renders assets, and fits the viewport', async ({ page 
   });
   await enterGame(page);
   await expect(page).toHaveURL(/#\/games\/match3$/);
-  await expect(page.getByRole('heading', { name: 'AI 娘消消乐', exact: true })).toBeVisible();
-  await expect(page.locator('canvas')).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: '模型消消乐', exact: true })).toBeVisible();
+  await expect(page.locator('.match3-game canvas')).toHaveCount(0);
   await expect
     .poll(() =>
       page
@@ -84,6 +84,28 @@ test('invalid exchanges preserve moves and hints lead to a valid exchange', asyn
   expect(Number(await page.getByTestId('cleared').textContent())).toBeGreaterThanOrEqual(3);
 });
 
+test('matched characters show their goofy reaction portraits', async ({ page }, testInfo) => {
+  await page.clock.install();
+  await enterGame(page);
+  await expect(page.locator('.match3-tile img')).toHaveCount(64);
+  const candidate = enumerateValidSwaps(await readBoard(page))[0]!;
+  await tile(page, candidate.from).click();
+  await tile(page, candidate.to).click();
+  const reactions = page.locator('.match3-tile[data-reaction="true"]');
+  await expect(reactions).not.toHaveCount(0);
+  await expect
+    .poll(() =>
+      reactions
+        .first()
+        .locator('img')
+        .evaluate((image) => (image as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+  await page.screenshot({ path: testInfo.outputPath('match3-reaction.png'), fullPage: true });
+  await page.clock.runFor(5000);
+  await expect(reactions).toHaveCount(0);
+});
+
 test('pauses an active cascade and resumes without spending a second move', async ({ page }) => {
   await page.clock.install();
   await enterGame(page);
@@ -93,9 +115,10 @@ test('pauses an active cascade and resumes without spending a second move', asyn
   await page.getByRole('button', { name: '暂停', exact: true }).click();
   await expect(page.getByRole('region', { name: '暂停菜单' })).toBeVisible();
   const pausedBoard = await readBoard(page);
+  const pausedMoves = await page.getByTestId('moves').textContent();
   await page.clock.runFor(10_000);
   expect(await readBoard(page)).toEqual(pausedBoard);
-  await expect(page.getByTestId('moves')).toHaveText('20');
+  await expect(page.getByTestId('moves')).toHaveText(pausedMoves!);
   await page.getByRole('button', { name: '继续游戏', exact: true }).click();
   await page.clock.runFor(10_000);
   await expect(page.getByTestId('moves')).toHaveText('19');
@@ -178,7 +201,7 @@ test('background pause requires explicit resume, and restart and exit replace th
   await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
   await page.getByRole('button', { name: '确认', exact: true }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(0);
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(64);
   await expect(page.getByTestId('moves')).toHaveText('20');
   await page.reload();
@@ -208,12 +231,12 @@ test('leaving while a game chunk loads cannot mount a stale game', async ({ page
     await gate;
     await route.continue();
   });
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.getByText('正在加载游戏…')).toBeVisible();
   await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
   release();
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(64);
   await page.unroute('**/*.js');
 });
@@ -221,7 +244,7 @@ test('leaving while a game chunk loads cannot mount a stale game', async ({ page
 test('a failed game load offers a working retry', async ({ page }) => {
   await page.goto('/');
   await page.route('**/*.js', (route) => route.abort());
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.getByRole('alert')).toContainText('游戏加载失败');
   await page.unroute('**/*.js');
   await page.getByRole('button', { name: '重新加载', exact: true }).click();

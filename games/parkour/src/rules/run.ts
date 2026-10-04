@@ -86,8 +86,10 @@ export function step(state: RunState, input: PlayerInput, dt: number = FIXED_DT)
     : generateObstacles(
         state.generator,
         Math.min(state.finishDistance, distance + LOOKAHEAD_DISTANCE),
+        Boolean(state.endless),
       );
   const next = {
+    ...(state.endless ? { endless: true as const } : {}),
     seed: state.seed,
     tick: state.tick + 1,
     finishDistance: state.finishDistance,

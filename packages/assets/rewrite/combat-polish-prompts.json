@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-02",
+  "tool": "built-in image_gen.imagegen",
+  "transparent_background": true,
+  "reference": "runtime/enemy-atlas-v1.png and runtime/loot-atlas-v1.png",
+  "assets": [
+    {
+      "master": "masters/enemy-motion-ground-v1.png",
+      "runtime": "runtime/enemy-motion-ground-v1.webp",
+      "result": "call_OcXgzfyPZ5gkeklOIPgpk9D7.png",
+      "layout": "4 columns x 3 rows",
+      "cells": [
+        "runner-idle",
+        "runner-attack",
+        "runner-hit",
+        "runner-defeated",
+        "turret-idle",
+        "turret-attack",
+        "turret-hit",
+        "turret-defeated",
+        "hopper-idle",
+        "hopper-attack",
+        "hopper-hit",
+        "hopper-defeated"
+      ],
+      "brief_record": "Preserve the receipt infantry, printer tank and spring spam robot from the existing enemy atlas. One enemy per row with idle, attack, hit and defeated states, all left-facing on transparent alpha with no text."
+    },
+    {
+      "master": "masters/enemy-motion-air-v1.png",
+      "runtime": "runtime/enemy-motion-air-v1.webp",
+      "result": "call_nf4l4G82QrRcuRHlI9yxcoVA.png",
+      "layout": "4 columns x 3 rows",
+      "cells": [
+        "drone-idle",
+        "drone-attack",
+        "drone-hit",
+        "drone-defeated",
+        "sniper-idle",
+        "sniper-attack",
+        "sniper-hit",
+        "sniper-defeated",
+        "firewall-idle",
+        "firewall-warning",
+        "firewall-active",
+        "firewall-disabled"
+      ],
+      "brief_record": "Preserve the mint drone, gold sniper camera and orange firewall furnace from the existing enemy atlas. One unit per row with four readable combat states on transparent alpha."
+    },
+    {
+      "master": "masters/combat-vfx-atlas-v1.png",
+      "runtime": "runtime/combat-vfx-atlas-v1.webp",
+      "result": "call_a2bsEUvwFkJ5H27Flg4SPT28.png",
+      "layout": "4 columns x 4 rows",
+      "cells": [
+        "pulse-impact",
+        "spread-blast",
+        "rapid-tracer",
+        "laser-cut",
+        "fireball-explosion",
+        "homing-explosion",
+        "grenade-explosion",
+        "shield-shatter",
+        "overclock-aura",
+        "barrier-ripple",
+        "purge-pulse",
+        "enemy-hit",
+        "enemy-debris",
+        "boss-hit",
+        "phase-warning",
+        "revive"
+      ],
+      "brief_record": "Six weapon-specific effects and ten common combat feedback effects in a 4x4 transparent atlas, matching the existing anime arcade equipment and enemy style."
+    }
+  ],
+  "processing": "scripts/prepare-rewrite-combat-assets.py removes low-alpha haze and normalizes every cell to a padded grid. Combat VFX stays lossless; enemy runtime atlases use high-quality transparent WebP."
+}

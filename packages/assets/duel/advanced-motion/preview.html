@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>大肥鱼 · 进阶动作逐帧检查</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #101c2e;
+      color: #e4edfb;
+      font:
+        15px/1.65 system-ui,
+        sans-serif;
+    }
+    main {
+      max-width: 1120px;
+      margin: auto;
+      padding: 28px 20px;
+    }
+    h1 {
+      font-size: 30px;
+      margin: 0 0 6px;
+      color: #ffe1a6;
+    }
+    p {
+      color: #b4c8e3;
+      margin: 0 0 18px;
+    }
+    .tools {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 16px;
+      background: #1e314d;
+      border-radius: 10px;
+    }
+    select,
+    button {
+      font: inherit;
+      padding: 8px 12px;
+      border: 1px solid #6782a8;
+      border-radius: 6px;
+      background: #284261;
+      color: #fff;
+      cursor: pointer;
+    }
+    label {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+    .stage {
+      margin: 20px 0;
+      background: #16263d;
+      border: 1px solid #405779;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .stage svg {
+      display: block;
+      width: min(100%, 680px);
+      height: 330px;
+      margin: auto;
+    }
+    #status {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      font-size: 13px;
+      color: #ffe1a6;
+    }
+    .frames {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .frame {
+      margin: 0;
+      background: #1a2b43;
+      border: 1px solid #4a617f;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .frame svg {
+      display: block;
+      width: 100%;
+      height: 190px;
+    }
+    .frame figcaption {
+      padding: 8px 12px;
+      border-top: 1px solid #405779;
+      color: #d0dff4;
+      font-size: 13px;
+    }
+    body.light .stage,
+    body.light .frame {
+      background: #e4eaf1;
+    }
+    body.light .frame figcaption {
+      background: #1a2b43;
+    }
+    .note {
+      margin-top: 20px;
+      font-size: 13px;
+    }
+    a {
+      color: #b5dcff;
+    }
+    @media (max-width: 600px) {
+      main {
+        padding: 20px 12px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .frames {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .frame svg {
+        height: 160px;
+      }
+      .stage svg {
+        height: 240px;
+      }
+    }
+  </style>
+  <main>
+    <h1>闪避、击飞、防反：逐帧检查</h1>
+    <p>六名角色 · 每人16帧 · 原PNG透明背景。横线是脚底基准，十字是角色原点。</p>
+    <div class="tools">
+      <label>角色<select id="character" aria-label="角色"></select></label>
+      <label
+        >动作<select id="group" aria-label="动作">
+          <option value="0">闪避翻滚</option>
+          <option value="1">站立击飞</option>
+          <option value="2">防御反击</option>
+          <option value="3">空中击飞</option>
+        </select></label
+      >
+      <button id="play">暂停</button><button id="next">下一帧</button>
+      <label><input type="checkbox" id="mirror" />镜像</label
+      ><label><input type="checkbox" id="light" />浅色底</label>
+    </div>
+    <div class="stage">
+      <span id="status"></span>
+      <div id="animated"></div>
+    </div>
+    <div class="frames" id="frames"></div>
+    <p class="note">
+      预览采用慢速轮播，便于逐帧检查。完整图集与生成提示词保存在同目录，像素未做后期修改；显示裁切采用实际透明轮廓和统一角色比例。
+    </p>
+  </main>
+  <script type="module">
+    const geometry = await (await fetch('./geometry.json')).json();
+    const manifest = await (await fetch('./manifest.json')).json();
+    const labels = {
+      deepseek: '大肥鱼',
+      gpt: 'GPT',
+      doubao: '豆包',
+      client: '甲方',
+      prompt_sage: '提示词仙人',
+      unplug_uncle: '断网大爷',
+    };
+    const names = [
+      ['压低', '团身', '翻转', '起身'],
+      ['蓄力', '出脚', '送出', '收腿'],
+      ['挡住', '回拉', '顶回', '收手'],
+      ['蜷腿', '出脚', '伸展', '收腿'],
+    ];
+    const select = document.querySelector('#character'),
+      group = document.querySelector('#group'),
+      mirror = document.querySelector('#mirror');
+    for (const [id, name] of Object.entries(labels)) {
+      const o = document.createElement('option');
+      o.value = id;
+      o.textContent = name;
+      select.append(o);
+    }
+    let step = 0,
+      playing = true,
+      last = 0;
+    function sprite(index) {
+      const g = geometry[select.value][index],
+        src = manifest.characters[select.value].file;
+      return `<svg viewBox="-200 -190 400 210" aria-label="${labels[select.value]} 第${index + 1}帧">
+ <path d="M-190 0H190 M-5 0H5 M0-5V5" stroke="#6b849d" stroke-width="1" fill="none"/>
+ <g transform="scale(${mirror.checked ? -1 : 1},1)"><svg x="${g.x}" y="${g.y}" width="${g.width}" height="${g.height}" viewBox="${g.viewBox}" overflow="hidden"><image href="${src}" width="${g.sourceWidth}" height="${g.sourceHeight}"/></svg></g></svg>`;
+    }
+    function drawAnimated() {
+      const row = +group.value,
+        index = row * 4 + step;
+      document.querySelector('#animated').innerHTML = sprite(index);
+      document.querySelector('#animated').dataset.frame = index;
+      document.querySelector('#status').textContent =
+        `${labels[select.value]} · ${names[row][step]} · ${step + 1}/4`;
+    }
+    function render() {
+      document.querySelector('#frames').innerHTML = Array.from(
+        { length: 4 },
+        (_, i) =>
+          `<figure class="frame">${sprite(+group.value * 4 + i)}<figcaption>${i + 1} · ${names[+group.value][i]}</figcaption></figure>`,
+      ).join('');
+      drawAnimated();
+    }
+    select.onchange = group.onchange = () => {
+      step = 0;
+      render();
+    };
+    mirror.onchange = render;
+    document.querySelector('#light').onchange = (e) =>
+      document.body.classList.toggle('light', e.target.checked);
+    document.querySelector('#play').onclick = (e) => {
+      playing = !playing;
+      e.target.textContent = playing ? '暂停' : '播放';
+    };
+    document.querySelector('#next').onclick = () => {
+      playing = false;
+      document.querySelector('#play').textContent = '播放';
+      step = (step + 1) % 4;
+      drawAnimated();
+    };
+    function loop(time) {
+      if (playing && time - last > 260) {
+        last = time;
+        step = (step + 1) % 4;
+        drawAnimated();
+      }
+      requestAnimationFrame(loop);
+    }
+    render();
+    requestAnimationFrame(loop);
+  </script>
+</html>

@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "transparent_background": false,
+  "references": [],
+  "assets": [
+    {
+      "file": "runtime/token-furnace-background.png",
+      "result": "call_OROTUnPt3KuHN0IuSqopg8xG.png",
+      "size": [1881, 836],
+      "prompt": "Production panoramic background painting for an original 2D anime run-and-gun game, AI meme theme GPU TOKEN FURNACE. Very wide 2.25:1 landscape composition. Fixed side-on cross-section camera, layered distant industrial architecture, immense copper heat exchangers, glowing orange server furnaces and racks, amber cooling pipes, floating subtle red token-like sparks, dark blue charcoal steel supports, warm lava-like coolant visible only in distant pipes. Hand-painted polished Japanese arcade game illustration with detailed but soft background edges. Top two thirds visually rich, bottom third significantly darker and quiet for small foreground characters and hazards. No walkable foreground platforms, no characters, no enemies, no text, no logos, no interface. Make it feel like a physical hot server foundry with depth and strong readability. Not a castle, not fantasy clouds, not a title screen. Fill full canvas opaque."
+    },
+    {
+      "file": "runtime/neural-nest-background.png",
+      "result": "call_7JX9BtN7ODtiV2G6qbQWkAZM.png",
+      "size": [1881, 836],
+      "prompt": "Production panoramic background for an original polished 2D anime arcade run-and-gun game, final AI hallucination neural nest. Very wide 2.25:1 landscape, side-on cross-section perspective. An immense underground neural server core where violet cables coil like living roots, translucent lilac memory pods embedded in walls, glowing pink and cyan synapse filaments, distant central brain-like inference reactor enclosed in mechanical rings, indigo biomechanical cathedral architecture. Eerie yet charming anime sci-fi, hand-painted detailed environment, no horror gore, no monsters. Top two thirds rich layered scenery, bottom third dark and visually quiet for foreground action. No characters, no enemies, no bosses, no walkable foreground platforms, no text, no logos, no interface. Original AI machine ecosystem, strong depth, fill full opaque canvas."
+    }
+  ]
+}

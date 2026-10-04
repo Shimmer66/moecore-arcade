@@ -1,0 +1,247 @@
+const sprite = (url: string, width: number, height: number) => ({
+  url,
+  width,
+  height,
+});
+type FrameBounds = readonly [number, number, number, number];
+const atlas = (
+  url: string,
+  width: number,
+  height: number,
+  columns: number,
+  bounds: readonly FrameBounds[],
+  pivot = 0.5,
+) => ({
+  ...sprite(url, width, height),
+  frames: bounds.map(([x, y, w, h], index) => ({
+    x: x - 4,
+    y: y - 4,
+    width: w + 8,
+    height: h + 8,
+    anchorX: (((index % columns) + pivot) * width) / columns - x + 4,
+    anchorY: h + 4,
+  })),
+});
+
+export const REWRITE_ART = {
+  enemyMotion: {
+    ground: sprite(
+      new URL('../rewrite/runtime/enemy-motion-ground-v1.webp', import.meta.url).href,
+      1536,
+      1152,
+    ),
+    air: sprite(
+      new URL('../rewrite/runtime/enemy-motion-air-v1.webp', import.meta.url).href,
+      1536,
+      1152,
+    ),
+  },
+  combatVfx: sprite(
+    new URL('../rewrite/runtime/combat-vfx-atlas-v1.webp', import.meta.url).href,
+    1024,
+    1024,
+  ),
+  bossReaction: sprite(
+    new URL('../rewrite/runtime/boss-reaction-atlas-v1.webp', import.meta.url).href,
+    1536,
+    1536,
+  ),
+  bossPhase: sprite(
+    new URL('../rewrite/runtime/boss-phase-atlas-v1.webp', import.meta.url).href,
+    1536,
+    768,
+  ),
+  stageProps: [
+    sprite(new URL('../rewrite/runtime/stage-props-12-v1.webp', import.meta.url).href, 1024, 512),
+    sprite(new URL('../rewrite/runtime/stage-props-34-v1.webp', import.meta.url).href, 1024, 512),
+    sprite(new URL('../rewrite/runtime/stage-props-56-v1.webp', import.meta.url).href, 1024, 512),
+    sprite(new URL('../rewrite/runtime/stage-props-78-v1.webp', import.meta.url).href, 1024, 512),
+  ],
+  memeProps: sprite(
+    new URL('../rewrite/runtime/ai-meme-props-atlas-v1.webp', import.meta.url).href,
+    1024,
+    512,
+  ),
+  operatorReaction: sprite(
+    new URL('../rewrite/runtime/operator-reaction-atlas-v1.webp', import.meta.url).href,
+    1024,
+    768,
+  ),
+  missionCards: sprite(
+    new URL('../rewrite/runtime/mission-card-atlas-v1.webp', import.meta.url).href,
+    1536,
+    432,
+  ),
+  nestAtlas: sprite(
+    new URL('../rewrite/runtime/neural-nest-atlas-v1.png', import.meta.url).href,
+    1254,
+    1254,
+  ),
+  depthNodes: sprite(
+    new URL('../rewrite/runtime/depth-node-atlas-v1.png', import.meta.url).href,
+    1254,
+    1254,
+  ),
+  powerupAtlas: sprite(
+    new URL('../rewrite/runtime/powerup-atlas-v1.png', import.meta.url).href,
+    1536,
+    1024,
+  ),
+  lootAtlas: sprite(
+    new URL('../rewrite/runtime/loot-atlas-v1.png', import.meta.url).href,
+    1254,
+    1254,
+  ),
+  enemyAtlas: sprite(
+    new URL('../rewrite/runtime/enemy-atlas-v1.png', import.meta.url).href,
+    1536,
+    1024,
+  ),
+  motion: {
+    deepseek: atlas(
+      new URL('../rewrite/runtime/deepseek-motion-v1.png', import.meta.url).href,
+      1536,
+      1024,
+      3,
+      [
+        [35, 70, 442, 428],
+        [549, 79, 440, 426],
+        [1072, 82, 446, 424],
+        [37, 558, 440, 420],
+        [549, 566, 441, 376],
+        [1030, 712, 497, 259],
+      ],
+    ),
+    gpt: atlas(
+      new URL('../rewrite/runtime/gpt-motion-v1.png', import.meta.url).href,
+      1536,
+      1024,
+      3,
+      [
+        [18, 38, 482, 450],
+        [539, 41, 462, 446],
+        [1045, 46, 481, 445],
+        [25, 529, 474, 452],
+        [540, 534, 461, 390],
+        [1019, 710, 507, 257],
+      ],
+    ),
+    claude: atlas(
+      new URL('../rewrite/runtime/claude-motion-v1.png', import.meta.url).href,
+      1536,
+      1024,
+      3,
+      [
+        [20, 28, 463, 460],
+        [538, 32, 457, 460],
+        [1049, 32, 462, 459],
+        [21, 540, 461, 443],
+        [552, 523, 442, 398],
+        [1008, 688, 510, 276],
+      ],
+    ),
+  },
+  aimMotion: atlas(
+    new URL('../rewrite/runtime/aim-motion-v1.png', import.meta.url).href,
+    1448,
+    1086,
+    4,
+    [
+      [53, 77, 283, 286],
+      [445, 64, 199, 299],
+      [764, 103, 260, 259],
+      [1154, 93, 232, 265],
+      [45, 438, 290, 274],
+      [435, 409, 224, 302],
+      [759, 436, 304, 276],
+      [1140, 435, 258, 277],
+      [38, 764, 283, 261],
+      [432, 744, 235, 281],
+      [759, 775, 291, 250],
+      [1151, 745, 243, 286],
+    ],
+    0.6,
+  ),
+  depthMotion: atlas(
+    new URL('../rewrite/runtime/depth-motion-v1.png', import.meta.url).href,
+    1448,
+    1086,
+    4,
+    [
+      [59, 70, 263, 268],
+      [411, 71, 254, 268],
+      [774, 71, 250, 268],
+      [1138, 157, 269, 184],
+      [45, 402, 294, 289],
+      [413, 402, 289, 288],
+      [777, 402, 274, 288],
+      [1136, 495, 294, 201],
+      [60, 754, 252, 270],
+      [420, 754, 262, 271],
+      [786, 754, 249, 269],
+      [1152, 817, 260, 209],
+    ],
+    0.6,
+  ),
+  depthOperators: sprite(
+    new URL('../rewrite/runtime/depth-operators.png', import.meta.url).href,
+    2172,
+    724,
+  ),
+  bossAtlas: sprite(new URL('../rewrite/runtime/boss-atlas.png', import.meta.url).href, 1774, 887),
+  characters: {
+    deepseek: {
+      idle: sprite(
+        new URL('../rewrite/runtime/deepseek-idle.webp', import.meta.url).href,
+        377,
+        512,
+      ),
+      run: sprite(new URL('../rewrite/runtime/deepseek-run.webp', import.meta.url).href, 473, 512),
+      shoot: sprite(
+        new URL('../rewrite/runtime/deepseek-shoot.webp', import.meta.url).href,
+        509,
+        512,
+      ),
+    },
+    gpt: {
+      idle: sprite(new URL('../rewrite/runtime/gpt-idle.webp', import.meta.url).href, 415, 512),
+      run: sprite(new URL('../rewrite/runtime/gpt-run.webp', import.meta.url).href, 501, 512),
+      shoot: sprite(new URL('../rewrite/runtime/gpt-shoot.webp', import.meta.url).href, 512, 504),
+    },
+    claude: {
+      idle: sprite(new URL('../rewrite/runtime/claude-idle.webp', import.meta.url).href, 405, 512),
+      run: sprite(new URL('../rewrite/runtime/claude-run.webp', import.meta.url).href, 474, 512),
+      shoot: sprite(
+        new URL('../rewrite/runtime/claude-shoot.webp', import.meta.url).href,
+        483,
+        512,
+      ),
+    },
+  },
+  enemies: {
+    walker: sprite(
+      new URL('../rewrite/runtime/receipt-walker.webp', import.meta.url).href,
+      512,
+      481,
+    ),
+    turret: sprite(new URL('../rewrite/runtime/turret.webp', import.meta.url).href, 512, 372),
+    bossShielded: sprite(
+      new URL('../rewrite/runtime/boss-shielded.webp', import.meta.url).href,
+      468,
+      512,
+    ),
+    bossOpen: sprite(new URL('../rewrite/runtime/boss-open.webp', import.meta.url).href, 499, 512),
+  },
+  platform: sprite(new URL('../rewrite/runtime/platform.webp', import.meta.url).href, 512, 80),
+  backgrounds: [
+    new URL('../rewrite/runtime/level-1-background.webp', import.meta.url).href,
+    new URL('../rewrite/runtime/level-2-background.webp', import.meta.url).href,
+    new URL('../rewrite/runtime/level-3-background.webp', import.meta.url).href,
+    new URL('../rewrite/runtime/level-4-background.webp', import.meta.url).href,
+    new URL('../rewrite/runtime/level-5-background.webp', import.meta.url).href,
+    new URL('../rewrite/runtime/server-war-background.png', import.meta.url).href,
+    new URL('../rewrite/runtime/token-furnace-background.png', import.meta.url).href,
+    new URL('../rewrite/runtime/neural-nest-background.png', import.meta.url).href,
+    new URL('../rewrite/runtime/alignment-wall-background-v1.webp', import.meta.url).href,
+  ],
+} as const;

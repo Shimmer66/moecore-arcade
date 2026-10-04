@@ -1,0 +1,46 @@
+{
+  "generator": "built-in image_gen",
+  "status": "integrated",
+  "geometry": "geometry.json",
+  "files": [
+    {
+      "path": "client-aerial-v2.png",
+      "sha256": "2bf072b3b3c3caa2031ee63fb68a16d16b6af792c69c7fc538c1add0f93368a9"
+    },
+    {
+      "path": "client-ground-v1.png",
+      "sha256": "f0b70b26d6818c90a27fa91386d1c610372d25a7200a9f2cfb935fbe306e9282"
+    },
+    {
+      "path": "client-mobility-v1.png",
+      "sha256": "a5c81d0da659bd9d58764205daa5e23657f2592188ad406202f94206c92209d4"
+    },
+    {
+      "path": "prompt_sage-aerial-v1.png",
+      "sha256": "d38c6c7581a167a26119e1f0a60e614de93a93aad7f13940003a54fdb9a7983a"
+    },
+    {
+      "path": "prompt_sage-ground-v1.png",
+      "sha256": "91c900b696e44bb0c44fd63c4a7502b3360d2b356f3cdf57875b8a2619bc2514"
+    },
+    {
+      "path": "prompt_sage-mobility-v1.png",
+      "sha256": "8ed965fa51bdfa0b7280c41a5ede2edb4f285be6b02100d7b9df96550f347cb9"
+    },
+    {
+      "path": "unplug_uncle-aerial-v1.png",
+      "sha256": "2514a3f3c659e349eed5afc4b9519540ec2685c647bca8fbb67fb7fe6518cfd2"
+    },
+    {
+      "path": "unplug_uncle-ground-v1.png",
+      "sha256": "0f73c049e40d4fbd7f7f9f71d321b6342241db5c698b619f229579d1bb50d14c"
+    },
+    {
+      "path": "unplug_uncle-mobility-v2.png",
+      "sha256": "4c229aaf5976a3e2ac56610ebe391bcc39300b8493da03a3dbfe8a598d3ac5c0"
+    }
+  ],
+  "frameCount": 144,
+  "framesPerCharacter": 48,
+  "runtime": "games/duel/src/NewcomerSprite.vue"
+}

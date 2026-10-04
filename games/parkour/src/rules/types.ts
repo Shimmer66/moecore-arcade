@@ -57,6 +57,7 @@ export interface RunResult {
 }
 
 interface RunBase extends PlayerFrame {
+  readonly endless?: true;
   readonly seed: number;
   readonly tick: number;
   readonly finishDistance: number;

@@ -1,0 +1,28 @@
+{
+  "name": "@moecore/game-arena",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./rules": "./src/runner.ts"
+  },
+  "scripts": {
+    "typecheck": "vue-tsc --project tsconfig.json",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@lucide/vue": "1.47.0",
+    "@moecore/assets": "file:../../packages/assets",
+    "@moecore/game-sdk": "file:../../packages/game-sdk",
+    "matter-js": "0.20.0",
+    "vue": "3.5.43"
+  },
+  "devDependencies": {
+    "@types/matter-js": "0.20.2",
+    "vite": "8.3.0",
+    "vitest": "5.0.1",
+    "vue-tsc": "3.3.11"
+  }
+}

@@ -17,5 +17,8 @@ describe('sokoban asset pack', () => {
       expect(createHash('sha256').update(readFileSync(file)).digest('hex')).toBe(asset.sha256);
     }
     expect(getSokobanAsset('char_E_idle_01').url).toBeTruthy();
+    for (const id of ['portrait_neutral', 'char_S_idle_01', 'box_wood_01', 'target_empty_01']) {
+      expect(getSokobanAsset(id).url.endsWith('.webp')).toBe(true);
+    }
   });
 });

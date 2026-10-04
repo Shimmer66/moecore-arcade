@@ -1,0 +1,58 @@
+{
+  "status": "calibrated",
+  "frameCount": 40,
+  "rows": ["signature-startup", "signature-followthrough"],
+  "method": "Alpha component bounds and contact pivots; one uniform body scale per character; original PNG preserved.",
+  "characters": {
+    "deepseek": {
+      "file": "deepseek-v1.png",
+      "sha256": "bacf9ed11b10a2392e34b9d86f16e05c16215c8f46e97f9bc7cdaec5e7f36822",
+      "width": 1774,
+      "height": 887,
+      "frames": 8,
+      "scale": 0.325688,
+      "transparentFraction": 0.4825,
+      "bytes": 1849130
+    },
+    "doubao": {
+      "file": "doubao-v1.png",
+      "sha256": "9ce3ccde0e3337d90e93ebd6ffdee289e6306051f53784eec167a74dcb1fa1b4",
+      "width": 1774,
+      "height": 887,
+      "frames": 8,
+      "scale": 0.338095,
+      "transparentFraction": 0.6049,
+      "bytes": 1282221
+    },
+    "client": {
+      "file": "client-v2.png",
+      "sha256": "d2531ed4cc7e9c2d6f09fe576b5da99c1333ddd40bca61f664eb49fc695c25c0",
+      "width": 1774,
+      "height": 887,
+      "frames": 8,
+      "scale": 0.47651,
+      "transparentFraction": 0.6877,
+      "bytes": 1100180
+    },
+    "prompt_sage": {
+      "file": "prompt_sage-v1.png",
+      "sha256": "01365b3d924404144cd9fe3187d1276925625f4862f048ed9f93d612e1a44dde",
+      "width": 1774,
+      "height": 887,
+      "frames": 8,
+      "scale": 0.34466,
+      "transparentFraction": 0.5604,
+      "bytes": 1655727
+    },
+    "unplug_uncle": {
+      "file": "unplug_uncle-v1.png",
+      "sha256": "beea0acaa85cc906170b2d627a74cda7edf157a9c1ce802d93bfc0de7b8714ae",
+      "width": 1774,
+      "height": 887,
+      "frames": 8,
+      "scale": 0.390646,
+      "transparentFraction": 0.6029,
+      "bytes": 1434018
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-01",
+  "tool": "built-in image_gen.imagegen",
+  "file": "runtime/neural-nest-atlas-v1.png",
+  "result": "call_LT1FFui80dD6PfbAgJv7rbQ9.png",
+  "size": [1254, 1254],
+  "transparent_background": true,
+  "cells": ["incubation-pod", "hallucination-larva", "inference-heart", "shattered-heart-frame"],
+  "prompt": "Use case: stylized-concept. Asset type: production transparent sprite atlas for the final level of an original anime AI meme run-and-gun videogame. Create exactly four separate biomechanical AI nest objects in a 2x2 equal square grid on a square transparent canvas, each centered with at least 14% transparent margin and no clipping. Consistent polished hand-painted anime arcade enemy art, crisp readable outlines, magenta/violet/cyan neural glow, dark mechanical-organic shells, eerie but not gory. Top left: sealed neural incubation pod, oval armored shell with cable roots tucked inside silhouette and a narrow glowing eye slit. Top right: small crawling hallucination larva, low four-legged mechanical-organic drone with a bright eye and compact complete body, facing left. Bottom left: exposed inference heart core, floating faceted magenta neural heart inside a broken circular metal frame, pulsing cyan veins, no gore. Bottom right: shattered empty heart frame, broken dim circular shell with dark center and a few fading sparks, no intact heart. All objects same approximate visual scale within cells and readable at 48px. Genuine transparent alpha and generous gaps. No text, letters, labels, UI, borders, floor, shadows on ground, background scene, extra characters, weapons, bullets, or overlap.",
+  "integration": "ItemArt.vue crops four 627x627 cells. Pods and larvae appear in the final route; three heart cores appear in the arena and protect the boss. The shattered frame is retained for future persistent destruction feedback."
+}

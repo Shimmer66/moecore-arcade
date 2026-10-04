@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-01",
+  "tool": "built-in image_gen",
+  "sourceFilename": "call_GNMjOWnXTEd3hZCpKRbXGSfN.png",
+  "reference": "../newcomers/motion/prompt_sage-ground-v1.png",
+  "output": "prompt_sage-v1.png",
+  "prompt": "prompts.md",
+  "geometry": "geometry.json",
+  "manifest": "manifest.json",
+  "pixelsModified": false,
+  "purpose": "Prompt Sage flying talisman and slow-trap casting"
+}

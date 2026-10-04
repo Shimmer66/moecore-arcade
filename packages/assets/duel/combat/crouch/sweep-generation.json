@@ -1,0 +1,38 @@
+{
+  "generator": "built-in image_gen",
+  "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-b907f0b5-7539-4e36-ae52-3a6d9876ce9f.png",
+  "prompt": "ONE transparent 2D game sprite atlas, exactly THREE equal columns in ONE row, wide 3:1 canvas. One COMPLETE character per cell, no labels or borders. Left cell DeepSeek blue whale maid matching reference 1; center GPT white dragon girl matching reference 2; right Doubao matching reference 3, dark brown SIDE PARTED short bob, red scarf, dark sweatshirt, black shorts and opaque leggings. ALL THREE face screen RIGHT and perform a LOW SWEEP KICK: hips very low near floor, one knee deeply bent under the torso supporting the body, the OTHER leg fully extended horizontally to the RIGHT just above floor level, toes/boot pointing right, hands lifted in fighting guard for balance. It must visibly be a sweeping leg attack, NOT a crouching punch, NOT a standing high kick, NOT both knees folded. Side-on three-quarter view, same costumes and round head proportions as references, crisp cel shading and clean dark outlines. Same baseline y=85% of each cell, whole figure, extended leg, hair, horns and tail remain inside its own cell with transparent padding. Body compressed by real folded joints, not flattened art. Absolutely genuine RGBA TRANSPARENT outside the character silhouettes and between legs. No scenery, colored glow, floor, shadow, text, diagram, effects, checkerboard or opaque backdrop. Exactly three separate full-body low sweep poses.",
+  "width": 2172,
+  "height": 724,
+  "alphaRange": [0, 255],
+  "sha256": "4b8dc3dbea9d96c7db7a1d227f2bbe2e70ec36130306090a83b47025922b8f0f",
+  "geometry": {
+    "deepseek": {
+      "x": -47.895,
+      "y": -106.204,
+      "width": 118.355,
+      "height": 114.252,
+      "viewBox": "0 0 750 724",
+      "sourceWidth": 2172,
+      "sourceHeight": 724
+    },
+    "gpt": {
+      "x": -47.341,
+      "y": -107.752,
+      "width": 117.953,
+      "height": 115.403,
+      "viewBox": "750 0 740 724",
+      "sourceWidth": 2172,
+      "sourceHeight": 724
+    },
+    "doubao": {
+      "x": -36.868,
+      "y": -115.749,
+      "width": 116.949,
+      "height": 124.152,
+      "viewBox": "1490 0 682 724",
+      "sourceWidth": 2172,
+      "sourceHeight": 724
+    }
+  }
+}

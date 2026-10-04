@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-01",
+  "tool": "built-in image_gen",
+  "sourceFilename": "call_r91mDfAGHeDUT547tAMGugmy.png",
+  "reference": "../normal-motion/gpt-v1.png",
+  "output": "gpt-v1.png",
+  "prompt": "prompts.md",
+  "geometry": "geometry.json",
+  "manifest": "manifest.json",
+  "pixelsModified": false,
+  "purpose": "GPT catch startup and throw follow-through, eight poses"
+}

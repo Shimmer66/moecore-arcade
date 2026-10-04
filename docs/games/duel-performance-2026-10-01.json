@@ -1,0 +1,140 @@
+{
+  "recorded": "2026-10-01",
+  "environment": "Local headless Chromium against the actual Vite production preview on loopback. Mobile sample uses a 390x844 viewport and CDP 4x CPU throttling.",
+  "reason": "Recheck after integrating five signature atlases, role-specific combo hints, cancel feedback and current six-character move polish.",
+  "method": "One cold page per mode; scripted keyboard fight for about five seconds. Frame interval comes from requestAnimationFrame timestamps. Callback work excludes later Vue microtasks, layout and paint.",
+  "limitations": [
+    "Single-run snapshots with warm local filesystem cache",
+    "No network bandwidth throttling",
+    "Short headless samples do not prove physical phone thermals or sustained frame rate",
+    "Estimated decoded bytes are width * height * 4, not measured browser RSS or GPU memory"
+  ],
+  "comparison": {
+    "previousOptimizedEstimate": {
+      "practiceDecodedBytes": 169845384,
+      "teamDecodedBytes": 345971912,
+      "practiceReadyMs": 1234,
+      "teamReadyMs": 1524
+    },
+    "currentAtlasBytes": 7321276,
+    "decodedEstimateIncrease": {
+      "practiceBytes": 12588304,
+      "teamBytes": 37764912
+    }
+  },
+  "desktop": [
+    {
+      "mode": "practice",
+      "readyMs": 1182,
+      "decodedURLs": 29,
+      "decodeCalls": 29,
+      "duplicateDecodeCalls": 0,
+      "requestedImages": 35,
+      "imageBodyBytes": 32371826,
+      "estimatedDecodedBytes": 182433688,
+      "frames": 320,
+      "frameIntervalP50": 16.7,
+      "frameIntervalP95": 16.7,
+      "callbackP95": 0.3,
+      "framesAbove25ms": 0,
+      "longTasks": [],
+      "fightDecodeCalls": 0,
+      "errors": []
+    },
+    {
+      "mode": "team",
+      "readyMs": 1038,
+      "decodedURLs": 61,
+      "decodeCalls": 61,
+      "duplicateDecodeCalls": 0,
+      "requestedImages": 64,
+      "imageBodyBytes": 62946316,
+      "estimatedDecodedBytes": 383736824,
+      "frames": 318,
+      "frameIntervalP50": 16.7,
+      "frameIntervalP95": 16.8,
+      "callbackP95": 0.3,
+      "framesAbove25ms": 0,
+      "longTasks": [],
+      "fightDecodeCalls": 0,
+      "errors": []
+    }
+  ],
+  "mobileCpu4": [
+    {
+      "mode": "practice",
+      "readyMs": 1487,
+      "decodedURLs": 29,
+      "decodeCalls": 29,
+      "duplicateDecodeCalls": 0,
+      "requestedImages": 35,
+      "imageBodyBytes": 32371826,
+      "estimatedDecodedBytes": 182433688,
+      "frames": 323,
+      "frameIntervalP50": 16.7,
+      "frameIntervalP95": 16.7,
+      "callbackP95": 0.7,
+      "framesAbove25ms": 2,
+      "longTasks": [],
+      "fightDecodeCalls": 0,
+      "errors": []
+    },
+    {
+      "mode": "team",
+      "readyMs": 1480,
+      "decodedURLs": 61,
+      "decodeCalls": 61,
+      "duplicateDecodeCalls": 0,
+      "requestedImages": 64,
+      "imageBodyBytes": 62946316,
+      "estimatedDecodedBytes": 383736824,
+      "frames": 324,
+      "frameIntervalP50": 16.7,
+      "frameIntervalP95": 16.8,
+      "callbackP95": 0.7,
+      "framesAbove25ms": 0,
+      "longTasks": [],
+      "fightDecodeCalls": 0,
+      "errors": []
+    }
+  ],
+  "postHudPolishMobileCpu4": [
+    {
+      "mode": "practice",
+      "readyMs": 1496,
+      "decodedURLs": 29,
+      "decodeCalls": 29,
+      "duplicateDecodeCalls": 0,
+      "requestedImages": 35,
+      "imageBodyBytes": 32371826,
+      "estimatedDecodedBytes": 182433688,
+      "frames": 326,
+      "frameIntervalP50": 16.7,
+      "frameIntervalP95": 16.8,
+      "callbackP95": 0.7,
+      "framesAbove25ms": 1,
+      "longTasks": [],
+      "fightDecodeCalls": 0,
+      "errors": []
+    },
+    {
+      "mode": "team",
+      "readyMs": 1424,
+      "decodedURLs": 61,
+      "decodeCalls": 61,
+      "duplicateDecodeCalls": 0,
+      "requestedImages": 64,
+      "imageBodyBytes": 62946316,
+      "estimatedDecodedBytes": 383736824,
+      "frames": 327,
+      "frameIntervalP50": 16.7,
+      "frameIntervalP95": 16.7,
+      "callbackP95": 0.8,
+      "framesAbove25ms": 0,
+      "longTasks": [],
+      "fightDecodeCalls": 0,
+      "errors": []
+    }
+  ],
+  "decision": "Keep current preload behavior. The added decoded-size estimate is material, especially in team mode, but the measured production samples show no fight-time decode, no long tasks and stable frame intervals. Revisit only with physical-device memory evidence or a repeatable handoff stall."
+}

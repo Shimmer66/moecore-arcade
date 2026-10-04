@@ -1,0 +1,82 @@
+{
+  "generator": "built-in image_gen",
+  "status": "generated-and-integrated",
+  "layout": {
+    "columns": 4,
+    "rows": ["run", "jab", "hook", "kick", "upper", "hurtRecovery"]
+  },
+  "assets": [
+    {
+      "id": "deepseek",
+      "ref": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/deepseek/ready.png",
+      "identity": "DeepSeek blue whale maid: cobalt hair fading cyan, whale fin ears and large blue tail, white frilly headband, navy and white apron dress, blue boots with gold bows, blue eyes, small rice grain on cheek.",
+      "prompt": "Edit the provided animation atlas to fix CELL PADDING ONLY. Keep exactly the same 24 poses and same character art in a FOUR-column SIX-row grid. Each cell must have a CLEAR EMPTY TRANSPARENT MARGIN of at least 20% of cell width on LEFT and RIGHT and 15% of cell height ABOVE and BELOW the complete sprite. UNIFORMLY SHRINK ALL 24 FIGURES together by about 30%, preserving character proportions and relative body scale across poses. Center each shrunken sprite in its own cell and align standing feet to a consistent baseline. Important: long kicks, tails, airborne fists, horns and falling feet must remain FULLY INSIDE their individual cells. No sprite may touch, overlap or leak into any adjacent cell, and there must be an obvious blank corridor between every row and column. No frame borders, labels, text or checkerboard. Real RGBA transparent background, no glow, shadows or colored backdrop. Do not change costume, face, hairstyle, pose ordering, frame count or outline style. This is a padded sprite atlas for clean rectangular cropping.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-54d9c109-a8f2-4746-aa09-7d19fc9903be.png",
+      "path": "combat/motion/deepseek_v2.png",
+      "width": 1024,
+      "height": 1536,
+      "alphaRange": [0, 254],
+      "sha256": "0f18d48dcfcd49ce33e83ad0df93e8fe5a906014155b8b9f1a5f4b2c219f155e",
+      "frameCount": 24,
+      "revisions": [
+        {
+          "path": "combat/motion/deepseek.png",
+          "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-f39601a2-f718-49dc-a30d-55f7983f2cfb.png",
+          "prompt": "Create ONE complete animation sprite atlas for an original 2D anime arcade fighting game. Exactly FOUR COLUMNS and SIX ROWS = 24 full-body sprites in a uniform invisible grid, portrait canvas 2:3 (ideally 1024x1536). Use REAL TRANSPARENT RGBA background outside silhouettes. Do not paint colored lighting, scenery, ground shadow, frame borders, grid lines, labels or text. Fixed side-on three-quarter camera. ALL sprites face SCREEN RIGHT, except torso rotation within punches; no camera changes. Each cell has the SAME character scale, foot baseline at 90% of cell height, generous 10% side padding, complete horns/hair/tail/shoes. No cross-cell overlap. Clean cel shading, bold dark outlines, 3-head-tall chibi proportions matching identity reference. Each ROW is a FOUR-FRAME SEQUENCE read left-to-right; consecutive frames must change limb positions coherently, not be duplicates. Row1 RUN LOOP: left leg reaching right arm forward; both legs passing under hips; right leg reaching left arm forward; airborne push-off back leg extended. Row2 JAB: fist drawn beside cheek and torso wound back; leading arm fully punches right; extended fist follows through with forward weight; fist retracts back to guard. Row3 SECOND PUNCH: rear elbow cocked with hips turning back; strong bent-elbow hook toward right with torso pivot; back/shoulder rotates through following the punch; hips and arms return to ready. Row4 SIDE KICK: knee chambered high with both hands guarding; leg shoots horizontally right with supporting foot planted; extended leg and torso follow through; knee retracts before foot returns to floor. Row5 UPPERCUT: deep crouch fist beside hip; legs extend and fist rises vertically above head; airborne upward follow-through with knee raised; descending recovery knees ready to absorb landing. Row6 HIT AND RECOVERY: backward standing recoil from punch eyes squeezed shut; feet swept out falling backward; lying on side on floor head left feet right at same body scale; getting up on one knee, one hand supporting ground. No energy effects or extra props. Readable silhouette, clearly distinct anticipation/contact/follow-through/recovery. Preserve outfit details through all 24 sprites.\nIdentity lock: DeepSeek blue whale maid: cobalt hair fading cyan, whale fin ears and large blue tail, white frilly headband, navy and white apron dress, blue boots with gold bows, blue eyes, small rice grain on cheek.",
+          "reason": "Increase cell padding to remove adjacent-frame fragments"
+        }
+      ],
+      "revisionReferences": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/motion/deepseek.png"
+      ]
+    },
+    {
+      "id": "gpt",
+      "ref": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/first-batch/duel_gpt_base.png",
+      "identity": "GPT white dragon girl: white hair and ivory horns, mint eyes, small wings, white scaled tail, white/mint dress with green bows and white boots. Empty hands: NO papers or books.",
+      "prompt": "Edit the provided animation atlas to fix CELL PADDING ONLY. Keep exactly the same 24 poses and same character art in a FOUR-column SIX-row grid. Each cell must have a CLEAR EMPTY TRANSPARENT MARGIN of at least 20% of cell width on LEFT and RIGHT and 15% of cell height ABOVE and BELOW the complete sprite. UNIFORMLY SHRINK ALL 24 FIGURES together by about 30%, preserving character proportions and relative body scale across poses. Center each shrunken sprite in its own cell and align standing feet to a consistent baseline. Important: long kicks, tails, airborne fists, horns and falling feet must remain FULLY INSIDE their individual cells. No sprite may touch, overlap or leak into any adjacent cell, and there must be an obvious blank corridor between every row and column. No frame borders, labels, text or checkerboard. Real RGBA transparent background, no glow, shadows or colored backdrop. Do not change costume, face, hairstyle, pose ordering, frame count or outline style. This is a padded sprite atlas for clean rectangular cropping.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-96ac9d61-fa20-4786-b163-3d54a62db012.png",
+      "path": "combat/motion/gpt_v2.png",
+      "width": 1024,
+      "height": 1536,
+      "alphaRange": [0, 254],
+      "sha256": "e56dc5f9e3b03990621f4564deb40af984a3af3b325d8eab5ed06f03eea29cc5",
+      "frameCount": 24,
+      "revisions": [
+        {
+          "path": "combat/motion/gpt.png",
+          "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-ee6d9225-f525-4400-a19c-e9009216d2d8.png",
+          "prompt": "Create ONE complete animation sprite atlas for an original 2D anime arcade fighting game. Exactly FOUR COLUMNS and SIX ROWS = 24 full-body sprites in a uniform invisible grid, portrait canvas 2:3 (ideally 1024x1536). Use REAL TRANSPARENT RGBA background outside silhouettes. Do not paint colored lighting, scenery, ground shadow, frame borders, grid lines, labels or text. Fixed side-on three-quarter camera. ALL sprites face SCREEN RIGHT, except torso rotation within punches; no camera changes. Each cell has the SAME character scale, foot baseline at 90% of cell height, generous 10% side padding, complete horns/hair/tail/shoes. No cross-cell overlap. Clean cel shading, bold dark outlines, 3-head-tall chibi proportions matching identity reference. Each ROW is a FOUR-FRAME SEQUENCE read left-to-right; consecutive frames must change limb positions coherently, not be duplicates. Row1 RUN LOOP: left leg reaching right arm forward; both legs passing under hips; right leg reaching left arm forward; airborne push-off back leg extended. Row2 JAB: fist drawn beside cheek and torso wound back; leading arm fully punches right; extended fist follows through with forward weight; fist retracts back to guard. Row3 SECOND PUNCH: rear elbow cocked with hips turning back; strong bent-elbow hook toward right with torso pivot; back/shoulder rotates through following the punch; hips and arms return to ready. Row4 SIDE KICK: knee chambered high with both hands guarding; leg shoots horizontally right with supporting foot planted; extended leg and torso follow through; knee retracts before foot returns to floor. Row5 UPPERCUT: deep crouch fist beside hip; legs extend and fist rises vertically above head; airborne upward follow-through with knee raised; descending recovery knees ready to absorb landing. Row6 HIT AND RECOVERY: backward standing recoil from punch eyes squeezed shut; feet swept out falling backward; lying on side on floor head left feet right at same body scale; getting up on one knee, one hand supporting ground. No energy effects or extra props. Readable silhouette, clearly distinct anticipation/contact/follow-through/recovery. Preserve outfit details through all 24 sprites.\nIdentity lock: GPT white dragon girl: white hair and ivory horns, mint eyes, small wings, white scaled tail, white/mint dress with green bows and white boots. Empty hands: NO papers or books.",
+          "reason": "Increase cell padding to remove adjacent-frame fragments"
+        }
+      ],
+      "revisionReferences": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/motion/gpt.png"
+      ]
+    },
+    {
+      "id": "doubao",
+      "ref": "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/doubao/ready.png",
+      "identity": "Doubao: chin-length dark brown SIDE-PARTED BOB, exposed forehead, red scarf, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No buns, no straight bangs, no white shirt, no orange clothing.",
+      "prompt": "Edit the provided animation atlas to fix CELL PADDING ONLY. Keep exactly the same 24 poses and same character art in a FOUR-column SIX-row grid. Each cell must have a CLEAR EMPTY TRANSPARENT MARGIN of at least 20% of cell width on LEFT and RIGHT and 15% of cell height ABOVE and BELOW the complete sprite. UNIFORMLY SHRINK ALL 24 FIGURES together by about 30%, preserving character proportions and relative body scale across poses. Center each shrunken sprite in its own cell and align standing feet to a consistent baseline. Important: long kicks, tails, airborne fists, horns and falling feet must remain FULLY INSIDE their individual cells. No sprite may touch, overlap or leak into any adjacent cell, and there must be an obvious blank corridor between every row and column. No frame borders, labels, text or checkerboard. Real RGBA transparent background, no glow, shadows or colored backdrop. Do not change costume, face, hairstyle, pose ordering, frame count or outline style. This is a padded sprite atlas for clean rectangular cropping.",
+      "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-200fbc18-7954-47d3-b275-cc55ecb6b72d.png",
+      "path": "combat/motion/doubao_v2.png",
+      "width": 1024,
+      "height": 1536,
+      "alphaRange": [0, 254],
+      "sha256": "9c1556712a20f2061b971220eac00761e5cb274e0efe120fe833dd712a7df084",
+      "frameCount": 24,
+      "revisions": [
+        {
+          "path": "combat/motion/doubao.png",
+          "source": "C:\\Users\\yan\\.codex\\generated_images\\01a0d947-4fea-7991-b254-ff42df29f49b\\exec-80ce8f77-27ca-458d-a2b9-9d3ef7e70252.png",
+          "prompt": "Create ONE complete animation sprite atlas for an original 2D anime arcade fighting game. Exactly FOUR COLUMNS and SIX ROWS = 24 full-body sprites in a uniform invisible grid, portrait canvas 2:3 (ideally 1024x1536). Use REAL TRANSPARENT RGBA background outside silhouettes. Do not paint colored lighting, scenery, ground shadow, frame borders, grid lines, labels or text. Fixed side-on three-quarter camera. ALL sprites face SCREEN RIGHT, except torso rotation within punches; no camera changes. Each cell has the SAME character scale, foot baseline at 90% of cell height, generous 10% side padding, complete horns/hair/tail/shoes. No cross-cell overlap. Clean cel shading, bold dark outlines, 3-head-tall chibi proportions matching identity reference. Each ROW is a FOUR-FRAME SEQUENCE read left-to-right; consecutive frames must change limb positions coherently, not be duplicates. Row1 RUN LOOP: left leg reaching right arm forward; both legs passing under hips; right leg reaching left arm forward; airborne push-off back leg extended. Row2 JAB: fist drawn beside cheek and torso wound back; leading arm fully punches right; extended fist follows through with forward weight; fist retracts back to guard. Row3 SECOND PUNCH: rear elbow cocked with hips turning back; strong bent-elbow hook toward right with torso pivot; back/shoulder rotates through following the punch; hips and arms return to ready. Row4 SIDE KICK: knee chambered high with both hands guarding; leg shoots horizontally right with supporting foot planted; extended leg and torso follow through; knee retracts before foot returns to floor. Row5 UPPERCUT: deep crouch fist beside hip; legs extend and fist rises vertically above head; airborne upward follow-through with knee raised; descending recovery knees ready to absorb landing. Row6 HIT AND RECOVERY: backward standing recoil from punch eyes squeezed shut; feet swept out falling backward; lying on side on floor head left feet right at same body scale; getting up on one knee, one hand supporting ground. No energy effects or extra props. Readable silhouette, clearly distinct anticipation/contact/follow-through/recovery. Preserve outfit details through all 24 sprites.\nIdentity lock: Doubao: chin-length dark brown SIDE-PARTED BOB, exposed forehead, red scarf, charcoal sweatshirt, black shorts over opaque dark leggings, black/red sneakers with white soles. No buns, no straight bangs, no white shirt, no orange clothing.",
+          "reason": "Increase cell padding to remove adjacent-frame fragments"
+        }
+      ],
+      "revisionReferences": [
+        "C:/home/yuki/projects/moecore-arcade/packages/assets/duel/combat/motion/doubao.png"
+      ]
+    }
+  ]
+}

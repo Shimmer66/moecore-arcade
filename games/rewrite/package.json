@@ -1,0 +1,26 @@
+{
+  "name": "@moecore/game-rewrite",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./rules": "./src/rules.ts"
+  },
+  "scripts": {
+    "typecheck": "vue-tsc --project tsconfig.json",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "record:campaign": "vitest run --config scripts/record-campaign.config.ts && prettier --write tests/replays/*.json"
+  },
+  "dependencies": {
+    "@moecore/assets": "file:../../packages/assets",
+    "@moecore/game-sdk": "file:../../packages/game-sdk",
+    "vue": "3.5.43"
+  },
+  "devDependencies": {
+    "vite": "8.3.0",
+    "vue-tsc": "3.3.11",
+    "vitest": "5.0.1"
+  }
+}
