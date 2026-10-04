@@ -149,6 +149,7 @@ test('toggles the game host into and out of fullscreen', async ({ page }) => {
 });
 
 for (const [id, selector] of [
+  ['starfall', '.starfall'],
   ['sokoban', '.sokoban'],
   ['match3', '.match3'],
   ['parkour', '.whale-game'],
