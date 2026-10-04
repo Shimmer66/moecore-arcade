@@ -15,6 +15,17 @@ export interface GameEntry {
 
 export const games: ReadonlyArray<GameEntry> = [
   {
+    id: 'uncle',
+    title: '舅舅的奇妙冒险',
+    category: '格斗 · 双人',
+    icon: 'runner',
+    description: '锅铲对保温杯，客厅就是擂台。叫上身边的人，三局两胜决定谁去洗碗。',
+    tags: ['动作', '双人'],
+    tone: 'peach',
+    badge: '本地双人 · 新作',
+    load: async () => (await import('@moecore/game-uncle')).game,
+  },
+  {
     id: 'starfall',
     title: '荒星回响：第七码头',
     category: '格斗 · 双人',

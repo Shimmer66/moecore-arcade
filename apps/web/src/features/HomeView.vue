@@ -9,6 +9,7 @@ const filters = ['全部', '益智', '动作', '双人'] as const;
 const selectedFilter = ref<(typeof filters)[number]>('全部');
 const search = ref('');
 const portraits: Readonly<Record<string, string>> = {
+  uncle: HOME_COVER_ART.uncle,
   starfall: HOME_COVER_ART.starfall,
   stardust: HOME_ART.duel,
   duel: HOME_ART.duel,
