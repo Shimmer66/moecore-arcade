@@ -1,0 +1,55 @@
+{
+  "engine": "baseline",
+  "startedAt": "2026-09-20T13:32:05.693Z",
+  "environment": {
+    "cwd": "C:\\home\\yuki\\projects\\moecore-arcade-spike\\",
+    "node": "v24.15.0",
+    "os": "win32 10.0.26200 x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 275HX",
+    "ramBytes": 33778278400,
+    "baseCommit": "281027b29a347a7f542146b54d60ea15a64c7b89",
+    "pnpm": "10.33.0"
+  },
+  "before": {
+    "duSh": "114M\tnode_modules",
+    "duAllocated": "118876160\tnode_modules",
+    "allocatedBytes": 118876160,
+    "duApparent": "109659856\tnode_modules",
+    "apparentBytes": 109659856,
+    "wcLock": "1570 pnpm-lock.yaml",
+    "lockLines": 1570
+  },
+  "commands": ["pnpm run build"],
+  "after": {
+    "duSh": "114M\tnode_modules",
+    "duAllocated": "118876160\tnode_modules",
+    "allocatedBytes": 118876160,
+    "duApparent": "109659856\tnode_modules",
+    "apparentBytes": 109659856,
+    "wcLock": "1570 pnpm-lock.yaml",
+    "lockLines": 1570
+  },
+  "installDelta": {
+    "allocatedBytes": 0,
+    "apparentBytes": 0,
+    "lockLines": 0
+  },
+  "assets": {
+    "files": [
+      {
+        "file": "index-ChCkZAjo.js",
+        "bytes": 2761,
+        "gzip9Bytes": 1420,
+        "gzip9NoNameBytes": 1402,
+        "viteGzipBytes": 1412,
+        "sha256": "a8d5425d664f011cda3beb38bc1c9847ca8c1c4ea13c04d890eea181f323e397"
+      }
+    ],
+    "totalBytes": 2761,
+    "totalGzip9Bytes": 1420,
+    "totalGzip9NoNameBytes": 1402,
+    "totalViteGzipBytes": 1412
+  },
+  "status": "complete",
+  "finishedAt": "2026-09-20T13:33:03.985Z"
+}
