@@ -20,7 +20,13 @@
 
 `steady/` 包含内置 image_gen 生成的四张选定样图：GPT 待接、GPT 硬撑、用户基准、上天接人的组合概念稿。GPT 身份参考本项目已有白龙娘图，另外三张沿用新基准；实际提示词、引用关系与修正记录见 [`steady/generation-log.json`](steady/generation-log.json)，尺寸、透明通道和哈希见 [`steady/manifest.json`](steady/manifest.json)。作者为 MoeCore Arcade contributors with image_gen，状态为 `generated-pending-review`。用户图已接入实验室人物，GPT 两姿态用于对白反应区；组合图仍作预览。硬撑初稿保留在 drafts，不列为选定成品。
 
-## 首页复用资源
+## 首页游戏封面
+
+2026-10-04 使用内置 `image_gen` 新增七张玩法封面，位于 [`home-covers/`](home-covers/README.md)，并通过 `HOME_COVER_ART` 接入首页。封面分别表现物理道具、陷阱出口、三消连线、白饭跑酷、推箱目标、鲸鲸队列与横版射击，避免继续复用通用角色头像。作者为 MoeCore Arcade contributors with GPT Image，状态为 `generated-pending-review`。
+
+发布文件统一处理为 768×768 WebP；参考素材、尺寸、哈希和最终提示词摘要见 [`home-covers/manifest.json`](home-covers/manifest.json) 与 [`home-covers/README.md`](home-covers/README.md)。原有格斗封面保持不变。
+
+## 运行时复用资源
 
 推演对决新增三人四帧动作组图集（三张、72 帧位）、六张独立蹲姿/蹲拳，以及三姿态扫腿图集，均由内置 image_gen 基于已有角色参考制作。完整提示词与源图见 [motion-prompts.json](duel/motion-prompts.json)、[single-prompts.json](duel/combat/crouch/single-prompts.json)、[sweep-generation.json](duel/combat/crouch/sweep-generation.json)，保留 `generated-pending-review` 来源状态；已校准运行时 viewport 并接入局内。PNG 未改图、抠图或重采样。
 
@@ -34,17 +40,17 @@
 
 推演对决封面由 `HOME_ART.duel` 映射到 `resources/duel-cover.svg`，在 `ASSETS.duelCover` 登记为 `original-placeholder`。封面、`games/duel/src/FighterSprite.vue` 内三位角色和 `DuelGame.vue` 内机房场景均为本项目代码绘制的 SVG，作者为 MoeCore Arcade contributors；没有引入第三方角色图、配音或字体。打击音由 Web Audio 合成，台词可选设备本地中文语音。角色形象为原型，仍需成品质量复核。
 
-首页通过 `src/index.ts` 的 `HOME_ART` 公开映射复用以下素材，保留原始来源和审核状态；复用不产生新的授权结论。
+游戏运行时和历史模块仍通过 `src/index.ts` 的 `HOME_ART` 公开映射复用以下素材，保留原始来源和审核状态；复用不产生新的授权结论。
 
-| 映射         | 文件                                                             | 用途                       |
-| ------------ | ---------------------------------------------------------------- | -------------------------- |
-| `match3`     | `match3/assets/tiles/gpt_tile_portrait.png`                      | 首屏白龙娘与消消乐封面     |
-| `parkour`    | `parkour/assets/characters/deepseek/poses/deepseek_pose_001.png` | 跑酷首页封面，来自旧素材包 |
-| `sokoban`    | `sokoban/runtime/char_S_idle_01.png`                             | 推箱子封面                 |
-| `whaleQueue` | `whale-queue/character/portrait_whalegirl_proud.png`             | 首屏角色与鲸鲸封面         |
-| `rewrite`    | `rewrite/runtime/deepseek-shoot.webp`                            | 幻觉防线封面               |
+| 映射         | 文件                                                             | 用途                  |
+| ------------ | ---------------------------------------------------------------- | --------------------- |
+| `match3`     | `match3/assets/tiles/gpt_tile_portrait.png`                      | 历史角色复用          |
+| `parkour`    | `parkour/assets/characters/deepseek/poses/deepseek_pose_001.png` | DeepSeek 姿态来源     |
+| `sokoban`    | `sokoban/runtime/char_S_idle_01.png`                             | 推箱子待机角色        |
+| `whaleQueue` | `whale-queue/character/portrait_whalegirl_proud.png`             | 鲸鲸角色与 Arena 解说 |
+| `rewrite`    | `rewrite/runtime/deepseek-shoot.webp`                            | 幻觉防线射击姿态      |
 
-幻觉防线首页入口使用 `HOME_ART.rewrite` 映射的 DeepSeek 娘射击姿态；游戏场景结合项目生成位图与 Vue 组件内 SVG。站点标识仍沿用资源元数据中的 `original-placeholder` 分类，当前描述不将其认定为已核验商标。
+幻觉防线运行时仍保留 `HOME_ART.rewrite` 映射的 DeepSeek 娘射击姿态；首页改用 `HOME_COVER_ART.rewrite`。游戏场景结合项目生成位图与 Vue 组件内 SVG。站点标识仍沿用资源元数据中的 `original-placeholder` 分类，当前描述不将其认定为已核验商标。
 
 ## 消消乐素材包
 
@@ -98,7 +104,7 @@
 
 ## 生成事故冒险复用资源
 
-《别乱生成！》复用 `HOME_ART.match3` 和 `HOME_ART.whaleQueue` 作为玩家与解说角色，保留原素材来源及审核状态。平台、星星、出口和事故演出由 SVG/CSS 绘制，短提示音通过 Web Audio 合成；本次没有调用图片生成。
+《别乱生成！》运行时复用 `HOME_ART.match3` 和 `HOME_ART.whaleQueue` 作为玩家与解说角色，保留原素材来源及审核状态。平台、星星、出口和事故演出由 SVG/CSS 绘制，短提示音通过 Web Audio 合成；首页封面另由内置 `image_gen` 生成并登记在 `home-covers/`。
 
 历史弹射原型曾使用 `ARENA_ART` 映射的三张消消乐头像；该映射仍保留，但当前冒险界面不引用它。新增素材须先向项目所有者列明需求并获得确认。
 

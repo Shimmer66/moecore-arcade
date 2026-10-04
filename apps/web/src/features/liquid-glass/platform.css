@@ -316,19 +316,27 @@
   position: absolute;
   top: 7px;
   left: 23px;
+  padding: 4px 8px;
+  border: 1px solid rgb(255 255 255 / 54%);
+  border-radius: 999px;
   color: #506583;
+  background: rgb(244 250 255 / 76%);
+  box-shadow: 0 4px 12px rgb(29 75 111 / 10%);
+  backdrop-filter: blur(8px);
   font-size: 10px;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.07em;
 }
 .platform-home .catalog-badge {
-  top: 4px;
+  top: 7px;
   left: auto;
   right: 21px;
-  padding: 0;
-  border: 0;
-  background: none;
-  box-shadow: none;
+  padding: 4px 8px;
+  border: 1px solid rgb(255 255 255 / 54%);
+  border-radius: 999px;
+  background: rgb(244 250 255 / 76%);
+  box-shadow: 0 4px 12px rgb(29 75 111 / 10%);
+  backdrop-filter: blur(8px);
   color: #4b607d;
   font-size: 10px;
   font-weight: 500;

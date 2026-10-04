@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { ArrowUpRight, Search, Sparkles, X } from '@lucide/vue';
-import { HOME_ART, HOME_COVER_ART } from '@moecore/assets';
+import { HOME_COVER_ART } from '@moecore/assets';
 import { games } from '../games/registry';
 
 const emit = defineEmits<{ select: [gameId: string] }>();
@@ -9,14 +9,14 @@ const filters = ['全部', '益智', '动作', '双人'] as const;
 const selectedFilter = ref<(typeof filters)[number]>('全部');
 const search = ref('');
 const portraits: Readonly<Record<string, string>> = {
-  duel: HOME_ART.duel,
-  steady: HOME_COVER_ART.match3,
+  duel: HOME_COVER_ART.duel,
+  steady: HOME_COVER_ART.steady,
   arena: HOME_COVER_ART.arena,
   match3: HOME_COVER_ART.match3,
-  parkour: HOME_COVER_ART.arena,
+  parkour: HOME_COVER_ART.parkour,
   sokoban: HOME_COVER_ART.sokoban,
   'whale-queue': HOME_COVER_ART.whaleQueue,
-  rewrite: HOME_COVER_ART.match3,
+  rewrite: HOME_COVER_ART.rewrite,
 };
 const visibleGames = computed(() =>
   games.filter(
@@ -94,10 +94,10 @@ function resetFilters() {
             <span v-if="game.badge" class="catalog-badge">{{ game.badge }}</span>
             <img
               :src="portraits[game.id]"
-              :class="['catalog-portrait', { 'catalog-poster': game.id === 'duel' }]"
+              class="catalog-portrait catalog-poster"
               alt=""
-              width="164"
-              height="164"
+              width="768"
+              height="768"
               loading="lazy"
               decoding="async"
             />

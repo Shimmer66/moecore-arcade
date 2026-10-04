@@ -37,11 +37,22 @@ test('home catalogue renders all current games with display-sized art', async ({
           (image) =>
             image instanceof HTMLImageElement &&
             image.complete &&
-            image.naturalWidth > 0 &&
+            image.naturalWidth >= 768 &&
+            image.naturalHeight >= 720 &&
             (image.currentSrc.startsWith('data:image/svg+xml') ||
               /\.(?:webp|svg)(?:$|\?)/.test(image.currentSrc)),
         ),
       ),
     )
     .toBe(true);
+  expect(
+    await portraits.evaluateAll(
+      (images) =>
+        new Set(
+          images.map((image) =>
+            image instanceof HTMLImageElement ? image.currentSrc : image.getAttribute('src'),
+          ),
+        ).size,
+    ),
+  ).toBe(8);
 });
