@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-10-04",
+  "tool": "built-in image_gen",
+  "author": "MoeCore Arcade contributors with GPT Image",
+  "reviewStatus": "generated-pending-review",
+  "runtimeProcessing": "Pillow resize to 768x768 WebP, quality 86, method 6",
+  "assets": [
+    {
+      "id": "steady-cover",
+      "file": "steady-cover.webp",
+      "width": 768,
+      "height": 768,
+      "sha256": "162bf952fcae5faa9e828bf20061e9320124a63675caa2ce08a5478d0f12ddc9",
+      "references": ["steady gameplay screenshot", "steady/characters/steady_gpt_ready.png"]
+    },
+    {
+      "id": "arena-cover",
+      "file": "arena-cover.webp",
+      "width": 768,
+      "height": 768,
+      "sha256": "eef70ed9da77997f8030b2d8bb8216c28947675f97bdac2ce9fa4afb0236a7c0",
+      "references": ["arena gameplay screenshot", "generated-world/first-batch/deepseek-run.png"]
+    },
+    {
+      "id": "match3-cover",
+      "file": "match3-cover.webp",
+      "width": 768,
+      "height": 768,
+      "sha256": "d43270a42ec713524495b663764ffe85b4d6ba2804909f25b6823c25cc313110",
+      "references": ["match3 gameplay screenshot", "match3 DeepSeek/GPT/Claude reaction tiles"]
+    },
+    {
+      "id": "parkour-cover",
+      "file": "parkour-cover.webp",
+      "width": 768,
+      "height": 768,
+      "sha256": "5a442df1594660407c19440d901bf96b1b363e1473c2130bc6428fbce448f940",
+      "references": ["parkour menu screenshot", "whale-runner/runtime/char_run_03.webp"]
+    },
+    {
+      "id": "sokoban-cover",
+      "file": "sokoban-cover.webp",
+      "width": 768,
+      "height": 768,
+      "sha256": "c3966e0b7829bb9800c276d276ef689e4325f972aa8ab6d78e29cc5b9a86f310",
+      "references": ["sokoban gameplay screenshot", "sokoban push character, box and goal assets"]
+    },
+    {
+      "id": "whale-queue-cover",
+      "file": "whale-queue-cover.webp",
+      "width": 768,
+      "height": 768,
+      "sha256": "607827b291e67de57bc565b701056d294b2069ad439287c7ee4713697ad493ac",
+      "references": [
+        "whale queue gameplay screenshot",
+        "player, queue whale and inspiration star assets"
+      ]
+    },
+    {
+      "id": "rewrite-cover",
+      "file": "rewrite-cover.webp",
+      "width": 768,
+      "height": 768,
+      "sha256": "00380dd90a023dfa749c49bfb040bd9df06dbd0f80d2cc2db2ee9f3b67fc6256",
+      "references": ["rewrite selection screenshot", "DeepSeek/GPT/Claude shooting poses"]
+    }
+  ]
+}

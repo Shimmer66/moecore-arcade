@@ -18,8 +18,9 @@ import LiquidSurface from '../features/liquid-glass/LiquidSurface.vue';
 const props = defineProps<{ gameId: string }>();
 const emit = defineEmits<{ exit: [] }>();
 const definition = shallowRef<GameDefinition>();
+const entry = computed(() => findGame(props.gameId));
 const displayTitle = computed(
-  () => findGame(props.gameId)?.title ?? definition.value?.title ?? '未找到游戏',
+  () => entry.value?.toolbarTitle ?? entry.value?.title ?? definition.value?.title ?? '未找到游戏',
 );
 const error = ref('');
 const loading = ref(false);
@@ -205,7 +206,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section ref="gameHost" class="game-host" :data-reduce-motion="reduceMotion">
+  <section
+    ref="gameHost"
+    class="game-host"
+    :data-game-id="gameId"
+    :data-reduce-motion="reduceMotion"
+  >
     <div class="game-toolbar">
       <LiquidGlass />
       <div class="game-heading">

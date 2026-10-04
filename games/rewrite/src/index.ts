@@ -3,6 +3,6 @@ import RewriteGame from './RewriteGame.vue';
 
 export const game = {
   id: 'rewrite',
-  title: '模型战争',
+  title: '幻觉防线',
   component: RewriteGame,
 } satisfies GameDefinition;

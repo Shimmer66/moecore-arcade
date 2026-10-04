@@ -50,10 +50,14 @@ export const HOME_ART = {
 
 /** Display-sized derivatives for the home page; games keep their full-resolution art. */
 export const HOME_COVER_ART = {
-  match3: HOME_ART.match3,
-  arena: new URL('../home-thumbs/deepseek-idle.webp', import.meta.url).href,
-  sokoban: HOME_ART.sokoban,
-  whaleQueue: HOME_ART.whaleQueue,
+  duel: HOME_ART.duel,
+  steady: new URL('../home-covers/steady-cover.webp', import.meta.url).href,
+  arena: new URL('../home-covers/arena-cover.webp', import.meta.url).href,
+  match3: new URL('../home-covers/match3-cover.webp', import.meta.url).href,
+  parkour: new URL('../home-covers/parkour-cover.webp', import.meta.url).href,
+  sokoban: new URL('../home-covers/sokoban-cover.webp', import.meta.url).href,
+  whaleQueue: new URL('../home-covers/whale-queue-cover.webp', import.meta.url).href,
+  rewrite: new URL('../home-covers/rewrite-cover.webp', import.meta.url).href,
 } as const;
 
 export type AssetId = (typeof ASSETS)[keyof typeof ASSETS]['id'];

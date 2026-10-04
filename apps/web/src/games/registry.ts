@@ -3,6 +3,7 @@ import type { GameDefinition } from '@moecore/game-sdk';
 export interface GameEntry {
   readonly id: string;
   readonly title: string;
+  readonly toolbarTitle?: string;
   readonly category: string;
   readonly icon: 'grid' | 'runner' | 'box' | 'whale';
   readonly description: string;
@@ -49,6 +50,7 @@ export const games: ReadonlyArray<GameEntry> = [
   {
     id: 'arena',
     title: '别乱生成！',
+    toolbarTitle: '别乱生成！',
     category: '动作 · 闯关',
     icon: 'runner',
     description: '地板会消失，出口会跑路。记住陷阱，再试一次。',
@@ -59,7 +61,7 @@ export const games: ReadonlyArray<GameEntry> = [
   },
   {
     id: 'match3',
-    title: '模型消消乐',
+    title: '幻觉消消乐',
     category: '益智 · 单人',
     icon: 'grid',
     description: '交换图块，在 20 步内完成收集目标。',
@@ -71,6 +73,7 @@ export const games: ReadonlyArray<GameEntry> = [
   {
     id: 'parkour',
     title: '大肥鱼跑酷：答案马上就到',
+    toolbarTitle: '大肥鱼跑酷',
     category: '动作 · 单人',
     icon: 'runner',
     description: '白饭照吃，答案照送。跑过四段离谱路程。',
@@ -93,6 +96,7 @@ export const games: ReadonlyArray<GameEntry> = [
   {
     id: 'whale-queue',
     title: '鲸鲸的灵感长队',
+    toolbarTitle: '鲸鲸长队',
     category: '动作 · 单人',
     icon: 'whale',
     description: '带着小鲸穿过数据海，收集 30 颗灵感星。',
@@ -103,10 +107,10 @@ export const games: ReadonlyArray<GameEntry> = [
   },
   {
     id: 'rewrite',
-    title: '模型战争',
+    title: '幻觉防线',
     category: '动作 · 单人 / 双人',
     icon: 'runner',
-    description: '单人或双人，六种武器，打穿八关。',
+    description: '单人或双人打穿八关，六种武器随时切换。',
     tags: ['动作', '单人', '双人'],
     tone: 'lav',
     badge: '街机射击',

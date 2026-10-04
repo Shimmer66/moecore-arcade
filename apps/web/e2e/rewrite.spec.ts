@@ -14,7 +14,7 @@ test('deploys original character art and supports aim, prone, jump, fire and gre
 }, info) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  await expect(page.getByRole('region', { name: '模型战争游戏' })).toBeVisible();
+  await expect(page.getByRole('region', { name: '幻觉防线游戏' })).toBeVisible();
   await expect
     .poll(() =>
       page
