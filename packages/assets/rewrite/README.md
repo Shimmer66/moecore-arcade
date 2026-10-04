@@ -1,4 +1,4 @@
-# AI 娘闯关素材
+# 模型战争素材
 
 2026-09-26 使用内置 GPT Image 生成项目素材，状态为 `generated-pending-review`。原始 PNG 保存在 `first-batch/`；`python scripts/prepare-rewrite-assets.py` 从原图和已有角色母版制作 `runtime/` 中的轻量 WebP。游戏通过 `@moecore/assets/rewrite` 加载运行图，不在构建中载入原图。
 
@@ -81,3 +81,42 @@ Boss 图集生成指令：Original anime AI meme side-scrolling run-and-gun enem
 `runtime/neural-nest-atlas-v1.png` 为内置 GPT Image 生成的1254×1254透明图集，四个627×627单元依次为孵化节点、幻觉幼体、推理心核和破碎空壳。前三个单元已用于终关真实敌人和弱点，空壳保留为后续持续破坏反馈素材；完整提示词和结果标识见 `neural-nest-prompts.json`。
 
 终关背景继续使用 `runtime/neural-nest-background.png`。图集只提供实体造型，孵化冷却、幼体移动、心核血量、Boss保护和命中框均由规则决定；标签、血条、受击闪烁和保护提示由SVG绘制。桌面与手机均检查过心核围绕Boss、节点关闭提示和幼体显示。
+
+## 2026-10-02 普通敌人动作与战斗特效
+
+单元一素材优化新增三张 GPT Image 透明母版，并通过
+`scripts/prepare-rewrite-combat-assets.py` 清理低透明度背景雾、逐格裁切、统一边距，输出透明
+WebP 运行图；战斗特效保持无损，角色与场景使用高质量压缩：
+
+- `enemy-motion-ground-v1.webp`：回执步兵、打印机炮台和弹簧垃圾邮件怪，各包含待机、攻击、受击和击破状态。
+- `enemy-motion-air-v1.webp`：无人机、狙击机和炉口机关，各包含四个战斗状态；炉口依次对应安全、预警、喷发和关闭。
+- `combat-vfx-atlas-v1.webp`：六武器专属反馈，以及手雷爆炸、护盾破碎、清场、受击、Boss阶段和重连等通用特效。
+
+PNG 母版保存在 `masters/`，生成结果标识、单元顺序和简化要求记录在
+`combat-polish-prompts.json`。敌人状态只读取现有冷却、受击和死亡事件，不改变碰撞、血量、射速
+或关卡规则；特效时钟继续由模拟时间驱动，暂停时冻结。
+
+## 2026-10-02 Boss 状态与关卡前景
+
+八个 Boss 新增强化阶段、受击和击破图：
+
+- `boss-phase-atlas-v1.webp`：4×2 单元，对应八个 Boss 的强化阶段。
+- `boss-reaction-atlas-v1.webp`：4×4 单元，前两行为八个受击状态，后两行为八个击破状态。
+
+Boss 图保持原有索引顺序。强化图由现有生命阶段驱动，受击图读取真实 `flash` 状态，击破图由
+真实死亡事件保留在关卡结算层下方；不从图片推导碰撞。
+
+`stage-props-12/34/56/78-v1.webp` 为四张4×2透明图集，每一行对应一关、每关四个装饰物。
+它们不进入碰撞，仅用于强化关卡身份。第七关新增
+`alignment-wall-background-v1.webp`，替换与第六关共用的服务器工厂背景。
+
+PNG 母版、生成结果和单元说明记录在 `boss-scenery-prompts.json`。
+
+## 2026-10-02 AI Meme 画面化与角色演出
+
+- `ai-meme-props-atlas-v1.webp`：八个关卡各一件专属AI Meme场景装置，包括限流闸门、正在输入终端、上下文溢出罐、幻觉引用投影器、Token预算机、递归子任务舱、安全拒绝门和答案写入终端。
+- `operator-reaction-atlas-v1.webp`：三名角色各有受击、稀有武器拾取、Boss登场和胜利四种通讯表情。
+- `mission-card-atlas-v1.webp`：八张不含文字的关卡开场底图，标题与Meme文案由游戏代码渲染，避免生成文字错误。
+
+关卡卡片与角色通讯均不接管输入。减少动态效果时保留信息但关闭进场动画。完整生成记录见
+`meme-presentation-prompts.json`。

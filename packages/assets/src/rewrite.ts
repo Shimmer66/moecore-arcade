@@ -24,6 +24,54 @@ const atlas = (
 });
 
 export const REWRITE_ART = {
+  enemyMotion: {
+    ground: sprite(
+      new URL('../rewrite/runtime/enemy-motion-ground-v1.webp', import.meta.url).href,
+      1536,
+      1152,
+    ),
+    air: sprite(
+      new URL('../rewrite/runtime/enemy-motion-air-v1.webp', import.meta.url).href,
+      1536,
+      1152,
+    ),
+  },
+  combatVfx: sprite(
+    new URL('../rewrite/runtime/combat-vfx-atlas-v1.webp', import.meta.url).href,
+    1024,
+    1024,
+  ),
+  bossReaction: sprite(
+    new URL('../rewrite/runtime/boss-reaction-atlas-v1.webp', import.meta.url).href,
+    1536,
+    1536,
+  ),
+  bossPhase: sprite(
+    new URL('../rewrite/runtime/boss-phase-atlas-v1.webp', import.meta.url).href,
+    1536,
+    768,
+  ),
+  stageProps: [
+    sprite(new URL('../rewrite/runtime/stage-props-12-v1.webp', import.meta.url).href, 1024, 512),
+    sprite(new URL('../rewrite/runtime/stage-props-34-v1.webp', import.meta.url).href, 1024, 512),
+    sprite(new URL('../rewrite/runtime/stage-props-56-v1.webp', import.meta.url).href, 1024, 512),
+    sprite(new URL('../rewrite/runtime/stage-props-78-v1.webp', import.meta.url).href, 1024, 512),
+  ],
+  memeProps: sprite(
+    new URL('../rewrite/runtime/ai-meme-props-atlas-v1.webp', import.meta.url).href,
+    1024,
+    512,
+  ),
+  operatorReaction: sprite(
+    new URL('../rewrite/runtime/operator-reaction-atlas-v1.webp', import.meta.url).href,
+    1024,
+    768,
+  ),
+  missionCards: sprite(
+    new URL('../rewrite/runtime/mission-card-atlas-v1.webp', import.meta.url).href,
+    1536,
+    432,
+  ),
   nestAtlas: sprite(
     new URL('../rewrite/runtime/neural-nest-atlas-v1.png', import.meta.url).href,
     1254,
@@ -194,5 +242,6 @@ export const REWRITE_ART = {
     new URL('../rewrite/runtime/server-war-background.png', import.meta.url).href,
     new URL('../rewrite/runtime/token-furnace-background.png', import.meta.url).href,
     new URL('../rewrite/runtime/neural-nest-background.png', import.meta.url).href,
+    new URL('../rewrite/runtime/alignment-wall-background-v1.webp', import.meta.url).href,
   ],
 } as const;

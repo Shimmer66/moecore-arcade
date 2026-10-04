@@ -87,6 +87,6 @@ onUnmounted(() => window.removeEventListener('hashchange', onRouteChange));
       <HomeView v-else @select="selectGame" />
     </main>
 
-    <footer class="site-footer">摸鱼局 · AI 角色小游戏合集 · 非官方同人项目</footer>
+    <footer class="site-footer">摸鱼局 · 小游戏合集</footer>
   </div>
 </template>

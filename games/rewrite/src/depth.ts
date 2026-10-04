@@ -54,7 +54,16 @@ export interface DepthState {
   shots: DepthShot[];
   hostile: DepthHostile[];
   grenades: { x: number; y: number; z: number; fuse: number; originZ: number; originY: number }[];
-  effects: { x: number; y: number; z: number; life: number; boom: boolean }[];
+  effects: {
+    x: number;
+    y: number;
+    z: number;
+    life: number;
+    boom: boolean;
+    kind?: 'hit' | 'muzzle';
+    weapon?: Weapon;
+    defeat?: boolean;
+  }[];
 }
 const clamp = (n: number, a: number, b: number) => Math.max(a, Math.min(b, n));
 const players = (s: RunState) => (s.partner ? [s, s.partner] : [s]).filter((p) => p.lives > 0);
@@ -205,6 +214,15 @@ export function fireDepth(base: DepthState, p: PlayerState, firstId: number): nu
       hits: [],
     }),
   );
+  base.effects.push({
+    x: p.x,
+    y: p.y + (p.crouching ? 0.3 : 0.8),
+    z: p.depthZ + 0.5,
+    life: 0.14,
+    boom: false,
+    kind: 'muzzle',
+    weapon: p.weapon,
+  });
   return offsets.length;
 }
 export function grenadeDepth(base: DepthState, p: PlayerState) {
@@ -247,8 +265,25 @@ export function purgeDepth(s: RunState): boolean {
   }
   return bossDefeated;
 }
-function effect(base: DepthState, x: number, y: number, z: number, boom = false) {
-  base.effects.push({ x, y, z, life: boom ? 0.55 : 0.2, boom });
+function effect(
+  base: DepthState,
+  x: number,
+  y: number,
+  z: number,
+  boom = false,
+  weapon?: Weapon,
+  defeat = false,
+) {
+  base.effects.push({
+    x,
+    y,
+    z,
+    life: boom ? 0.55 : 0.2,
+    boom,
+    ...(defeat ? { defeat: true } : {}),
+    ...(!boom ? { kind: 'hit' as const } : {}),
+    ...(weapon ? { weapon } : {}),
+  });
 }
 function shootAt(base: DepthState, t: DepthTarget, x: number, y: number, speed: number, z = 0) {
   if (base.hostile.length >= 100) return;
@@ -309,21 +344,21 @@ export function stepDepth(s: RunState, dt: number, hooks: DepthHooks) {
         t.originX +
         Math.sin(base.age * 1.2 + (Math.floor(slot / 2) * Math.PI) / 2) * (slot % 2 ? 1 : -1) * 1.8;
     }
-  const damageTarget = (t: DepthTarget, damage: number) => {
+  const damageTarget = (t: DepthTarget, damage: number, weapon?: Weapon) => {
     if (t.hp <= 0) return;
     if (
       (t.kind === 'boss' && depthBossProtected(base)) ||
       (t.kind === 'head' && !depthTargetOpen(base, t))
     ) {
-      effect(base, t.x, t.y, t.z);
+      effect(base, t.x, t.y, t.z, false, weapon);
       return;
     }
     t.hp -= damage * (depthTargetOpen(base, t) ? 1 : 0.35);
     t.flash = 0.08;
-    effect(base, t.x, t.y, t.z);
+    effect(base, t.x, t.y, t.z, false, weapon);
     if (t.kind === 'boss') boss.hp = t.hp;
     if (t.hp > 0) return;
-    effect(base, t.x, t.y, t.z, true);
+    effect(base, t.x, t.y, t.z, true, weapon, t.kind === 'boss');
     if (t.kind === 'boss') {
       hooks.bossDefeated();
       return;
@@ -375,7 +410,7 @@ export function stepDepth(s: RunState, dt: number, hooks: DepthHooks) {
         Math.abs(y - t.y) > (t.kind === 'boss' ? 1.8 : 0.65) + b.radius
       )
         continue;
-      damageTarget(t, b.damage);
+      damageTarget(t, b.damage, b.weapon);
       b.hits.push(t.id);
       if (b.weapon !== 'laser' && b.weapon !== 'flame') {
         b.z = 99;

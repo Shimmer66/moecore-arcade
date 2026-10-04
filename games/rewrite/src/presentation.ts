@@ -1,6 +1,6 @@
 export interface ImpactEffect {
   id: number;
-  kind: 'hit' | 'boom' | 'shield' | 'pickup';
+  kind: 'hit' | 'boom' | 'shield' | 'pickup' | 'muzzle' | 'defeat';
   life: number;
 }
 
@@ -25,9 +25,11 @@ export function impactFeedback(
     const strength =
       effect.kind === 'boom'
         ? Math.min(1, effect.life / 0.55) * 5
-        : effect.kind === 'hit'
-          ? Math.min(1, effect.life / 0.24) * 3.2
-          : 0;
+        : effect.kind === 'defeat'
+          ? Math.min(1, effect.life / 0.55) * 3.5
+          : effect.kind === 'hit'
+            ? Math.min(1, effect.life / 0.24) * 3.2
+            : 0;
     if (strength > amplitude) {
       amplitude = strength;
       seed = effect.id;
@@ -35,7 +37,7 @@ export function impactFeedback(
     if (effect.kind === 'hit' && effect.life > 0) {
       flash = Math.max(flash, Math.min(0.16, effect.life * 0.65));
       color = '#ff7187';
-    } else if (effect.kind === 'boom' && effect.life > 0) {
+    } else if ((effect.kind === 'boom' || effect.kind === 'defeat') && effect.life > 0) {
       flash = Math.max(flash, Math.min(0.08, effect.life * 0.18));
     }
   }

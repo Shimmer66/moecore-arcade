@@ -8,7 +8,7 @@ import {
 
 async function enterGame(page: Page) {
   await page.goto('/');
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(64);
   await expect(page.getByTestId('moves')).toHaveText('20');
 }
@@ -39,7 +39,7 @@ test('opens the Vue game, renders assets, and fits the viewport', async ({ page 
   });
   await enterGame(page);
   await expect(page).toHaveURL(/#\/games\/match3$/);
-  await expect(page.getByRole('heading', { name: 'AI 娘消消乐', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '模型消消乐', exact: true })).toBeVisible();
   await expect(page.locator('.match3-game canvas')).toHaveCount(0);
   await expect
     .poll(() =>
@@ -201,7 +201,7 @@ test('background pause requires explicit resume, and restart and exit replace th
   await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
   await page.getByRole('button', { name: '确认', exact: true }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(0);
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(64);
   await expect(page.getByTestId('moves')).toHaveText('20');
   await page.reload();
@@ -231,12 +231,12 @@ test('leaving while a game chunk loads cannot mount a stale game', async ({ page
     await gate;
     await route.continue();
   });
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.getByText('正在加载游戏…')).toBeVisible();
   await page.getByRole('button', { name: '返回游戏列表', exact: true }).click();
   await expect(page.getByRole('heading', { name: '小游戏', exact: true })).toBeVisible();
   release();
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.locator('.match3-tile')).toHaveCount(64);
   await page.unroute('**/*.js');
 });
@@ -244,7 +244,7 @@ test('leaving while a game chunk loads cannot mount a stale game', async ({ page
 test('a failed game load offers a working retry', async ({ page }) => {
   await page.goto('/');
   await page.route('**/*.js', (route) => route.abort());
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page.getByRole('alert')).toContainText('游戏加载失败');
   await page.unroute('**/*.js');
   await page.getByRole('button', { name: '重新加载', exact: true }).click();

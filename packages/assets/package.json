@@ -12,6 +12,7 @@
     "./parkour": "./src/parkour.ts",
     "./parkour-portraits": "./src/parkour-portraits.ts",
     "./rewrite": "./src/rewrite.ts",
+    "./stardust": "./src/stardust.ts",
     "./whale-runner": "./src/whale-runner.ts",
     "./sokoban": "./src/sokoban.ts",
     "./whale-queue": "./src/whale-queue.ts"

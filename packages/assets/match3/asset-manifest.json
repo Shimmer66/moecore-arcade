@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "assetCount": 70,
   "sourceImageCount": 16,
-  "description": "AI 娘消消乐素材整理包。70 张独立透明 PNG，其中六张头像棋子和十张搞怪反应图按角色设定绘制。",
+  "description": "模型消消乐素材整理包。70 张独立透明 PNG，其中六张头像棋子和十张搞怪反应图按角色设定绘制。",
   "imageSpec": {
     "legacyCanvasWidth": 384,
     "legacyCanvasHeight": 384,

@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref, shallowRef, watch } from 'vue';
 import { REWRITE_ART } from '@moecore/assets/rewrite';
 import type { GameEvents, GameProps } from '@moecore/game-sdk';
 import DepthBattle from './DepthBattle.vue';
 import ActorSprite from './ActorSprite.vue';
 import ItemArt from './ItemArt.vue';
 import FireballSprite from './FireballSprite.vue';
+import EnemyArt from './EnemyArt.vue';
+import CombatEffect from './CombatEffect.vue';
+import BossArt from './BossArt.vue';
+import StageProp from './StageProp.vue';
+import StageMeme from './StageMeme.vue';
+import OperatorReaction from './OperatorReaction.vue';
+import MissionCard from './MissionCard.vue';
+import { personaMemeLine, sectorMemeLine, stageMemeLine } from './meme';
 import { effectTones, musicBpm, musicTones, type ToneSpec } from './sound';
 import { impactFeedback } from './presentation';
 import { platformsAt } from './levels';
@@ -35,6 +43,7 @@ import {
   difficultyNames,
   initialContinues,
   type Difficulty,
+  type Enemy,
   type Persona,
   type RunInput,
   type RunState,
@@ -63,8 +72,13 @@ interface PointerBinding {
   actions: string[];
   playerId: 1 | 2;
   kind: 'dpad' | 'action';
+  stick?: HTMLElement;
 }
 const pointers = new Map<number, PointerBinding>();
+const stickPositions = reactive({
+  1: { x: 0, y: 0 },
+  2: { x: 0, y: 0 },
+});
 const queued = new Set<string>();
 const equipped = new Map<1 | 2, Weapon>();
 const gamepadHeld = new Set<string>();
@@ -131,15 +145,79 @@ const feedback = computed(() =>
 const enemies = computed(() =>
   state.value.enemies.filter((e) => e.hp > 0 && visible(e.x) && visibleY(e.y)),
 );
+const enemyVisualState = (enemy: Enemy) =>
+  enemy.flash > 0
+    ? ('hit' as const)
+    : enemy.cooldown < 0.45
+      ? ('attack' as const)
+      : ('idle' as const);
 const boss = computed(() => state.value.enemies.find((e) => e.kind === 'boss'));
 const bossWarning = computed(() =>
   !state.value.base && boss.value && state.value.arena && boss.value.cooldown < 0.7
     ? bossAttack(state.value, boss.value)
     : null,
 );
-const bossViewBox = computed(() => {
-  const size = REWRITE_ART.bossAtlas.width / 4;
-  return `${(state.value.levelIndex % 4) * size} ${Math.floor(state.value.levelIndex / 4) * size} ${size} ${size}`;
+const bossVisualState = (enemy: Enemy) =>
+  enemy.flash > 0
+    ? ('hit' as const)
+    : bossPhase(enemy) >= 2
+      ? ('phase' as const)
+      : ('idle' as const);
+const stageDecorations = computed(() =>
+  level.value.axis === 'vertical'
+    ? [
+        { x: 2.2, y: 5, slot: 0 },
+        { x: 18.5, y: 17, slot: 1 },
+        { x: 2.8, y: 31, slot: 2 },
+        { x: 18, y: 44, slot: 3 },
+      ]
+    : [0.12, 0.36, 0.62, 0.84].map((fraction, slot) => ({
+        x: level.value.length * fraction,
+        y: slot % 2 ? 0.1 : 0,
+        slot,
+      })),
+);
+const stageMemePosition = computed(() =>
+  level.value.axis === 'vertical' ? { x: 11, y: 24 } : { x: level.value.length * 0.52, y: 0.2 },
+);
+const operatorReaction = computed(() => {
+  if (!selected.value) return null;
+  if (state.value.phase === 'level-complete' || state.value.phase === 'won')
+    return {
+      persona: state.value.persona,
+      reaction: 'victory' as const,
+      label: personaMemeLine(state.value.persona, 'victory'),
+    };
+  const hurtPlayer = players.value.find(
+    (player) =>
+      state.value.stageTime > 1.5 &&
+      player.lives > 0 &&
+      player.invulnerable > 0 &&
+      player.invulnerable <= 1.4,
+  );
+  if (hurtPlayer)
+    return {
+      persona: hurtPlayer.persona,
+      reaction: 'hit' as const,
+      label: personaMemeLine(hurtPlayer.persona, 'hit'),
+    };
+  const pickupPlayer = players.value.find(
+    (player) =>
+      player.latestWeapon && state.value.noticeTime > 0 && state.value.notice.includes('入库'),
+  );
+  if (pickupPlayer)
+    return {
+      persona: pickupPlayer.persona,
+      reaction: 'pickup' as const,
+      label: personaMemeLine(pickupPlayer.persona, 'pickup'),
+    };
+  if (state.value.arena && state.value.stageTime < 1.8)
+    return {
+      persona: state.value.persona,
+      reaction: 'boss' as const,
+      label: personaMemeLine(state.value.persona, 'boss'),
+    };
+  return null;
 });
 const weapon = computed(() => weapons[state.value.weapon]);
 const progress = computed(() =>
@@ -195,6 +273,8 @@ function release() {
   pointers.clear();
   queued.clear();
   equipped.clear();
+  stickPositions[1].x = stickPositions[1].y = 0;
+  stickPositions[2].x = stickPositions[2].y = 0;
   accumulator = 0;
 }
 function pollGamepads(active: boolean) {
@@ -257,20 +337,51 @@ function press(
   for (const action of actions)
     if (['jump', 'grenade', 'shoot'].includes(action)) queued.add(actionName(action, playerId));
 }
+function updateJoystick(event: PointerEvent, binding: PointerBinding) {
+  if (!binding.stick) return;
+  const rect = binding.stick.getBoundingClientRect();
+  const dx = event.clientX - (rect.left + rect.width / 2);
+  const dy = event.clientY - (rect.top + rect.height / 2);
+  const radius = Math.min(rect.width, rect.height) / 2;
+  const distance = Math.hypot(dx, dy);
+  if (distance < radius * 0.18 || distance > radius * 1.18) {
+    stickPositions[binding.playerId].x = 0;
+    stickPositions[binding.playerId].y = 0;
+    binding.actions = [];
+    return;
+  }
+  const travel = Math.min(27, distance ? (distance / radius) * 34 : 0);
+  stickPositions[binding.playerId].x = distance ? (dx / distance) * travel : 0;
+  stickPositions[binding.playerId].y = distance ? (dy / distance) * travel : 0;
+  const nx = dx / distance;
+  const ny = dy / distance;
+  const actions: string[] = [];
+  if (nx < -0.34) actions.push('left');
+  if (nx > 0.34) actions.push('right');
+  if (ny < -0.34) actions.push('up');
+  if (ny > 0.34) actions.push('down');
+  binding.actions = actions.map((action) => actionName(action, binding.playerId));
+}
+function pressJoystick(event: PointerEvent, playerId: 1 | 2) {
+  const player = teamPlayers(state.value).find((candidate) => candidate.playerId === playerId);
+  if (props.paused || !selected.value || state.value.phase !== 'running' || !player?.lives) return;
+  const stick = event.currentTarget as HTMLElement;
+  stick.setPointerCapture(event.pointerId);
+  const binding: PointerBinding = { actions: [], playerId, kind: 'dpad', stick };
+  pointers.set(event.pointerId, binding);
+  updateJoystick(event, binding);
+}
 function movePointer(event: PointerEvent) {
   const binding = pointers.get(event.pointerId);
   if (!binding || binding.kind !== 'dpad') return;
-  const target = document
-    .elementFromPoint(event.clientX, event.clientY)
-    ?.closest<HTMLButtonElement>('button[data-control-kind="dpad"]');
-  if (!target || target.disabled || target.dataset.controlPlayer !== String(binding.playerId)) {
-    pointers.delete(event.pointerId);
-    return;
-  }
-  const actions = target.dataset.controlActions?.split(',').filter(Boolean) ?? [];
-  binding.actions = actions.map((action) => actionName(action, binding.playerId));
+  updateJoystick(event, binding);
 }
 function pointerUp(event: PointerEvent) {
+  const binding = pointers.get(event.pointerId);
+  if (binding?.kind === 'dpad') {
+    stickPositions[binding.playerId].x = 0;
+    stickPositions[binding.playerId].y = 0;
+  }
   pointers.delete(event.pointerId);
 }
 function accessibleAction(event: MouseEvent, action: string, playerId: 1 | 2 = 1) {
@@ -694,7 +805,7 @@ onUnmounted(() => {
 <template>
   <section
     class="rewrite-game"
-    aria-label="AI 娘闯关游戏"
+    aria-label="模型战争游戏"
     :style="{ '--mission': level.color }"
     :data-audio-voices="audioVoices"
     :data-music-beat="musicMarker"
@@ -704,7 +815,7 @@ onUnmounted(() => {
     <header class="rewrite-heading">
       <div>
         <span class="rewrite-eyebrow">NEURAL FRONT / RUN & GUN</span>
-        <h2>AI 娘闯关 <span>模型战争</span></h2>
+        <h2>模型战争 <span>八关突围</span></h2>
       </div>
       <div class="rewrite-audio-group">
         <button
@@ -996,6 +1107,27 @@ onUnmounted(() => {
             />
           </g>
           <g :transform="`translate(${-camera + feedback.x}, ${cameraY + feedback.y})`">
+            <g aria-hidden="true" opacity="0.5">
+              <StageProp
+                v-for="decor in stageDecorations"
+                :key="`decor${decor.slot}`"
+                :stage="state.levelIndex"
+                :prop-index="decor.slot"
+                :x="decor.x * 40 - 38"
+                :y="350 - decor.y * 40 - 76"
+                width="76"
+                height="76"
+              />
+            </g>
+            <StageMeme
+              aria-hidden="true"
+              :stage="state.levelIndex"
+              :x="stageMemePosition.x * 40 - 40"
+              :y="350 - stageMemePosition.y * 40 - 80"
+              width="80"
+              height="80"
+              opacity="0.62"
+            />
             <g v-if="level.axis === 'vertical'" aria-hidden="true">
               <rect
                 x="382"
@@ -1141,10 +1273,16 @@ onUnmounted(() => {
                 </text>
               </g>
               <g v-else-if="h.kind !== 'mirage'">
-                <ItemArt
+                <EnemyArt
                   v-if="h.kind === 'firewall'"
                   kind="firewall"
-                  enemy
+                  :state="
+                    hazardState(i, state.stageTime) === 'active'
+                      ? 'hit'
+                      : hazardState(i, state.stageTime) === 'warning'
+                        ? 'attack'
+                        : 'idle'
+                  "
                   :x="h.from * 40 - 12"
                   y="303"
                   width="48"
@@ -1270,20 +1408,15 @@ onUnmounted(() => {
                   stroke-dasharray="8 8"
                   opacity="0.35"
                 />
-                <svg
+                <BossArt
                   x="-85"
                   y="-164"
                   width="170"
                   height="170"
-                  :viewBox="bossViewBox"
+                  :stage="state.levelIndex"
+                  :state="bossVisualState(e)"
                   :opacity="e.flash > 0 ? 0.5 : 1"
-                >
-                  <image
-                    :href="REWRITE_ART.bossAtlas.url"
-                    :width="REWRITE_ART.bossAtlas.width"
-                    :height="REWRITE_ART.bossAtlas.height"
-                  />
-                </svg>
+                />
                 <text
                   y="-164"
                   text-anchor="middle"
@@ -1309,7 +1442,18 @@ onUnmounted(() => {
                   stroke="#f5a4ff"
                   stroke-width="3"
                 />
+                <EnemyArt
+                  v-if="['runner', 'turret', 'drone', 'sniper', 'hopper'].includes(e.kind)"
+                  :kind="e.kind"
+                  :state="enemyVisualState(e)"
+                  :x="e.kind === 'heart' ? -39 : -34"
+                  :y="e.kind === 'heart' ? -70 : -57"
+                  :width="e.kind === 'heart' ? 78 : 68"
+                  :height="e.kind === 'heart' ? 70 : 57"
+                  :opacity="e.flash > 0 ? 0.4 : 1"
+                />
                 <ItemArt
+                  v-else
                   :kind="e.kind"
                   enemy
                   :x="e.kind === 'heart' ? -39 : -34"
@@ -1468,19 +1612,13 @@ onUnmounted(() => {
               :key="`fx${e.id}`"
               :transform="`translate(${e.x * 40}, ${350 - e.y * 40})`"
             >
-              <circle
-                :r="
-                  props.settings.reduceMotion
-                    ? 14
-                    : e.kind === 'boom'
-                      ? 12 + (0.55 - e.life) * 90
-                      : 8 + (0.24 - e.life) * 55
-                "
-                :stroke="e.kind === 'boom' ? '#ffc578' : '#a3fff1'"
-                :stroke-width="e.kind === 'boom' ? 6 : 2"
-                fill="#fff5ba"
-                :fill-opacity="props.settings.reduceMotion ? 0.05 : e.life * 0.5"
-                :opacity="Math.min(1, e.life * 4)"
+              <CombatEffect
+                :kind="e.kind"
+                :weapon="e.weapon"
+                :enemy="e.enemy"
+                :stage="state.levelIndex"
+                :life="e.life"
+                :reduce-motion="props.settings.reduceMotion"
               />
             </g>
           </g>
@@ -1505,6 +1643,31 @@ onUnmounted(() => {
           pointer-events="none"
         />
       </svg>
+      <div
+        v-if="selected && state.phase === 'running' && state.stageTime < 1.4"
+        class="rewrite-mission-card"
+        :class="{ static: props.settings.reduceMotion }"
+      >
+        <MissionCard :stage="state.levelIndex" />
+        <span>NODE 0{{ state.levelIndex + 1 }}</span>
+        <strong>{{ level.title }}</strong>
+        <small>{{ stageMemeLine(state.levelIndex, 'intro') }}</small>
+      </div>
+      <div
+        v-if="operatorReaction"
+        class="rewrite-operator-reaction"
+        :class="{ static: props.settings.reduceMotion }"
+        aria-live="polite"
+      >
+        <OperatorReaction
+          :persona="operatorReaction.persona"
+          :reaction="operatorReaction.reaction"
+        />
+        <p>
+          <b>{{ personas[operatorReaction.persona].name }}</b>
+          <span>{{ operatorReaction.label }}</span>
+        </p>
+      </div>
       <div v-if="selected" class="rewrite-mission">
         <span>0{{ state.levelIndex + 1 }} / 08</span><strong>{{ level.title }}</strong
         ><small>{{
@@ -1528,7 +1691,7 @@ onUnmounted(() => {
         <div class="rewrite-brief">
           <span class="rewrite-eyebrow">MISSION 01—08</span>
           <h3>别让幻觉<br />替你开火。</h3>
-          <p>八关突围，清掉幻觉与限流。选角色，直接开打。</p>
+          <p>选角色，打穿八关。</p>
         </div>
         <div class="rewrite-deploy">
           <div class="rewrite-difficulty" aria-label="出击人数">
@@ -1656,7 +1819,8 @@ onUnmounted(() => {
     </div>
     <div v-if="selected && sector && !state.arena" class="rewrite-sector" aria-live="polite">
       <b>{{ sector.title }}</b
-      ><span>{{ sector.hint }}</span>
+      ><span>{{ sector.hint }}</span
+      ><em>{{ sectorMemeLine(state.levelIndex, state.sector) }}</em>
     </div>
     <div v-if="selected" class="rewrite-control-deck" :class="{ duo: state.partner }">
       <div
@@ -1674,9 +1838,14 @@ onUnmounted(() => {
         <div
           class="rewrite-dpad rewrite-joystick"
           :style="{
-            '--stick-x': `${(Number(has('right', controller.playerId)) - Number(has('left', controller.playerId))) * 27}px`,
-            '--stick-y': `${(Number(has('down', controller.playerId)) - Number(has('up', controller.playerId))) * 27}px`,
+            '--stick-x': `${stickPositions[controller.playerId].x}px`,
+            '--stick-y': `${stickPositions[controller.playerId].y}px`,
           }"
+          @pointerdown.prevent="pressJoystick($event, controller.playerId)"
+          @pointermove.prevent="movePointer"
+          @pointerup="pointerUp"
+          @pointercancel="pointerUp"
+          @lostpointercapture="pointerUp"
         >
           <button
             v-for="key in dpad"
@@ -1691,11 +1860,6 @@ onUnmounted(() => {
             data-control-kind="dpad"
             :data-control-player="controller.playerId"
             :data-control-actions="key.actions.join(',')"
-            @pointerdown.prevent="press($event, key.actions, controller.playerId)"
-            @pointermove.prevent="movePointer"
-            @pointerup="pointerUp"
-            @pointercancel="pointerUp"
-            @lostpointercapture="pointerUp"
           >
             {{ key.icon }}
           </button>
@@ -1773,7 +1937,7 @@ onUnmounted(() => {
         思考时减伤，生成时暴露核心。角色死亡会丢失当前特殊武器，其他库存保留，检查点复活有 2.5
         秒保护。虚线桥是幻觉，必须跳过。每关击败 Boss 后补充一命，最多五命。
       </p>
-      <p>AI 品牌与角色能力均为本作虚构同人设定。</p>
+      <p>角色与能力均为虚构设定。</p>
       <p>
         先击破飞行胶囊或补给箱，再领取释放的道具。算力超频提升射速12秒；沙盒力场免疫攻击6秒，但不能阻止坠落；全量清理消除附近杂兵和弹幕，对Boss造成20伤害，不会清除基地核心。限时增益换枪后保留，暂停时冻结，阵亡时消失；同类剩余不足一半时才领取并刷新，避免浪费。
       </p>
@@ -2008,6 +2172,115 @@ h2 span {
   pointer-events: none;
   font-size: 12px;
   text-shadow: 0 2px 8px #000;
+}
+.rewrite-mission-card {
+  position: absolute;
+  z-index: 6;
+  top: 74px;
+  left: 50%;
+  width: min(390px, 58%);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--mission), transparent 25%);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px #030912b8;
+  color: #f4fbff;
+  text-align: center;
+  pointer-events: none;
+  transform: translateX(-50%);
+  animation: rewrite-mission-in 0.28s ease-out both;
+}
+.rewrite-mission-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #06111c22, #07111dd9);
+}
+.rewrite-mission-card > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.rewrite-mission-card > span,
+.rewrite-mission-card > strong,
+.rewrite-mission-card > small {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+.rewrite-mission-card > span {
+  margin-top: 15%;
+  color: var(--mission);
+  font: 700 10px monospace;
+  letter-spacing: 2px;
+}
+.rewrite-mission-card > strong {
+  margin-top: 5px;
+  font-size: 23px;
+}
+.rewrite-mission-card > small {
+  margin: 5px 16px 0;
+  color: #c5d6e0;
+  font-size: 11px;
+}
+.rewrite-operator-reaction {
+  position: absolute;
+  z-index: 7;
+  right: 14px;
+  bottom: 34px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  max-width: 210px;
+  padding: 5px 8px 5px 3px;
+  border: 1px solid #6d8ba0;
+  border-radius: 8px;
+  background: #091827df;
+  box-shadow: 0 8px 18px #0208109e;
+  pointer-events: none;
+  animation: rewrite-reaction-in 0.2s ease-out both;
+}
+.rewrite-operator-reaction > svg {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  margin-bottom: -5px;
+}
+.rewrite-operator-reaction p {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 5px;
+  color: #bed0da;
+  font-size: 10px;
+}
+.rewrite-operator-reaction b {
+  color: #f5fbff;
+  font-size: 11px;
+}
+.rewrite-mission-card.static,
+.rewrite-operator-reaction.static {
+  animation: none;
+}
+@keyframes rewrite-mission-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+@keyframes rewrite-reaction-in {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 .rewrite-mission > span:first-child {
   color: var(--mission);
@@ -2973,6 +3246,12 @@ h2 span {
 .rewrite-sector b {
   color: #d5baff;
 }
+.rewrite-sector em {
+  width: 100%;
+  color: #86cfca;
+  font-style: normal;
+  font-size: 10px;
+}
 .rewrite-quick-deck button {
   flex: 1;
   display: flex;
@@ -3366,6 +3645,38 @@ h2 span {
   }
   .rewrite-loadout-panel > summary {
     min-height: 36px;
+  }
+  .rewrite-mission-card {
+    top: 42px;
+    width: 72%;
+  }
+  .rewrite-mission-card > span {
+    margin-top: 12%;
+    font-size: 8px;
+  }
+  .rewrite-mission-card > strong {
+    font-size: 17px;
+  }
+  .rewrite-mission-card > small {
+    margin-top: 2px;
+    font-size: 9px;
+  }
+  .rewrite-operator-reaction {
+    right: 7px;
+    bottom: 29px;
+    max-width: 150px;
+    padding: 3px 6px 3px 1px;
+  }
+  .rewrite-operator-reaction > svg {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+  }
+  .rewrite-operator-reaction p {
+    font-size: 8px;
+  }
+  .rewrite-operator-reaction b {
+    font-size: 9px;
   }
 }
 </style>

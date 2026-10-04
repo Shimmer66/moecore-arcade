@@ -113,7 +113,7 @@ test('filters remain usable and game glass stays within the toolbar', async ({ p
     'true',
   );
 
-  await page.getByRole('button', { name: /AI 娘消消乐/ }).click();
+  await page.getByRole('button', { name: /模型消消乐/ }).click();
   await expect(page).toHaveURL(/#\/games\/match3$/);
   await expect(page.locator('.match3-tile')).toHaveCount(64);
   await expect(page.locator('.game-toolbar canvas.liquid-glass-canvas')).toHaveAttribute(

@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-02",
+  "tool": "built-in image_gen.imagegen",
+  "assets": [
+    {
+      "master": "masters/ai-meme-props-atlas-v1.png",
+      "runtime": "runtime/ai-meme-props-atlas-v1.webp",
+      "result": "call_3xjCmtO7KPeBQtnJgitefgn1.png",
+      "transparent_background": true,
+      "layout": "4 columns x 2 rows",
+      "cells": [
+        "rate-limit-barrier",
+        "typing-terminal",
+        "context-overflow-tank",
+        "citation-projector",
+        "token-budget-meter",
+        "recursive-task-cloner",
+        "refusal-checkpoint",
+        "answer-writer"
+      ]
+    },
+    {
+      "master": "masters/operator-reaction-atlas-v1.png",
+      "runtime": "runtime/operator-reaction-atlas-v1.webp",
+      "result": "call_Gz0fziNhhCR0x27rnBmbMQK2.png",
+      "transparent_background": true,
+      "layout": "4 columns x 3 rows",
+      "brief_record": "One persona per row. Columns are hurt, rare pickup, boss arrival and victory reactions while preserving the three existing character identities."
+    },
+    {
+      "master": "masters/mission-card-atlas-v1.png",
+      "runtime": "runtime/mission-card-atlas-v1.webp",
+      "result": "call_7B2yCRQlHyigQZXQHuFNu6NR.png",
+      "transparent_background": true,
+      "layout": "4 columns x 2 rows",
+      "brief_record": "Eight text-free landscape mission panels in stage order, with dark central space for code-rendered title and meme copy."
+    }
+  ],
+  "processing": "scripts/prepare-rewrite-combat-assets.py normalizes the prop and portrait atlases to padded square cells and mission cards to 384x216 cells, then writes high-quality transparent WebP runtime images."
+}

@@ -4,7 +4,7 @@ test('game pages return to the catalog and anchor links land on their sections',
   page,
 }) => {
   await page.goto('/#/games/rewrite');
-  await expect(page.getByRole('heading', { level: 1, name: 'AI 娘闯关' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: '模型战争' })).toBeVisible();
 
   const discover = page.getByRole('link', { name: '发现游戏' });
   if (await discover.isVisible()) {

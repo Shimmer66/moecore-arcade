@@ -14,6 +14,17 @@ export interface GameEntry {
 
 export const games: ReadonlyArray<GameEntry> = [
   {
+    id: 'stardust',
+    title: '星尘远征：替身决斗',
+    category: '格斗 · 双人 / 冒险',
+    icon: 'runner',
+    description: '选择远征军角色，双人决斗或共享三次复活挑战开罗。​',
+    tags: ['动作', '双人'],
+    tone: 'lemon',
+    badge: '替身使者',
+    load: async () => (await import('@moecore/game-stardust')).game,
+  },
+  {
     id: 'duel',
     title: '战斗吧，大肥鱼',
     category: '格斗 · 单人 / 双人',
@@ -37,7 +48,7 @@ export const games: ReadonlyArray<GameEntry> = [
   },
   {
     id: 'arena',
-    title: 'AI 娘：别乱生成！',
+    title: '别乱生成！',
     category: '动作 · 闯关',
     icon: 'runner',
     description: '地板会消失，出口会跑路。记住陷阱，再试一次。',
@@ -48,7 +59,7 @@ export const games: ReadonlyArray<GameEntry> = [
   },
   {
     id: 'match3',
-    title: 'AI 娘消消乐',
+    title: '模型消消乐',
     category: '益智 · 单人',
     icon: 'grid',
     description: '交换图块，在 20 步内完成收集目标。',
@@ -92,10 +103,10 @@ export const games: ReadonlyArray<GameEntry> = [
   },
   {
     id: 'rewrite',
-    title: 'AI 娘闯关',
+    title: '模型战争',
     category: '动作 · 单人 / 双人',
     icon: 'runner',
-    description: '单人或双人打穿八关，六种武器随时切换。',
+    description: '单人或双人，六种武器，打穿八关。',
     tags: ['动作', '单人', '双人'],
     tone: 'lav',
     badge: '街机射击',

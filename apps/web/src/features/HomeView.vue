@@ -9,6 +9,7 @@ const filters = ['全部', '益智', '动作', '双人'] as const;
 const selectedFilter = ref<(typeof filters)[number]>('全部');
 const search = ref('');
 const portraits: Readonly<Record<string, string>> = {
+  stardust: HOME_ART.duel,
   duel: HOME_ART.duel,
   steady: HOME_COVER_ART.match3,
   arena: HOME_COVER_ART.arena,
@@ -38,7 +39,7 @@ function resetFilters() {
     <section class="arcade-hero" aria-labelledby="arcade-hero-title">
       <div class="hero-copy">
         <h1 id="arcade-hero-title">给今天，留一点<span>好玩的。</span></h1>
-        <p>和熟悉的 AI 角色一起闯关、解谜、整活。</p>
+        <p>和熟悉的角色一起闯关、解谜、整活。</p>
       </div>
       <div class="hero-note">
         <span class="note-sparkle" aria-hidden="true"
@@ -135,7 +136,7 @@ function resetFilters() {
       </div>
       <div class="contribute-copy">
         <h2 id="contribute-title">一点灵感，就能开始。</h2>
-        <p>非官方 AI 角色小游戏企划。欢迎带着点子，一起做点好玩的。</p>
+        <p>欢迎带着点子，一起做点好玩的。</p>
       </div>
       <a
         class="home-button"

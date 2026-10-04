@@ -68,6 +68,6 @@ describe('bounded long-running combat state', () => {
       );
     }
     expect(maxBullets).toBeLessThanOrEqual(13);
-    expect(maxEffects).toBe(0);
+    expect(maxEffects).toBeLessThanOrEqual(2);
   });
 });

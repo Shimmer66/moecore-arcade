@@ -14,7 +14,7 @@ test('deploys original character art and supports aim, prone, jump, fire and gre
 }, info) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  await expect(page.getByRole('region', { name: 'AI 娘闯关游戏' })).toBeVisible();
+  await expect(page.getByRole('region', { name: '模型战争游戏' })).toBeVisible();
   await expect
     .poll(() =>
       page
@@ -25,6 +25,11 @@ test('deploys original character art and supports aim, prone, jump, fire and gre
   await page.screenshot({ path: info.outputPath('deployment.png'), fullPage: true });
   await page.getByRole('button', { name: /DeepSeek 娘/ }).click();
   const world = page.locator('.rewrite-world');
+  const missionCard = page.locator('.rewrite-mission-card');
+  await expect(missionCard).toBeVisible();
+  await expect(missionCard).toContainText('收到不代表处理');
+  await expect(missionCard.locator('image')).toHaveAttribute('href', /mission-card-atlas-v1/);
+  await expect(world.locator('[data-stage-meme="0"]')).toHaveCount(1);
   await page.keyboard.down('KeyW');
   await page.keyboard.down('KeyJ');
   await page.clock.runFor(100);
@@ -53,6 +58,8 @@ test('deploys original character art and supports aim, prone, jump, fire and gre
   await page.keyboard.press('KeyL');
   await page.clock.runFor(50);
   await expect(world).toHaveAttribute('data-grenades', '2');
+  await page.clock.runFor(1100);
+  await expect(missionCard).toBeHidden();
   await page.screenshot({ path: info.outputPath('combat.png'), fullPage: true });
   const urls = await world
     .locator('image')
@@ -97,21 +104,28 @@ test('pause freezes the simulation, clears held input, and restores keyboard foc
 
 test('multi-pointer movement and shooting release independently on cancel', async ({ page }) => {
   await page.getByRole('button', { name: /Claude 娘/ }).click();
-  const right = page.getByRole('button', { name: '向右移动', exact: true });
+  const joystick = page.locator('.rewrite-joystick').first();
   const fire = page.getByRole('button', { name: '射击', exact: true });
   // Synthetic pointer events exercise the UI contract; real capture is covered by the click test.
-  await right.evaluate((e) => {
+  await joystick.evaluate((e) => {
     e.setPointerCapture = () => {};
   });
   await fire.evaluate((e) => {
     e.setPointerCapture = () => {};
   });
-  await right.dispatchEvent('pointerdown', { pointerId: 1 });
+  const stick = await joystick.boundingBox();
+  if (!stick) throw new Error('Joystick is not visible');
+  await joystick.dispatchEvent('pointerdown', {
+    pointerId: 1,
+    pointerType: 'touch',
+    clientX: stick.x + stick.width * 0.85,
+    clientY: stick.y + stick.height * 0.5,
+  });
   await fire.dispatchEvent('pointerdown', { pointerId: 2 });
   await page.clock.runFor(200);
   const world = page.locator('.rewrite-world');
   expect(Number(await world.getAttribute('data-x'))).toBeGreaterThan(3);
-  await right.dispatchEvent('pointercancel', { pointerId: 1 });
+  await joystick.dispatchEvent('pointercancel', { pointerId: 1 });
   const stopped = await world.getAttribute('data-x');
   await page.clock.runFor(150);
   await expect(world).toHaveAttribute('data-x', stopped!);
@@ -162,18 +176,24 @@ test('boss practice exposes eight distinct atlas cells without awarding campaign
     await page.getByRole('button', { name: '关卡演练', exact: true }).click();
     await page.getByLabel('演练目标', { exact: true }).selectOption(String(i));
     await page.getByRole('button', { name: /GPT 娘/ }).click();
+    const bossReaction = page.locator('.rewrite-operator-reaction');
+    await expect(bossReaction).toBeVisible();
+    await expect(bossReaction).toContainText('九成把握');
     await expect(page.locator('.rewrite-world')).toHaveAttribute('data-stage', String(i + 1));
-    const atlas = page.locator('[data-enemy="boss"] svg');
+    const atlas = page.locator('[data-enemy="boss"] [data-boss-art]');
     // Move far enough to see the boss in both desktop and mobile viewports.
     await page.keyboard.down('KeyD');
     await page.clock.runFor(1150);
     await page.keyboard.up('KeyD');
     await expect(atlas).toBeVisible();
-    cells.add((await atlas.getAttribute('viewBox'))!);
+    cells.add((await atlas.getAttribute('data-boss-art'))!);
     await expect(atlas.locator('image')).toHaveAttribute('href', /boss-atlas/);
-    if (i === 4 || i === 7) {
+    await expect(page.locator('[data-stage-prop]')).toHaveCount(4);
+    if (i === 4 || i === 6 || i === 7) {
       const background = page.locator(
-        `.rewrite-world > g > image[href*="${i === 4 ? 'token-furnace' : 'neural-nest'}"]`,
+        `.rewrite-world > g > image[href*="${
+          i === 4 ? 'token-furnace' : i === 6 ? 'alignment-wall' : 'neural-nest'
+        }"]`,
       );
       await expect(background).toBeVisible();
       expect(
@@ -206,6 +226,10 @@ test('a real-damage practice fight can be won and replayed without a campaign re
   }
   await page.keyboard.up('KeyJ');
   await expect(page.getByRole('dialog', { name: '关卡完成' })).toBeVisible();
+  await expect(
+    page.locator('[data-combat-effect="defeat"] [data-boss-state="defeated"]'),
+  ).toBeVisible();
+  await expect(page.locator('[data-operator-reaction="victory"]')).toHaveCount(1);
   await page.getByRole('button', { name: '再次演练', exact: true }).click();
   await expect(page.locator('.rewrite-world')).toHaveAttribute('data-phase', 'running');
   await expect(page.getByTestId('rewrite-player').locator('.actor-sprite')).toHaveAttribute(
@@ -318,15 +342,22 @@ test('two touch controllers fit 320px and keep simultaneous player actions separ
   await page.setViewportSize({ width: 320, height: 740 });
   await page.getByRole('button', { name: '双人协作', exact: true }).click();
   await page.getByRole('button', { name: /DeepSeek 娘/ }).click();
-  const left = page.getByRole('button', { name: 'P1 向右移动', exact: true });
+  const p1Joystick = page.locator('.rewrite-controls').nth(0).locator('.rewrite-joystick');
   const jump = page.getByRole('button', { name: 'P2 跳跃', exact: true });
-  await left.evaluate((e) => {
+  await p1Joystick.evaluate((e) => {
     e.setPointerCapture = () => {};
   });
   await jump.evaluate((e) => {
     e.setPointerCapture = () => {};
   });
-  await left.dispatchEvent('pointerdown', { pointerId: 10 });
+  const stick = await p1Joystick.boundingBox();
+  if (!stick) throw new Error('P1 joystick is not visible');
+  await p1Joystick.dispatchEvent('pointerdown', {
+    pointerId: 10,
+    pointerType: 'touch',
+    clientX: stick.x + stick.width * 0.85,
+    clientY: stick.y + stick.height * 0.5,
+  });
   await jump.dispatchEvent('pointerdown', { pointerId: 20 });
   await page.clock.runFor(200);
   expect(Number(await page.getByTestId('rewrite-player').getAttribute('data-x'))).toBeGreaterThan(
@@ -336,7 +367,7 @@ test('two touch controllers fit 320px and keep simultaneous player actions separ
     1,
   );
   await expect(page.getByTestId('rewrite-player')).toHaveAttribute('data-y', '0.00');
-  await left.dispatchEvent('pointercancel', { pointerId: 10 });
+  await p1Joystick.dispatchEvent('pointercancel', { pointerId: 10 });
   await jump.dispatchEvent('pointercancel', { pointerId: 20 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   const overflow = await page.locator('.rewrite-controls').evaluateAll((controls) =>

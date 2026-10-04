@@ -268,7 +268,7 @@ onUnmounted(() => {
   >
     <header class="glitch-heading">
       <div>
-        <span class="glitch-eyebrow">AI 娘 · 生成事故现场</span>
+        <span class="glitch-eyebrow">生成事故现场</span>
         <h2>{{ level.title }}</h2>
       </div>
       <span class="glitch-chapter">{{ state.level + 1 }} <small>/ 3 关</small></span>

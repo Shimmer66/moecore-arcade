@@ -80,7 +80,8 @@ async function load() {
 }
 
 watch(() => props.gameId, load, { immediate: true });
-onErrorCaptured(() => {
+onErrorCaptured((caught) => {
+  console.error(`[GameHost:${props.gameId}]`, caught);
   error.value = '游戏运行中断';
   definition.value = undefined;
   return false;

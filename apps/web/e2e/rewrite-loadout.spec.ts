@@ -78,9 +78,9 @@ test('locked weapons cannot be selected and the battlefield uses distinct loot a
   await page.clock.runFor(50);
   await expect(page.getByTestId('rewrite-player')).toHaveAttribute('data-weapon', 'pulse');
   await expect(page.locator('[data-supply] [data-art]').first()).toBeVisible();
-  const images = page.locator('.rewrite-world [data-enemy] svg[data-art] image');
+  const images = page.locator('.rewrite-world [data-enemy] svg[data-enemy-art] image');
   expect(await images.count()).toBeGreaterThan(0);
-  await expect(images.first()).toHaveAttribute('href', /enemy-atlas-v1/);
+  await expect(images.first()).toHaveAttribute('href', /enemy-motion-ground-v1/);
   await page.keyboard.down('KeyD');
   await page.clock.runFor(420);
   await page.keyboard.up('KeyD');

@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-02",
+  "tool": "built-in image_gen.imagegen",
+  "assets": [
+    {
+      "master": "masters/boss-reaction-atlas-v1.png",
+      "runtime": "runtime/boss-reaction-atlas-v1.webp",
+      "result": "call_uEtRdx6CvuehxwGOaFFZf0Sp.png",
+      "transparent_background": true,
+      "layout": "4 columns x 4 rows",
+      "brief_record": "Preserve all eight boss identities. First two rows are hit reactions in original order; last two rows are defeated states in original order."
+    },
+    {
+      "master": "masters/boss-phase-atlas-v1.png",
+      "runtime": "runtime/boss-phase-atlas-v1.webp",
+      "result": "call_HDQUIJMg9PA1wwgIqgHfUxzF.png",
+      "transparent_background": true,
+      "layout": "4 columns x 2 rows",
+      "brief_record": "Preserve all eight boss identities and order while opening armor, cores or energy systems for a readable powered-up phase."
+    },
+    {
+      "master": "masters/alignment-wall-background-v1.png",
+      "runtime": "runtime/alignment-wall-background-v1.webp",
+      "result": "call_IMGLJEqCNOpQunxSerwUV5ng.png",
+      "transparent_background": false,
+      "brief_record": "Wide side-view Alignment Firewall fortress with blue-white defensive walls, policy locks, scanners and a dark quiet lower third."
+    },
+    {
+      "masters": [
+        "masters/stage-props-12-v1.png",
+        "masters/stage-props-34-v1.png",
+        "masters/stage-props-56-v1.png",
+        "masters/stage-props-78-v1.png"
+      ],
+      "runtime": [
+        "runtime/stage-props-12-v1.webp",
+        "runtime/stage-props-34-v1.webp",
+        "runtime/stage-props-56-v1.webp",
+        "runtime/stage-props-78-v1.webp"
+      ],
+      "results": [
+        "call_tCcTc5k87FkgOnh2B4cOU3qK.png",
+        "call_dQPebh80mjdIQrbB437YErUh.png",
+        "call_ahjShSHHoh2yiH1HUscETSXP.png",
+        "call_DoaLCHiKA2tzCWUUtQ2n8fVd.png"
+      ],
+      "transparent_background": true,
+      "layout": "each atlas is 4 columns x 2 rows; one row per stage",
+      "brief_record": "Four unique environmental props for each existing stage, with no embedded text or gameplay collision."
+    }
+  ],
+  "processing": "scripts/prepare-rewrite-combat-assets.py normalizes transparent atlases to padded cells, writes high-quality transparent WebP and converts the opaque background to a compressed runtime WebP."
+}

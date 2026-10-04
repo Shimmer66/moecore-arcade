@@ -22,6 +22,7 @@
     "@moecore/game-parkour": "file:../../games/parkour",
     "@moecore/game-rewrite": "file:../../games/rewrite",
     "@moecore/game-sokoban": "file:../../games/sokoban",
+    "@moecore/game-stardust": "file:../../games/stardust",
     "@moecore/game-whale-queue": "file:../../games/whale-queue",
     "@lucide/vue": "1.47.0",
     "vue": "3.5.43"

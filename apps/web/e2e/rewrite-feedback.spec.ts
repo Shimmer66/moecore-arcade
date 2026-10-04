@@ -29,7 +29,9 @@ test('grenade impact shakes and flashes the stage but reduced motion disables bo
   await expect(world).toHaveAttribute('data-impact-flash', '0.000');
 });
 
-test('rendered projectile and effect nodes stay bounded by simulation counts', async ({ page }) => {
+test('rendered projectile and effect nodes stay bounded by simulation counts', async ({
+  page,
+}, info) => {
   await page.getByRole('button', { name: /GPT 娘/ }).click();
   const world = page.locator('.rewrite-world');
   await page.keyboard.down('KeyJ');
@@ -42,6 +44,12 @@ test('rendered projectile and effect nodes stay bounded by simulation counts', a
     expect(Number(await world.getAttribute('data-render-effects'))).toBeLessThanOrEqual(
       Number(await world.getAttribute('data-sim-effects')),
     );
+    if (i === 0) {
+      const muzzle = page.locator('[data-combat-effect="muzzle"]').first();
+      await expect(muzzle).toBeVisible();
+      await expect(muzzle.locator('image')).toHaveAttribute('href', /combat-vfx-atlas-v1/);
+      await page.screenshot({ path: info.outputPath('weapon-vfx.png'), fullPage: true });
+    }
   }
   await page.keyboard.up('KeyJ');
   await page.keyboard.up('KeyD');

@@ -20,6 +20,7 @@ import {
   type DepthState,
 } from './depth';
 import { FIREBALL, fireballDelta } from './fireball';
+import { personaMemeLine, sectorMemeLine, stageMemeLine } from './meme';
 export { levels } from './levels';
 export type { Weapon } from './levels';
 export type Persona = 'deepseek' | 'gpt' | 'claude';
@@ -121,8 +122,10 @@ export interface Effect {
   id: number;
   x: number;
   y: number;
-  kind: 'hit' | 'boom' | 'shield' | 'pickup';
+  kind: 'hit' | 'boom' | 'shield' | 'pickup' | 'muzzle' | 'defeat';
   life: number;
+  weapon?: Weapon;
+  enemy?: EnemyKind;
 }
 export interface PlayerState {
   playerId: 1 | 2;
@@ -324,7 +327,7 @@ export function createRun(
     comboTime: 0,
     arena: bossOnly,
     continues: initialContinues(difficulty),
-    notice: level.hint,
+    notice: stageMemeLine(levelIndex, 'intro'),
     noticeTime: 5,
     nextId: 0,
     deaths: 0,
@@ -402,8 +405,15 @@ function note(s: RunState, text: string) {
   s.notice = text;
   s.noticeTime = 2.8;
 }
-function fx(s: RunState, x: number, y: number, kind: Effect['kind']) {
-  s.effects.push({ id: s.nextId++, x, y, kind, life: kind === 'boom' ? 0.55 : 0.24 });
+function fx(
+  s: RunState,
+  x: number,
+  y: number,
+  kind: Effect['kind'],
+  details: Pick<Effect, 'weapon' | 'enemy'> = {},
+) {
+  const life = kind === 'boom' || kind === 'defeat' ? 0.55 : kind === 'muzzle' ? 0.14 : 0.24;
+  s.effects.push({ id: s.nextId++, x, y, kind, life, ...details });
 }
 function reconnect(s: RunState, p: PlayerState) {
   const other = teamPlayers(s).find((n) => n.playerId !== p.playerId && n.lives > 0);
@@ -496,12 +506,15 @@ function kill(s: RunState, e: Enemy) {
   s.combo++;
   s.comboTime = 3;
   s.score += (e.kind === 'boss' ? 4000 : 100) * Math.min(5, 1 + Math.floor(s.combo / 5));
-  fx(s, e.x, e.y + 0.7, 'boom');
+  if (e.kind === 'boss') fx(s, e.x, e.y + 1.2, 'defeat', { enemy: 'boss' });
+  else if (['runner', 'turret', 'drone', 'sniper', 'hopper'].includes(e.kind))
+    fx(s, e.x, e.y + 0.7, 'defeat', { enemy: e.kind });
+  else fx(s, e.x, e.y + 0.7, 'boom');
   if (e.kind === 'boss') {
     s.enemyBullets = [];
     s.score += Math.max(0, 1500 - Math.floor(s.stageTime * 5));
     s.phase = s.levelIndex === levels.length - 1 ? 'won' : 'level-complete';
-    note(s, '核验通过。出口已解锁！');
+    note(s, stageMemeLine(s.levelIndex, 'clear'));
   } else if (e.kind === 'heart') {
     const remaining = finalHeartCount(s);
     note(
@@ -841,7 +854,7 @@ function collectSupplies(s: RunState, p: PlayerState) {
       p.latestWeapon = drop.kind;
       note(
         s,
-        `P${p.playerId} ${weapons[drop.kind].name} 已收纳 · 点击武器栏或${p.playerId === 1 ? ' Q / E' : ' [ / ]'} 切换`,
+        `P${p.playerId} ${weapons[drop.kind].name} 已收纳 · ${personaMemeLine(p.persona, 'pickup')}`,
       );
     }
   }
@@ -1023,6 +1036,10 @@ function movePlayer(s: RunState, p: PlayerState, input: RunInput, seconds: numbe
           hits: [],
         });
       }
+    if (!s.base)
+      fx(s, p.x + p.aimX * 0.75, p.y + (p.crouching ? 0.3 : 0.8), 'muzzle', {
+        weapon: p.weapon,
+      });
     p.shotCooldown =
       (p.overclock > 0 ? 0.65 : 1) *
       (p.weapon === 'rapid'
@@ -1105,7 +1122,7 @@ export function stepRun(
     if (nextSector > s.sector) {
       s.sector = nextSector;
       const sector = level.sectors[nextSector]!;
-      note(s, `${sector.title} · ${sector.hint}`);
+      note(s, `${sector.title} · ${sectorMemeLine(s.levelIndex, nextSector)}`);
     }
   }
   if (
@@ -1124,9 +1141,11 @@ export function stepRun(
     s.enemyBullets = [];
     note(
       s,
-      finalHeartCount(s)
-        ? `${level.boss} · 三枚推理心核仍在保护本体`
-        : `${level.boss} · 全员进入战区`,
+      `${
+        finalHeartCount(s)
+          ? `${level.boss} · 三枚推理心核仍在保护本体`
+          : `${level.boss} · 全员进入战区`
+      }｜${stageMemeLine(s.levelIndex, 'boss')}`,
     );
   }
   if (
@@ -1136,7 +1155,13 @@ export function stepRun(
     active.every((p) => p.x >= level.length - 22) &&
     s.noticeTime <= 0
   )
-    note(s, `终战入口被孵化网络锁定 · 还剩 ${finalPodCount(s)} 个节点`);
+    note(
+      s,
+      `终战入口被孵化网络锁定 · 还剩 ${finalPodCount(s)} 个节点｜${stageMemeLine(
+        s.levelIndex,
+        'locked',
+      )}`,
+    );
   updateEnemies(s, seconds);
   for (const b of s.bullets) {
     if (b.weapon === 'homing') {
@@ -1215,7 +1240,7 @@ export function stepRun(
       e.hp -= guarded ? 0 : b.damage * (e.kind === 'boss' && !bossIsOpen(e) ? 0.35 : 1);
       e.flash = 0.08;
       b.hits.push(e.id);
-      fx(s, nx, ny, 'hit');
+      fx(s, nx, ny, 'hit', { weapon: b.weapon });
       if (e.hp <= 0) kill(s, e);
       if (b.weapon !== 'laser' && b.weapon !== 'flame') {
         b.ttl = 0;

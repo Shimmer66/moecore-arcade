@@ -5,6 +5,11 @@ import { teamPlayers, weapons, canCollect, type RunState } from './rules';
 import ActorSprite from './ActorSprite.vue';
 import ItemArt from './ItemArt.vue';
 import FireballSprite from './FireballSprite.vue';
+import EnemyArt from './EnemyArt.vue';
+import CombatEffect from './CombatEffect.vue';
+import BossArt from './BossArt.vue';
+import StageProp from './StageProp.vue';
+import StageMeme from './StageMeme.vue';
 import {
   depthRoomTitle,
   depthTargetOpen,
@@ -32,10 +37,6 @@ const scale = (z: number) =>
       13);
 const px = (x: number, z: number) => props.width / 2 + (x - 11) * (props.width / 24) * scale(z);
 const py = (y: number, z: number) => 160 + (200 - y * 40) * scale(z);
-const bossBox = computed(() => {
-  const cell = REWRITE_ART.bossAtlas.width / 4;
-  return `${(props.state.levelIndex % 4) * cell} ${Math.floor(props.state.levelIndex / 4) * cell} ${cell} ${cell}`;
-});
 const required = computed(() => targets.value.filter((t) => t.kind === 'core').length);
 const guards = computed(() => depthGuards(base.value));
 const nodeNames = ['计划', '执行', '反思', '复核'];
@@ -66,6 +67,27 @@ const nodeBox = (slot: number) => `${(slot % 2) * 627} ${Math.floor(slot / 2) * 
       height="420"
       preserveAspectRatio="xMidYMid slice"
       opacity="0.23"
+    />
+    <g aria-hidden="true" opacity=".28">
+      <StageProp
+        v-for="slot in 4"
+        :key="`depth-prop${slot}`"
+        :stage="state.levelIndex"
+        :prop-index="slot - 1"
+        :x="width * (0.08 + (slot - 1) * 0.28)"
+        :y="slot % 2 ? 184 : 236"
+        width="74"
+        height="74"
+      />
+    </g>
+    <StageMeme
+      aria-hidden="true"
+      :stage="state.levelIndex"
+      :x="width / 2 - 44"
+      y="247"
+      width="88"
+      height="88"
+      opacity=".24"
     />
     <polygon
       :points="`0,0 ${px(0, 18)},${py(8, 18)} ${px(0, 18)},${py(0, 18)} 0,420`"
@@ -153,20 +175,15 @@ const nodeBox = (slot: number) => `${(slot % 2) * 627} ${Math.floor(slot / 2) * 
         :data-enemy="t.kind"
       >
         <template v-if="t.kind === 'boss'">
-          <svg
+          <BossArt
             x="-67"
             y="-86"
             width="134"
             height="134"
-            :viewBox="bossBox"
+            :stage="state.levelIndex"
+            :state="t.flash > 0 ? 'hit' : t.hp < t.maxHp * 0.66 ? 'phase' : 'idle'"
             :opacity="depthBossProtected(base) ? 0.4 : 1"
-          >
-            <image
-              :href="REWRITE_ART.bossAtlas.url"
-              :width="REWRITE_ART.bossAtlas.width"
-              :height="REWRITE_ART.bossAtlas.height"
-            />
-          </svg>
+          />
           <text
             y="-93"
             text-anchor="middle"
@@ -241,7 +258,14 @@ const nodeBox = (slot: number) => `${(slot % 2) * 627} ${Math.floor(slot / 2) * 
           <text y="-29" text-anchor="middle" fill="#b9f8df" font-size="10">补给节点</text>
         </template>
         <template v-else>
-          <ItemArt :kind="t.kind" enemy x="-25" y="-23" width="50" height="45" />
+          <EnemyArt
+            :kind="t.kind"
+            :state="t.flash > 0 ? 'hit' : t.cooldown < 0.45 ? 'attack' : 'idle'"
+            x="-25"
+            y="-23"
+            width="50"
+            height="45"
+          />
           <ellipse v-if="t.kind === 'drone'" cy="-22" rx="23" ry="5" fill="none" stroke="#eeadff" />
         </template>
         <rect
@@ -434,12 +458,13 @@ const nodeBox = (slot: number) => `${(slot % 2) * 627} ${Math.floor(slot / 2) * 
       :key="`fx${i}`"
       :transform="`translate(${px(e.x, e.z)},${py(e.y, e.z)})`"
     >
-      <circle
-        :r="reduceMotion ? 10 : e.boom ? 18 + (0.55 - e.life) * 60 : 8"
-        fill="#ffd79e"
-        :fill-opacity="Math.min(0.5, e.life)"
-        stroke="#ffebb7"
-        :opacity="Math.min(1, e.life * 5)"
+      <CombatEffect
+        :kind="e.defeat ? 'defeat' : e.boom ? 'boom' : e.kind === 'muzzle' ? 'muzzle' : 'hit'"
+        :weapon="e.weapon"
+        :enemy="e.defeat ? 'boss' : undefined"
+        :stage="state.levelIndex"
+        :life="e.life"
+        :reduce-motion="reduceMotion"
       />
     </g>
     <g v-if="base.transition > 0">
