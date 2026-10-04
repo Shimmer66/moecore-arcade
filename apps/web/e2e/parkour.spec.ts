@@ -168,9 +168,7 @@ test('one opening exchange leads straight into the shared Vue game', async ({ pa
   await expect(page.getByRole('button', { name: /幻觉消消乐/ })).toBeVisible();
   await page.getByRole('button', { name: /大肥鱼跑酷：答案马上就到/ }).click();
   await page.getByRole('button', { name: '单项练习', exact: true }).click();
-  await expect(
-    page.getByRole('heading', { name: '大肥鱼跑酷', exact: true }),
-  ).toBeVisible();
+  await expect(page.getByRole('heading', { name: '大肥鱼跑酷', exact: true })).toBeVisible();
   const opening = page.getByRole('region', { name: '开场故事' });
   await expect(opening).toContainText('访客：');
   await expect(opening).toContainText('DeepSeek 娘：');
