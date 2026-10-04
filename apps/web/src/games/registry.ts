@@ -15,6 +15,17 @@ export interface GameEntry {
 
 export const games: ReadonlyArray<GameEntry> = [
   {
+    id: 'starfall',
+    title: '荒星回响：第七码头',
+    category: '格斗 · 双人',
+    icon: 'runner',
+    description: '沙海列车站的原创回响格斗。近身连拳、残像闪避，用满槽必杀击碎最后一秒。',
+    tags: ['动作', '双人'],
+    tone: 'peach',
+    badge: '本地双人 · 新作',
+    load: async () => (await import('@moecore/game-starfall')).game,
+  },
+  {
     id: 'stardust',
     title: '星尘远征：替身决斗',
     category: '格斗 · 双人 / 冒险',

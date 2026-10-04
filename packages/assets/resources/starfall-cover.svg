@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" fill="#e96e4f"/>
+  <circle cx="160" cy="75" r="54" fill="#ffe176" stroke="#27172f" stroke-width="8"/>
+  <path d="M0 160 54 92l61 68 65-54 63 54 77-72v132H0Z" fill="#6e3046" stroke="#27172f" stroke-width="7"/>
+  <path d="M45 205h230" stroke="#27172f" stroke-width="12"/>
+  <g stroke="#27172f" stroke-width="7" stroke-linejoin="round">
+    <path fill="#dc394d" d="m97 182 6-70 26-28 26 31-3 67Z"/>
+    <circle cx="129" cy="69" r="27" fill="#e7aa79"/>
+    <path fill="#52212f" d="m103 66 6-30 43 9 5 37-29-15-17 22Z"/>
+    <path fill="#3757b8" d="m171 182 1-65 24-31 27 29 6 67Z"/>
+    <circle cx="198" cy="70" r="27" fill="#bd7a63"/>
+    <path fill="#17183f" d="m173 69 8-34 40 10 4 35-28-13-18 20Z"/>
+    <path fill="#ffdf6f" d="m84 126-24-25 19-27 26 28Z"/>
+    <path fill="#72e5ef" d="m235 126 25-25-19-27-27 28Z"/>
+  </g>
+  <text x="160" y="209" text-anchor="middle" font-family="Arial Black" font-size="20" fill="#fff4ca" stroke="#27172f" stroke-width="5" paint-order="stroke">STARFALL VII</text>
+</svg>

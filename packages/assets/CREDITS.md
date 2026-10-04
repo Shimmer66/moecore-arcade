@@ -2,17 +2,20 @@
 
 项目所有者于 2026-09-24 确认游戏生成素材均由其自创，并同意用于公开试玩站点。清单中保留的 `generated-pending-review` 表示品牌、角色形象及成品质量仍待复核，不表示素材作者未知，也不等同于第三方品牌授权。
 
-| assetId          | 文件                            | 来源 / 作者                                                                     | 状态       |
-| ---------------- | ------------------------------- | ------------------------------------------------------------------------------- | ---------- |
-| `arcade-mark`    | `resources/arcade-mark.svg`     | 摸鱼局 UI 改版绘制的蓝底白色手柄 SVG 标识 / MoeCore Arcade contributors         | 自制占位   |
-| `rice-bowl`      | `resources/rice-bowl.svg`       | 本次跑酷玩法扩充绘制的饭碗 / MoeCore Arcade contributors                        | 自制占位   |
-| `canteen`        | `resources/canteen.svg`         | 本次跑酷玩法扩充绘制的食堂窗口 / MoeCore Arcade contributors                    | 自制占位   |
-| `answer-sea`     | `resources/answer-sea.png`      | 本次数据海场景，以 GPT Image 按项目提示词生成 / MoeCore Arcade contributors     | 生成待复核 |
-| `echo-reef`      | `resources/echo-reef.webp`      | 参考数据海画风生成的紫色纸带回音礁 / MoeCore Arcade contributors with GPT Image | 生成待复核 |
-| `request-vortex` | `resources/request-vortex.webp` | 参考数据海画风生成的青蓝请求漩涡 / MoeCore Arcade contributors with GPT Image   | 生成待复核 |
+| assetId          | 文件                            | 来源 / 作者                                                                         | 状态       |
+| ---------------- | ------------------------------- | ----------------------------------------------------------------------------------- | ---------- |
+| `arcade-mark`    | `resources/arcade-mark.svg`     | 摸鱼局 UI 改版绘制的蓝底白色手柄 SVG 标识 / MoeCore Arcade contributors             | 自制占位   |
+| `rice-bowl`      | `resources/rice-bowl.svg`       | 本次跑酷玩法扩充绘制的饭碗 / MoeCore Arcade contributors                            | 自制占位   |
+| `canteen`        | `resources/canteen.svg`         | 本次跑酷玩法扩充绘制的食堂窗口 / MoeCore Arcade contributors                        | 自制占位   |
+| `answer-sea`     | `resources/answer-sea.png`      | 本次数据海场景，以 GPT Image 按项目提示词生成 / MoeCore Arcade contributors         | 生成待复核 |
+| `echo-reef`      | `resources/echo-reef.webp`      | 参考数据海画风生成的紫色纸带回音礁 / MoeCore Arcade contributors with GPT Image     | 生成待复核 |
+| `request-vortex` | `resources/request-vortex.webp` | 参考数据海画风生成的青蓝请求漩涡 / MoeCore Arcade contributors with GPT Image       | 生成待复核 |
+| `starfall-cover` | `resources/starfall-cover.svg`  | 2026-10-04 为《荒星回响：第七码头》绘制的原创矢量封面 / MoeCore Arcade contributors | 自制占位   |
 
 这些图不描绘候选角色，不使用第三方角色原图或品牌 Logo，也不是已经核验商标的正式标识。
 饭碗和食堂窗口是特定游戏道具，可随正式构建发布；没有把它们登记成原 72 张素材包中的图片。
+
+《荒星回响：第七码头》的首页封面、局内沙漠车站、两名角色、回响体、漫画拟声与必杀分镜均为本项目 SVG/CSS 绘制。它们只采用宽泛的沙漠旅途与漫画格斗语言，没有复制现成作品的角色名称、造型、招式名称、台词、音频或图片素材。
 
 ## 承诺实验室首批试稿
 

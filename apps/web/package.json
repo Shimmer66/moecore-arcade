@@ -13,6 +13,7 @@
     "test:e2e:rewrite-campaign": "playwright test --config playwright.rewrite-campaign.config.ts"
   },
   "dependencies": {
+    "@moecore/game-starfall": "file:../../games/starfall",
     "@moecore/game-duel": "file:../../games/duel",
     "@moecore/game-steady": "file:../../games/steady",
     "@moecore/game-arena": "file:../../games/arena",
