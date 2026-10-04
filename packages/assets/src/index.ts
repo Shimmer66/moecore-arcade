@@ -60,6 +60,7 @@ export type AssetId = (typeof ASSETS)[keyof typeof ASSETS]['id'];
 
 // Keep the existing catalogue artwork; game asset packs remain lazy.
 export const ARCADE_PORTRAITS: Readonly<Record<string, string>> = {
+  uncle: new URL('../resources/uncle-cover.svg', import.meta.url).href,
   duel: HOME_COVER_ART.arena,
   steady: HOME_COVER_ART.match3,
   arena: HOME_COVER_ART.arena,

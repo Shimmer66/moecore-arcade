@@ -153,6 +153,7 @@ for (const [id, selector] of [
   ['match3', '.match3'],
   ['parkour', '.whale-game'],
   ['whale-queue', '.whale-queue-game'],
+  ['uncle', '.uncle-game'],
   ['duel', '.duel'],
   ['arena', '.glitch-game'],
   ['steady', '.workshop'],
