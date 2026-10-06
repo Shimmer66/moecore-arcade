@@ -1,0 +1,11 @@
+Generated with the built-in image_gen tool; transparent 2x2 game sprite sheet.
+Final asset: silver-chariot-upper-burst-v5.png
+Based on the existing polnareff-stand-motion-v1.png design, with user-directed iterations.
+Reference research: JoJo Wiki Silver Chariot; Fighters Generation Polnareff character gallery.
+Reference pages: https://jojowiki.com/Silver_Chariot
+https://www.fightersgeneration.com/characters3/polnareff.html
+The final proportions, chest sternum, black arms and gold joints follow the user's iterative art direction.
+This is generated fan-game artwork, not an official licensed asset.
+
+Final edit prompt:
+Make a very subtle body proportion refinement to this exact transparent four-pose Silver Chariot sprite sheet. ONLY slim the torso and waist slightly, approximately 8 percent narrower, for a slightly leaner athletic body, NOT skinny or skeletal. Apply consistently to all four poses while maintaining the same height, head size, chunky strong forearms and armored legs, four-cell layout, poses and weapon lengths. Preserve ALL established details: the prominent VERTICAL GOLD STERNUM joining horizontal golden chest ribs, black torso core and black segmented arms, slightly thinner upper arms than forearms, gold shoulder and elbow joints, silver helmet with green jewel, silver hips and armored legs, no back spikes and no shoulder spikes. Keep the chest and arm armor shed, fragments only in top-left; all effects and poses unchanged. The difference should be restrained and subtle, not a redesign. Maintain genuine transparent alpha background, no text or new objects.

@@ -293,7 +293,7 @@ onUnmounted(() => {
       <div class="game-content" :inert="paused" :aria-hidden="paused ? true : undefined">
         <component
           :is="definition.component"
-          :key="sessionId"
+          :key="gameId === 'stardust' ? gameId : sessionId"
           :session-id="sessionId"
           :attempt="attempt"
           :paused="paused"

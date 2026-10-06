@@ -1,0 +1,54 @@
+Tool: built-in image_gen.
+Date: 2026-10-06.
+Artwork approved by the user during generation. Generated fan-game art, not an official asset release.
+No new ultimate design or mechanics were generated.
+
+Visual references:
+../villains-chibi/dio-the-world-chibi-v1.png
+../villains-chibi/vanilla-ice-cream-chibi-v2.png
+Character identity references:
+https://jojowiki.com/The_World
+https://jojowiki.com/Cream
+
+Normalized generation prompt set:
+
+1. dio-the-world-entity-v1.png
+Generate The World ONLY from the existing DIO/The World art. No human DIO.
+Preserve golden armor, angular helmet, gray articulated muscles, green heart motifs,
+thick boots and detailed chibi cel shading. Reconstruct obscured anatomy.
+Full body, neutral raised-fist stance, face right, transparent background and safe margins.
+No text, environment, clock, knives or ultimate effects.
+
+2. ice-cream-entity-v1.png
+Generate Cream ONLY from the existing Vanilla Ice/Cream art. No human Vanilla Ice.
+Preserve dark-purple horned cowl, pale skull face, yellow eyes, purple gemstones,
+bone-white muscular armor and clawed hands. Reconstruct obscured anatomy.
+Full body, slightly hunched ready stance, face right, transparent background and safe margins.
+No void sphere, swallowing, environment, text or ultimate design.
+
+3. motion/dio-stand-motion-v1.png
+Use dio-the-world-entity-v1.png as the exact character reference.
+Strict 4 columns by 2 rows, eight equal square cells, full body and consistent baseline.
+Row-major: idle, forward movement, light punch, heavy punch, rapid barrage,
+crossed-arm guard, hurt recoil, recall/recovery.
+Right-facing, transparent gutters, no human DIO, no text or new ultimate.
+
+4. motion/ice-stand-motion-v1.png
+Use ice-cream-entity-v1.png as the exact character reference.
+Strict 4 columns by 2 rows, eight equal square cells, full body and consistent baseline.
+Row-major: idle, forward movement, claw jab, heavy claw swipe, repeated claw strikes,
+crossed-arm guard, hurt recoil, recall/recovery.
+Right-facing, transparent gutters, no human Vanilla Ice, no text or new ultimate.
+
+5. ../motion/dio-body-only-motion-v1.png
+Use the original DIO/The World portrait for HUMAN DIO ONLY.
+Strict 4 columns by 3 rows. Preserve blond hair, green hearts, gold outfit and chibi style.
+Row-major: idle A, idle B, walk A, running stride, light extension, light recovery,
+heavy punch, guard, crouch, hurt, commanding gesture without effects, relaxed recovery.
+Transparent background, safe margins, no Stand or ghost in any cell.
+
+6. ../motion/ice-body-only-motion-v1.png
+Use the original Vanilla Ice/Cream portrait for HUMAN VANILLA ICE ONLY.
+Strict 4 columns by 3 rows. Preserve long brown hair, purple hearts, sleeveless outfit,
+white cloth strips and chibi style. Same twelve body poses as the DIO body sheet.
+Transparent background, safe margins, no skull monster or Stand in any cell.

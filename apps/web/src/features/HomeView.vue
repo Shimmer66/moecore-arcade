@@ -9,9 +9,7 @@ const filters = ['全部', '益智', '动作', '双人'] as const;
 const selectedFilter = ref<(typeof filters)[number]>('全部');
 const search = ref('');
 const portraits: Readonly<Record<string, string>> = {
-  uncle: HOME_COVER_ART.uncle,
-  starfall: HOME_COVER_ART.starfall,
-  stardust: HOME_ART.duel,
+  stardust: HOME_COVER_ART.stardust,
   duel: HOME_ART.duel,
   steady: HOME_COVER_ART.steady,
   arena: HOME_COVER_ART.arena,
@@ -98,6 +96,7 @@ function resetFilters() {
             <img
               :src="portraits[game.id]"
               class="catalog-portrait catalog-poster"
+              :class="{ 'catalog-lineup': game.id === 'stardust' }"
               alt=""
               width="768"
               height="768"
@@ -150,3 +149,10 @@ function resetFilters() {
     </section>
   </div>
 </template>
+
+<style scoped>
+.catalog-portrait.catalog-poster.catalog-lineup {
+  object-fit: contain;
+  background: #b5b1ae;
+}
+</style>

@@ -2,20 +2,17 @@
 
 项目所有者于 2026-09-24 确认游戏生成素材均由其自创，并同意用于公开试玩站点。清单中保留的 `generated-pending-review` 表示品牌、角色形象及成品质量仍待复核，不表示素材作者未知，也不等同于第三方品牌授权。
 
-| assetId          | 文件                            | 来源 / 作者                                                                         | 状态       |
-| ---------------- | ------------------------------- | ----------------------------------------------------------------------------------- | ---------- |
-| `arcade-mark`    | `resources/arcade-mark.svg`     | 摸鱼局 UI 改版绘制的蓝底白色手柄 SVG 标识 / MoeCore Arcade contributors             | 自制占位   |
-| `rice-bowl`      | `resources/rice-bowl.svg`       | 本次跑酷玩法扩充绘制的饭碗 / MoeCore Arcade contributors                            | 自制占位   |
-| `canteen`        | `resources/canteen.svg`         | 本次跑酷玩法扩充绘制的食堂窗口 / MoeCore Arcade contributors                        | 自制占位   |
-| `answer-sea`     | `resources/answer-sea.png`      | 本次数据海场景，以 GPT Image 按项目提示词生成 / MoeCore Arcade contributors         | 生成待复核 |
-| `echo-reef`      | `resources/echo-reef.webp`      | 参考数据海画风生成的紫色纸带回音礁 / MoeCore Arcade contributors with GPT Image     | 生成待复核 |
-| `request-vortex` | `resources/request-vortex.webp` | 参考数据海画风生成的青蓝请求漩涡 / MoeCore Arcade contributors with GPT Image       | 生成待复核 |
-| `starfall-cover` | `resources/starfall-cover.svg`  | 2026-10-04 为《荒星回响：第七码头》绘制的原创矢量封面 / MoeCore Arcade contributors | 自制占位   |
+| assetId          | 文件                            | 来源 / 作者                                                                     | 状态       |
+| ---------------- | ------------------------------- | ------------------------------------------------------------------------------- | ---------- |
+| `arcade-mark`    | `resources/arcade-mark.svg`     | 摸鱼局 UI 改版绘制的蓝底白色手柄 SVG 标识 / MoeCore Arcade contributors         | 自制占位   |
+| `rice-bowl`      | `resources/rice-bowl.svg`       | 本次跑酷玩法扩充绘制的饭碗 / MoeCore Arcade contributors                        | 自制占位   |
+| `canteen`        | `resources/canteen.svg`         | 本次跑酷玩法扩充绘制的食堂窗口 / MoeCore Arcade contributors                    | 自制占位   |
+| `answer-sea`     | `resources/answer-sea.png`      | 本次数据海场景，以 GPT Image 按项目提示词生成 / MoeCore Arcade contributors     | 生成待复核 |
+| `echo-reef`      | `resources/echo-reef.webp`      | 参考数据海画风生成的紫色纸带回音礁 / MoeCore Arcade contributors with GPT Image | 生成待复核 |
+| `request-vortex` | `resources/request-vortex.webp` | 参考数据海画风生成的青蓝请求漩涡 / MoeCore Arcade contributors with GPT Image   | 生成待复核 |
 
 这些图不描绘候选角色，不使用第三方角色原图或品牌 Logo，也不是已经核验商标的正式标识。
 饭碗和食堂窗口是特定游戏道具，可随正式构建发布；没有把它们登记成原 72 张素材包中的图片。
-
-《荒星回响：第七码头》的首页封面、局内沙漠车站、两名角色、回响体、漫画拟声与必杀分镜均为本项目 SVG/CSS 绘制。它们只采用宽泛的沙漠旅途与漫画格斗语言，没有复制现成作品的角色名称、造型、招式名称、台词、音频或图片素材。
 
 ## 承诺实验室首批试稿
 
@@ -114,3 +111,13 @@
 ## 模型战争第一批 GPT Image 素材
 
 `rewrite/first-batch/` 收录 DeepSeek 娘与 GPT 娘的射击姿态、Claude 娘待机/奔跑/射击姿态、五关远景、“已读回执怪”、打印机炮台和幻觉大王的两种状态。DeepSeek 与 GPT 分别参考项目已有头像与全身待机图生成。压缩运行图在 `rewrite/runtime/`，现已接入游戏。文件与参考来源见 [rewrite/README.md](rewrite/README.md)，状态为 `generated-pending-review`。
+
+## 星尘远征素材
+
+`stardust/` 收录星尘远征的主角、敌人、替身、动作图集、分离实体和首页阵容图。`concept/`、`fighters/`、`fighters-chibi/`、`enemy-roster/`、`villains-chibi/`、`motion/` 与 `separated/` 中的生成素材由项目对话内的图像生成流程制作，状态为 `generated-pending-review`，不表示取得原作品角色或品牌的官方授权。
+
+`fighters/kakyoin-hierophant-green-base-v1.png` 是 2026-10-05 提供的花京院与绿色法皇生成基准图；`kakyoin-hierophant-green-ribbon-v2.png` 及后续本体／替身动作图以此为视觉参考。独立替身的生成方法和提示词摘要见 [`stardust/separated/README.md`](stardust/separated/README.md)。
+
+`stardust/official/hierophant-green.png` 来自 JOJO 官方门户角色页，仅用于当前原型的绿色法皇形象，原始地址与获取日期见 [`stardust/official/README.md`](stardust/official/README.md)。来源为官方页面不等同于已取得再分发或商业授权。
+
+星尘远征的音频来源、处理参数与授权状态见 [`../../docs/games/stardust-audio.md`](../../docs/games/stardust-audio.md)。角色连打语音随源码提交基于用户的授权声明；两段 Mixkit 原始挥剑 WAV 仅用于本地构建和成品部署，按许可约定由 `.gitignore` 排除，不随公开源码仓库分发。

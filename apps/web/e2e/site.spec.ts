@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { games } from '../src/games/registry';
 
 test('game pages return to the catalog and anchor links land on their sections', async ({
   page,
@@ -25,11 +26,11 @@ test('game pages return to the catalog and anchor links land on their sections',
   await expect(page.getByRole('heading', { name: '一点灵感，就能开始。' })).toBeVisible();
 });
 
-test('home catalogue renders all current games with display-sized art', async ({ page }) => {
+test('home catalogue renders all current games with their own artwork', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.catalog-card')).toHaveCount(8);
+  await expect(page.locator('.catalog-card')).toHaveCount(games.length);
   const portraits = page.locator('.catalog-portrait');
-  await expect(portraits).toHaveCount(8);
+  await expect(portraits).toHaveCount(games.length);
   await expect
     .poll(() =>
       portraits.evaluateAll((images) =>
@@ -39,9 +40,14 @@ test('home catalogue renders all current games with display-sized art', async ({
             image.complete &&
             image.naturalWidth > 0 &&
             (image.currentSrc.startsWith('data:image/svg+xml') ||
-              /\.(?:webp|svg)(?:$|\?)/.test(image.currentSrc)),
+              /\.(?:webp|svg|png)(?:$|\?)/.test(image.currentSrc)),
         ),
       ),
     )
     .toBe(true);
+  const stardustCover = page
+    .getByRole('button', { name: /星尘远征：替身决斗/ })
+    .locator('.catalog-portrait');
+  await expect(stardustCover).toHaveAttribute('src', /stardust-crusaders-lineup-v6/);
+  await expect(stardustCover).toHaveCSS('object-fit', 'contain');
 });

@@ -50,8 +50,7 @@ export const HOME_ART = {
 
 /** Display-sized derivatives for the home page; games keep their full-resolution art. */
 export const HOME_COVER_ART = {
-  uncle: new URL('../resources/uncle-cover.svg', import.meta.url).href,
-  starfall: new URL('../resources/starfall-cover.svg', import.meta.url).href,
+  stardust: new URL('../stardust/concept/stardust-crusaders-lineup-v6.png', import.meta.url).href,
   duel: HOME_ART.duel,
   steady: new URL('../home-covers/steady-cover.webp', import.meta.url).href,
   arena: new URL('../home-covers/arena-cover.webp', import.meta.url).href,
