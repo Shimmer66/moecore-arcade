@@ -1,0 +1,624 @@
+{
+  "generatedAt": "2026-10-08",
+  "tool": "Pillow",
+  "quality": 86,
+  "method": 6,
+  "stardust": [
+    {
+      "source": "packages/assets/stardust/concept/stardust-crusaders-lineup-v6.png",
+      "output": "packages/assets/stardust/runtime-webp/concept/stardust-crusaders-lineup-v6.webp",
+      "width": 1536,
+      "height": 1024,
+      "sourceBytes": 2463580,
+      "outputBytes": 249458,
+      "sourceSha256": "05244d80ca0237be557be976985377fa5e435852f9a84659f5e8c1c624fe70a1",
+      "outputSha256": "8d4086e0790f8430b06321135c1e68bd653a8f79889a1f0dcda1801cd6a0d2ad"
+    },
+    {
+      "source": "packages/assets/stardust/enemy-roster/stardust-enemies-chibi-grid-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/enemy-roster/stardust-enemies-chibi-grid-v1.webp",
+      "width": 1448,
+      "height": 1086,
+      "sourceBytes": 2715450,
+      "outputBytes": 713440,
+      "sourceSha256": "1386346dcb96f17e593305b7685769441d16ed4e6cbb5d18449fcf1c8fbd0114",
+      "outputSha256": "0501c0d70c4eb68c13e3b935ff2527b74bd5a84d86c5ffc84d106a72ec5e7d2f"
+    },
+    {
+      "source": "packages/assets/stardust/fighters/avdol-magicians-red-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/fighters/avdol-magicians-red-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "sourceBytes": 2157291,
+      "outputBytes": 261498,
+      "sourceSha256": "f28bad5d6b6e2a77d90b5cd37ab4504ff485b43350698faa3d0969ce25908d52",
+      "outputSha256": "a1f1703a9b2e0533be79c1670f3d52dfc5c35f9be8652f96c28f17d128327ff3"
+    },
+    {
+      "source": "packages/assets/stardust/fighters/jotaro-star-platinum-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/fighters/jotaro-star-platinum-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "sourceBytes": 2054039,
+      "outputBytes": 210574,
+      "sourceSha256": "2944b3bf6c0d71e2a70f06b986d29422a9228de64ae0da000c272e8b1d7276a2",
+      "outputSha256": "fdf39d93037fbc60af5b3b0cf037edf9b2f79cf16c7dcf3db60eeec1100231dc"
+    },
+    {
+      "source": "packages/assets/stardust/fighters/kakyoin-hierophant-green-ribbon-v2.png",
+      "output": "packages/assets/stardust/runtime-webp/fighters/kakyoin-hierophant-green-ribbon-v2.webp",
+      "width": 1024,
+      "height": 1536,
+      "sourceBytes": 2542812,
+      "outputBytes": 347460,
+      "sourceSha256": "b339576144bc6cc5e2143b182d855d9915cf5b0ce1fb3e205b1cc431ada019cd",
+      "outputSha256": "9d01c4d931cd37d57718933014f7fe2572cef54f02dfc4bc1c896424c8e4ff00"
+    },
+    {
+      "source": "packages/assets/stardust/fighters/polnareff-silver-chariot-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/fighters/polnareff-silver-chariot-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "sourceBytes": 1918146,
+      "outputBytes": 186616,
+      "sourceSha256": "74c2dfa48ef8c23211b5d7cab6e684e061f7355d9d815faf0fcb7ce3de2a4813",
+      "outputSha256": "0a8f3d580630132bb796eae1e793b58731a41f1970910b9741fd1c2985058b8c"
+    },
+    {
+      "source": "packages/assets/stardust/fighters-chibi/avdol-magicians-red-chibi-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/fighters-chibi/avdol-magicians-red-chibi-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "sourceBytes": 2422594,
+      "outputBytes": 326074,
+      "sourceSha256": "88065c95158a14e9bec70a841367e4009cec8e2e7ca66cf92b8218fa6534d19c",
+      "outputSha256": "a5f2e909b248a07562cfe1cd79985d3fb92b727cc98c9d7878fe8d167c979a36"
+    },
+    {
+      "source": "packages/assets/stardust/fighters-chibi/jotaro-star-platinum-chibi-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/fighters-chibi/jotaro-star-platinum-chibi-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "sourceBytes": 2186289,
+      "outputBytes": 247276,
+      "sourceSha256": "13a54a6ca8cf5aa7156425c2dee5951fa2867ed55888409436ed018e49a81673",
+      "outputSha256": "11c1a63d5b6ded621f7bd223a5f7a669879d3657a76d5ecf55d26d1ca7423b63"
+    },
+    {
+      "source": "packages/assets/stardust/fighters-chibi/kakyoin-hierophant-green-ribbon-v2.png",
+      "output": "packages/assets/stardust/runtime-webp/fighters-chibi/kakyoin-hierophant-green-ribbon-v2.webp",
+      "width": 1024,
+      "height": 1536,
+      "sourceBytes": 2542812,
+      "outputBytes": 347460,
+      "sourceSha256": "b339576144bc6cc5e2143b182d855d9915cf5b0ce1fb3e205b1cc431ada019cd",
+      "outputSha256": "9d01c4d931cd37d57718933014f7fe2572cef54f02dfc4bc1c896424c8e4ff00"
+    },
+    {
+      "source": "packages/assets/stardust/fighters-chibi/polnareff-silver-chariot-chibi-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/fighters-chibi/polnareff-silver-chariot-chibi-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "sourceBytes": 2166982,
+      "outputBytes": 234852,
+      "sourceSha256": "4aff33bca925109a25cecf4dd999533df622abaeb8445b88679de69a98ab9611",
+      "outputSha256": "7a28ba31e7bb94e1d44c2622d294d0d3f0f050c6db7b64758f40ccca5902cae9"
+    },
+    {
+      "source": "packages/assets/stardust/motion/alessi-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/alessi-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1129978,
+      "outputBytes": 300194,
+      "sourceSha256": "d2ea6f53938fd64f0b3d8a4e3f9a7fa5c22e5ab69a2e5b42bba9c30bfd412ccb",
+      "outputSha256": "34f83b039362d49a21edf89447364838cf55ecf4bb0b4a3a88c68c16720376fb"
+    },
+    {
+      "source": "packages/assets/stardust/motion/avdol-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/avdol-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1169936,
+      "outputBytes": 332750,
+      "sourceSha256": "55eeec62a05bf2442c633338c5d0f759301d4837e427653ecc356a1ac96e2d16",
+      "outputSha256": "a3c6c7f1c1885fc50770c71e13a289ad960d5bb21e7f5384bdd3f94dcfdf33aa"
+    },
+    {
+      "source": "packages/assets/stardust/motion/darby-elder-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/darby-elder-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1290505,
+      "outputBytes": 355612,
+      "sourceSha256": "e4ec6c1a637187bcd50a2238a40fdc537fa6445970a51f1ade4033b8b086723c",
+      "outputSha256": "66173b3c82c697cabdce1d053c1b7f2014fea46ffd930b6a2f69e6ef7ae01349"
+    },
+    {
+      "source": "packages/assets/stardust/motion/darby-younger-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/darby-younger-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1194959,
+      "outputBytes": 315256,
+      "sourceSha256": "97849e72c410826c3c85db3f5f1f057922dc33e8b0c96276f769ea24ed2aa5f5",
+      "outputSha256": "2852f9f2f89237792e75c6547ea017aa1084178544d0ba3510713762b112008a"
+    },
+    {
+      "source": "packages/assets/stardust/motion/devo-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/devo-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1098717,
+      "outputBytes": 296296,
+      "sourceSha256": "dbef4eda53ddda1b96299c06ed4d89d1784abb87f05682f98e68e7a856a618fc",
+      "outputSha256": "5ed88db4505776b3340bb842e41e62919a89f8c4dee1ea921cf1fcbd7aa82736"
+    },
+    {
+      "source": "packages/assets/stardust/motion/dio-body-only-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/dio-body-only-motion-v1.webp",
+      "width": 1448,
+      "height": 1086,
+      "sourceBytes": 1865398,
+      "outputBytes": 511428,
+      "sourceSha256": "8174eda3b7ce7595461ec814e9b2c53767afc212e2be8101389dac4d9185a175",
+      "outputSha256": "ea9220675fa76e7cd4accad589698355e33f9612f639142f05a50fa3b756cbc0"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/alessi-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/alessi-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 722014,
+      "outputBytes": 202924,
+      "sourceSha256": "6de418a89cd4009aa7ef25a0ed296ac023d6f0588732ffd1772b0108330296ff",
+      "outputSha256": "f371a46a2737772474dbbaff95595aa081d4b80dd2084d3072e1820a7ecd20ad"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/avdol-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/avdol-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 698285,
+      "outputBytes": 204646,
+      "sourceSha256": "8d553254dcd464eb076c5823b0734d86506b2adc51b6a0ddb626e32a9da169b2",
+      "outputSha256": "5baf0ac92ac9c9f08a53723c772e877bfc5b8305a2e9993fd4b2c784b4cd6e04"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/darby-elder-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/darby-elder-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 796167,
+      "outputBytes": 223748,
+      "sourceSha256": "849a994a34d5a0a55352832351bd2abcd18dde6fbc27a7df00178859cfbaf691",
+      "outputSha256": "fd020accdba228117854d4b27e3c96bb12ba95de44fdc74e9b124181b089ee61"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/darby-younger-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/darby-younger-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 701801,
+      "outputBytes": 187056,
+      "sourceSha256": "47f70179faa75cecfb925ae0ea28486896b3739d24fa08c133250cdffd8cf3f0",
+      "outputSha256": "b4d66008a1c2cab80dc55648870cb0d661824e291e8bf6209156c39117ba66ee"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/devo-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/devo-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 646594,
+      "outputBytes": 182226,
+      "sourceSha256": "1663ef2c3732bdeebe609c14f91b1656dc6b64fcda27f75bab8e3a75e20d3641",
+      "outputSha256": "0a6e62e5e10a99a9f9df0eda51cdce0c21d97e23436bd0ae891a1bfda3c5c658"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/dio-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/dio-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 753393,
+      "outputBytes": 209742,
+      "sourceSha256": "e7d21472687e36c930df5d935808b4249281a836f751bfb45f763e0626004782",
+      "outputSha256": "349b9567096412fb9185b43bde07ad29dac1de8b807cb9ba48e6da96786d79f1"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/gray-fly-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/gray-fly-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 696611,
+      "outputBytes": 203660,
+      "sourceSha256": "d695416bdd227c2ceaa698b3dc54374dee20cf033edc80528b7b4ba05d6eb90c",
+      "outputSha256": "68100ea62eccd65fd16c39f5e4981c8f73f4299645ea51d6de709384a13de282"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/holhorse-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/holhorse-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 634820,
+      "outputBytes": 168532,
+      "sourceSha256": "e2431212de17908989c743608ca130f855112f63b40d391c2675b666356ea670",
+      "outputSha256": "00b163f0287206a7f926bcbfafc4a2c9d6da2e3a3ea1f0c869fdf88ce847e5a9"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/ice-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/ice-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 741344,
+      "outputBytes": 180614,
+      "sourceSha256": "8797c0eb9be78a04beda91886b39f5e9e62122c94ba698e938c66532a245e9f4",
+      "outputSha256": "655bae710a31118874cf98ba255bc915bb496ef5789fa9c2b3d5868f8e77d253"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/j-geil-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/j-geil-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 748331,
+      "outputBytes": 217878,
+      "sourceSha256": "78377f4102adb634b764e7a37c33fd958590fe7b8b2604e1cbba5281dba333fc",
+      "outputSha256": "3241fda75d35b460afc74704eb0ff1ca1268257e5dd47a26a43810509128ebf1"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/jotaro-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/jotaro-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 649994,
+      "outputBytes": 166402,
+      "sourceSha256": "bacc69439084d2a3ce345b9b3ee8ff8fa70971c5c0a63cd226ca004311f2b0db",
+      "outputSha256": "7f42615d1468a2bb050b27f871421d0ad0326cebe8da358768e499fbd98f3a95"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/kakyoin-body-only-extended-v2.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/kakyoin-body-only-extended-v2.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 432456,
+      "outputBytes": 123174,
+      "sourceSha256": "75baa4238d947c44501380b64357e94fb702d3ce2b26fd259f74e2d46eab726e",
+      "outputSha256": "fade336983decc0db2edd5e1ddd623609474cf4c35c71e13cb120a89cb4ccdca"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/mariah-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/mariah-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 772315,
+      "outputBytes": 228356,
+      "sourceSha256": "6e25378a75ef965a306087624d7c4e09c35b0de417fda86dd8eb0c2759fd6c7d",
+      "outputSha256": "f533bdca03ccf702a2223042f6bb6cd13438d9c0d81599f41dcb478a3ef0a7c2"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/ndoul-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/ndoul-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 728165,
+      "outputBytes": 229718,
+      "sourceSha256": "b8b3fbb75ebe55af15d1d21ff2997cc7a4b3cc832ba18fd50e3fd451bf6cb092",
+      "outputSha256": "4f824605e4e94c2a320f554df55bc72f75080ded1001e435ff72ceef2bf0ec28"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/nena-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/nena-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 734332,
+      "outputBytes": 183076,
+      "sourceSha256": "da30fa573f482b43de4bf8817fef2cc73207055bf25a0bb469c3c1ddc2541c24",
+      "outputSha256": "402a757cdc2b6fac5afc96d25ae951831e8d26a9ad03f791d4bc3e7d0929863c"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/pet-shop-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/pet-shop-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 762986,
+      "outputBytes": 237220,
+      "sourceSha256": "2d4678785166c3517dfdd1ab7d9643a8b98f545b5dfde357ed000fed5aac98e0",
+      "outputSha256": "512f41918c627559dc37b4b539be95f806ec18a71c6c4f4b729bae97f3031b7a"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/polnareff-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/polnareff-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 460865,
+      "outputBytes": 127736,
+      "sourceSha256": "bde886a4b373d9308bfb8b4f13b1ce81494eac585980295562f70e8b81745187",
+      "outputSha256": "9b2af6436cbc95b9add489872bd6f8c06787f5de784a93ccd38fd667cf33065c"
+    },
+    {
+      "source": "packages/assets/stardust/motion/extended/rubber-soul-extended-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/extended/rubber-soul-extended-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 774037,
+      "outputBytes": 201954,
+      "sourceSha256": "d75cae85ebd0b553f4b0fa9279428b72a5533282a463a65b182ffba9c516b73a",
+      "outputSha256": "fa5b9aecd0375a6a90b0241291aadd7e76a9bf1fa5686958b18cef0dccc4404e"
+    },
+    {
+      "source": "packages/assets/stardust/motion/gray-fly-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/gray-fly-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1249843,
+      "outputBytes": 362674,
+      "sourceSha256": "cbfb9171ffac617a543524dcbe51f037561bfc183fddc4a441143721369b93b1",
+      "outputSha256": "fb0ef12f07c4751c95abdb1a41971f2c859e72574536207ae9c08bffdd192219"
+    },
+    {
+      "source": "packages/assets/stardust/motion/hol-horse-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/hol-horse-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1026144,
+      "outputBytes": 270210,
+      "sourceSha256": "b06d0bc5c19870d6682952f34a47be2a554540d8dd7af3ddabc352ee4444b960",
+      "outputSha256": "2c82303bf656caead1debb1b0be5670001100cd586da6f9c0f8fb6003b40cfff"
+    },
+    {
+      "source": "packages/assets/stardust/motion/ice-body-only-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/ice-body-only-motion-v1.webp",
+      "width": 1448,
+      "height": 1086,
+      "sourceBytes": 2027984,
+      "outputBytes": 453982,
+      "sourceSha256": "25f15c8e98bf0bbab022eabb5be46f0d7578c77439226d6dcb1fc5447aa72322",
+      "outputSha256": "ee264941a9c465eb88e033e31ab6149596fd307706e8b180f721e3e42b23f693"
+    },
+    {
+      "source": "packages/assets/stardust/motion/j-geil-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/j-geil-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1225658,
+      "outputBytes": 360248,
+      "sourceSha256": "3cdea92a00ad5c113e2e2e337ef62f7e04acc6bb766c23c8d82dd3740c0d6b71",
+      "outputSha256": "6dbc2908c1e0e1dc2120ba1121a1f4ddcb9cb0eb4fb39907afb80bdf009b3b63"
+    },
+    {
+      "source": "packages/assets/stardust/motion/jotaro-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/jotaro-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1124106,
+      "outputBytes": 290846,
+      "sourceSha256": "effb6b07aec746be2e4b96529cefe8b907a6195d30a7d043b9ca4b11703909fc",
+      "outputSha256": "5a5ba47a2a36880a8db98f638f23be5921d0122dd07b0aad4924af090f4979e3"
+    },
+    {
+      "source": "packages/assets/stardust/motion/kakyoin-body-only-motion-v2.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/kakyoin-body-only-motion-v2.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 842334,
+      "outputBytes": 221346,
+      "sourceSha256": "70a9c171f333e2ccc4ddb5526f77c36e4153e7576af398a7a90392446e1ddcf0",
+      "outputSha256": "5d58f978b699b63af1eeb02d449d6de018d7789b8edb10f67e608ac7fe3c6722"
+    },
+    {
+      "source": "packages/assets/stardust/motion/mariah-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/mariah-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1268389,
+      "outputBytes": 367236,
+      "sourceSha256": "58f540d01a0cb14a4d77083e4a978dc6d3fbcc62ee661a17f86951837aad27b2",
+      "outputSha256": "ee047fe6b7d36b76f1f5ee2786d9380dacfa773f25ab59420efa89249b849351"
+    },
+    {
+      "source": "packages/assets/stardust/motion/ndoul-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/ndoul-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1160560,
+      "outputBytes": 349338,
+      "sourceSha256": "92398c0bdb95ea5b87ea04032540ff6f4a1c5ed8f2119a90874ab449cf0b3eb1",
+      "outputSha256": "8e3090afbbe044b4bfeda83dfea98192b3251969e82c5b1009564dd75ba829a7"
+    },
+    {
+      "source": "packages/assets/stardust/motion/nena-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/nena-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1184853,
+      "outputBytes": 278104,
+      "sourceSha256": "fe326102ab17f16b346fc03ce79b9adc86fe4aaf432b6fcaf9f6033313d94fed",
+      "outputSha256": "f8cf8563f48e6bb3f34ca8f5e69ac0e901fea6021a66fa63b4bee3d9c6d69421"
+    },
+    {
+      "source": "packages/assets/stardust/motion/pet-shop-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/pet-shop-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1234520,
+      "outputBytes": 381112,
+      "sourceSha256": "0323b9630900235eb8f36ef60aba029b756d9b55cd04e5a783cdb7bbbea72b7b",
+      "outputSha256": "6215dcb4b27aa44e060b1921838deab18f6909796e5c913454db5f8398750f62"
+    },
+    {
+      "source": "packages/assets/stardust/motion/polnareff-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/polnareff-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 989389,
+      "outputBytes": 276568,
+      "sourceSha256": "24723f4a25d62b6115cb8fba62f5c18cb936a490b6e669130d978ec87818c832",
+      "outputSha256": "2d940075008f5bed0d4c025fb2ad8e8dcb9d7354da8bafacad12745278333979"
+    },
+    {
+      "source": "packages/assets/stardust/motion/rubber-soul-chibi-action-sheet-v1-clean-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/motion/rubber-soul-chibi-action-sheet-v1-clean-v1.webp",
+      "width": 1024,
+      "height": 768,
+      "sourceBytes": 1298993,
+      "outputBytes": 339190,
+      "sourceSha256": "88dc82c69dcbdb89c544d108d3e43a9cf98e18fd34ab0cd68c961e2c72d6c7e1",
+      "outputSha256": "5ca8bc02d52950a855848efcfe1ddf84e54a8abd16a5bc364c434fbe266164e0"
+    },
+    {
+      "source": "packages/assets/stardust/separated/dio-the-world-entity-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/dio-the-world-entity-v1.webp",
+      "width": 1230,
+      "height": 1278,
+      "sourceBytes": 1439464,
+      "outputBytes": 232112,
+      "sourceSha256": "0765971bf5928703148a3a99b613aa0c48ad2610be6e1a418d8eedf5eaca6ea8",
+      "outputSha256": "e4fab14051c51dd07c709fbdae9bcfbc620d8330ea013f537f6a20dddde32afc"
+    },
+    {
+      "source": "packages/assets/stardust/separated/ice-cream-entity-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/ice-cream-entity-v1.webp",
+      "width": 1226,
+      "height": 1283,
+      "sourceBytes": 1568234,
+      "outputBytes": 227040,
+      "sourceSha256": "f0dd1d960d68ccf55229ceab6743a009acf118504a2e2e273acaf7ad0253ac43",
+      "outputSha256": "d0e27f77ae81f49dc75c041336a93e572acd33f62e8333f0573d8640efc67a87"
+    },
+    {
+      "source": "packages/assets/stardust/separated/motion/avdol-stand-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/motion/avdol-stand-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 523344,
+      "outputBytes": 186458,
+      "sourceSha256": "8c5378c378ed1adbde71f2d659bde9ebf5ffb84830dae37af9a1f5dcc5ca3ee8",
+      "outputSha256": "aea6add0b3b63e1655e41505dff254572c677810666b7f3cf505422a80a6fb4a"
+    },
+    {
+      "source": "packages/assets/stardust/separated/motion/dio-stand-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/motion/dio-stand-motion-v1.webp",
+      "width": 1774,
+      "height": 887,
+      "sourceBytes": 1906736,
+      "outputBytes": 484616,
+      "sourceSha256": "0504ab4bf3c1e2b4c6dc10341eb779164ee7545cdedce067a8853a5d1b4d46f8",
+      "outputSha256": "9fed5ddf59eb706fc3375006cd4108d8ab8ab73d0cced46eff96d5e516fb0d14"
+    },
+    {
+      "source": "packages/assets/stardust/separated/motion/ice-stand-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/motion/ice-stand-motion-v1.webp",
+      "width": 1774,
+      "height": 887,
+      "sourceBytes": 2163278,
+      "outputBytes": 479874,
+      "sourceSha256": "78c26de1c8107a552f685e9d3b037914e4fee6abfafaa07229725b6f4d4795ae",
+      "outputSha256": "d5c78b8792ac455890d8468c13550207084d59cec94303f93ac83fafce17523b"
+    },
+    {
+      "source": "packages/assets/stardust/separated/motion/jotaro-stand-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/motion/jotaro-stand-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 592828,
+      "outputBytes": 164002,
+      "sourceSha256": "a673f7a46a227fa16aec9eb9eee8a9e0fd8c95d2df0f560f7fd177e89a085e8e",
+      "outputSha256": "0f739de646b37b88c013b678a163ba1cdc17672f1511b9efe2af5d4089bbb0f4"
+    },
+    {
+      "source": "packages/assets/stardust/separated/motion/kakyoin-stand-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/motion/kakyoin-stand-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 895555,
+      "outputBytes": 275558,
+      "sourceSha256": "6ec6c58f1df7c8663a70bb9c154ce3907e811fe844de93d4e755f8d11eb2b9a7",
+      "outputSha256": "875d154137bede791bb9d9c97d833ccea2076b39cc6961178c6296beed6da9f7"
+    },
+    {
+      "source": "packages/assets/stardust/separated/motion/polnareff-stand-motion-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/motion/polnareff-stand-motion-v1.webp",
+      "width": 1024,
+      "height": 512,
+      "sourceBytes": 575536,
+      "outputBytes": 167238,
+      "sourceSha256": "b0820f44369a7857f4d96c82674e3196089840d551b25345b9e513ba30a3d8ce",
+      "outputSha256": "74b9c2bdd6195d4aae45f0ecc54a532a5f3bc4a8328debe028cc0d54f1e36641"
+    },
+    {
+      "source": "packages/assets/stardust/separated/motion/silver-chariot-upper-burst-v5.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/motion/silver-chariot-upper-burst-v5.webp",
+      "width": 1402,
+      "height": 1122,
+      "sourceBytes": 1541797,
+      "outputBytes": 311420,
+      "sourceSha256": "e3de95d15a744a4cad8590b5765ef2d7beee1d061ac3a006bed9bd2d1a8f3a5d",
+      "outputSha256": "202d15fb5eac62169fb7b05cab58a07b2c4cebe0e417fdb49d2dee4ab5e442e6"
+    },
+    {
+      "source": "packages/assets/stardust/separated/stand-separation-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/separated/stand-separation-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "sourceBytes": 2470354,
+      "outputBytes": 362480,
+      "sourceSha256": "ce8ef0ce819f10302892ce177774901b833b7d68b25a7ab2d8ada6681ef5df49",
+      "outputSha256": "1dadc072338f3b7c7a0acf7a0832cacae3061cf55f6505e2775ef4e86c2cdda2"
+    },
+    {
+      "source": "packages/assets/stardust/villains-chibi/dio-the-world-chibi-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/villains-chibi/dio-the-world-chibi-v1.webp",
+      "width": 1230,
+      "height": 1278,
+      "sourceBytes": 2330003,
+      "outputBytes": 467156,
+      "sourceSha256": "3f815d1a3f955bce5066472d2c344021ab089f56a4d0ec2c54285c9befae8f29",
+      "outputSha256": "ce10017df97991b8a4bd442cff8e3e603738f9b6500134aa6edd2a4e30b5523f"
+    },
+    {
+      "source": "packages/assets/stardust/villains-chibi/hol-horse-emperor-chibi-v1.png",
+      "output": "packages/assets/stardust/runtime-webp/villains-chibi/hol-horse-emperor-chibi-v1.webp",
+      "width": 1214,
+      "height": 1295,
+      "sourceBytes": 1720138,
+      "outputBytes": 311964,
+      "sourceSha256": "48ca864e20130fe4096c71cd6bd9f028a1c9d1e686a767433b63c1709463a5da",
+      "outputSha256": "956dcfdf4a8d1adffb07801192c108ad9cbf5ae8d0bebae23a836b2c98027d98"
+    },
+    {
+      "source": "packages/assets/stardust/villains-chibi/vanilla-ice-cream-chibi-v2.png",
+      "output": "packages/assets/stardust/runtime-webp/villains-chibi/vanilla-ice-cream-chibi-v2.webp",
+      "width": 1226,
+      "height": 1283,
+      "sourceBytes": 1934732,
+      "outputBytes": 286456,
+      "sourceSha256": "9ae8f21d59da8f4f6a47a2ea2ea59d3cd7c01bbec876f46c4e0717c04b405e50",
+      "outputSha256": "89e333a79087275f21fb3b9a2e1e9120118163e530dfe0fcf94e532a24e93629"
+    }
+  ],
+  "shell": [
+    {
+      "source": "apps/web/src/assets/images/bg_menu_landscape.png",
+      "output": "apps/web/src/assets/images/bg_menu_landscape.webp",
+      "width": 1920,
+      "height": 1080,
+      "sourceBytes": 2394804,
+      "outputBytes": 149106,
+      "sourceSha256": "d856e1616165b8ddf1bfd043dc50586a1ba64500f95ca9377c2dcf23c5d645b8",
+      "outputSha256": "fd4511527199edab940618291e378193f3cfe857b0a2a3e6d4fc10343db76980"
+    },
+    {
+      "source": "apps/web/src/assets/images/bg_menu_portrait.png",
+      "output": "apps/web/src/assets/images/bg_menu_portrait.webp",
+      "width": 1080,
+      "height": 1920,
+      "sourceBytes": 2119419,
+      "outputBytes": 103382,
+      "sourceSha256": "844729455e2fefb5ae15abed1318501e83a78bd3e788fc4ff410ce023fc55c4e",
+      "outputSha256": "dfbdca08df9c455c9f42ded690b6495360d515a9d0ac30fdd19f131882605c08"
+    }
+  ],
+  "summary": {
+    "sourceBytes": 82182993,
+    "outputBytes": 16874622
+  }
+}

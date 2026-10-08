@@ -48,6 +48,6 @@ test('home catalogue renders all current games with their own artwork', async ({
   const stardustCover = page
     .getByRole('button', { name: /星尘远征：替身决斗/ })
     .locator('.catalog-portrait');
-  await expect(stardustCover).toHaveAttribute('src', /stardust-crusaders-lineup-v6/);
+  await expect(stardustCover).toHaveAttribute('src', /stardust-crusaders-lineup-v6[^/]*\.webp/);
   await expect(stardustCover).toHaveCSS('object-fit', 'contain');
 });

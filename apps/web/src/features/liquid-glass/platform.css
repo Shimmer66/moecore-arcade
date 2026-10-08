@@ -38,7 +38,7 @@
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-image: url('../../assets/images/bg_menu_landscape.png');
+  background-image: url('../../assets/images/bg_menu_landscape.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -795,7 +795,7 @@
 @media (max-width: 760px) {
   .platform-shell::before,
   .platform-game .game-host:fullscreen::before {
-    background-image: url('../../assets/images/bg_menu_portrait.png');
+    background-image: url('../../assets/images/bg_menu_portrait.webp');
   }
   .platform-game main {
     width: calc(100% - 16px);

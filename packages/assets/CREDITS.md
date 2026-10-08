@@ -121,3 +121,5 @@
 `stardust/official/hierophant-green.png` 来自 JOJO 官方门户角色页，仅用于当前原型的绿色法皇形象，原始地址与获取日期见 [`stardust/official/README.md`](stardust/official/README.md)。来源为官方页面不等同于已取得再分发或商业授权。
 
 星尘远征的音频来源、处理参数与授权状态见 [`../../docs/games/stardust-audio.md`](../../docs/games/stardust-audio.md)。角色连打语音随源码提交基于用户的授权声明；两段 Mixkit 原始挥剑 WAV 仅用于本地构建和成品部署，按许可约定由 `.gitignore` 排除，不随公开源码仓库分发。
+
+为降低首屏和选角加载量，`stardust/runtime-webp/` 保存当前运行时实际引用图片的同尺寸 WebP 副本；源 PNG 不删除。转换脚本为 [`scripts/prepare-runtime-webp-assets.py`](../../scripts/prepare-runtime-webp-assets.py)，尺寸、源文件与输出文件 SHA-256 见 [`stardust/runtime-webp/manifest.json`](stardust/runtime-webp/manifest.json)。站点横屏与竖屏背景也由同一脚本生成 WebP 运行副本。
