@@ -4,6 +4,13 @@ import { ArrowLeft, ArrowRight, Lock, Unplug } from '@lucide/vue';
 import type { GameEvents, GameProps } from '@moecore/game-sdk';
 import { STARDUST_ART } from '@moecore/assets/stardust';
 import BattleEffects from './BattleEffects.vue';
+import MobileTouchControls from './MobileTouchControls.vue';
+import {
+  advanceTouchAction,
+  clearTouchAction,
+  createTouchActionBuffer,
+  queueTouchAction,
+} from './touch-input';
 import { advanceStandAI, createStandAIState, type StandAIState } from './stand-ai';
 import { BOSS_STAND_FRAMES, bossStandPose, isBossStandOwner } from './stand-animation';
 import {
@@ -208,12 +215,16 @@ const sfxEnabled = ref(true);
 const voiceEnabled = ref(true);
 const ambienceEnabled = ref(true);
 const startedAt = ref(0);
+const touchCapable = ref(false);
 const keys = new Set<string>();
 const arenaElement = ref<HTMLElement>();
 const arenaWidth = ref(0);
 const standSpriteWidth = ref(150);
 let arenaObserver: ResizeObserver | undefined;
 const touchMovement: Record<Side, number> = { p1: 0, p2: 0 };
+const touchGuard: Record<Side, boolean> = { p1: false, p2: false };
+const touchCrouch: Record<Side, boolean> = { p1: false, p2: false };
+const touchActionBuffer = createTouchActionBuffer();
 const hitEffects = ref<
   {
     id: number;
@@ -467,6 +478,18 @@ const combatants = computed(() =>
 const controlledTwo = computed(() =>
   coop.value ? partner.value : mode.value === 'versus' ? p2.value : undefined,
 );
+const singleTouchMode = computed(() => mode.value !== 'versus' && mode.value !== 'coop');
+const mobileLightLabel = computed(() =>
+  p1.value?.id === 'avdol' ? '火焰弹' : p1.value?.id === 'kakyoin' ? '绿宝石' : '轻击',
+);
+const mobileCanDetach = computed(() =>
+  Boolean(
+    p1.value && hasIndependentStand(p1.value.id) && rangeRank(p1.value) !== 'E' && !p1.value.down,
+  ),
+);
+const mobileCanUltimate = computed(() =>
+  Boolean(p1.value && (isHero(p1.value.id) ? ultimateReady(p1.value) : p1.value.energy >= 100)),
+);
 const standControls = computed(() =>
   [
     { fighter: p1.value, side: 'p1' as const, label: '玩家一', hotkey: 'F' },
@@ -576,6 +599,16 @@ function clearMovement() {
   keys.clear();
   touchMovement.p1 = 0;
   touchMovement.p2 = 0;
+  touchGuard.p1 = false;
+  touchGuard.p2 = false;
+  touchCrouch.p1 = false;
+  touchCrouch.p2 = false;
+  clearTouchAction(touchActionBuffer);
+  for (const fighter of [p1.value, p2.value, partner.value]) {
+    if (!fighter) continue;
+    fighter.guard = false;
+    fighter.crouch = false;
+  }
 }
 
 function holdMovement(side: Side, direction: number, event: PointerEvent) {
@@ -1632,6 +1665,23 @@ function act(side: Side, action: Action) {
   strike(attacker, defender, action);
 }
 
+function touchAct(action: Action) {
+  const fighter = p1.value;
+  if (
+    !fighter ||
+    props.paused ||
+    phase.value !== 'fight' ||
+    introStep.value !== 'done' ||
+    fighter.down
+  )
+    return;
+  if (fighter.attackFrames > 0 || fighter.stun > 0 || casting(fighter)) {
+    queueTouchAction(touchActionBuffer, action);
+    return;
+  }
+  act('p1', action);
+}
+
 function move(side: Side, direction: number, dt: number) {
   if (
     props.paused ||
@@ -1793,24 +1843,24 @@ function tick(now: number) {
       animationCarry %= 110;
       animationPulse.value = (animationPulse.value + 1) % 120;
     }
-    if (!isPlayerFrozen(stopped.value, 'p1')) p1.value.guard = keys.has('KeyL');
+    if (!isPlayerFrozen(stopped.value, 'p1')) p1.value.guard = keys.has('KeyL') || touchGuard.p1;
     if (!isPlayerFrozen(stopped.value, 'p2')) {
-      p2.value.guard = mode.value === 'versus' && keys.has('Digit3');
-      if (partner.value) partner.value.guard = coop.value && keys.has('Digit3');
+      p2.value.guard = mode.value === 'versus' && (keys.has('Digit3') || touchGuard.p2);
+      if (partner.value) partner.value.guard = coop.value && (keys.has('Digit3') || touchGuard.p2);
     }
     p1.value.crouch =
       p1.value.standControl.mode !== 'detached' &&
       !p1.value.guard &&
       p1.value.jumpMs <= 0 &&
       !p1.value.down &&
-      keys.has('KeyS');
+      (keys.has('KeyS') || touchCrouch.p1);
     if (mode.value === 'versus') {
       p2.value.crouch =
         p2.value.standControl.mode !== 'detached' &&
         !p2.value.guard &&
         p2.value.jumpMs <= 0 &&
         !p2.value.down &&
-        keys.has('ArrowDown');
+        (keys.has('ArrowDown') || touchCrouch.p2);
     }
     if (coop.value && partner.value) {
       partner.value.crouch =
@@ -1818,7 +1868,7 @@ function tick(now: number) {
         !partner.value.guard &&
         partner.value.jumpMs <= 0 &&
         !partner.value.down &&
-        keys.has('ArrowDown');
+        (keys.has('ArrowDown') || touchCrouch.p2);
     }
     const p1Direction = Number(keys.has('KeyD')) - Number(keys.has('KeyA')) || touchMovement.p1;
     const p2Direction =
@@ -1947,6 +1997,12 @@ function tick(now: number) {
         }
       }
     }
+    const bufferedAction = advanceTouchAction(
+      touchActionBuffer,
+      dt,
+      !p1.value.down && p1.value.stun <= 0 && p1.value.attackFrames <= 0 && !casting(p1.value),
+    );
+    if (bufferedAction) act('p1', bufferedAction);
     for (const id of ['jotaro', 'dio'] as const) {
       if (
         !fighters.some(
@@ -2100,6 +2156,8 @@ watch(
 );
 
 onMounted(() => {
+  touchCapable.value =
+    navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
   window.addEventListener('keydown', keydown);
   window.addEventListener('keyup', keyup);
   window.addEventListener('blur', clearMovement);
@@ -2120,7 +2178,13 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <main class="stardust" :data-phase="phase" :data-mode="mode" data-testid="stardust-game">
+  <main
+    class="stardust"
+    :class="{ 'single-touch-mode': singleTouchMode, 'touch-capable': touchCapable }"
+    :data-phase="phase"
+    :data-mode="mode"
+    data-testid="stardust-game"
+  >
     <section v-if="phase === 'select'" class="select-screen">
       <header>
         <span>STAND BATTLE / CAIRO ROUTE</span>
@@ -2661,6 +2725,27 @@ onUnmounted(() => {
         />
         <div class="ground" aria-hidden="true"></div>
       </div>
+
+      <MobileTouchControls
+        v-if="singleTouchMode"
+        :visible="touchCapable"
+        :active="phase === 'fight' && introStep === 'done'"
+        :paused="props.paused"
+        :stand-mode="p1?.standControl.mode ?? 'attached'"
+        :can-detach="mobileCanDetach"
+        :can-ultimate="mobileCanUltimate"
+        :can-finger="p1?.id === 'jotaro'"
+        :can-time-stop="p1?.id === 'jotaro' || p1?.id === 'dio'"
+        :light-label="mobileLightLabel"
+        :ultimate-label="ultimateLabel(p1)"
+        @movement="touchMovement.p1 = $event"
+        @crouch="touchCrouch.p1 = $event"
+        @guard="touchGuard.p1 = $event"
+        @jump="jump('p1')"
+        @action="touchAct($event)"
+        @detach="detachStand('p1')"
+        @time-stop="timeStop('p1')"
+      />
 
       <div class="controls">
         <section>

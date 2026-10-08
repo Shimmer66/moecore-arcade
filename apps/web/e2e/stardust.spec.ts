@@ -15,9 +15,18 @@ async function prepareBarrageBattle(page: import('@playwright/test').Page) {
   await page.getByLabel('打击音效').uncheck();
   await page.getByLabel('待机环境声').uncheck();
   await page.getByTestId('stardust-arena').click();
-  await page.keyboard.down('KeyD');
-  await page.clock.runFor(272);
-  await page.keyboard.up('KeyD');
+  for (let step = 0; step < 40; step++) {
+    const [first, second] = await page
+      .locator('[data-testid="stardust-p1"], [data-testid="stardust-p2"]')
+      .evaluateAll((nodes) =>
+        nodes.map((node) => Number.parseFloat((node as HTMLElement).style.left)),
+      );
+    if (Math.abs(second! - first!) <= 3) break;
+    const key = second! > first! ? 'KeyD' : 'KeyA';
+    await page.keyboard.down(key);
+    await page.clock.runFor(16);
+    await page.keyboard.up(key);
+  }
   await page
     .locator('.controls section')
     .first()
