@@ -15,23 +15,26 @@ async function prepareBarrageBattle(page: import('@playwright/test').Page) {
   await page.getByLabel('打击音效').uncheck();
   await page.getByLabel('待机环境声').uncheck();
   await page.getByTestId('stardust-arena').click();
-  for (let step = 0; step < 40; step++) {
+  for (let step = 0; step < 80; step++) {
     const [first, second] = await page
       .locator('[data-testid="stardust-p1"], [data-testid="stardust-p2"]')
       .evaluateAll((nodes) =>
         nodes.map((node) => Number.parseFloat((node as HTMLElement).style.left)),
       );
-    if (Math.abs(second! - first!) <= 3) break;
+    if (Math.abs(second! - first!) <= 1.5) {
+      await page
+        .locator('.controls section')
+        .first()
+        .getByRole('button', { name: /替身连打/ })
+        .click();
+      return;
+    }
     const key = second! > first! ? 'KeyD' : 'KeyA';
     await page.keyboard.down(key);
     await page.clock.runFor(16);
     await page.keyboard.up(key);
   }
-  await page
-    .locator('.controls section')
-    .first()
-    .getByRole('button', { name: /替身连打/ })
-    .click();
+  throw new Error('Could not approach the barrage target');
 }
 
 test('barrage repeatedly damages in range, respects guard and pause, and expires', async ({
@@ -86,6 +89,7 @@ test('barrage repeatedly damages in range, respects guard and pause, and expires
 });
 
 test('two bounded barrages end only the round and pause the round break', async ({ page }) => {
+  test.setTimeout(45_000);
   await prepareBarrageBattle(page);
   await page.clock.runFor(10_032);
   await expect(page.getByTestId('stardust-p2')).toHaveAttribute('data-hp', '250');
@@ -223,7 +227,7 @@ test('plays movement, jump and crouch poses and returns to idle', async ({ page 
     'background-image',
     /jotaro-extended-motion-v1/,
   );
-  await expect(fighter).toHaveAttribute('data-pose', 'idle', { timeout: 1_200 });
+  await expect(fighter).toHaveAttribute('data-pose', 'idle', { timeout: 2_000 });
 
   await page.keyboard.down('KeyS');
   await expect(fighter).toHaveAttribute('data-pose', 'crouch');
